@@ -254,9 +254,10 @@
       <Data key="2c636b17-7d83-44d8-9252-73a8e55283e5" value="MISO_2" />
       <Data key="42a1c22f-6008-4c86-b67d-059696ab6bd0" value="SCLK_1" />
       <Data key="83b2fde2-60ad-45b6-9e5c-cb3baa6e3f9a" value="SCLK_2" />
-      <Data key="1425177d-0d0e-4468-8bcc-e638e5509a9b" value="MOSI_1" />
+      <Data key="1425177d-0d0e-4468-8bcc-e638e5509a9b" value="Rx_1" />
       <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="Pin_1" />
-      <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="MISO_1" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="PWM_Pin_1" />
+      <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="Tx_1" />
       <Data key="f9581703-704a-43ce-8ea2-ed0e5c4d2e33" value="MOSI_2" />
     </Group>
   </Group>
@@ -3354,19 +3355,29 @@
         <Data key="Port Format" value="12,6" />
       </Group>
     </Group>
+    <Group key="83b2fde2-60ad-45b6-9e5c-cb3baa6e3f9a">
+      <Group key="0">
+        <Data key="Port Format" value="12,1" />
+      </Group>
+    </Group>
     <Group key="1425177d-0d0e-4468-8bcc-e638e5509a9b">
       <Group key="0">
-        <Data key="Port Format" value="12,3" />
+        <Data key="Port Format" value="12,6" />
       </Group>
     </Group>
     <Group key="77715107-f8d5-47e5-a629-0fb83101ac6b">
       <Group key="0">
-        <Data key="Port Format" value="3,0" />
+        <Data key="Port Format" value="1,6" />
+      </Group>
+    </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="1,7" />
       </Group>
     </Group>
     <Group key="ed092b9b-d398-4703-be89-cebf998501f6">
       <Group key="0">
-        <Data key="Port Format" value="12,2" />
+        <Data key="Port Format" value="12,7" />
       </Group>
     </Group>
     <Group key="UnAssigned Pins" />

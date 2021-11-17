@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem">
 <ExpandedNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
@@ -55,13 +55,19 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\main.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\Clock_1</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cy_boot</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\isr_uart_rx</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\MISO_2</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\MOSI_2</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\PWM_1</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\PWM_Pin_1</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\SCLK_2</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\SPIM_1</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\SPIM_1_IntClock</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\UART_1</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\UART_1_IntClock</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cycodeshareexport.ld</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cycodeshareimport.ld</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cycodeshareimport.scat</v>
@@ -78,10 +84,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cyfitter_cfg.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cyfitter_cfg.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cyfittergnu.inc</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cyfitteriar.inc</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cyfitterrv.inc</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\cymetadata.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5\project.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -106,6 +108,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
@@ -117,14 +120,23 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_2.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_2.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_Pin_1.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_INT.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_IntClock.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_PM.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.elf</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.hex</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.map</v>
@@ -135,6 +147,43 @@
 <VisibleNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_2.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_2.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_Pin_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_INT.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_IntClock.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_PM.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.elf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.hex</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Microcontroller_coolingsystem.map</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.gpdsc</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.rpt</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem_timing.html</v>
 </VisibleNodeIds>
@@ -152,9 +201,13 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CY8C58LP Family Datasheet</v>
 <v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides</v>
 <v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides\cy_boot_v6_10</v>
+<v>BachelorProject\Microcontroller_coolingsystem\cy_clock_v2_20.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\cy_isr_v1_70.pdf</v>
 <v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20</v>
 <v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\PWM_v3_30.pdf</v>
 <v>BachelorProject\Microcontroller_coolingsystem\SPI_Master_v2_50.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\UART_v2_50.pdf</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>BachelorProject</v>
@@ -163,9 +216,13 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CY8C58LP Family Datasheet</v>
 <v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides</v>
 <v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides\cy_boot_v6_10</v>
+<v>BachelorProject\Microcontroller_coolingsystem\cy_clock_v2_20.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\cy_isr_v1_70.pdf</v>
 <v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20</v>
 <v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\PWM_v3_30.pdf</v>
 <v>BachelorProject\Microcontroller_coolingsystem\SPI_Master_v2_50.pdf</v>
+<v>BachelorProject\Microcontroller_coolingsystem\UART_v2_50.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
@@ -185,7 +242,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1324, 683" SelectedTabbedMdiWindow="9a7dbf8f-b901-49ba-8825-e3bd7b67f1df"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\main.c" Guid="a85b6624-00b4-47ce-a483-792469ee7b24" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="9a7dbf8f-b901-49ba-8825-e3bd7b67f1df" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="4b61efac-db28-4544-a256-28825de24d7a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1338, 711" SelectedTabbedMdiWindow="a85b6624-00b4-47ce-a483-792469ee7b24"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\main.c" Guid="a85b6624-00b4-47ce-a483-792469ee7b24" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="9a7dbf8f-b901-49ba-8825-e3bd7b67f1df" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="4b61efac-db28-4544-a256-28825de24d7a" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="b58fe21d-1736-4d4c-9419-7d3abe5e789a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
