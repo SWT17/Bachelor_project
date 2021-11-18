@@ -1,6 +1,0 @@
-C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj|4d2b4425-5a00-4b20-ac48-b3e95ea23ecb
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|c019f2d6-91dc-4a8f-9e5b-9574bcb8abc4
-C:\Users\nico_\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|af4846dc-7107-46bc-8bed-646db00e11b7
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f7340c4d-a471-4963-bf91-0c499bff5fca
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|754d849b-af6e-4f97-9be4-d08887b5a6d2
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|c90fe2d0-86ad-4d8b-9445-9fb1be3c9d84
