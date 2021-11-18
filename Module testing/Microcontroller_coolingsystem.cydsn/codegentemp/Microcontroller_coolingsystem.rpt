@@ -1,13 +1,13 @@
-Loading plugins phase: Elapsed time ==> 0s.269ms
+Loading plugins phase: Elapsed time ==> 0s.383ms
 <CYPRESSTAG name="CyDsfit arguments...">
-cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -d CY8C5888LTQ-LP097 -s C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -d CY8C5888LTQ-LP097 -s C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 1s.558ms
+Elaboration phase: Elapsed time ==> 1s.807ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.061ms
+HDL generation phase: Elapsed time ==> 0s.075ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -25,23 +25,23 @@ HDL generation phase: Elapsed time ==> 0s.061ms
 ======================================================================
 Compiling:  Microcontroller_coolingsystem.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 Microcontroller_coolingsystem.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 Microcontroller_coolingsystem.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  Microcontroller_coolingsystem.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 Microcontroller_coolingsystem.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 Microcontroller_coolingsystem.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  Microcontroller_coolingsystem.v
 Program  :   vlogfe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Thu Nov 18 07:22:00 2021
+Thu Nov 18 09:19:36 2021
 
 
 ======================================================================
@@ -51,7 +51,7 @@ Options  :    -yv2 -q10 Microcontroller_coolingsystem.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Thu Nov 18 07:22:00 2021
+Thu Nov 18 09:19:36 2021
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_SPI_Master_v2_50\B_SPI_Master_v2_50.v'
@@ -63,6 +63,7 @@ Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\wa
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.v'
+Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v'
 
 vpp:  No errors.
 
@@ -98,11 +99,11 @@ vlogfe:  No errors.
 ======================================================================
 Compiling:  Microcontroller_coolingsystem.v
 Program  :   tovif
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Thu Nov 18 07:22:00 2021
+Thu Nov 18 09:19:36 2021
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -113,9 +114,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.ctl'.
+Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.v'.
+Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_SPI_Master_v2_50\B_SPI_Master_v2_50.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cy_psoc3_inc.v'.
@@ -123,6 +124,7 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\conte
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_PWM_v3_30\B_PWM_v3_30.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v'.
+Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3pkg.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\lcpsoc3\stdlogic\mod_cnst.vif'.
@@ -134,11 +136,11 @@ tovif:  No errors.
 ======================================================================
 Compiling:  Microcontroller_coolingsystem.v
 Program  :   topld
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -dcpsoc3 -verilog Microcontroller_coolingsystem.v
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Thu Nov 18 07:22:01 2021
+Thu Nov 18 09:19:37 2021
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -149,9 +151,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.ctl'.
+Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.v'.
+Linking 'C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\codegentemp\Microcontroller_coolingsystem.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_SPI_Master_v2_50\B_SPI_Master_v2_50.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cy_psoc3_inc.v'.
@@ -159,6 +161,7 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\conte
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_PWM_v3_30\B_PWM_v3_30.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v'.
+Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3pkg.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\lcpsoc3\stdlogic\mod_cnst.vif'.
@@ -483,6 +486,10 @@ Aliasing tmpOE__Tx_1_net_0 to tmpOE__MISO_2_net_0
 Aliasing \VDAC8_1:Net_83\ to zero
 Aliasing \VDAC8_1:Net_81\ to zero
 Aliasing \VDAC8_1:Net_82\ to zero
+Aliasing \PGA_1:Net_37\ to zero
+Aliasing \PGA_1:Net_40\ to zero
+Aliasing \PGA_1:Net_38\ to zero
+Aliasing \PGA_1:Net_39\ to zero
 Aliasing \SPIM_1:BSPIM:so_send_reg\\D\ to zero
 Aliasing \SPIM_1:BSPIM:mosi_pre_reg\\D\ to zero
 Aliasing \SPIM_1:BSPIM:dpcounter_one_reg\\D\ to \SPIM_1:BSPIM:load_rx_data\
@@ -680,29 +687,33 @@ Removing Lhs of wire tmpOE__Tx_1_net_0[759] = tmpOE__MISO_2_net_0[1]
 Removing Lhs of wire \VDAC8_1:Net_83\[766] = zero[2]
 Removing Lhs of wire \VDAC8_1:Net_81\[767] = zero[2]
 Removing Lhs of wire \VDAC8_1:Net_82\[768] = zero[2]
-Removing Lhs of wire \SPIM_1:BSPIM:so_send_reg\\D\[772] = zero[2]
-Removing Lhs of wire \SPIM_1:BSPIM:mosi_pre_reg\\D\[778] = zero[2]
-Removing Lhs of wire \SPIM_1:BSPIM:dpcounter_one_reg\\D\[780] = \SPIM_1:BSPIM:load_rx_data\[27]
-Removing Lhs of wire \SPIM_1:BSPIM:mosi_from_dp_reg\\D\[781] = \SPIM_1:BSPIM:mosi_from_dp\[41]
-Removing Lhs of wire \PWM_1:PWMUDB:min_kill_reg\\D\[784] = tmpOE__MISO_2_net_0[1]
-Removing Lhs of wire \PWM_1:PWMUDB:prevCapture\\D\[785] = zero[2]
-Removing Lhs of wire \PWM_1:PWMUDB:trig_last\\D\[786] = zero[2]
-Removing Lhs of wire \PWM_1:PWMUDB:ltch_kill_reg\\D\[789] = tmpOE__MISO_2_net_0[1]
-Removing Lhs of wire \PWM_1:PWMUDB:prevCompare1\\D\[792] = \PWM_1:PWMUDB:cmp1\[189]
-Removing Lhs of wire \PWM_1:PWMUDB:prevCompare2\\D\[793] = \PWM_1:PWMUDB:cmp2\[192]
-Removing Lhs of wire \PWM_1:PWMUDB:cmp1_status_reg\\D\[794] = \PWM_1:PWMUDB:cmp1_status\[190]
-Removing Lhs of wire \PWM_1:PWMUDB:cmp2_status_reg\\D\[795] = \PWM_1:PWMUDB:cmp2_status\[193]
-Removing Lhs of wire \PWM_1:PWMUDB:pwm_i_reg\\D\[797] = \PWM_1:PWMUDB:pwm_i\[242]
-Removing Lhs of wire \PWM_1:PWMUDB:pwm1_i_reg\\D\[798] = \PWM_1:PWMUDB:pwm1_i\[244]
-Removing Lhs of wire \PWM_1:PWMUDB:pwm2_i_reg\\D\[799] = \PWM_1:PWMUDB:pwm2_i\[246]
-Removing Lhs of wire \PWM_1:PWMUDB:tc_i_reg\\D\[800] = \PWM_1:PWMUDB:status_2\[184]
-Removing Lhs of wire \UART_1:BUART:reset_reg\\D\[801] = zero[2]
-Removing Lhs of wire \UART_1:BUART:rx_bitclk\\D\[816] = \UART_1:BUART:rx_bitclk_pre\[593]
-Removing Lhs of wire \UART_1:BUART:rx_parity_error_pre\\D\[825] = \UART_1:BUART:rx_parity_error_pre\[670]
-Removing Lhs of wire \UART_1:BUART:rx_break_status\\D\[826] = zero[2]
+Removing Lhs of wire \PGA_1:Net_37\[774] = zero[2]
+Removing Lhs of wire \PGA_1:Net_40\[775] = zero[2]
+Removing Lhs of wire \PGA_1:Net_38\[776] = zero[2]
+Removing Lhs of wire \PGA_1:Net_39\[777] = zero[2]
+Removing Lhs of wire \SPIM_1:BSPIM:so_send_reg\\D\[783] = zero[2]
+Removing Lhs of wire \SPIM_1:BSPIM:mosi_pre_reg\\D\[789] = zero[2]
+Removing Lhs of wire \SPIM_1:BSPIM:dpcounter_one_reg\\D\[791] = \SPIM_1:BSPIM:load_rx_data\[27]
+Removing Lhs of wire \SPIM_1:BSPIM:mosi_from_dp_reg\\D\[792] = \SPIM_1:BSPIM:mosi_from_dp\[41]
+Removing Lhs of wire \PWM_1:PWMUDB:min_kill_reg\\D\[795] = tmpOE__MISO_2_net_0[1]
+Removing Lhs of wire \PWM_1:PWMUDB:prevCapture\\D\[796] = zero[2]
+Removing Lhs of wire \PWM_1:PWMUDB:trig_last\\D\[797] = zero[2]
+Removing Lhs of wire \PWM_1:PWMUDB:ltch_kill_reg\\D\[800] = tmpOE__MISO_2_net_0[1]
+Removing Lhs of wire \PWM_1:PWMUDB:prevCompare1\\D\[803] = \PWM_1:PWMUDB:cmp1\[189]
+Removing Lhs of wire \PWM_1:PWMUDB:prevCompare2\\D\[804] = \PWM_1:PWMUDB:cmp2\[192]
+Removing Lhs of wire \PWM_1:PWMUDB:cmp1_status_reg\\D\[805] = \PWM_1:PWMUDB:cmp1_status\[190]
+Removing Lhs of wire \PWM_1:PWMUDB:cmp2_status_reg\\D\[806] = \PWM_1:PWMUDB:cmp2_status\[193]
+Removing Lhs of wire \PWM_1:PWMUDB:pwm_i_reg\\D\[808] = \PWM_1:PWMUDB:pwm_i\[242]
+Removing Lhs of wire \PWM_1:PWMUDB:pwm1_i_reg\\D\[809] = \PWM_1:PWMUDB:pwm1_i\[244]
+Removing Lhs of wire \PWM_1:PWMUDB:pwm2_i_reg\\D\[810] = \PWM_1:PWMUDB:pwm2_i\[246]
+Removing Lhs of wire \PWM_1:PWMUDB:tc_i_reg\\D\[811] = \PWM_1:PWMUDB:status_2\[184]
+Removing Lhs of wire \UART_1:BUART:reset_reg\\D\[812] = zero[2]
+Removing Lhs of wire \UART_1:BUART:rx_bitclk\\D\[827] = \UART_1:BUART:rx_bitclk_pre\[593]
+Removing Lhs of wire \UART_1:BUART:rx_parity_error_pre\\D\[836] = \UART_1:BUART:rx_parity_error_pre\[670]
+Removing Lhs of wire \UART_1:BUART:rx_break_status\\D\[837] = zero[2]
 
 ------------------------------------------------------
-Aliased 0 equations, 207 wires.
+Aliased 0 equations, 211 wires.
 ------------------------------------------------------
 
 ----------------------------------------------------------
@@ -952,14 +963,14 @@ Removing Lhs of wire \PWM_1:PWMUDB:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_8\[441] = zer
 Removing Rhs of wire \UART_1:BUART:rx_bitclk_enable\[557] = \UART_1:BUART:rx_bitclk\[605]
 Removing Lhs of wire \UART_1:BUART:rx_status_0\[656] = zero[2]
 Removing Lhs of wire \UART_1:BUART:rx_status_6\[665] = zero[2]
-Removing Lhs of wire \PWM_1:PWMUDB:runmode_enable\\D\[787] = \PWM_1:PWMUDB:control_7\[129]
-Removing Lhs of wire \PWM_1:PWMUDB:final_kill_reg\\D\[796] = zero[2]
-Removing Lhs of wire \UART_1:BUART:tx_ctrl_mark_last\\D\[808] = \UART_1:BUART:tx_ctrl_mark_last\[548]
-Removing Lhs of wire \UART_1:BUART:rx_markspace_status\\D\[820] = zero[2]
-Removing Lhs of wire \UART_1:BUART:rx_parity_error_status\\D\[821] = zero[2]
-Removing Lhs of wire \UART_1:BUART:rx_addr_match_status\\D\[823] = zero[2]
-Removing Lhs of wire \UART_1:BUART:rx_markspace_pre\\D\[824] = \UART_1:BUART:rx_markspace_pre\[669]
-Removing Lhs of wire \UART_1:BUART:rx_parity_bit\\D\[829] = \UART_1:BUART:rx_parity_bit\[675]
+Removing Lhs of wire \PWM_1:PWMUDB:runmode_enable\\D\[798] = \PWM_1:PWMUDB:control_7\[129]
+Removing Lhs of wire \PWM_1:PWMUDB:final_kill_reg\\D\[807] = zero[2]
+Removing Lhs of wire \UART_1:BUART:tx_ctrl_mark_last\\D\[819] = \UART_1:BUART:tx_ctrl_mark_last\[548]
+Removing Lhs of wire \UART_1:BUART:rx_markspace_status\\D\[831] = zero[2]
+Removing Lhs of wire \UART_1:BUART:rx_parity_error_status\\D\[832] = zero[2]
+Removing Lhs of wire \UART_1:BUART:rx_addr_match_status\\D\[834] = zero[2]
+Removing Lhs of wire \UART_1:BUART:rx_markspace_pre\\D\[835] = \UART_1:BUART:rx_markspace_pre\[669]
+Removing Lhs of wire \UART_1:BUART:rx_parity_bit\\D\[840] = \UART_1:BUART:rx_parity_bit\[675]
 
 ------------------------------------------------------
 Aliased 0 equations, 16 wires.
@@ -996,16 +1007,16 @@ topld:  No errors.
 
 CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj" -dcpsoc3 Microcontroller_coolingsystem.v -verilog
+Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj" -dcpsoc3 Microcontroller_coolingsystem.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 1s.897ms
+Warp synthesis phase: Elapsed time ==> 2s.775ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Thursday, 18 November 2021 07:22:02
-Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -d CY8C5888LTQ-LP097 Microcontroller_coolingsystem.v -verilog
+cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Thursday, 18 November 2021 09:19:38
+Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Module testing\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cyprj -d CY8C5888LTQ-LP097 Microcontroller_coolingsystem.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.018ms
+Design parsing phase: Elapsed time ==> 0s.024ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -1314,7 +1325,7 @@ Design Equations
             IO Voltage: 0
         PORT MAP (
             pa_out => Pin_1(0)__PA ,
-            analog_term => Net_110 ,
+            analog_term => Net_111 ,
             pad => Pin_1(0)_PAD );
         Properties:
         {
@@ -2482,12 +2493,12 @@ Comparator                    :    0 :    4 :    4 :  0.00 %
 Delta-Sigma ADC               :    0 :    1 :    1 :  0.00 %
 LPF                           :    0 :    2 :    2 :  0.00 %
 SAR ADC                       :    0 :    2 :    2 :  0.00 %
-Analog (SC/CT) Blocks         :    0 :    4 :    4 :  0.00 %
+Analog (SC/CT) Blocks         :    1 :    3 :    4 : 25.00 %
 DAC                           :      :      :      :        
   VIDAC                       :    1 :    3 :    4 : 25.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.212ms
-Tech Mapping phase: Elapsed time ==> 0s.302ms
+Technology Mapping: Elapsed time ==> 0s.214ms
+Tech Mapping phase: Elapsed time ==> 0s.301ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 Initial Analog Placement Results:
@@ -2496,44 +2507,57 @@ IO_2@[IOP=(0)][IoId=(2)] : Pin_1(0) (fixed)
 IO_6@[IOP=(12)][IoId=(6)] : Rx_1(0) (fixed)
 IO_1@[IOP=(12)][IoId=(1)] : SCLK_2(0) (fixed)
 IO_7@[IOP=(12)][IoId=(7)] : Tx_1(0) (fixed)
-VIDAC[3]@[FFB(VIDAC,3)] : \VDAC8_1:viDAC8\
-Log: apr.M0058: The analog placement iterative improvement is 31% done. (App=cydsfit)
-Log: apr.M0058: The analog placement iterative improvement is 57% done. (App=cydsfit)
-Log: apr.M0058: The analog placement iterative improvement is 79% done. (App=cydsfit)
-Log: apr.M0058: The analog placement iterative improvement is 100% done. (App=cydsfit)
+SC[3]@[FFB(SC,3)] : \PGA_1:SC\
+VIDAC[0]@[FFB(VIDAC,0)] : \VDAC8_1:viDAC8\
+Log: apr.M0058: The analog placement iterative improvement is 52% done. (App=cydsfit)
 Analog Placement Results:
 IO_0@[IOP=(0)][IoId=(0)] : MISO_2(0) (fixed)
 IO_2@[IOP=(0)][IoId=(2)] : Pin_1(0) (fixed)
 IO_6@[IOP=(12)][IoId=(6)] : Rx_1(0) (fixed)
 IO_1@[IOP=(12)][IoId=(1)] : SCLK_2(0) (fixed)
 IO_7@[IOP=(12)][IoId=(7)] : Tx_1(0) (fixed)
-VIDAC[0]@[FFB(VIDAC,0)] : \VDAC8_1:viDAC8\
+SC[2]@[FFB(SC,2)] : \PGA_1:SC\
+VIDAC[2]@[FFB(VIDAC,2)] : \VDAC8_1:viDAC8\
 
-Analog Placement phase: Elapsed time ==> 0s.802ms
+Analog Placement phase: Elapsed time ==> 0s.430ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
-Analog Routing phase: Elapsed time ==> 0s.001ms
+Analog Routing phase: Elapsed time ==> 0s.002ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
 Dump of CyAnalogRoutingResultsDB
 Map of net to items {
-  Net: Net_110 {
-    vidac_0_vout
-    amuxbusl_x_vidac_0_vout
-    amuxbusl
-    amuxbusl_x_p0_2
+  Net: Net_111 {
+    sc_2_vout
+    agl6_x_sc_2_vout
+    agl6
+    agl6_x_p0_2
     p0_2
+  }
+  Net: \PGA_1:Net_17\ {
+  }
+  Net: Net_112 {
+    vidac_2_vout
+    agl5_x_vidac_2_vout
+    agl5
+    agl5_x_sc_2_vin
+    sc_2_vin
   }
   Net: \VDAC8_1:Net_77\ {
   }
 }
 Map of item to net {
-  vidac_0_vout                                     -> Net_110
-  amuxbusl_x_vidac_0_vout                          -> Net_110
-  amuxbusl                                         -> Net_110
-  amuxbusl_x_p0_2                                  -> Net_110
-  p0_2                                             -> Net_110
+  sc_2_vout                                        -> Net_111
+  agl6_x_sc_2_vout                                 -> Net_111
+  agl6                                             -> Net_111
+  agl6_x_p0_2                                      -> Net_111
+  p0_2                                             -> Net_111
+  vidac_2_vout                                     -> Net_112
+  agl5_x_vidac_2_vout                              -> Net_112
+  agl5                                             -> Net_112
+  agl5_x_sc_2_vin                                  -> Net_112
+  sc_2_vin                                         -> Net_112
 }
 Mux Info {
 }
@@ -2541,11 +2565,11 @@ Dump of CyP35AnalogRoutingResultsDB
 IsVddaHalfUsedForComp = False
 IsVddaHalfUsedForSar0 = False
 IsVddaHalfUsedForSar1 = False
-Analog Code Generation phase: Elapsed time ==> 0s.248ms
+Analog Code Generation phase: Elapsed time ==> 0s.270ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
-I2076: Total run-time: 1.3 sec.
+I2076: Total run-time: 1.4 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -2569,14 +2593,14 @@ PLD Packing Summary
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
 </CYPRESSTAG>
-PLD Packing: Elapsed time ==> 0s.003ms
+PLD Packing: Elapsed time ==> 0s.001ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Partitioning">
 <CYPRESSTAG name="Initial Partitioning Summary">
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.045ms
+Partitioning: Elapsed time ==> 0s.046ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -3938,7 +3962,7 @@ Pin : Name = Pin_1(0)
         IO Voltage: 0
     PORT MAP (
         pa_out => Pin_1(0)__PA ,
-        analog_term => Net_110 ,
+        analog_term => Net_111 ,
         pad => Pin_1(0)_PAD );
     Properties:
     {
@@ -4151,15 +4175,26 @@ LCD group 0: empty
 LVD group 0: empty
 PICU group 0: empty
 PM group 0: empty
-SC group 0: empty
+SC group 0: 
+    SC Block @ F(SC,2): 
+    sccell: Name =\PGA_1:SC\
+        PORT MAP (
+            vref => \PGA_1:Net_17\ ,
+            vin => Net_112 ,
+            modout => \PGA_1:Net_41\ ,
+            vout => Net_111 );
+        Properties:
+        {
+            cy_registers = ""
+        }
 SPC group 0: empty
 Timer group 0: empty
 USB group 0: empty
 VIDAC group 0: 
-    VIDAC Block @ F(VIDAC,0): 
+    VIDAC Block @ F(VIDAC,2): 
     vidaccell: Name =\VDAC8_1:viDAC8\
         PORT MAP (
-            vout => Net_110 ,
+            vout => Net_112 ,
             iout => \VDAC8_1:Net_77\ );
         Properties:
         {
@@ -4184,7 +4219,7 @@ Port Configuration report
 Port | Pin | Fixed |      Type |       Drive Mode |      Name | Connections
 -----+-----+-------+-----------+------------------+-----------+----------------
    0 |   0 |     * |      NONE |     HI_Z_DIGITAL | MISO_2(0) | FB(Net_19)
-     |   2 |     * |      NONE |      HI_Z_ANALOG |  Pin_1(0) | Analog(Net_110)
+     |   2 |     * |      NONE |      HI_Z_ANALOG |  Pin_1(0) | Analog(Net_111)
 -----+-----+-------+-----------+------------------+-----------+----------------
   12 |   1 |     * |      NONE |         CMOS_OUT | SCLK_2(0) | In(Net_25)
      |   3 |       |      NONE |         CMOS_OUT | MOSI_2(0) | In(Net_23)
@@ -4194,33 +4229,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |      Name | Connections
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.094ms
-Digital Placement phase: Elapsed time ==> 1s.783ms
+Digital component placer commit/Report: Elapsed time ==> 0s.103ms
+Digital Placement phase: Elapsed time ==> 1s.912ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata" --vh2-path "Microcontroller_coolingsystem_r.vh2" --pcf-path "Microcontroller_coolingsystem.pco" --des-name "Microcontroller_coolingsystem" --dsf-path "Microcontroller_coolingsystem.dsf" --sdc-path "Microcontroller_coolingsystem.sdc" --lib-path "Microcontroller_coolingsystem_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 2s.171ms
+Digital Routing phase: Elapsed time ==> 2s.046ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.251ms
+Bitstream Generation phase: Elapsed time ==> 0s.245ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.040ms
+Bitstream Verification phase: Elapsed time ==> 0s.039ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in Microcontroller_coolingsystem_timing.html.
-Static timing analysis phase: Elapsed time ==> 0s.479ms
+Static timing analysis phase: Elapsed time ==> 0s.510ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.215ms
+Design database save phase: Elapsed time ==> 0s.226ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 6s.381ms
+cydsfit: Elapsed time ==> 6s.077ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 6s.382ms
-API generation phase: Elapsed time ==> 1s.245ms
-Dependency generation phase: Elapsed time ==> 0s.015ms
-Cleanup phase: Elapsed time ==> 0s.001ms
+Fitter phase: Elapsed time ==> 6s.081ms
+API generation phase: Elapsed time ==> 1s.401ms
+Dependency generation phase: Elapsed time ==> 0s.021ms
+Cleanup phase: Elapsed time ==> 0s.000ms

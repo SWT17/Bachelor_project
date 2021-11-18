@@ -1,5 +1,5 @@
 -- Project:   Microcontroller_coolingsystem
--- Generated: 11/18/2021 07:22:03
+-- Generated: 11/18/2021 09:19:39
 -- PSoC Creator  4.4
 
 ENTITY Microcontroller_coolingsystem IS
@@ -49,6 +49,7 @@ ARCHITECTURE __DEFAULT__ OF Microcontroller_coolingsystem IS
     SIGNAL Rx_1(0)__PA : bit;
     SIGNAL SCLK_2(0)__PA : bit;
     SIGNAL Tx_1(0)__PA : bit;
+    SIGNAL \PGA_1:Net_41\ : bit;
     SIGNAL \PWM_1:PWMUDB:cmp1_less\ : bit;
     SIGNAL \PWM_1:PWMUDB:cmp2_less\ : bit;
     SIGNAL \PWM_1:PWMUDB:control_0\ : bit;
@@ -178,7 +179,8 @@ ARCHITECTURE __DEFAULT__ OF Microcontroller_coolingsystem IS
     ATTRIBUTE lib_model OF \UART_1:BUART:sTX:TxSts\ : LABEL IS "statusicell4";
     ATTRIBUTE lib_model OF \UART_1:BUART:sRX:RxShifter:u0\ : LABEL IS "datapathcell5";
     ATTRIBUTE lib_model OF \UART_1:BUART:sRX:RxSts\ : LABEL IS "statusicell5";
-    ATTRIBUTE Location OF \VDAC8_1:viDAC8\ : LABEL IS "F(VIDAC,0)";
+    ATTRIBUTE Location OF \VDAC8_1:viDAC8\ : LABEL IS "F(VIDAC,2)";
+    ATTRIBUTE Location OF \PGA_1:SC\ : LABEL IS "F(SC,2)";
     ATTRIBUTE lib_model OF Net_25 : LABEL IS "macrocell14";
     ATTRIBUTE lib_model OF Net_23 : LABEL IS "macrocell15";
     ATTRIBUTE lib_model OF \SPIM_1:BSPIM:state_2\ : LABEL IS "macrocell16";
@@ -516,6 +518,14 @@ ARCHITECTURE __DEFAULT__ OF Microcontroller_coolingsystem IS
     ATTRIBUTE udb_chain OF macrocell : COMPONENT IS "cin,cout";
     ATTRIBUTE chain_lsb OF macrocell : COMPONENT IS "cin";
     ATTRIBUTE chain_msb OF macrocell : COMPONENT IS "cout";
+    COMPONENT sccell
+        PORT (
+            aclk : IN std_ulogic;
+            bst_clk : IN std_ulogic;
+            clk_udb : IN std_ulogic;
+            modout : OUT std_ulogic;
+            dyn_cntl_udb : IN std_ulogic);
+    END COMPONENT;
     COMPONENT statusicell
         PORT (
             status_0 : IN std_ulogic;
@@ -1627,6 +1637,13 @@ BEGIN
             reset => open,
             idir => open,
             ioff => open);
+
+    \PGA_1:SC\:sccell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            dyn_cntl_udb => open,
+            modout => \PGA_1:Net_41\);
 
     Net_25:macrocell
         GENERIC MAP(

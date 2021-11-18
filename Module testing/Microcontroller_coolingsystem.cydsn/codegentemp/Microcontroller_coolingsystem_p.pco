@@ -64,9 +64,10 @@ set_io "MOSI_2(0)" iocell 12 3
 # Note: port 12 is the logical name for port 7
 set_io "SCLK_2(0)" iocell 12 1
 set_location "\PWM_1:PWMUDB:genblk1:ctrlreg\" controlcell 3 2 6 
-set_location "\VDAC8_1:viDAC8\" vidaccell -1 -1 0
+set_location "\VDAC8_1:viDAC8\" vidaccell -1 -1 2
 set_io "MISO_2(0)" iocell 0 0
 # Note: port 12 is the logical name for port 7
 set_io "Tx_1(0)" iocell 12 7
 set_location "isr_uart_rx" interrupt -1 -1 0
+set_location "\PGA_1:SC\" sccell -1 -1 2
 set_io "Pin_1(0)" iocell 0 2

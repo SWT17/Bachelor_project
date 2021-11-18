@@ -1,6 +1,6 @@
 // ======================================================================
 // Microcontroller_coolingsystem.v generated from TopDesign.cysch
-// 11/18/2021 at 07:22
+// 11/18/2021 at 09:19
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -543,9 +543,77 @@ module VDAC8_v1_90_3 (
 
 endmodule
 
+// Component: cy_analog_virtualmux_v1_0
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v"
+`endif
+
+// PGA_v2_0(Gain=1, Power=1, VddaValue=5, Vref_Input=0, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=PGA_v2_0, CY_CONFIG_TITLE=PGA_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=PGA_1, CY_INSTANCE_SHORT_NAME=PGA_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=PGA_1, )
+module PGA_v2_0_4 (
+    Vin,
+    Vout,
+    Vref);
+    inout       Vin;
+    electrical  Vin;
+    inout       Vout;
+    electrical  Vout;
+    inout       Vref;
+    electrical  Vref;
+
+
+    electrical  Net_75;
+          wire  Net_41;
+          wire  Net_40;
+    electrical  Net_17;
+          wire  Net_39;
+          wire  Net_38;
+          wire  Net_37;
+
+    cy_psoc3_scblock_v1_0 SC (
+        .aclk(Net_37),
+        .bst_clk(Net_40),
+        .clk_udb(Net_38),
+        .dyn_cntl(Net_39),
+        .modout_sync(Net_41),
+        .vin(Vin),
+        .vout(Vout),
+        .vref(Net_17));
+
+    ZeroTerminal ZeroTerminal_1 (
+        .z(Net_37));
+
+    ZeroTerminal ZeroTerminal_2 (
+        .z(Net_38));
+
+    ZeroTerminal ZeroTerminal_3 (
+        .z(Net_39));
+
+    ZeroTerminal ZeroTerminal_4 (
+        .z(Net_40));
+
+	// cy_analog_virtualmux_1 (cy_analog_virtualmux_v1_0)
+	cy_connect_v1_0 cy_analog_virtualmux_1_connect(Net_17, Net_75);
+	defparam cy_analog_virtualmux_1_connect.sig_width = 1;
+
+    cy_analog_noconnect_v1_0 cy_analog_noconnect_2 (
+        .noconnect(Net_75));
+
+
+
+endmodule
+
 // top
 module top ;
 
+    electrical  Net_113;
           wire  Net_93;
           wire [7:0] Net_94;
           wire  Net_90;
@@ -579,7 +647,8 @@ module top ;
           wire  Net_30;
           wire  Net_29;
           wire  Net_28;
-    electrical  Net_110;
+    electrical  Net_112;
+    electrical  Net_111;
           wire  Net_14;
           wire  Net_61;
           wire  Net_18;
@@ -918,7 +987,7 @@ module top ;
 		 (.oe(tmpOE__Pin_1_net),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__Pin_1_net[0:0]}),
-		  .analog({Net_110}),
+		  .analog({Net_111}),
 		  .io({tmpIO_0__Pin_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_1_net),
 		  .interrupt({tmpINTERRUPT_0__Pin_1_net[0:0]}),
@@ -1117,10 +1186,15 @@ module top ;
     VDAC8_v1_90_3 VDAC8_1 (
         .data(8'b00000000),
         .strobe(1'b0),
-        .vOut(Net_110));
+        .vOut(Net_112));
     defparam VDAC8_1.Data_Source = 0;
     defparam VDAC8_1.Initial_Value = 31;
     defparam VDAC8_1.Strobe_Mode = 0;
+
+    PGA_v2_0_4 PGA_1 (
+        .Vin(Net_112),
+        .Vout(Net_111),
+        .Vref(Net_113));
 
 
 

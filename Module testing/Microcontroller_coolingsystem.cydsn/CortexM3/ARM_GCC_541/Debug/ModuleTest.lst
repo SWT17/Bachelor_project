@@ -1,0 +1,1770 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ModuleTest.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Init_testsetup,"ax",%progbits
+  20              		.align	2
+  21              		.global	Init_testsetup
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	Init_testsetup, %function
+  25              	Init_testsetup:
+  26              	.LFB64:
+  27              		.file 1 "ModuleTest.c"
+   1:ModuleTest.c  **** /* ========================================
+   2:ModuleTest.c  ****  *
+   3:ModuleTest.c  ****  * Copyright YOUR COMPANY, THE YEAR
+   4:ModuleTest.c  ****  * All Rights Reserved
+   5:ModuleTest.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:ModuleTest.c  ****  *
+   7:ModuleTest.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:ModuleTest.c  ****  * WHICH IS THE PROPERTY OF your company.
+   9:ModuleTest.c  ****  *
+  10:ModuleTest.c  ****  * ========================================
+  11:ModuleTest.c  **** */
+  12:ModuleTest.c  **** #include "ModuleTest.h"
+  13:ModuleTest.c  **** CY_ISR_PROTO(ISR_UART_rx_handler);
+  14:ModuleTest.c  **** void handleByteReceived(uint8_t byteReceived);
+  15:ModuleTest.c  **** 
+  16:ModuleTest.c  **** float Speed = 0.496*256 / 4.096;
+  17:ModuleTest.c  **** float Vout = 0.496;
+  18:ModuleTest.c  **** static char outputBuffer[256];
+  19:ModuleTest.c  **** 
+  20:ModuleTest.c  **** uint8 start = 0;
+  21:ModuleTest.c  **** 
+  22:ModuleTest.c  **** void Init_testsetup()
+  23:ModuleTest.c  **** {
+  28              		.loc 1 23 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 2
+
+
+  35              		.cfi_offset 14, -4
+  24:ModuleTest.c  ****       
+  25:ModuleTest.c  ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  36              		.loc 1 25 0
+  37              		.syntax unified
+  38              	@ 25 "ModuleTest.c" 1
+  39 0002 62B6     		CPSIE   i
+  40              	@ 0 "" 2
+  26:ModuleTest.c  ****     isr_uart_rx_StartEx(ISR_UART_rx_handler); /* setup uart interrupt handle */
+  41              		.loc 1 26 0
+  42              		.thumb
+  43              		.syntax unified
+  44 0004 0348     		ldr	r0, .L3
+  45 0006 FFF7FEFF 		bl	isr_uart_rx_StartEx
+  46              	.LVL0:
+  27:ModuleTest.c  ****     UART_1_Start(); /* start uart */
+  47              		.loc 1 27 0
+  48 000a FFF7FEFF 		bl	UART_1_Start
+  49              	.LVL1:
+  28:ModuleTest.c  ****     PGA_1_Start();
+  50              		.loc 1 28 0
+  51 000e FFF7FEFF 		bl	PGA_1_Start
+  52              	.LVL2:
+  53 0012 08BD     		pop	{r3, pc}
+  54              	.L4:
+  55              		.align	2
+  56              	.L3:
+  57 0014 00000000 		.word	ISR_UART_rx_handler
+  58              		.cfi_endproc
+  59              	.LFE64:
+  60              		.size	Init_testsetup, .-Init_testsetup
+  61              		.global	__aeabi_f2d
+  62              		.section	.text.Start_test,"ax",%progbits
+  63              		.align	2
+  64              		.global	Start_test
+  65              		.thumb
+  66              		.thumb_func
+  67              		.type	Start_test, %function
+  68              	Start_test:
+  69              	.LFB65:
+  29:ModuleTest.c  ****     
+  30:ModuleTest.c  **** 
+  31:ModuleTest.c  **** }
+  32:ModuleTest.c  **** 
+  33:ModuleTest.c  **** 
+  34:ModuleTest.c  **** void Start_test()
+  35:ModuleTest.c  **** {
+  70              		.loc 1 35 0
+  71              		.cfi_startproc
+  72              		@ Volatile: function does not return.
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              	.L6:
+  36:ModuleTest.c  ****      while(start == 0) /* Wait for start signal from actor */
+  76              		.loc 1 36 0 discriminator 1
+  77 0000 104B     		ldr	r3, .L9
+  78 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 3
+
+
+  79 0004 002B     		cmp	r3, #0
+  80 0006 FBD0     		beq	.L6
+  35:ModuleTest.c  ****      while(start == 0) /* Wait for start signal from actor */
+  81              		.loc 1 35 0
+  82 0008 00B5     		push	{lr}
+  83              		.cfi_def_cfa_offset 4
+  84              		.cfi_offset 14, -4
+  85 000a 85B0     		sub	sp, sp, #20
+  86              		.cfi_def_cfa_offset 24
+  37:ModuleTest.c  ****     {
+  38:ModuleTest.c  ****     }
+  39:ModuleTest.c  ****     
+  40:ModuleTest.c  ****     VDAC8_1_Start(); /* Start VDAC */
+  87              		.loc 1 40 0
+  88 000c FFF7FEFF 		bl	VDAC8_1_Start
+  89              	.LVL3:
+  41:ModuleTest.c  **** 
+  42:ModuleTest.c  ****     UART_1_PutString("VDAC started \r\n"); 
+  90              		.loc 1 42 0
+  91 0010 0D48     		ldr	r0, .L9+4
+  92 0012 FFF7FEFF 		bl	UART_1_PutString
+  93              	.LVL4:
+  43:ModuleTest.c  ****     snprintf(outputBuffer, sizeof(outputBuffer), "Initial Speed %f corresponding voltage %f \r\n", 
+  94              		.loc 1 43 0
+  95 0016 0D4C     		ldr	r4, .L9+8
+  96 0018 0D4D     		ldr	r5, .L9+12
+  97 001a 2868     		ldr	r0, [r5]	@ float
+  98 001c FFF7FEFF 		bl	__aeabi_f2d
+  99              	.LVL5:
+ 100 0020 CDE90201 		strd	r0, [sp, #8]
+ 101 0024 6868     		ldr	r0, [r5, #4]	@ float
+ 102 0026 FFF7FEFF 		bl	__aeabi_f2d
+ 103              	.LVL6:
+ 104 002a CDE90001 		strd	r0, [sp]
+ 105 002e 094A     		ldr	r2, .L9+16
+ 106 0030 4FF48071 		mov	r1, #256
+ 107 0034 2046     		mov	r0, r4
+ 108 0036 FFF7FEFF 		bl	snprintf
+ 109              	.LVL7:
+  44:ModuleTest.c  ****     UART_1_PutString(outputBuffer);  /* Output initial status message - VDAC started, initial speed
+ 110              		.loc 1 44 0
+ 111 003a 2046     		mov	r0, r4
+ 112 003c FFF7FEFF 		bl	UART_1_PutString
+ 113              	.LVL8:
+ 114              	.L7:
+ 115 0040 FEE7     		b	.L7
+ 116              	.L10:
+ 117 0042 00BF     		.align	2
+ 118              	.L9:
+ 119 0044 00000000 		.word	.LANCHOR0
+ 120 0048 00000000 		.word	.LC0
+ 121 004c 04000000 		.word	.LANCHOR0+4
+ 122 0050 00000000 		.word	.LANCHOR1
+ 123 0054 10000000 		.word	.LC1
+ 124              		.cfi_endproc
+ 125              	.LFE65:
+ 126              		.size	Start_test, .-Start_test
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 4
+
+
+ 127              		.global	__aeabi_fcmplt
+ 128              		.global	__aeabi_fadd
+ 129              		.global	__aeabi_fmul
+ 130              		.global	__aeabi_dmul
+ 131              		.global	__aeabi_d2f
+ 132              		.global	__aeabi_f2uiz
+ 133              		.global	__aeabi_fcmpgt
+ 134              		.global	__aeabi_fsub
+ 135              		.section	.text.handleByteReceived,"ax",%progbits
+ 136              		.align	2
+ 137              		.global	handleByteReceived
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.type	handleByteReceived, %function
+ 141              	handleByteReceived:
+ 142              	.LFB67:
+  45:ModuleTest.c  ****    
+  46:ModuleTest.c  ****     for(;;)  /* run infinite loop */
+  47:ModuleTest.c  ****     {
+  48:ModuleTest.c  ****     }
+  49:ModuleTest.c  **** }
+  50:ModuleTest.c  **** 
+  51:ModuleTest.c  **** 
+  52:ModuleTest.c  **** CY_ISR(ISR_UART_rx_handler)  /* Interrupt handler - reading byte sent */
+  53:ModuleTest.c  **** {
+  54:ModuleTest.c  ****     uint8_t bytesToRead = UART_1_GetRxBufferSize();
+  55:ModuleTest.c  ****     while (bytesToRead > 0)
+  56:ModuleTest.c  ****     {
+  57:ModuleTest.c  ****         uint8_t byteReceived = UART_1_ReadRxData();
+  58:ModuleTest.c  ****         //UART_1_WriteTxData(byteReceived); // echo back
+  59:ModuleTest.c  ****         
+  60:ModuleTest.c  ****         handleByteReceived(byteReceived);
+  61:ModuleTest.c  ****         
+  62:ModuleTest.c  ****         bytesToRead--;
+  63:ModuleTest.c  ****     }
+  64:ModuleTest.c  **** }
+  65:ModuleTest.c  **** void handleByteReceived(uint8_t byteReceived)  /* Method to translate incoming byte into actions */
+  66:ModuleTest.c  **** {
+ 143              		.loc 1 66 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147              	.LVL9:
+ 148 0000 30B5     		push	{r4, r5, lr}
+ 149              		.cfi_def_cfa_offset 12
+ 150              		.cfi_offset 4, -12
+ 151              		.cfi_offset 5, -8
+ 152              		.cfi_offset 14, -4
+ 153 0002 85B0     		sub	sp, sp, #20
+ 154              		.cfi_def_cfa_offset 32
+  67:ModuleTest.c  ****     switch(byteReceived)
+ 155              		.loc 1 67 0
+ 156 0004 7128     		cmp	r0, #113
+ 157 0006 06D0     		beq	.L13
+ 158 0008 7328     		cmp	r0, #115
+ 159 000a 00F08C80 		beq	.L14
+ 160 000e 7028     		cmp	r0, #112
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 5
+
+
+ 161 0010 40F08C80 		bne	.L11
+ 162 0014 4AE0     		b	.L15
+ 163              	.L13:
+  68:ModuleTest.c  ****     {
+  69:ModuleTest.c  ****         case 'q' :
+  70:ModuleTest.c  ****         {
+  71:ModuleTest.c  ****             if(Speed<255)
+ 164              		.loc 1 71 0
+ 165 0016 484B     		ldr	r3, .L25+8
+ 166 0018 5C68     		ldr	r4, [r3, #4]	@ float
+ 167 001a 4849     		ldr	r1, .L25+12
+ 168 001c 2046     		mov	r0, r4
+ 169              	.LVL10:
+ 170 001e FFF7FEFF 		bl	__aeabi_fcmplt
+ 171              	.LVL11:
+ 172 0022 0028     		cmp	r0, #0
+ 173 0024 3ED0     		beq	.L22
+  72:ModuleTest.c  ****             {
+  73:ModuleTest.c  ****                 Speed = Speed+1;
+ 174              		.loc 1 73 0
+ 175 0026 4FF07E51 		mov	r1, #1065353216
+ 176 002a 2046     		mov	r0, r4
+ 177 002c FFF7FEFF 		bl	__aeabi_fadd
+ 178              	.LVL12:
+ 179 0030 0546     		mov	r5, r0
+ 180 0032 414C     		ldr	r4, .L25+8
+ 181 0034 6060     		str	r0, [r4, #4]	@ float
+  74:ModuleTest.c  ****                 Vout = (Speed/256) * 4.096;
+ 182              		.loc 1 74 0
+ 183 0036 4FF06E51 		mov	r1, #998244352
+ 184 003a FFF7FEFF 		bl	__aeabi_fmul
+ 185              	.LVL13:
+ 186 003e FFF7FEFF 		bl	__aeabi_f2d
+ 187              	.LVL14:
+ 188 0042 3BA3     		adr	r3, .L25
+ 189 0044 D3E90023 		ldrd	r2, [r3]
+ 190 0048 FFF7FEFF 		bl	__aeabi_dmul
+ 191              	.LVL15:
+ 192 004c FFF7FEFF 		bl	__aeabi_d2f
+ 193              	.LVL16:
+ 194 0050 2060     		str	r0, [r4]	@ float
+  75:ModuleTest.c  ****                 VDAC8_1_SetValue(Speed);
+ 195              		.loc 1 75 0
+ 196 0052 2846     		mov	r0, r5
+ 197 0054 FFF7FEFF 		bl	__aeabi_f2uiz
+ 198              	.LVL17:
+ 199 0058 C0B2     		uxtb	r0, r0
+ 200 005a FFF7FEFF 		bl	VDAC8_1_SetValue
+ 201              	.LVL18:
+  76:ModuleTest.c  ****                 snprintf(outputBuffer, sizeof(outputBuffer), "Speed is increased to %fV; \r\n", Vou
+ 202              		.loc 1 76 0
+ 203 005e 384D     		ldr	r5, .L25+16
+ 204 0060 2068     		ldr	r0, [r4]	@ float
+ 205 0062 FFF7FEFF 		bl	__aeabi_f2d
+ 206              	.LVL19:
+ 207 0066 CDE90001 		strd	r0, [sp]
+ 208 006a 364A     		ldr	r2, .L25+20
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 6
+
+
+ 209 006c 4FF48071 		mov	r1, #256
+ 210 0070 2846     		mov	r0, r5
+ 211 0072 FFF7FEFF 		bl	snprintf
+ 212              	.LVL20:
+  77:ModuleTest.c  ****                 UART_1_PutString(outputBuffer);
+ 213              		.loc 1 77 0
+ 214 0076 2846     		mov	r0, r5
+ 215 0078 FFF7FEFF 		bl	UART_1_PutString
+ 216              	.LVL21:
+  78:ModuleTest.c  ****                 snprintf(outputBuffer, sizeof(outputBuffer), "Speed increased to %f corresponding v
+ 217              		.loc 1 78 0
+ 218 007c 2068     		ldr	r0, [r4]	@ float
+ 219 007e FFF7FEFF 		bl	__aeabi_f2d
+ 220              	.LVL22:
+ 221 0082 CDE90201 		strd	r0, [sp, #8]
+ 222 0086 6068     		ldr	r0, [r4, #4]	@ float
+ 223 0088 FFF7FEFF 		bl	__aeabi_f2d
+ 224              	.LVL23:
+ 225 008c CDE90001 		strd	r0, [sp]
+ 226 0090 2D4A     		ldr	r2, .L25+24
+ 227 0092 4FF48071 		mov	r1, #256
+ 228 0096 2846     		mov	r0, r5
+ 229 0098 FFF7FEFF 		bl	snprintf
+ 230              	.LVL24:
+  79:ModuleTest.c  ****                 UART_1_PutString(outputBuffer);
+ 231              		.loc 1 79 0
+ 232 009c 2846     		mov	r0, r5
+ 233 009e FFF7FEFF 		bl	UART_1_PutString
+ 234              	.LVL25:
+ 235 00a2 43E0     		b	.L11
+ 236              	.L22:
+  80:ModuleTest.c  ****             }else
+  81:ModuleTest.c  ****             {
+  82:ModuleTest.c  ****                 UART_1_PutString("Speed is at maximum 4.096V \r\n");
+ 237              		.loc 1 82 0
+ 238 00a4 2948     		ldr	r0, .L25+28
+ 239 00a6 FFF7FEFF 		bl	UART_1_PutString
+ 240              	.LVL26:
+ 241 00aa 3FE0     		b	.L11
+ 242              	.LVL27:
+ 243              	.L15:
+  83:ModuleTest.c  ****             }
+  84:ModuleTest.c  ****             
+  85:ModuleTest.c  ****         }
+  86:ModuleTest.c  ****         break;
+  87:ModuleTest.c  ****         case 'p' :
+  88:ModuleTest.c  ****         { 
+  89:ModuleTest.c  ****             if(Speed > 1)
+ 244              		.loc 1 89 0
+ 245 00ac 224B     		ldr	r3, .L25+8
+ 246 00ae 5C68     		ldr	r4, [r3, #4]	@ float
+ 247 00b0 4FF07E51 		mov	r1, #1065353216
+ 248 00b4 2046     		mov	r0, r4
+ 249              	.LVL28:
+ 250 00b6 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 251              	.LVL29:
+ 252 00ba 0028     		cmp	r0, #0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 7
+
+
+ 253 00bc 30D0     		beq	.L23
+  90:ModuleTest.c  ****             {
+  91:ModuleTest.c  ****                 Speed = Speed-1;
+ 254              		.loc 1 91 0
+ 255 00be 4FF07E51 		mov	r1, #1065353216
+ 256 00c2 2046     		mov	r0, r4
+ 257 00c4 FFF7FEFF 		bl	__aeabi_fsub
+ 258              	.LVL30:
+ 259 00c8 0546     		mov	r5, r0
+ 260 00ca 1B4C     		ldr	r4, .L25+8
+ 261 00cc 6060     		str	r0, [r4, #4]	@ float
+  92:ModuleTest.c  ****                 Vout = (Speed/256) * 4.096;
+ 262              		.loc 1 92 0
+ 263 00ce 4FF06E51 		mov	r1, #998244352
+ 264 00d2 FFF7FEFF 		bl	__aeabi_fmul
+ 265              	.LVL31:
+ 266 00d6 FFF7FEFF 		bl	__aeabi_f2d
+ 267              	.LVL32:
+ 268 00da 15A3     		adr	r3, .L25
+ 269 00dc D3E90023 		ldrd	r2, [r3]
+ 270 00e0 FFF7FEFF 		bl	__aeabi_dmul
+ 271              	.LVL33:
+ 272 00e4 FFF7FEFF 		bl	__aeabi_d2f
+ 273              	.LVL34:
+ 274 00e8 2060     		str	r0, [r4]	@ float
+  93:ModuleTest.c  ****                 VDAC8_1_SetValue(Speed);
+ 275              		.loc 1 93 0
+ 276 00ea 2846     		mov	r0, r5
+ 277 00ec FFF7FEFF 		bl	__aeabi_f2uiz
+ 278              	.LVL35:
+ 279 00f0 C0B2     		uxtb	r0, r0
+ 280 00f2 FFF7FEFF 		bl	VDAC8_1_SetValue
+ 281              	.LVL36:
+  94:ModuleTest.c  ****                 snprintf(outputBuffer, sizeof(outputBuffer), "Speed decreased to %fV corresponding 
+ 282              		.loc 1 94 0
+ 283 00f6 124D     		ldr	r5, .L25+16
+ 284 00f8 2068     		ldr	r0, [r4]	@ float
+ 285 00fa FFF7FEFF 		bl	__aeabi_f2d
+ 286              	.LVL37:
+ 287 00fe CDE90201 		strd	r0, [sp, #8]
+ 288 0102 6068     		ldr	r0, [r4, #4]	@ float
+ 289 0104 FFF7FEFF 		bl	__aeabi_f2d
+ 290              	.LVL38:
+ 291 0108 CDE90001 		strd	r0, [sp]
+ 292 010c 104A     		ldr	r2, .L25+32
+ 293 010e 4FF48071 		mov	r1, #256
+ 294 0112 2846     		mov	r0, r5
+ 295 0114 FFF7FEFF 		bl	snprintf
+ 296              	.LVL39:
+  95:ModuleTest.c  ****                 UART_1_PutString(outputBuffer);
+ 297              		.loc 1 95 0
+ 298 0118 2846     		mov	r0, r5
+ 299 011a FFF7FEFF 		bl	UART_1_PutString
+ 300              	.LVL40:
+ 301 011e 02E0     		b	.L14
+ 302              	.L23:
+  96:ModuleTest.c  ****             }else
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 8
+
+
+  97:ModuleTest.c  ****             {
+  98:ModuleTest.c  ****                 UART_1_PutString("Speed is at minimum 0V \r\n");
+ 303              		.loc 1 98 0
+ 304 0120 0C48     		ldr	r0, .L25+36
+ 305 0122 FFF7FEFF 		bl	UART_1_PutString
+ 306              	.LVL41:
+ 307              	.L14:
+  99:ModuleTest.c  ****             }
+ 100:ModuleTest.c  ****         }
+ 101:ModuleTest.c  ****         case 's':
+ 102:ModuleTest.c  ****         {
+ 103:ModuleTest.c  ****             start=1;
+ 308              		.loc 1 103 0
+ 309 0126 0122     		movs	r2, #1
+ 310 0128 0B4B     		ldr	r3, .L25+40
+ 311 012a 1A70     		strb	r2, [r3]
+ 312              	.L11:
+ 104:ModuleTest.c  ****         }
+ 105:ModuleTest.c  ****         
+ 106:ModuleTest.c  ****         break;
+ 107:ModuleTest.c  **** 
+ 108:ModuleTest.c  ****         
+ 109:ModuleTest.c  ****     }
+ 110:ModuleTest.c  **** }
+ 313              		.loc 1 110 0
+ 314 012c 05B0     		add	sp, sp, #20
+ 315              		.cfi_def_cfa_offset 12
+ 316              		@ sp needed
+ 317 012e 30BD     		pop	{r4, r5, pc}
+ 318              	.L26:
+ 319              		.align	3
+ 320              	.L25:
+ 321 0130 FCA9F1D2 		.word	-755914244
+ 322 0134 4D621040 		.word	1074815565
+ 323 0138 00000000 		.word	.LANCHOR1
+ 324 013c 00007F43 		.word	1132396544
+ 325 0140 04000000 		.word	.LANCHOR0+4
+ 326 0144 40000000 		.word	.LC2
+ 327 0148 60000000 		.word	.LC3
+ 328 014c 94000000 		.word	.LC4
+ 329 0150 B4000000 		.word	.LC5
+ 330 0154 E8000000 		.word	.LC6
+ 331 0158 00000000 		.word	.LANCHOR0
+ 332              		.cfi_endproc
+ 333              	.LFE67:
+ 334              		.size	handleByteReceived, .-handleByteReceived
+ 335              		.section	.text.ISR_UART_rx_handler,"ax",%progbits
+ 336              		.align	2
+ 337              		.global	ISR_UART_rx_handler
+ 338              		.thumb
+ 339              		.thumb_func
+ 340              		.type	ISR_UART_rx_handler, %function
+ 341              	ISR_UART_rx_handler:
+ 342              	.LFB66:
+  53:ModuleTest.c  ****     uint8_t bytesToRead = UART_1_GetRxBufferSize();
+ 343              		.loc 1 53 0
+ 344              		.cfi_startproc
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 9
+
+
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0000 10B5     		push	{r4, lr}
+ 348              		.cfi_def_cfa_offset 8
+ 349              		.cfi_offset 4, -8
+ 350              		.cfi_offset 14, -4
+  54:ModuleTest.c  ****     while (bytesToRead > 0)
+ 351              		.loc 1 54 0
+ 352 0002 FFF7FEFF 		bl	UART_1_GetRxBufferSize
+ 353              	.LVL42:
+ 354 0006 0446     		mov	r4, r0
+ 355              	.LVL43:
+  55:ModuleTest.c  ****     {
+ 356              		.loc 1 55 0
+ 357 0008 05E0     		b	.L28
+ 358              	.L29:
+ 359              	.LBB2:
+  57:ModuleTest.c  ****         //UART_1_WriteTxData(byteReceived); // echo back
+ 360              		.loc 1 57 0
+ 361 000a FFF7FEFF 		bl	UART_1_ReadRxData
+ 362              	.LVL44:
+  60:ModuleTest.c  ****         
+ 363              		.loc 1 60 0
+ 364 000e FFF7FEFF 		bl	handleByteReceived
+ 365              	.LVL45:
+  62:ModuleTest.c  ****     }
+ 366              		.loc 1 62 0
+ 367 0012 013C     		subs	r4, r4, #1
+ 368              	.LVL46:
+ 369 0014 E4B2     		uxtb	r4, r4
+ 370              	.LVL47:
+ 371              	.L28:
+ 372              	.LBE2:
+  55:ModuleTest.c  ****     {
+ 373              		.loc 1 55 0
+ 374 0016 002C     		cmp	r4, #0
+ 375 0018 F7D1     		bne	.L29
+  64:ModuleTest.c  **** void handleByteReceived(uint8_t byteReceived)  /* Method to translate incoming byte into actions */
+ 376              		.loc 1 64 0
+ 377 001a 10BD     		pop	{r4, pc}
+ 378              		.cfi_endproc
+ 379              	.LFE66:
+ 380              		.size	ISR_UART_rx_handler, .-ISR_UART_rx_handler
+ 381              		.global	start
+ 382              		.global	Vout
+ 383              		.global	Speed
+ 384              		.data
+ 385              		.align	2
+ 386              		.set	.LANCHOR1,. + 0
+ 387              		.type	Vout, %object
+ 388              		.size	Vout, 4
+ 389              	Vout:
+ 390 0000 B6F3FD3E 		.word	1056830390
+ 391              		.type	Speed, %object
+ 392              		.size	Speed, 4
+ 393              	Speed:
+ 394 0004 0000F841 		.word	1106771968
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 10
+
+
+ 395              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 396              		.align	2
+ 397              	.LC0:
+ 398 0000 56444143 		.ascii	"VDAC started \015\012\000"
+ 398      20737461 
+ 398      72746564 
+ 398      200D0A00 
+ 399              	.LC1:
+ 400 0010 496E6974 		.ascii	"Initial Speed %f corresponding voltage %f \015\012\000"
+ 400      69616C20 
+ 400      53706565 
+ 400      64202566 
+ 400      20636F72 
+ 401 003d 000000   		.space	3
+ 402              	.LC2:
+ 403 0040 53706565 		.ascii	"Speed is increased to %fV; \015\012\000"
+ 403      64206973 
+ 403      20696E63 
+ 403      72656173 
+ 403      65642074 
+ 404 005e 0000     		.space	2
+ 405              	.LC3:
+ 406 0060 53706565 		.ascii	"Speed increased to %f corresponding voltage %f \015"
+ 406      6420696E 
+ 406      63726561 
+ 406      73656420 
+ 406      746F2025 
+ 407 0090 0A00     		.ascii	"\012\000"
+ 408 0092 0000     		.space	2
+ 409              	.LC4:
+ 410 0094 53706565 		.ascii	"Speed is at maximum 4.096V \015\012\000"
+ 410      64206973 
+ 410      20617420 
+ 410      6D617869 
+ 410      6D756D20 
+ 411 00b2 0000     		.space	2
+ 412              	.LC5:
+ 413 00b4 53706565 		.ascii	"Speed decreased to %fV corresponding voltage %f \015"
+ 413      64206465 
+ 413      63726561 
+ 413      73656420 
+ 413      746F2025 
+ 414 00e5 0A00     		.ascii	"\012\000"
+ 415 00e7 00       		.space	1
+ 416              	.LC6:
+ 417 00e8 53706565 		.ascii	"Speed is at minimum 0V \015\012\000"
+ 417      64206973 
+ 417      20617420 
+ 417      6D696E69 
+ 417      6D756D20 
+ 418              		.bss
+ 419              		.align	2
+ 420              		.set	.LANCHOR0,. + 0
+ 421              		.type	start, %object
+ 422              		.size	start, 1
+ 423              	start:
+ 424 0000 00       		.space	1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 11
+
+
+ 425 0001 000000   		.space	3
+ 426              		.type	outputBuffer, %object
+ 427              		.size	outputBuffer, 256
+ 428              	outputBuffer:
+ 429 0004 00000000 		.space	256
+ 429      00000000 
+ 429      00000000 
+ 429      00000000 
+ 429      00000000 
+ 430              		.text
+ 431              	.Letext0:
+ 432              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 433              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 434              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 435              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 436              		.file 6 "Generated_Source\\PSoC5/isr_uart_rx.h"
+ 437              		.file 7 "Generated_Source\\PSoC5/UART_1.h"
+ 438              		.file 8 "Generated_Source\\PSoC5/PGA_1.h"
+ 439              		.file 9 "Generated_Source\\PSoC5/VDAC8_1.h"
+ 440              		.file 10 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4
+ 441              		.section	.debug_info,"",%progbits
+ 442              	.Ldebug_info0:
+ 443 0000 9A030000 		.4byte	0x39a
+ 444 0004 0400     		.2byte	0x4
+ 445 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 446 000a 04       		.byte	0x4
+ 447 000b 01       		.uleb128 0x1
+ 448 000c B1000000 		.4byte	.LASF38
+ 449 0010 0C       		.byte	0xc
+ 450 0011 D2020000 		.4byte	.LASF39
+ 451 0015 19020000 		.4byte	.LASF40
+ 452 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 453 001d 00000000 		.4byte	0
+ 454 0021 00000000 		.4byte	.Ldebug_line0
+ 455 0025 02       		.uleb128 0x2
+ 456 0026 01       		.byte	0x1
+ 457 0027 06       		.byte	0x6
+ 458 0028 97000000 		.4byte	.LASF0
+ 459 002c 03       		.uleb128 0x3
+ 460 002d 33000000 		.4byte	.LASF4
+ 461 0031 02       		.byte	0x2
+ 462 0032 1D       		.byte	0x1d
+ 463 0033 37000000 		.4byte	0x37
+ 464 0037 02       		.uleb128 0x2
+ 465 0038 01       		.byte	0x1
+ 466 0039 08       		.byte	0x8
+ 467 003a A3000000 		.4byte	.LASF1
+ 468 003e 02       		.uleb128 0x2
+ 469 003f 02       		.byte	0x2
+ 470 0040 05       		.byte	0x5
+ 471 0041 AE020000 		.4byte	.LASF2
+ 472 0045 02       		.uleb128 0x2
+ 473 0046 02       		.byte	0x2
+ 474 0047 07       		.byte	0x7
+ 475 0048 56000000 		.4byte	.LASF3
+ 476 004c 03       		.uleb128 0x3
+ 477 004d 3D000000 		.4byte	.LASF5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 12
+
+
+ 478 0051 02       		.byte	0x2
+ 479 0052 3F       		.byte	0x3f
+ 480 0053 57000000 		.4byte	0x57
+ 481 0057 02       		.uleb128 0x2
+ 482 0058 04       		.byte	0x4
+ 483 0059 05       		.byte	0x5
+ 484 005a BD020000 		.4byte	.LASF6
+ 485 005e 02       		.uleb128 0x2
+ 486 005f 04       		.byte	0x4
+ 487 0060 07       		.byte	0x7
+ 488 0061 53010000 		.4byte	.LASF7
+ 489 0065 02       		.uleb128 0x2
+ 490 0066 08       		.byte	0x8
+ 491 0067 05       		.byte	0x5
+ 492 0068 9B020000 		.4byte	.LASF8
+ 493 006c 02       		.uleb128 0x2
+ 494 006d 08       		.byte	0x8
+ 495 006e 07       		.byte	0x7
+ 496 006f C9010000 		.4byte	.LASF9
+ 497 0073 04       		.uleb128 0x4
+ 498 0074 04       		.byte	0x4
+ 499 0075 05       		.byte	0x5
+ 500 0076 696E7400 		.ascii	"int\000"
+ 501 007a 02       		.uleb128 0x2
+ 502 007b 04       		.byte	0x4
+ 503 007c 07       		.byte	0x7
+ 504 007d BC010000 		.4byte	.LASF10
+ 505 0081 03       		.uleb128 0x3
+ 506 0082 E0010000 		.4byte	.LASF11
+ 507 0086 03       		.byte	0x3
+ 508 0087 18       		.byte	0x18
+ 509 0088 2C000000 		.4byte	0x2c
+ 510 008c 03       		.uleb128 0x3
+ 511 008d 11020000 		.4byte	.LASF12
+ 512 0091 03       		.byte	0x3
+ 513 0092 2C       		.byte	0x2c
+ 514 0093 4C000000 		.4byte	0x4c
+ 515 0097 05       		.uleb128 0x5
+ 516 0098 70000000 		.4byte	.LASF13
+ 517 009c 04       		.byte	0x4
+ 518 009d E901     		.2byte	0x1e9
+ 519 009f 37000000 		.4byte	0x37
+ 520 00a3 02       		.uleb128 0x2
+ 521 00a4 04       		.byte	0x4
+ 522 00a5 04       		.byte	0x4
+ 523 00a6 91000000 		.4byte	.LASF14
+ 524 00aa 02       		.uleb128 0x2
+ 525 00ab 08       		.byte	0x8
+ 526 00ac 04       		.byte	0x4
+ 527 00ad 69000000 		.4byte	.LASF15
+ 528 00b1 02       		.uleb128 0x2
+ 529 00b2 01       		.byte	0x1
+ 530 00b3 08       		.byte	0x8
+ 531 00b4 A9020000 		.4byte	.LASF16
+ 532 00b8 02       		.uleb128 0x2
+ 533 00b9 08       		.byte	0x8
+ 534 00ba 04       		.byte	0x4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 13
+
+
+ 535 00bb C6020000 		.4byte	.LASF17
+ 536 00bf 02       		.uleb128 0x2
+ 537 00c0 04       		.byte	0x4
+ 538 00c1 07       		.byte	0x7
+ 539 00c2 92020000 		.4byte	.LASF18
+ 540 00c6 06       		.uleb128 0x6
+ 541 00c7 82000000 		.4byte	.LASF41
+ 542 00cb 01       		.byte	0x1
+ 543 00cc 16       		.byte	0x16
+ 544 00cd 00000000 		.4byte	.LFB64
+ 545 00d1 18000000 		.4byte	.LFE64-.LFB64
+ 546 00d5 01       		.uleb128 0x1
+ 547 00d6 9C       		.byte	0x9c
+ 548 00d7 05010000 		.4byte	0x105
+ 549 00db 07       		.uleb128 0x7
+ 550 00dc 0A000000 		.4byte	.LVL0
+ 551 00e0 3A030000 		.4byte	0x33a
+ 552 00e4 F2000000 		.4byte	0xf2
+ 553 00e8 08       		.uleb128 0x8
+ 554 00e9 01       		.uleb128 0x1
+ 555 00ea 50       		.byte	0x50
+ 556 00eb 05       		.uleb128 0x5
+ 557 00ec 03       		.byte	0x3
+ 558 00ed 00000000 		.4byte	ISR_UART_rx_handler
+ 559 00f1 00       		.byte	0
+ 560 00f2 09       		.uleb128 0x9
+ 561 00f3 0E000000 		.4byte	.LVL1
+ 562 00f7 45030000 		.4byte	0x345
+ 563 00fb 09       		.uleb128 0x9
+ 564 00fc 12000000 		.4byte	.LVL2
+ 565 0100 50030000 		.4byte	0x350
+ 566 0104 00       		.byte	0
+ 567 0105 0A       		.uleb128 0xa
+ 568 0106 E8010000 		.4byte	.LASF19
+ 569 010a 01       		.byte	0x1
+ 570 010b 22       		.byte	0x22
+ 571 010c 00000000 		.4byte	.LFB65
+ 572 0110 58000000 		.4byte	.LFE65-.LFB65
+ 573 0114 01       		.uleb128 0x1
+ 574 0115 9C       		.byte	0x9c
+ 575 0116 6F010000 		.4byte	0x16f
+ 576 011a 09       		.uleb128 0x9
+ 577 011b 10000000 		.4byte	.LVL3
+ 578 011f 5B030000 		.4byte	0x35b
+ 579 0123 07       		.uleb128 0x7
+ 580 0124 16000000 		.4byte	.LVL4
+ 581 0128 66030000 		.4byte	0x366
+ 582 012c 3A010000 		.4byte	0x13a
+ 583 0130 08       		.uleb128 0x8
+ 584 0131 01       		.uleb128 0x1
+ 585 0132 50       		.byte	0x50
+ 586 0133 05       		.uleb128 0x5
+ 587 0134 03       		.byte	0x3
+ 588 0135 00000000 		.4byte	.LC0
+ 589 0139 00       		.byte	0
+ 590 013a 07       		.uleb128 0x7
+ 591 013b 3A000000 		.4byte	.LVL7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 14
+
+
+ 592 013f 71030000 		.4byte	0x371
+ 593 0143 5E010000 		.4byte	0x15e
+ 594 0147 08       		.uleb128 0x8
+ 595 0148 01       		.uleb128 0x1
+ 596 0149 50       		.byte	0x50
+ 597 014a 02       		.uleb128 0x2
+ 598 014b 74       		.byte	0x74
+ 599 014c 00       		.sleb128 0
+ 600 014d 08       		.uleb128 0x8
+ 601 014e 01       		.uleb128 0x1
+ 602 014f 51       		.byte	0x51
+ 603 0150 03       		.uleb128 0x3
+ 604 0151 0A       		.byte	0xa
+ 605 0152 0001     		.2byte	0x100
+ 606 0154 08       		.uleb128 0x8
+ 607 0155 01       		.uleb128 0x1
+ 608 0156 52       		.byte	0x52
+ 609 0157 05       		.uleb128 0x5
+ 610 0158 03       		.byte	0x3
+ 611 0159 10000000 		.4byte	.LC1
+ 612 015d 00       		.byte	0
+ 613 015e 0B       		.uleb128 0xb
+ 614 015f 40000000 		.4byte	.LVL8
+ 615 0163 66030000 		.4byte	0x366
+ 616 0167 08       		.uleb128 0x8
+ 617 0168 01       		.uleb128 0x1
+ 618 0169 50       		.byte	0x50
+ 619 016a 02       		.uleb128 0x2
+ 620 016b 74       		.byte	0x74
+ 621 016c 00       		.sleb128 0
+ 622 016d 00       		.byte	0
+ 623 016e 00       		.byte	0
+ 624 016f 0C       		.uleb128 0xc
+ 625 0170 77010000 		.4byte	.LASF20
+ 626 0174 01       		.byte	0x1
+ 627 0175 41       		.byte	0x41
+ 628 0176 00000000 		.4byte	.LFB67
+ 629 017a 5C010000 		.4byte	.LFE67-.LFB67
+ 630 017e 01       		.uleb128 0x1
+ 631 017f 9C       		.byte	0x9c
+ 632 0180 78020000 		.4byte	0x278
+ 633 0184 0D       		.uleb128 0xd
+ 634 0185 F0020000 		.4byte	.LASF23
+ 635 0189 01       		.byte	0x1
+ 636 018a 41       		.byte	0x41
+ 637 018b 81000000 		.4byte	0x81
+ 638 018f 00000000 		.4byte	.LLST0
+ 639 0193 09       		.uleb128 0x9
+ 640 0194 5E000000 		.4byte	.LVL18
+ 641 0198 7C030000 		.4byte	0x37c
+ 642 019c 07       		.uleb128 0x7
+ 643 019d 76000000 		.4byte	.LVL20
+ 644 01a1 71030000 		.4byte	0x371
+ 645 01a5 C0010000 		.4byte	0x1c0
+ 646 01a9 08       		.uleb128 0x8
+ 647 01aa 01       		.uleb128 0x1
+ 648 01ab 50       		.byte	0x50
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 15
+
+
+ 649 01ac 02       		.uleb128 0x2
+ 650 01ad 75       		.byte	0x75
+ 651 01ae 00       		.sleb128 0
+ 652 01af 08       		.uleb128 0x8
+ 653 01b0 01       		.uleb128 0x1
+ 654 01b1 51       		.byte	0x51
+ 655 01b2 03       		.uleb128 0x3
+ 656 01b3 0A       		.byte	0xa
+ 657 01b4 0001     		.2byte	0x100
+ 658 01b6 08       		.uleb128 0x8
+ 659 01b7 01       		.uleb128 0x1
+ 660 01b8 52       		.byte	0x52
+ 661 01b9 05       		.uleb128 0x5
+ 662 01ba 03       		.byte	0x3
+ 663 01bb 40000000 		.4byte	.LC2
+ 664 01bf 00       		.byte	0
+ 665 01c0 07       		.uleb128 0x7
+ 666 01c1 7C000000 		.4byte	.LVL21
+ 667 01c5 66030000 		.4byte	0x366
+ 668 01c9 D4010000 		.4byte	0x1d4
+ 669 01cd 08       		.uleb128 0x8
+ 670 01ce 01       		.uleb128 0x1
+ 671 01cf 50       		.byte	0x50
+ 672 01d0 02       		.uleb128 0x2
+ 673 01d1 75       		.byte	0x75
+ 674 01d2 00       		.sleb128 0
+ 675 01d3 00       		.byte	0
+ 676 01d4 07       		.uleb128 0x7
+ 677 01d5 9C000000 		.4byte	.LVL24
+ 678 01d9 71030000 		.4byte	0x371
+ 679 01dd F8010000 		.4byte	0x1f8
+ 680 01e1 08       		.uleb128 0x8
+ 681 01e2 01       		.uleb128 0x1
+ 682 01e3 50       		.byte	0x50
+ 683 01e4 02       		.uleb128 0x2
+ 684 01e5 75       		.byte	0x75
+ 685 01e6 00       		.sleb128 0
+ 686 01e7 08       		.uleb128 0x8
+ 687 01e8 01       		.uleb128 0x1
+ 688 01e9 51       		.byte	0x51
+ 689 01ea 03       		.uleb128 0x3
+ 690 01eb 0A       		.byte	0xa
+ 691 01ec 0001     		.2byte	0x100
+ 692 01ee 08       		.uleb128 0x8
+ 693 01ef 01       		.uleb128 0x1
+ 694 01f0 52       		.byte	0x52
+ 695 01f1 05       		.uleb128 0x5
+ 696 01f2 03       		.byte	0x3
+ 697 01f3 60000000 		.4byte	.LC3
+ 698 01f7 00       		.byte	0
+ 699 01f8 07       		.uleb128 0x7
+ 700 01f9 A2000000 		.4byte	.LVL25
+ 701 01fd 66030000 		.4byte	0x366
+ 702 0201 0C020000 		.4byte	0x20c
+ 703 0205 08       		.uleb128 0x8
+ 704 0206 01       		.uleb128 0x1
+ 705 0207 50       		.byte	0x50
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 16
+
+
+ 706 0208 02       		.uleb128 0x2
+ 707 0209 75       		.byte	0x75
+ 708 020a 00       		.sleb128 0
+ 709 020b 00       		.byte	0
+ 710 020c 07       		.uleb128 0x7
+ 711 020d AA000000 		.4byte	.LVL26
+ 712 0211 66030000 		.4byte	0x366
+ 713 0215 23020000 		.4byte	0x223
+ 714 0219 08       		.uleb128 0x8
+ 715 021a 01       		.uleb128 0x1
+ 716 021b 50       		.byte	0x50
+ 717 021c 05       		.uleb128 0x5
+ 718 021d 03       		.byte	0x3
+ 719 021e 94000000 		.4byte	.LC4
+ 720 0222 00       		.byte	0
+ 721 0223 09       		.uleb128 0x9
+ 722 0224 F6000000 		.4byte	.LVL36
+ 723 0228 7C030000 		.4byte	0x37c
+ 724 022c 07       		.uleb128 0x7
+ 725 022d 18010000 		.4byte	.LVL39
+ 726 0231 71030000 		.4byte	0x371
+ 727 0235 50020000 		.4byte	0x250
+ 728 0239 08       		.uleb128 0x8
+ 729 023a 01       		.uleb128 0x1
+ 730 023b 50       		.byte	0x50
+ 731 023c 02       		.uleb128 0x2
+ 732 023d 75       		.byte	0x75
+ 733 023e 00       		.sleb128 0
+ 734 023f 08       		.uleb128 0x8
+ 735 0240 01       		.uleb128 0x1
+ 736 0241 51       		.byte	0x51
+ 737 0242 03       		.uleb128 0x3
+ 738 0243 0A       		.byte	0xa
+ 739 0244 0001     		.2byte	0x100
+ 740 0246 08       		.uleb128 0x8
+ 741 0247 01       		.uleb128 0x1
+ 742 0248 52       		.byte	0x52
+ 743 0249 05       		.uleb128 0x5
+ 744 024a 03       		.byte	0x3
+ 745 024b B4000000 		.4byte	.LC5
+ 746 024f 00       		.byte	0
+ 747 0250 07       		.uleb128 0x7
+ 748 0251 1E010000 		.4byte	.LVL40
+ 749 0255 66030000 		.4byte	0x366
+ 750 0259 64020000 		.4byte	0x264
+ 751 025d 08       		.uleb128 0x8
+ 752 025e 01       		.uleb128 0x1
+ 753 025f 50       		.byte	0x50
+ 754 0260 02       		.uleb128 0x2
+ 755 0261 75       		.byte	0x75
+ 756 0262 00       		.sleb128 0
+ 757 0263 00       		.byte	0
+ 758 0264 0B       		.uleb128 0xb
+ 759 0265 26010000 		.4byte	.LVL41
+ 760 0269 66030000 		.4byte	0x366
+ 761 026d 08       		.uleb128 0x8
+ 762 026e 01       		.uleb128 0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 17
+
+
+ 763 026f 50       		.byte	0x50
+ 764 0270 05       		.uleb128 0x5
+ 765 0271 03       		.byte	0x3
+ 766 0272 E8000000 		.4byte	.LC6
+ 767 0276 00       		.byte	0
+ 768 0277 00       		.byte	0
+ 769 0278 0E       		.uleb128 0xe
+ 770 0279 3F010000 		.4byte	.LASF21
+ 771 027d 01       		.byte	0x1
+ 772 027e 34       		.byte	0x34
+ 773 027f 00000000 		.4byte	.LFB66
+ 774 0283 1C000000 		.4byte	.LFE66-.LFB66
+ 775 0287 01       		.uleb128 0x1
+ 776 0288 9C       		.byte	0x9c
+ 777 0289 D5020000 		.4byte	0x2d5
+ 778 028d 0F       		.uleb128 0xf
+ 779 028e 76000000 		.4byte	.LASF22
+ 780 0292 01       		.byte	0x1
+ 781 0293 36       		.byte	0x36
+ 782 0294 81000000 		.4byte	0x81
+ 783 0298 3A000000 		.4byte	.LLST1
+ 784 029c 10       		.uleb128 0x10
+ 785 029d 0A000000 		.4byte	.LBB2
+ 786 02a1 0C000000 		.4byte	.LBE2-.LBB2
+ 787 02a5 CB020000 		.4byte	0x2cb
+ 788 02a9 0F       		.uleb128 0xf
+ 789 02aa F0020000 		.4byte	.LASF23
+ 790 02ae 01       		.byte	0x1
+ 791 02af 39       		.byte	0x39
+ 792 02b0 81000000 		.4byte	0x81
+ 793 02b4 58000000 		.4byte	.LLST2
+ 794 02b8 09       		.uleb128 0x9
+ 795 02b9 0E000000 		.4byte	.LVL44
+ 796 02bd 87030000 		.4byte	0x387
+ 797 02c1 09       		.uleb128 0x9
+ 798 02c2 12000000 		.4byte	.LVL45
+ 799 02c6 6F010000 		.4byte	0x16f
+ 800 02ca 00       		.byte	0
+ 801 02cb 09       		.uleb128 0x9
+ 802 02cc 06000000 		.4byte	.LVL42
+ 803 02d0 92030000 		.4byte	0x392
+ 804 02d4 00       		.byte	0
+ 805 02d5 11       		.uleb128 0x11
+ 806 02d6 B1000000 		.4byte	0xb1
+ 807 02da E5020000 		.4byte	0x2e5
+ 808 02de 12       		.uleb128 0x12
+ 809 02df BF000000 		.4byte	0xbf
+ 810 02e3 FF       		.byte	0xff
+ 811 02e4 00       		.byte	0
+ 812 02e5 13       		.uleb128 0x13
+ 813 02e6 04020000 		.4byte	.LASF24
+ 814 02ea 01       		.byte	0x1
+ 815 02eb 12       		.byte	0x12
+ 816 02ec D5020000 		.4byte	0x2d5
+ 817 02f0 05       		.uleb128 0x5
+ 818 02f1 03       		.byte	0x3
+ 819 02f2 04000000 		.4byte	outputBuffer
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 18
+
+
+ 820 02f6 14       		.uleb128 0x14
+ 821 02f7 8A010000 		.4byte	.LASF25
+ 822 02fb 05       		.byte	0x5
+ 823 02fc 1207     		.2byte	0x712
+ 824 02fe 02030000 		.4byte	0x302
+ 825 0302 15       		.uleb128 0x15
+ 826 0303 8C000000 		.4byte	0x8c
+ 827 0307 16       		.uleb128 0x16
+ 828 0308 00000000 		.4byte	.LASF26
+ 829 030c 01       		.byte	0x1
+ 830 030d 10       		.byte	0x10
+ 831 030e A3000000 		.4byte	0xa3
+ 832 0312 05       		.uleb128 0x5
+ 833 0313 03       		.byte	0x3
+ 834 0314 00000000 		.4byte	Speed
+ 835 0318 16       		.uleb128 0x16
+ 836 0319 B8020000 		.4byte	.LASF27
+ 837 031d 01       		.byte	0x1
+ 838 031e 11       		.byte	0x11
+ 839 031f A3000000 		.4byte	0xa3
+ 840 0323 05       		.uleb128 0x5
+ 841 0324 03       		.byte	0x3
+ 842 0325 00000000 		.4byte	Vout
+ 843 0329 16       		.uleb128 0x16
+ 844 032a 47000000 		.4byte	.LASF28
+ 845 032e 01       		.byte	0x1
+ 846 032f 14       		.byte	0x14
+ 847 0330 97000000 		.4byte	0x97
+ 848 0334 05       		.uleb128 0x5
+ 849 0335 03       		.byte	0x3
+ 850 0336 00000000 		.4byte	start
+ 851 033a 17       		.uleb128 0x17
+ 852 033b 12000000 		.4byte	.LASF29
+ 853 033f 12000000 		.4byte	.LASF29
+ 854 0343 06       		.byte	0x6
+ 855 0344 18       		.byte	0x18
+ 856 0345 17       		.uleb128 0x17
+ 857 0346 26000000 		.4byte	.LASF30
+ 858 034a 26000000 		.4byte	.LASF30
+ 859 034e 07       		.byte	0x7
+ 860 034f 54       		.byte	0x54
+ 861 0350 17       		.uleb128 0x17
+ 862 0351 06000000 		.4byte	.LASF31
+ 863 0355 06000000 		.4byte	.LASF31
+ 864 0359 08       		.byte	0x8
+ 865 035a 3E       		.byte	0x3e
+ 866 035b 17       		.uleb128 0x17
+ 867 035c 97010000 		.4byte	.LASF32
+ 868 0360 97010000 		.4byte	.LASF32
+ 869 0364 09       		.byte	0x9
+ 870 0365 33       		.byte	0x33
+ 871 0366 17       		.uleb128 0x17
+ 872 0367 DF020000 		.4byte	.LASF33
+ 873 036b DF020000 		.4byte	.LASF33
+ 874 036f 07       		.byte	0x7
+ 875 0370 8B       		.byte	0x8b
+ 876 0371 17       		.uleb128 0x17
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 19
+
+
+ 877 0372 4D000000 		.4byte	.LASF34
+ 878 0376 4D000000 		.4byte	.LASF34
+ 879 037a 0A       		.byte	0xa
+ 880 037b FD       		.byte	0xfd
+ 881 037c 17       		.uleb128 0x17
+ 882 037d F3010000 		.4byte	.LASF35
+ 883 0381 F3010000 		.4byte	.LASF35
+ 884 0385 09       		.byte	0x9
+ 885 0386 37       		.byte	0x37
+ 886 0387 17       		.uleb128 0x17
+ 887 0388 65010000 		.4byte	.LASF36
+ 888 038c 65010000 		.4byte	.LASF36
+ 889 0390 07       		.byte	0x7
+ 890 0391 6F       		.byte	0x6f
+ 891 0392 17       		.uleb128 0x17
+ 892 0393 A5010000 		.4byte	.LASF37
+ 893 0397 A5010000 		.4byte	.LASF37
+ 894 039b 07       		.byte	0x7
+ 895 039c 73       		.byte	0x73
+ 896 039d 00       		.byte	0
+ 897              		.section	.debug_abbrev,"",%progbits
+ 898              	.Ldebug_abbrev0:
+ 899 0000 01       		.uleb128 0x1
+ 900 0001 11       		.uleb128 0x11
+ 901 0002 01       		.byte	0x1
+ 902 0003 25       		.uleb128 0x25
+ 903 0004 0E       		.uleb128 0xe
+ 904 0005 13       		.uleb128 0x13
+ 905 0006 0B       		.uleb128 0xb
+ 906 0007 03       		.uleb128 0x3
+ 907 0008 0E       		.uleb128 0xe
+ 908 0009 1B       		.uleb128 0x1b
+ 909 000a 0E       		.uleb128 0xe
+ 910 000b 55       		.uleb128 0x55
+ 911 000c 17       		.uleb128 0x17
+ 912 000d 11       		.uleb128 0x11
+ 913 000e 01       		.uleb128 0x1
+ 914 000f 10       		.uleb128 0x10
+ 915 0010 17       		.uleb128 0x17
+ 916 0011 00       		.byte	0
+ 917 0012 00       		.byte	0
+ 918 0013 02       		.uleb128 0x2
+ 919 0014 24       		.uleb128 0x24
+ 920 0015 00       		.byte	0
+ 921 0016 0B       		.uleb128 0xb
+ 922 0017 0B       		.uleb128 0xb
+ 923 0018 3E       		.uleb128 0x3e
+ 924 0019 0B       		.uleb128 0xb
+ 925 001a 03       		.uleb128 0x3
+ 926 001b 0E       		.uleb128 0xe
+ 927 001c 00       		.byte	0
+ 928 001d 00       		.byte	0
+ 929 001e 03       		.uleb128 0x3
+ 930 001f 16       		.uleb128 0x16
+ 931 0020 00       		.byte	0
+ 932 0021 03       		.uleb128 0x3
+ 933 0022 0E       		.uleb128 0xe
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 20
+
+
+ 934 0023 3A       		.uleb128 0x3a
+ 935 0024 0B       		.uleb128 0xb
+ 936 0025 3B       		.uleb128 0x3b
+ 937 0026 0B       		.uleb128 0xb
+ 938 0027 49       		.uleb128 0x49
+ 939 0028 13       		.uleb128 0x13
+ 940 0029 00       		.byte	0
+ 941 002a 00       		.byte	0
+ 942 002b 04       		.uleb128 0x4
+ 943 002c 24       		.uleb128 0x24
+ 944 002d 00       		.byte	0
+ 945 002e 0B       		.uleb128 0xb
+ 946 002f 0B       		.uleb128 0xb
+ 947 0030 3E       		.uleb128 0x3e
+ 948 0031 0B       		.uleb128 0xb
+ 949 0032 03       		.uleb128 0x3
+ 950 0033 08       		.uleb128 0x8
+ 951 0034 00       		.byte	0
+ 952 0035 00       		.byte	0
+ 953 0036 05       		.uleb128 0x5
+ 954 0037 16       		.uleb128 0x16
+ 955 0038 00       		.byte	0
+ 956 0039 03       		.uleb128 0x3
+ 957 003a 0E       		.uleb128 0xe
+ 958 003b 3A       		.uleb128 0x3a
+ 959 003c 0B       		.uleb128 0xb
+ 960 003d 3B       		.uleb128 0x3b
+ 961 003e 05       		.uleb128 0x5
+ 962 003f 49       		.uleb128 0x49
+ 963 0040 13       		.uleb128 0x13
+ 964 0041 00       		.byte	0
+ 965 0042 00       		.byte	0
+ 966 0043 06       		.uleb128 0x6
+ 967 0044 2E       		.uleb128 0x2e
+ 968 0045 01       		.byte	0x1
+ 969 0046 3F       		.uleb128 0x3f
+ 970 0047 19       		.uleb128 0x19
+ 971 0048 03       		.uleb128 0x3
+ 972 0049 0E       		.uleb128 0xe
+ 973 004a 3A       		.uleb128 0x3a
+ 974 004b 0B       		.uleb128 0xb
+ 975 004c 3B       		.uleb128 0x3b
+ 976 004d 0B       		.uleb128 0xb
+ 977 004e 11       		.uleb128 0x11
+ 978 004f 01       		.uleb128 0x1
+ 979 0050 12       		.uleb128 0x12
+ 980 0051 06       		.uleb128 0x6
+ 981 0052 40       		.uleb128 0x40
+ 982 0053 18       		.uleb128 0x18
+ 983 0054 9742     		.uleb128 0x2117
+ 984 0056 19       		.uleb128 0x19
+ 985 0057 01       		.uleb128 0x1
+ 986 0058 13       		.uleb128 0x13
+ 987 0059 00       		.byte	0
+ 988 005a 00       		.byte	0
+ 989 005b 07       		.uleb128 0x7
+ 990 005c 898201   		.uleb128 0x4109
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 21
+
+
+ 991 005f 01       		.byte	0x1
+ 992 0060 11       		.uleb128 0x11
+ 993 0061 01       		.uleb128 0x1
+ 994 0062 31       		.uleb128 0x31
+ 995 0063 13       		.uleb128 0x13
+ 996 0064 01       		.uleb128 0x1
+ 997 0065 13       		.uleb128 0x13
+ 998 0066 00       		.byte	0
+ 999 0067 00       		.byte	0
+ 1000 0068 08       		.uleb128 0x8
+ 1001 0069 8A8201   		.uleb128 0x410a
+ 1002 006c 00       		.byte	0
+ 1003 006d 02       		.uleb128 0x2
+ 1004 006e 18       		.uleb128 0x18
+ 1005 006f 9142     		.uleb128 0x2111
+ 1006 0071 18       		.uleb128 0x18
+ 1007 0072 00       		.byte	0
+ 1008 0073 00       		.byte	0
+ 1009 0074 09       		.uleb128 0x9
+ 1010 0075 898201   		.uleb128 0x4109
+ 1011 0078 00       		.byte	0
+ 1012 0079 11       		.uleb128 0x11
+ 1013 007a 01       		.uleb128 0x1
+ 1014 007b 31       		.uleb128 0x31
+ 1015 007c 13       		.uleb128 0x13
+ 1016 007d 00       		.byte	0
+ 1017 007e 00       		.byte	0
+ 1018 007f 0A       		.uleb128 0xa
+ 1019 0080 2E       		.uleb128 0x2e
+ 1020 0081 01       		.byte	0x1
+ 1021 0082 3F       		.uleb128 0x3f
+ 1022 0083 19       		.uleb128 0x19
+ 1023 0084 03       		.uleb128 0x3
+ 1024 0085 0E       		.uleb128 0xe
+ 1025 0086 3A       		.uleb128 0x3a
+ 1026 0087 0B       		.uleb128 0xb
+ 1027 0088 3B       		.uleb128 0x3b
+ 1028 0089 0B       		.uleb128 0xb
+ 1029 008a 8701     		.uleb128 0x87
+ 1030 008c 19       		.uleb128 0x19
+ 1031 008d 11       		.uleb128 0x11
+ 1032 008e 01       		.uleb128 0x1
+ 1033 008f 12       		.uleb128 0x12
+ 1034 0090 06       		.uleb128 0x6
+ 1035 0091 40       		.uleb128 0x40
+ 1036 0092 18       		.uleb128 0x18
+ 1037 0093 9642     		.uleb128 0x2116
+ 1038 0095 19       		.uleb128 0x19
+ 1039 0096 01       		.uleb128 0x1
+ 1040 0097 13       		.uleb128 0x13
+ 1041 0098 00       		.byte	0
+ 1042 0099 00       		.byte	0
+ 1043 009a 0B       		.uleb128 0xb
+ 1044 009b 898201   		.uleb128 0x4109
+ 1045 009e 01       		.byte	0x1
+ 1046 009f 11       		.uleb128 0x11
+ 1047 00a0 01       		.uleb128 0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 22
+
+
+ 1048 00a1 31       		.uleb128 0x31
+ 1049 00a2 13       		.uleb128 0x13
+ 1050 00a3 00       		.byte	0
+ 1051 00a4 00       		.byte	0
+ 1052 00a5 0C       		.uleb128 0xc
+ 1053 00a6 2E       		.uleb128 0x2e
+ 1054 00a7 01       		.byte	0x1
+ 1055 00a8 3F       		.uleb128 0x3f
+ 1056 00a9 19       		.uleb128 0x19
+ 1057 00aa 03       		.uleb128 0x3
+ 1058 00ab 0E       		.uleb128 0xe
+ 1059 00ac 3A       		.uleb128 0x3a
+ 1060 00ad 0B       		.uleb128 0xb
+ 1061 00ae 3B       		.uleb128 0x3b
+ 1062 00af 0B       		.uleb128 0xb
+ 1063 00b0 27       		.uleb128 0x27
+ 1064 00b1 19       		.uleb128 0x19
+ 1065 00b2 11       		.uleb128 0x11
+ 1066 00b3 01       		.uleb128 0x1
+ 1067 00b4 12       		.uleb128 0x12
+ 1068 00b5 06       		.uleb128 0x6
+ 1069 00b6 40       		.uleb128 0x40
+ 1070 00b7 18       		.uleb128 0x18
+ 1071 00b8 9642     		.uleb128 0x2116
+ 1072 00ba 19       		.uleb128 0x19
+ 1073 00bb 01       		.uleb128 0x1
+ 1074 00bc 13       		.uleb128 0x13
+ 1075 00bd 00       		.byte	0
+ 1076 00be 00       		.byte	0
+ 1077 00bf 0D       		.uleb128 0xd
+ 1078 00c0 05       		.uleb128 0x5
+ 1079 00c1 00       		.byte	0
+ 1080 00c2 03       		.uleb128 0x3
+ 1081 00c3 0E       		.uleb128 0xe
+ 1082 00c4 3A       		.uleb128 0x3a
+ 1083 00c5 0B       		.uleb128 0xb
+ 1084 00c6 3B       		.uleb128 0x3b
+ 1085 00c7 0B       		.uleb128 0xb
+ 1086 00c8 49       		.uleb128 0x49
+ 1087 00c9 13       		.uleb128 0x13
+ 1088 00ca 02       		.uleb128 0x2
+ 1089 00cb 17       		.uleb128 0x17
+ 1090 00cc 00       		.byte	0
+ 1091 00cd 00       		.byte	0
+ 1092 00ce 0E       		.uleb128 0xe
+ 1093 00cf 2E       		.uleb128 0x2e
+ 1094 00d0 01       		.byte	0x1
+ 1095 00d1 3F       		.uleb128 0x3f
+ 1096 00d2 19       		.uleb128 0x19
+ 1097 00d3 03       		.uleb128 0x3
+ 1098 00d4 0E       		.uleb128 0xe
+ 1099 00d5 3A       		.uleb128 0x3a
+ 1100 00d6 0B       		.uleb128 0xb
+ 1101 00d7 3B       		.uleb128 0x3b
+ 1102 00d8 0B       		.uleb128 0xb
+ 1103 00d9 27       		.uleb128 0x27
+ 1104 00da 19       		.uleb128 0x19
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 23
+
+
+ 1105 00db 11       		.uleb128 0x11
+ 1106 00dc 01       		.uleb128 0x1
+ 1107 00dd 12       		.uleb128 0x12
+ 1108 00de 06       		.uleb128 0x6
+ 1109 00df 40       		.uleb128 0x40
+ 1110 00e0 18       		.uleb128 0x18
+ 1111 00e1 9742     		.uleb128 0x2117
+ 1112 00e3 19       		.uleb128 0x19
+ 1113 00e4 01       		.uleb128 0x1
+ 1114 00e5 13       		.uleb128 0x13
+ 1115 00e6 00       		.byte	0
+ 1116 00e7 00       		.byte	0
+ 1117 00e8 0F       		.uleb128 0xf
+ 1118 00e9 34       		.uleb128 0x34
+ 1119 00ea 00       		.byte	0
+ 1120 00eb 03       		.uleb128 0x3
+ 1121 00ec 0E       		.uleb128 0xe
+ 1122 00ed 3A       		.uleb128 0x3a
+ 1123 00ee 0B       		.uleb128 0xb
+ 1124 00ef 3B       		.uleb128 0x3b
+ 1125 00f0 0B       		.uleb128 0xb
+ 1126 00f1 49       		.uleb128 0x49
+ 1127 00f2 13       		.uleb128 0x13
+ 1128 00f3 02       		.uleb128 0x2
+ 1129 00f4 17       		.uleb128 0x17
+ 1130 00f5 00       		.byte	0
+ 1131 00f6 00       		.byte	0
+ 1132 00f7 10       		.uleb128 0x10
+ 1133 00f8 0B       		.uleb128 0xb
+ 1134 00f9 01       		.byte	0x1
+ 1135 00fa 11       		.uleb128 0x11
+ 1136 00fb 01       		.uleb128 0x1
+ 1137 00fc 12       		.uleb128 0x12
+ 1138 00fd 06       		.uleb128 0x6
+ 1139 00fe 01       		.uleb128 0x1
+ 1140 00ff 13       		.uleb128 0x13
+ 1141 0100 00       		.byte	0
+ 1142 0101 00       		.byte	0
+ 1143 0102 11       		.uleb128 0x11
+ 1144 0103 01       		.uleb128 0x1
+ 1145 0104 01       		.byte	0x1
+ 1146 0105 49       		.uleb128 0x49
+ 1147 0106 13       		.uleb128 0x13
+ 1148 0107 01       		.uleb128 0x1
+ 1149 0108 13       		.uleb128 0x13
+ 1150 0109 00       		.byte	0
+ 1151 010a 00       		.byte	0
+ 1152 010b 12       		.uleb128 0x12
+ 1153 010c 21       		.uleb128 0x21
+ 1154 010d 00       		.byte	0
+ 1155 010e 49       		.uleb128 0x49
+ 1156 010f 13       		.uleb128 0x13
+ 1157 0110 2F       		.uleb128 0x2f
+ 1158 0111 0B       		.uleb128 0xb
+ 1159 0112 00       		.byte	0
+ 1160 0113 00       		.byte	0
+ 1161 0114 13       		.uleb128 0x13
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 24
+
+
+ 1162 0115 34       		.uleb128 0x34
+ 1163 0116 00       		.byte	0
+ 1164 0117 03       		.uleb128 0x3
+ 1165 0118 0E       		.uleb128 0xe
+ 1166 0119 3A       		.uleb128 0x3a
+ 1167 011a 0B       		.uleb128 0xb
+ 1168 011b 3B       		.uleb128 0x3b
+ 1169 011c 0B       		.uleb128 0xb
+ 1170 011d 49       		.uleb128 0x49
+ 1171 011e 13       		.uleb128 0x13
+ 1172 011f 02       		.uleb128 0x2
+ 1173 0120 18       		.uleb128 0x18
+ 1174 0121 00       		.byte	0
+ 1175 0122 00       		.byte	0
+ 1176 0123 14       		.uleb128 0x14
+ 1177 0124 34       		.uleb128 0x34
+ 1178 0125 00       		.byte	0
+ 1179 0126 03       		.uleb128 0x3
+ 1180 0127 0E       		.uleb128 0xe
+ 1181 0128 3A       		.uleb128 0x3a
+ 1182 0129 0B       		.uleb128 0xb
+ 1183 012a 3B       		.uleb128 0x3b
+ 1184 012b 05       		.uleb128 0x5
+ 1185 012c 49       		.uleb128 0x49
+ 1186 012d 13       		.uleb128 0x13
+ 1187 012e 3F       		.uleb128 0x3f
+ 1188 012f 19       		.uleb128 0x19
+ 1189 0130 3C       		.uleb128 0x3c
+ 1190 0131 19       		.uleb128 0x19
+ 1191 0132 00       		.byte	0
+ 1192 0133 00       		.byte	0
+ 1193 0134 15       		.uleb128 0x15
+ 1194 0135 35       		.uleb128 0x35
+ 1195 0136 00       		.byte	0
+ 1196 0137 49       		.uleb128 0x49
+ 1197 0138 13       		.uleb128 0x13
+ 1198 0139 00       		.byte	0
+ 1199 013a 00       		.byte	0
+ 1200 013b 16       		.uleb128 0x16
+ 1201 013c 34       		.uleb128 0x34
+ 1202 013d 00       		.byte	0
+ 1203 013e 03       		.uleb128 0x3
+ 1204 013f 0E       		.uleb128 0xe
+ 1205 0140 3A       		.uleb128 0x3a
+ 1206 0141 0B       		.uleb128 0xb
+ 1207 0142 3B       		.uleb128 0x3b
+ 1208 0143 0B       		.uleb128 0xb
+ 1209 0144 49       		.uleb128 0x49
+ 1210 0145 13       		.uleb128 0x13
+ 1211 0146 3F       		.uleb128 0x3f
+ 1212 0147 19       		.uleb128 0x19
+ 1213 0148 02       		.uleb128 0x2
+ 1214 0149 18       		.uleb128 0x18
+ 1215 014a 00       		.byte	0
+ 1216 014b 00       		.byte	0
+ 1217 014c 17       		.uleb128 0x17
+ 1218 014d 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 25
+
+
+ 1219 014e 00       		.byte	0
+ 1220 014f 3F       		.uleb128 0x3f
+ 1221 0150 19       		.uleb128 0x19
+ 1222 0151 3C       		.uleb128 0x3c
+ 1223 0152 19       		.uleb128 0x19
+ 1224 0153 6E       		.uleb128 0x6e
+ 1225 0154 0E       		.uleb128 0xe
+ 1226 0155 03       		.uleb128 0x3
+ 1227 0156 0E       		.uleb128 0xe
+ 1228 0157 3A       		.uleb128 0x3a
+ 1229 0158 0B       		.uleb128 0xb
+ 1230 0159 3B       		.uleb128 0x3b
+ 1231 015a 0B       		.uleb128 0xb
+ 1232 015b 00       		.byte	0
+ 1233 015c 00       		.byte	0
+ 1234 015d 00       		.byte	0
+ 1235              		.section	.debug_loc,"",%progbits
+ 1236              	.Ldebug_loc0:
+ 1237              	.LLST0:
+ 1238 0000 00000000 		.4byte	.LVL9
+ 1239 0004 1E000000 		.4byte	.LVL10
+ 1240 0008 0100     		.2byte	0x1
+ 1241 000a 50       		.byte	0x50
+ 1242 000b 1E000000 		.4byte	.LVL10
+ 1243 000f AC000000 		.4byte	.LVL27
+ 1244 0013 0400     		.2byte	0x4
+ 1245 0015 F3       		.byte	0xf3
+ 1246 0016 01       		.uleb128 0x1
+ 1247 0017 50       		.byte	0x50
+ 1248 0018 9F       		.byte	0x9f
+ 1249 0019 AC000000 		.4byte	.LVL27
+ 1250 001d B6000000 		.4byte	.LVL28
+ 1251 0021 0100     		.2byte	0x1
+ 1252 0023 50       		.byte	0x50
+ 1253 0024 B6000000 		.4byte	.LVL28
+ 1254 0028 5C010000 		.4byte	.LFE67
+ 1255 002c 0400     		.2byte	0x4
+ 1256 002e F3       		.byte	0xf3
+ 1257 002f 01       		.uleb128 0x1
+ 1258 0030 50       		.byte	0x50
+ 1259 0031 9F       		.byte	0x9f
+ 1260 0032 00000000 		.4byte	0
+ 1261 0036 00000000 		.4byte	0
+ 1262              	.LLST1:
+ 1263 003a 08000000 		.4byte	.LVL43
+ 1264 003e 14000000 		.4byte	.LVL46
+ 1265 0042 0100     		.2byte	0x1
+ 1266 0044 54       		.byte	0x54
+ 1267 0045 16000000 		.4byte	.LVL47
+ 1268 0049 1C000000 		.4byte	.LFE66
+ 1269 004d 0100     		.2byte	0x1
+ 1270 004f 54       		.byte	0x54
+ 1271 0050 00000000 		.4byte	0
+ 1272 0054 00000000 		.4byte	0
+ 1273              	.LLST2:
+ 1274 0058 0E000000 		.4byte	.LVL44
+ 1275 005c 11000000 		.4byte	.LVL45-1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 26
+
+
+ 1276 0060 0100     		.2byte	0x1
+ 1277 0062 50       		.byte	0x50
+ 1278 0063 00000000 		.4byte	0
+ 1279 0067 00000000 		.4byte	0
+ 1280              		.section	.debug_aranges,"",%progbits
+ 1281 0000 34000000 		.4byte	0x34
+ 1282 0004 0200     		.2byte	0x2
+ 1283 0006 00000000 		.4byte	.Ldebug_info0
+ 1284 000a 04       		.byte	0x4
+ 1285 000b 00       		.byte	0
+ 1286 000c 0000     		.2byte	0
+ 1287 000e 0000     		.2byte	0
+ 1288 0010 00000000 		.4byte	.LFB64
+ 1289 0014 18000000 		.4byte	.LFE64-.LFB64
+ 1290 0018 00000000 		.4byte	.LFB65
+ 1291 001c 58000000 		.4byte	.LFE65-.LFB65
+ 1292 0020 00000000 		.4byte	.LFB67
+ 1293 0024 5C010000 		.4byte	.LFE67-.LFB67
+ 1294 0028 00000000 		.4byte	.LFB66
+ 1295 002c 1C000000 		.4byte	.LFE66-.LFB66
+ 1296 0030 00000000 		.4byte	0
+ 1297 0034 00000000 		.4byte	0
+ 1298              		.section	.debug_ranges,"",%progbits
+ 1299              	.Ldebug_ranges0:
+ 1300 0000 00000000 		.4byte	.LFB64
+ 1301 0004 18000000 		.4byte	.LFE64
+ 1302 0008 00000000 		.4byte	.LFB65
+ 1303 000c 58000000 		.4byte	.LFE65
+ 1304 0010 00000000 		.4byte	.LFB67
+ 1305 0014 5C010000 		.4byte	.LFE67
+ 1306 0018 00000000 		.4byte	.LFB66
+ 1307 001c 1C000000 		.4byte	.LFE66
+ 1308 0020 00000000 		.4byte	0
+ 1309 0024 00000000 		.4byte	0
+ 1310              		.section	.debug_line,"",%progbits
+ 1311              	.Ldebug_line0:
+ 1312 0000 6B020000 		.section	.debug_str,"MS",%progbits,1
+ 1312      0200FA01 
+ 1312      00000201 
+ 1312      FB0E0D00 
+ 1312      01010101 
+ 1313              	.LASF26:
+ 1314 0000 53706565 		.ascii	"Speed\000"
+ 1314      6400
+ 1315              	.LASF31:
+ 1316 0006 5047415F 		.ascii	"PGA_1_Start\000"
+ 1316      315F5374 
+ 1316      61727400 
+ 1317              	.LASF29:
+ 1318 0012 6973725F 		.ascii	"isr_uart_rx_StartEx\000"
+ 1318      75617274 
+ 1318      5F72785F 
+ 1318      53746172 
+ 1318      74457800 
+ 1319              	.LASF30:
+ 1320 0026 55415254 		.ascii	"UART_1_Start\000"
+ 1320      5F315F53 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 27
+
+
+ 1320      74617274 
+ 1320      00
+ 1321              	.LASF4:
+ 1322 0033 5F5F7569 		.ascii	"__uint8_t\000"
+ 1322      6E74385F 
+ 1322      7400
+ 1323              	.LASF5:
+ 1324 003d 5F5F696E 		.ascii	"__int32_t\000"
+ 1324      7433325F 
+ 1324      7400
+ 1325              	.LASF28:
+ 1326 0047 73746172 		.ascii	"start\000"
+ 1326      7400
+ 1327              	.LASF34:
+ 1328 004d 736E7072 		.ascii	"snprintf\000"
+ 1328      696E7466 
+ 1328      00
+ 1329              	.LASF3:
+ 1330 0056 73686F72 		.ascii	"short unsigned int\000"
+ 1330      7420756E 
+ 1330      7369676E 
+ 1330      65642069 
+ 1330      6E7400
+ 1331              	.LASF15:
+ 1332 0069 646F7562 		.ascii	"double\000"
+ 1332      6C6500
+ 1333              	.LASF13:
+ 1334 0070 75696E74 		.ascii	"uint8\000"
+ 1334      3800
+ 1335              	.LASF22:
+ 1336 0076 62797465 		.ascii	"bytesToRead\000"
+ 1336      73546F52 
+ 1336      65616400 
+ 1337              	.LASF41:
+ 1338 0082 496E6974 		.ascii	"Init_testsetup\000"
+ 1338      5F746573 
+ 1338      74736574 
+ 1338      757000
+ 1339              	.LASF14:
+ 1340 0091 666C6F61 		.ascii	"float\000"
+ 1340      7400
+ 1341              	.LASF0:
+ 1342 0097 7369676E 		.ascii	"signed char\000"
+ 1342      65642063 
+ 1342      68617200 
+ 1343              	.LASF1:
+ 1344 00a3 756E7369 		.ascii	"unsigned char\000"
+ 1344      676E6564 
+ 1344      20636861 
+ 1344      7200
+ 1345              	.LASF38:
+ 1346 00b1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1346      43313120 
+ 1346      352E342E 
+ 1346      31203230 
+ 1346      31363036 
+ 1347 00e4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 28
+
+
+ 1347      20726576 
+ 1347      6973696F 
+ 1347      6E203233 
+ 1347      37373135 
+ 1348 0117 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1348      66756E63 
+ 1348      74696F6E 
+ 1348      2D736563 
+ 1348      74696F6E 
+ 1349              	.LASF21:
+ 1350 013f 4953525F 		.ascii	"ISR_UART_rx_handler\000"
+ 1350      55415254 
+ 1350      5F72785F 
+ 1350      68616E64 
+ 1350      6C657200 
+ 1351              	.LASF7:
+ 1352 0153 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1352      20756E73 
+ 1352      69676E65 
+ 1352      6420696E 
+ 1352      7400
+ 1353              	.LASF36:
+ 1354 0165 55415254 		.ascii	"UART_1_ReadRxData\000"
+ 1354      5F315F52 
+ 1354      65616452 
+ 1354      78446174 
+ 1354      6100
+ 1355              	.LASF20:
+ 1356 0177 68616E64 		.ascii	"handleByteReceived\000"
+ 1356      6C654279 
+ 1356      74655265 
+ 1356      63656976 
+ 1356      656400
+ 1357              	.LASF25:
+ 1358 018a 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1358      52784275 
+ 1358      66666572 
+ 1358      00
+ 1359              	.LASF32:
+ 1360 0197 56444143 		.ascii	"VDAC8_1_Start\000"
+ 1360      385F315F 
+ 1360      53746172 
+ 1360      7400
+ 1361              	.LASF37:
+ 1362 01a5 55415254 		.ascii	"UART_1_GetRxBufferSize\000"
+ 1362      5F315F47 
+ 1362      65745278 
+ 1362      42756666 
+ 1362      65725369 
+ 1363              	.LASF10:
+ 1364 01bc 756E7369 		.ascii	"unsigned int\000"
+ 1364      676E6564 
+ 1364      20696E74 
+ 1364      00
+ 1365              	.LASF9:
+ 1366 01c9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1366      206C6F6E 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 29
+
+
+ 1366      6720756E 
+ 1366      7369676E 
+ 1366      65642069 
+ 1367              	.LASF11:
+ 1368 01e0 75696E74 		.ascii	"uint8_t\000"
+ 1368      385F7400 
+ 1369              	.LASF19:
+ 1370 01e8 53746172 		.ascii	"Start_test\000"
+ 1370      745F7465 
+ 1370      737400
+ 1371              	.LASF35:
+ 1372 01f3 56444143 		.ascii	"VDAC8_1_SetValue\000"
+ 1372      385F315F 
+ 1372      53657456 
+ 1372      616C7565 
+ 1372      00
+ 1373              	.LASF24:
+ 1374 0204 6F757470 		.ascii	"outputBuffer\000"
+ 1374      75744275 
+ 1374      66666572 
+ 1374      00
+ 1375              	.LASF12:
+ 1376 0211 696E7433 		.ascii	"int32_t\000"
+ 1376      325F7400 
+ 1377              	.LASF40:
+ 1378 0219 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 1378      73657273 
+ 1378      5C6E6963 
+ 1378      6F5F5C53 
+ 1378      756E6468 
+ 1379 0247 61636865 		.ascii	"achelor\\BachelorProject\\Module testing\\Microcont"
+ 1379      6C6F725C 
+ 1379      42616368 
+ 1379      656C6F72 
+ 1379      50726F6A 
+ 1380 0277 726F6C6C 		.ascii	"roller_coolingsystem.cydsn\000"
+ 1380      65725F63 
+ 1380      6F6F6C69 
+ 1380      6E677379 
+ 1380      7374656D 
+ 1381              	.LASF18:
+ 1382 0292 73697A65 		.ascii	"sizetype\000"
+ 1382      74797065 
+ 1382      00
+ 1383              	.LASF8:
+ 1384 029b 6C6F6E67 		.ascii	"long long int\000"
+ 1384      206C6F6E 
+ 1384      6720696E 
+ 1384      7400
+ 1385              	.LASF16:
+ 1386 02a9 63686172 		.ascii	"char\000"
+ 1386      00
+ 1387              	.LASF2:
+ 1388 02ae 73686F72 		.ascii	"short int\000"
+ 1388      7420696E 
+ 1388      7400
+ 1389              	.LASF27:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccpIP4y8.s 			page 30
+
+
+ 1390 02b8 566F7574 		.ascii	"Vout\000"
+ 1390      00
+ 1391              	.LASF6:
+ 1392 02bd 6C6F6E67 		.ascii	"long int\000"
+ 1392      20696E74 
+ 1392      00
+ 1393              	.LASF17:
+ 1394 02c6 6C6F6E67 		.ascii	"long double\000"
+ 1394      20646F75 
+ 1394      626C6500 
+ 1395              	.LASF39:
+ 1396 02d2 4D6F6475 		.ascii	"ModuleTest.c\000"
+ 1396      6C655465 
+ 1396      73742E63 
+ 1396      00
+ 1397              	.LASF33:
+ 1398 02df 55415254 		.ascii	"UART_1_PutString\000"
+ 1398      5F315F50 
+ 1398      75745374 
+ 1398      72696E67 
+ 1398      00
+ 1399              	.LASF23:
+ 1400 02f0 62797465 		.ascii	"byteReceived\000"
+ 1400      52656365 
+ 1400      69766564 
+ 1400      00
+ 1401              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

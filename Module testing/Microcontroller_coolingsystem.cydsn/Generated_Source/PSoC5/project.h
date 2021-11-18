@@ -34,6 +34,7 @@
 #include "UART_1.h"
 #include "isr_uart_rx.h"
 #include "VDAC8_1.h"
+#include "PGA_1.h"
 #include "SPIM_1_IntClock.h"
 #include "UART_1_IntClock.h"
 #include "core_cm3_psoc5.h"

@@ -1,5 +1,5 @@
 # Microcontroller_coolingsystem
-# 2021-11-18 06:22:05Z
+# 2021-11-18 08:19:41Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -41,7 +41,8 @@ set_location "\UART_1:BUART:sRX:RxShifter:u0\" 0 1 2
 set_location "\UART_1:BUART:sRX:RxBitCounter\" 1 0 7
 set_location "\UART_1:BUART:sRX:RxSts\" 0 1 4
 set_location "isr_uart_rx" interrupt -1 -1 0
-set_location "\VDAC8_1:viDAC8\" vidaccell -1 -1 0
+set_location "\VDAC8_1:viDAC8\" vidaccell -1 -1 2
+set_location "\PGA_1:SC\" sccell -1 -1 2
 set_location "Net_25" 1 1 0 1
 set_location "Net_23" 3 0 0 0
 set_location "\SPIM_1:BSPIM:state_2\" 3 0 1 0
