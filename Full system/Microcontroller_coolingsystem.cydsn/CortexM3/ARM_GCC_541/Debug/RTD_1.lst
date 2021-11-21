@@ -1,0 +1,1236 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"RTD_1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.RTD_1_MultShift24,"ax",%progbits
+  20              		.align	2
+  21              		.global	RTD_1_MultShift24
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	RTD_1_MultShift24, %function
+  25              	RTD_1_MultShift24:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\RTD_1.c"
+   1:Generated_Source\PSoC5/RTD_1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/RTD_1.c **** * File Name: RTD_1.c
+   3:Generated_Source\PSoC5/RTD_1.c **** * Version 1.20
+   4:Generated_Source\PSoC5/RTD_1.c **** *
+   5:Generated_Source\PSoC5/RTD_1.c **** * Description:
+   6:Generated_Source\PSoC5/RTD_1.c **** *  This file provides the source code to the API for the RTDCalc Component.
+   7:Generated_Source\PSoC5/RTD_1.c **** *
+   8:Generated_Source\PSoC5/RTD_1.c **** * Note:
+   9:Generated_Source\PSoC5/RTD_1.c **** *  None.
+  10:Generated_Source\PSoC5/RTD_1.c **** *
+  11:Generated_Source\PSoC5/RTD_1.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/RTD_1.c **** * Copyright 2012-2013, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/RTD_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/RTD_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/RTD_1.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/RTD_1.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/RTD_1.c **** 
+  18:Generated_Source\PSoC5/RTD_1.c **** #include "RTD_1.h"
+  19:Generated_Source\PSoC5/RTD_1.c **** 
+  20:Generated_Source\PSoC5/RTD_1.c **** #if(!CY_PSOC3)
+  21:Generated_Source\PSoC5/RTD_1.c **** 
+  22:Generated_Source\PSoC5/RTD_1.c **** 
+  23:Generated_Source\PSoC5/RTD_1.c ****     /*******************************************************************************
+  24:Generated_Source\PSoC5/RTD_1.c ****     * Function Name: RTD_1_MultShift24
+  25:Generated_Source\PSoC5/RTD_1.c ****     ********************************************************************************
+  26:Generated_Source\PSoC5/RTD_1.c ****     *
+  27:Generated_Source\PSoC5/RTD_1.c ****     * Summary:
+  28:Generated_Source\PSoC5/RTD_1.c ****     *  Performs the math function (op1 * op2) >> 24 using 64 bit arithmetic without
+  29:Generated_Source\PSoC5/RTD_1.c ****     *  any loss of precision and without overflow.
+  30:Generated_Source\PSoC5/RTD_1.c ****     *
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 2
+
+
+  31:Generated_Source\PSoC5/RTD_1.c ****     * Parameters:
+  32:Generated_Source\PSoC5/RTD_1.c ****     *  op1: Signed 32-bit operand
+  33:Generated_Source\PSoC5/RTD_1.c ****     *  op2: Unsigned 24-bit operand
+  34:Generated_Source\PSoC5/RTD_1.c ****     *
+  35:Generated_Source\PSoC5/RTD_1.c ****     * Return:
+  36:Generated_Source\PSoC5/RTD_1.c ****     *  Signed 32-bit result of the math calculation
+  37:Generated_Source\PSoC5/RTD_1.c ****     *
+  38:Generated_Source\PSoC5/RTD_1.c ****     *******************************************************************************/
+  39:Generated_Source\PSoC5/RTD_1.c ****     int32 RTD_1_MultShift24(int32 op1, uint32 op2) 
+  40:Generated_Source\PSoC5/RTD_1.c ****     {
+  28              		.loc 1 40 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 30B4     		push	{r4, r5}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 5, -4
+  38 0002 0B46     		mov	r3, r1
+  39              	.LVL1:
+  41:Generated_Source\PSoC5/RTD_1.c ****         int64 result=0;
+  42:Generated_Source\PSoC5/RTD_1.c **** 
+  43:Generated_Source\PSoC5/RTD_1.c ****         result = (int64)op1 * (int64)op2;
+  40              		.loc 1 43 0
+  41 0004 C517     		asrs	r5, r0, #31
+  42 0006 A0FB0101 		umull	r0, r1, r0, r1
+  43              	.LVL2:
+  44 000a 03FB0511 		mla	r1, r3, r5, r1
+  45              	.LVL3:
+  44:Generated_Source\PSoC5/RTD_1.c ****         
+  45:Generated_Source\PSoC5/RTD_1.c ****         if (result < 0)
+  46              		.loc 1 45 0
+  47 000e 0028     		cmp	r0, #0
+  48 0010 71F10003 		sbcs	r3, r1, #0
+  49              	.LVL4:
+  50 0014 07DA     		bge	.L2
+  46:Generated_Source\PSoC5/RTD_1.c ****         {
+  47:Generated_Source\PSoC5/RTD_1.c ****             result = -result;
+  51              		.loc 1 47 0
+  52 0016 4042     		rsbs	r0, r0, #0
+  53              	.LVL5:
+  54 0018 61EB4101 		sbc	r1, r1, r1, lsl #1
+  55              	.LVL6:
+  48:Generated_Source\PSoC5/RTD_1.c ****             result = (int32)((uint32)((uint64)result >> RTD_1_24BIT_SHIFTING));
+  56              		.loc 1 48 0
+  57 001c 000E     		lsrs	r0, r0, #24
+  58              	.LVL7:
+  59 001e 40EA0120 		orr	r0, r0, r1, lsl #8
+  60              	.LVL8:
+  49:Generated_Source\PSoC5/RTD_1.c ****             result = -result;
+  61              		.loc 1 49 0
+  62 0022 4042     		rsbs	r0, r0, #0
+  63              	.LVL9:
+  64 0024 02E0     		b	.L3
+  65              	.LVL10:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 3
+
+
+  66              	.L2:
+  50:Generated_Source\PSoC5/RTD_1.c ****         }
+  51:Generated_Source\PSoC5/RTD_1.c ****         else
+  52:Generated_Source\PSoC5/RTD_1.c ****         {
+  53:Generated_Source\PSoC5/RTD_1.c ****             result = (int32)((uint32)((uint64)result >> RTD_1_24BIT_SHIFTING));
+  67              		.loc 1 53 0
+  68 0026 000E     		lsrs	r0, r0, #24
+  69              	.LVL11:
+  70 0028 40EA0120 		orr	r0, r0, r1, lsl #8
+  71              	.LVL12:
+  72              	.L3:
+  54:Generated_Source\PSoC5/RTD_1.c ****         }
+  55:Generated_Source\PSoC5/RTD_1.c ****         return (result);
+  56:Generated_Source\PSoC5/RTD_1.c ****     }
+  73              		.loc 1 56 0
+  74 002c 30BC     		pop	{r4, r5}
+  75              		.cfi_restore 5
+  76              		.cfi_restore 4
+  77              		.cfi_def_cfa_offset 0
+  78 002e 7047     		bx	lr
+  79              		.cfi_endproc
+  80              	.LFE0:
+  81              		.size	RTD_1_MultShift24, .-RTD_1_MultShift24
+  82              		.section	.text.RTD_1_GetTemperature,"ax",%progbits
+  83              		.align	2
+  84              		.global	RTD_1_GetTemperature
+  85              		.thumb
+  86              		.thumb_func
+  87              		.type	RTD_1_GetTemperature, %function
+  88              	RTD_1_GetTemperature:
+  89              	.LFB1:
+  57:Generated_Source\PSoC5/RTD_1.c **** #endif /* End (!CY_PSOC3) */
+  58:Generated_Source\PSoC5/RTD_1.c **** 
+  59:Generated_Source\PSoC5/RTD_1.c **** 
+  60:Generated_Source\PSoC5/RTD_1.c **** /*******************************************************************************
+  61:Generated_Source\PSoC5/RTD_1.c **** * Function Name: RTD_1_GetTemperature
+  62:Generated_Source\PSoC5/RTD_1.c **** ********************************************************************************
+  63:Generated_Source\PSoC5/RTD_1.c **** *
+  64:Generated_Source\PSoC5/RTD_1.c **** * Summary:
+  65:Generated_Source\PSoC5/RTD_1.c **** *  Calculates the temperature from RTD resistance.
+  66:Generated_Source\PSoC5/RTD_1.c **** *
+  67:Generated_Source\PSoC5/RTD_1.c **** * Parameters:
+  68:Generated_Source\PSoC5/RTD_1.c **** *  res: Resistance in milliohms.
+  69:Generated_Source\PSoC5/RTD_1.c **** *
+  70:Generated_Source\PSoC5/RTD_1.c **** * Return:
+  71:Generated_Source\PSoC5/RTD_1.c **** *  Temperature in 1/100ths degrees C.
+  72:Generated_Source\PSoC5/RTD_1.c **** *
+  73:Generated_Source\PSoC5/RTD_1.c **** *******************************************************************************/
+  74:Generated_Source\PSoC5/RTD_1.c **** int32 RTD_1_GetTemperature(uint32 res) 
+  75:Generated_Source\PSoC5/RTD_1.c **** 
+  76:Generated_Source\PSoC5/RTD_1.c **** #if (CY_PSOC3)
+  77:Generated_Source\PSoC5/RTD_1.c **** {
+  78:Generated_Source\PSoC5/RTD_1.c **** 
+  79:Generated_Source\PSoC5/RTD_1.c ****     /***************************************
+  80:Generated_Source\PSoC5/RTD_1.c ****     *  Customizer Generated Coefficients
+  81:Generated_Source\PSoC5/RTD_1.c ****     ***************************************/
+  82:Generated_Source\PSoC5/RTD_1.c ****     const int32 CYCODE RTD_1_coeffPos[] = { -25278589, 204845931, 56348529, 32097701, 15406835, 333
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 4
+
+
+  83:Generated_Source\PSoC5/RTD_1.c ****     const int32 CYCODE RTD_1_coeffNeg[] = { -24840535, 96778662, 34796121, 16032724, -204779973, 30
+  84:Generated_Source\PSoC5/RTD_1.c **** 
+  85:Generated_Source\PSoC5/RTD_1.c ****     uint8 i=0u;
+  86:Generated_Source\PSoC5/RTD_1.c ****     float32 resNorm=0.0f;
+  87:Generated_Source\PSoC5/RTD_1.c ****     float32 temp=0.0f;
+  88:Generated_Source\PSoC5/RTD_1.c **** 
+  89:Generated_Source\PSoC5/RTD_1.c ****     resNorm = (float32)res;
+  90:Generated_Source\PSoC5/RTD_1.c **** 
+  91:Generated_Source\PSoC5/RTD_1.c ****     if (((RTD_1_RTD_TYPE == (uint32)RTD_1__PT100) && (res > RTD_1_ZERO_VAL_PT100)) ||
+  92:Generated_Source\PSoC5/RTD_1.c ****         ((RTD_1_RTD_TYPE == (uint32)RTD_1__PT500) && (res > RTD_1_ZERO_VAL_PT500)) ||
+  93:Generated_Source\PSoC5/RTD_1.c ****         ((RTD_1_RTD_TYPE == (uint32)RTD_1__PT1000) && (res > RTD_1_ZERO_VAL_PT1000)))
+  94:Generated_Source\PSoC5/RTD_1.c ****     {
+  95:Generated_Source\PSoC5/RTD_1.c ****          /* Temperature above 0 degrees C */
+  96:Generated_Source\PSoC5/RTD_1.c ****         for (i = RTD_1_ORDER_POS - 1u; i > 0u; i--)
+  97:Generated_Source\PSoC5/RTD_1.c ****         {
+  98:Generated_Source\PSoC5/RTD_1.c ****             temp = (RTD_1_coeffPos[i] + temp) * resNorm;
+  99:Generated_Source\PSoC5/RTD_1.c ****         }
+ 100:Generated_Source\PSoC5/RTD_1.c ****         temp = temp + RTD_1_coeffPos[RTD_1_FIRST_EL_MAS];
+ 101:Generated_Source\PSoC5/RTD_1.c ****     }
+ 102:Generated_Source\PSoC5/RTD_1.c ****     else
+ 103:Generated_Source\PSoC5/RTD_1.c ****     {
+ 104:Generated_Source\PSoC5/RTD_1.c ****         /* Temperature below 0 degrees C */
+ 105:Generated_Source\PSoC5/RTD_1.c ****         for (i = RTD_1_ORDER_NEG - 1u; i > 0u; i--)
+ 106:Generated_Source\PSoC5/RTD_1.c ****         {
+ 107:Generated_Source\PSoC5/RTD_1.c ****             temp = (RTD_1_coeffNeg[i] + temp) * resNorm;
+ 108:Generated_Source\PSoC5/RTD_1.c ****         }
+ 109:Generated_Source\PSoC5/RTD_1.c ****         temp = temp + RTD_1_coeffNeg[RTD_1_FIRST_EL_MAS];
+ 110:Generated_Source\PSoC5/RTD_1.c ****     }
+ 111:Generated_Source\PSoC5/RTD_1.c ****     return ((int32)(temp));
+ 112:Generated_Source\PSoC5/RTD_1.c **** }
+ 113:Generated_Source\PSoC5/RTD_1.c **** #else
+ 114:Generated_Source\PSoC5/RTD_1.c **** {
+  90              		.loc 1 114 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 48
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              	.LVL13:
+  95 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  96              		.cfi_def_cfa_offset 20
+  97              		.cfi_offset 4, -20
+  98              		.cfi_offset 5, -16
+  99              		.cfi_offset 6, -12
+ 100              		.cfi_offset 7, -8
+ 101              		.cfi_offset 14, -4
+ 102 0002 8DB0     		sub	sp, sp, #52
+ 103              		.cfi_def_cfa_offset 72
+ 104 0004 0746     		mov	r7, r0
+ 115:Generated_Source\PSoC5/RTD_1.c ****     /***************************************
+ 116:Generated_Source\PSoC5/RTD_1.c ****     *  Customizer Generated Coefficients
+ 117:Generated_Source\PSoC5/RTD_1.c ****     ***************************************/
+ 118:Generated_Source\PSoC5/RTD_1.c ****     const int32 CYCODE RTD_1_coeffPos[] = { -25278589, 204845931, 56348529, 32097701, 15406835, 333
+ 105              		.loc 1 118 0
+ 106 0006 224C     		ldr	r4, .L13
+ 107 0008 06AD     		add	r5, sp, #24
+ 108 000a 2646     		mov	r6, r4
+ 109 000c 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 110              	.LVL14:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 5
+
+
+ 111 000e 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 112 0010 96E80300 		ldmia	r6, {r0, r1}
+ 113 0014 85E80300 		stmia	r5, {r0, r1}
+ 119:Generated_Source\PSoC5/RTD_1.c ****     const int32 CYCODE RTD_1_coeffNeg[] = { -24840535, 96778662, 34796121, 16032724, -204779973, 30
+ 114              		.loc 1 119 0
+ 115 0018 6D46     		mov	r5, sp
+ 116 001a 1834     		adds	r4, r4, #24
+ 117 001c 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 118 001e 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 119 0020 94E80300 		ldmia	r4, {r0, r1}
+ 120 0024 85E80300 		stmia	r5, {r0, r1}
+ 121              	.LVL15:
+ 120:Generated_Source\PSoC5/RTD_1.c **** 
+ 121:Generated_Source\PSoC5/RTD_1.c ****     uint8 i;
+ 122:Generated_Source\PSoC5/RTD_1.c ****     int32 temp=0;
+ 123:Generated_Source\PSoC5/RTD_1.c **** 
+ 124:Generated_Source\PSoC5/RTD_1.c ****     if (((RTD_1_RTD_TYPE == (uint32)RTD_1__PT100) && (res > RTD_1_ZERO_VAL_PT100)) ||
+ 122              		.loc 1 124 0
+ 123 0028 1A4B     		ldr	r3, .L13+4
+ 124 002a 9F42     		cmp	r7, r3
+ 125 002c 17D9     		bls	.L6
+ 125:Generated_Source\PSoC5/RTD_1.c ****         ((RTD_1_RTD_TYPE == (uint32)RTD_1__PT500) && (res > RTD_1_ZERO_VAL_PT500)) ||
+ 126:Generated_Source\PSoC5/RTD_1.c ****         ((RTD_1_RTD_TYPE == (uint32)RTD_1__PT1000) && (res > RTD_1_ZERO_VAL_PT1000)))
+ 127:Generated_Source\PSoC5/RTD_1.c ****     {
+ 128:Generated_Source\PSoC5/RTD_1.c ****          /* Temperature above 0 degrees C */
+ 129:Generated_Source\PSoC5/RTD_1.c ****         res = res << (RTD_1_IN_NORMALIZATION - RTD_1_POS_INPUT_SCALE);
+ 126              		.loc 1 129 0
+ 127 002e 7D00     		lsls	r5, r7, #1
+ 128              	.LVL16:
+ 122:Generated_Source\PSoC5/RTD_1.c **** 
+ 129              		.loc 1 122 0
+ 130 0030 0020     		movs	r0, #0
+ 130:Generated_Source\PSoC5/RTD_1.c **** 
+ 131:Generated_Source\PSoC5/RTD_1.c ****         for (i = RTD_1_ORDER_POS - 1u; i > 0u; i--)
+ 131              		.loc 1 131 0
+ 132 0032 0524     		movs	r4, #5
+ 133 0034 0AE0     		b	.L7
+ 134              	.LVL17:
+ 135              	.L8:
+ 132:Generated_Source\PSoC5/RTD_1.c ****         {
+ 133:Generated_Source\PSoC5/RTD_1.c ****             temp = RTD_1_MultShift24((RTD_1_coeffPos[i] + temp), res);
+ 136              		.loc 1 133 0 discriminator 3
+ 137 0036 0CAB     		add	r3, sp, #48
+ 138 0038 03EB8403 		add	r3, r3, r4, lsl #2
+ 139 003c 53F8183C 		ldr	r3, [r3, #-24]
+ 140 0040 2946     		mov	r1, r5
+ 141 0042 1844     		add	r0, r0, r3
+ 142              	.LVL18:
+ 143 0044 FFF7FEFF 		bl	RTD_1_MultShift24
+ 144              	.LVL19:
+ 131:Generated_Source\PSoC5/RTD_1.c ****         {
+ 145              		.loc 1 131 0 discriminator 3
+ 146 0048 013C     		subs	r4, r4, #1
+ 147              	.LVL20:
+ 148 004a E4B2     		uxtb	r4, r4
+ 149              	.LVL21:
+ 150              	.L7:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 6
+
+
+ 131:Generated_Source\PSoC5/RTD_1.c ****         {
+ 151              		.loc 1 131 0 is_stmt 0 discriminator 1
+ 152 004c 002C     		cmp	r4, #0
+ 153 004e F2D1     		bne	.L8
+ 134:Generated_Source\PSoC5/RTD_1.c ****         }
+ 135:Generated_Source\PSoC5/RTD_1.c ****         temp = (int32)((uint32)((uint64)(int32)(temp + RTD_1_coeffPos[RTD_1_FIRST_EL_MAS]) >> 
+ 154              		.loc 1 135 0 is_stmt 1
+ 155 0050 114B     		ldr	r3, .L13+8
+ 156 0052 0344     		add	r3, r3, r0
+ 157 0054 D917     		asrs	r1, r3, #31
+ 158 0056 9B0A     		lsrs	r3, r3, #10
+ 159 0058 43EA8150 		orr	r0, r3, r1, lsl #22
+ 160              	.LVL22:
+ 161 005c 16E0     		b	.L9
+ 162              	.LVL23:
+ 163              	.L6:
+ 136:Generated_Source\PSoC5/RTD_1.c ****                        RTD_1_POS_COEFF_SCALE));
+ 137:Generated_Source\PSoC5/RTD_1.c ****     }
+ 138:Generated_Source\PSoC5/RTD_1.c **** 
+ 139:Generated_Source\PSoC5/RTD_1.c ****     else
+ 140:Generated_Source\PSoC5/RTD_1.c ****     {
+ 141:Generated_Source\PSoC5/RTD_1.c ****         /* Temperature below 0 degrees C */
+ 142:Generated_Source\PSoC5/RTD_1.c ****         res = res << (RTD_1_IN_NORMALIZATION - RTD_1_NEG_INPUT_SCALE);
+ 164              		.loc 1 142 0
+ 165 005e BD00     		lsls	r5, r7, #2
+ 166              	.LVL24:
+ 122:Generated_Source\PSoC5/RTD_1.c **** 
+ 167              		.loc 1 122 0
+ 168 0060 0020     		movs	r0, #0
+ 143:Generated_Source\PSoC5/RTD_1.c **** 
+ 144:Generated_Source\PSoC5/RTD_1.c ****         for (i = RTD_1_ORDER_NEG - 1u; i > 0u; i--)
+ 169              		.loc 1 144 0
+ 170 0062 0524     		movs	r4, #5
+ 171 0064 0AE0     		b	.L10
+ 172              	.LVL25:
+ 173              	.L11:
+ 145:Generated_Source\PSoC5/RTD_1.c ****         {
+ 146:Generated_Source\PSoC5/RTD_1.c ****             temp = RTD_1_MultShift24((RTD_1_coeffNeg[i] + temp), res);
+ 174              		.loc 1 146 0 discriminator 3
+ 175 0066 0CAB     		add	r3, sp, #48
+ 176 0068 03EB8403 		add	r3, r3, r4, lsl #2
+ 177 006c 53F8303C 		ldr	r3, [r3, #-48]
+ 178 0070 2946     		mov	r1, r5
+ 179 0072 1844     		add	r0, r0, r3
+ 180              	.LVL26:
+ 181 0074 FFF7FEFF 		bl	RTD_1_MultShift24
+ 182              	.LVL27:
+ 144:Generated_Source\PSoC5/RTD_1.c ****         {
+ 183              		.loc 1 144 0 discriminator 3
+ 184 0078 013C     		subs	r4, r4, #1
+ 185              	.LVL28:
+ 186 007a E4B2     		uxtb	r4, r4
+ 187              	.LVL29:
+ 188              	.L10:
+ 144:Generated_Source\PSoC5/RTD_1.c ****         {
+ 189              		.loc 1 144 0 is_stmt 0 discriminator 1
+ 190 007c 002C     		cmp	r4, #0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 7
+
+
+ 191 007e F2D1     		bne	.L11
+ 147:Generated_Source\PSoC5/RTD_1.c ****         }
+ 148:Generated_Source\PSoC5/RTD_1.c **** 
+ 149:Generated_Source\PSoC5/RTD_1.c ****         temp = (int32)((uint32)((uint64)(int32)(temp + RTD_1_coeffNeg[RTD_1_FIRST_EL_MAS]) >> 
+ 192              		.loc 1 149 0 is_stmt 1
+ 193 0080 064B     		ldr	r3, .L13+12
+ 194 0082 0344     		add	r3, r3, r0
+ 195 0084 D917     		asrs	r1, r3, #31
+ 196 0086 9B0A     		lsrs	r3, r3, #10
+ 197 0088 43EA8150 		orr	r0, r3, r1, lsl #22
+ 198              	.LVL30:
+ 199              	.L9:
+ 150:Generated_Source\PSoC5/RTD_1.c ****                        RTD_1_NEG_COEFF_SCALE));
+ 151:Generated_Source\PSoC5/RTD_1.c ****     }
+ 152:Generated_Source\PSoC5/RTD_1.c ****     return (temp);
+ 153:Generated_Source\PSoC5/RTD_1.c **** }
+ 200              		.loc 1 153 0
+ 201 008c 0DB0     		add	sp, sp, #52
+ 202              		.cfi_def_cfa_offset 20
+ 203              		@ sp needed
+ 204 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 205              	.LVL31:
+ 206              	.L14:
+ 207              		.align	2
+ 208              	.L13:
+ 209 0090 00000000 		.word	.LANCHOR0
+ 210 0094 40420F00 		.word	1000000
+ 211 0098 83477EFE 		.word	-25278589
+ 212 009c A9F684FE 		.word	-24840535
+ 213              		.cfi_endproc
+ 214              	.LFE1:
+ 215              		.size	RTD_1_GetTemperature, .-RTD_1_GetTemperature
+ 216              		.section	.rodata
+ 217              		.align	2
+ 218              		.set	.LANCHOR0,. + 0
+ 219              	.LC0:
+ 220 0000 83477EFE 		.word	-25278589
+ 221 0004 6BB3350C 		.word	204845931
+ 222 0008 71CF5B03 		.word	56348529
+ 223 000c A5C5E901 		.word	32097701
+ 224 0010 F316EB00 		.word	15406835
+ 225 0014 5033FD01 		.word	33370960
+ 226              	.LC1:
+ 227 0018 A9F684FE 		.word	-24840535
+ 228 001c A6B9C405 		.word	96778662
+ 229 0020 59F21202 		.word	34796121
+ 230 0024 D4A3F400 		.word	16032724
+ 231 0028 3B4ECBF3 		.word	-204779973
+ 232 002c F7670A12 		.word	302671863
+ 233              		.text
+ 234              	.Letext0:
+ 235              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 236              		.section	.debug_info,"",%progbits
+ 237              	.Ldebug_info0:
+ 238 0000 B3010000 		.4byte	0x1b3
+ 239 0004 0400     		.2byte	0x4
+ 240 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 8
+
+
+ 241 000a 04       		.byte	0x4
+ 242 000b 01       		.uleb128 0x1
+ 243 000c B8000000 		.4byte	.LASF25
+ 244 0010 0C       		.byte	0xc
+ 245 0011 BA010000 		.4byte	.LASF26
+ 246 0015 2E000000 		.4byte	.LASF27
+ 247 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 248 001d 00000000 		.4byte	0
+ 249 0021 00000000 		.4byte	.Ldebug_line0
+ 250 0025 02       		.uleb128 0x2
+ 251 0026 08       		.byte	0x8
+ 252 0027 07       		.byte	0x7
+ 253 0028 9C010000 		.4byte	.LASF0
+ 254 002c 02       		.uleb128 0x2
+ 255 002d 04       		.byte	0x4
+ 256 002e 07       		.byte	0x7
+ 257 002f 8F010000 		.4byte	.LASF1
+ 258 0033 03       		.uleb128 0x3
+ 259 0034 04       		.byte	0x4
+ 260 0035 05       		.byte	0x5
+ 261 0036 696E7400 		.ascii	"int\000"
+ 262 003a 02       		.uleb128 0x2
+ 263 003b 08       		.byte	0x8
+ 264 003c 05       		.byte	0x5
+ 265 003d E2010000 		.4byte	.LASF2
+ 266 0041 02       		.uleb128 0x2
+ 267 0042 08       		.byte	0x8
+ 268 0043 04       		.byte	0x4
+ 269 0044 0E020000 		.4byte	.LASF3
+ 270 0048 02       		.uleb128 0x2
+ 271 0049 01       		.byte	0x1
+ 272 004a 06       		.byte	0x6
+ 273 004b 1A020000 		.4byte	.LASF4
+ 274 004f 02       		.uleb128 0x2
+ 275 0050 01       		.byte	0x1
+ 276 0051 08       		.byte	0x8
+ 277 0052 AA000000 		.4byte	.LASF5
+ 278 0056 02       		.uleb128 0x2
+ 279 0057 02       		.byte	0x2
+ 280 0058 05       		.byte	0x5
+ 281 0059 F5010000 		.4byte	.LASF6
+ 282 005d 02       		.uleb128 0x2
+ 283 005e 02       		.byte	0x2
+ 284 005f 07       		.byte	0x7
+ 285 0060 26020000 		.4byte	.LASF7
+ 286 0064 02       		.uleb128 0x2
+ 287 0065 04       		.byte	0x4
+ 288 0066 05       		.byte	0x5
+ 289 0067 05020000 		.4byte	.LASF8
+ 290 006b 02       		.uleb128 0x2
+ 291 006c 04       		.byte	0x4
+ 292 006d 07       		.byte	0x7
+ 293 006e 55010000 		.4byte	.LASF9
+ 294 0072 02       		.uleb128 0x2
+ 295 0073 04       		.byte	0x4
+ 296 0074 07       		.byte	0x7
+ 297 0075 D9010000 		.4byte	.LASF10
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 9
+
+
+ 298 0079 02       		.uleb128 0x2
+ 299 007a 01       		.byte	0x1
+ 300 007b 08       		.byte	0x8
+ 301 007c F0010000 		.4byte	.LASF11
+ 302 0080 04       		.uleb128 0x4
+ 303 0081 FF010000 		.4byte	.LASF12
+ 304 0085 02       		.byte	0x2
+ 305 0086 E901     		.2byte	0x1e9
+ 306 0088 4F000000 		.4byte	0x4f
+ 307 008c 04       		.uleb128 0x4
+ 308 008d 88010000 		.4byte	.LASF13
+ 309 0091 02       		.byte	0x2
+ 310 0092 EB01     		.2byte	0x1eb
+ 311 0094 6B000000 		.4byte	0x6b
+ 312 0098 04       		.uleb128 0x4
+ 313 0099 6C010000 		.4byte	.LASF14
+ 314 009d 02       		.byte	0x2
+ 315 009e EE01     		.2byte	0x1ee
+ 316 00a0 64000000 		.4byte	0x64
+ 317 00a4 02       		.uleb128 0x2
+ 318 00a5 04       		.byte	0x4
+ 319 00a6 04       		.byte	0x4
+ 320 00a7 A4000000 		.4byte	.LASF15
+ 321 00ab 02       		.uleb128 0x2
+ 322 00ac 08       		.byte	0x8
+ 323 00ad 04       		.byte	0x4
+ 324 00ae 81010000 		.4byte	.LASF16
+ 325 00b2 04       		.uleb128 0x4
+ 326 00b3 39020000 		.4byte	.LASF17
+ 327 00b7 02       		.byte	0x2
+ 328 00b8 F401     		.2byte	0x1f4
+ 329 00ba 3A000000 		.4byte	0x3a
+ 330 00be 04       		.uleb128 0x4
+ 331 00bf 12000000 		.4byte	.LASF18
+ 332 00c3 02       		.byte	0x2
+ 333 00c4 F501     		.2byte	0x1f5
+ 334 00c6 25000000 		.4byte	0x25
+ 335 00ca 05       		.uleb128 0x5
+ 336 00cb 00000000 		.4byte	.LASF19
+ 337 00cf 01       		.byte	0x1
+ 338 00d0 27       		.byte	0x27
+ 339 00d1 98000000 		.4byte	0x98
+ 340 00d5 00000000 		.4byte	.LFB0
+ 341 00d9 30000000 		.4byte	.LFE0-.LFB0
+ 342 00dd 01       		.uleb128 0x1
+ 343 00de 9C       		.byte	0x9c
+ 344 00df 11010000 		.4byte	0x111
+ 345 00e3 06       		.uleb128 0x6
+ 346 00e4 6F703100 		.ascii	"op1\000"
+ 347 00e8 01       		.byte	0x1
+ 348 00e9 27       		.byte	0x27
+ 349 00ea 98000000 		.4byte	0x98
+ 350 00ee 00000000 		.4byte	.LLST0
+ 351 00f2 06       		.uleb128 0x6
+ 352 00f3 6F703200 		.ascii	"op2\000"
+ 353 00f7 01       		.byte	0x1
+ 354 00f8 27       		.byte	0x27
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 10
+
+
+ 355 00f9 8C000000 		.4byte	0x8c
+ 356 00fd 21000000 		.4byte	.LLST1
+ 357 0101 07       		.uleb128 0x7
+ 358 0102 B3010000 		.4byte	.LASF21
+ 359 0106 01       		.byte	0x1
+ 360 0107 29       		.byte	0x29
+ 361 0108 B2000000 		.4byte	0xb2
+ 362 010c 4D000000 		.4byte	.LLST2
+ 363 0110 00       		.byte	0
+ 364 0111 05       		.uleb128 0x5
+ 365 0112 19000000 		.4byte	.LASF20
+ 366 0116 01       		.byte	0x1
+ 367 0117 4A       		.byte	0x4a
+ 368 0118 98000000 		.4byte	0x98
+ 369 011c 00000000 		.4byte	.LFB1
+ 370 0120 A0000000 		.4byte	.LFE1-.LFB1
+ 371 0124 01       		.uleb128 0x1
+ 372 0125 9C       		.byte	0x9c
+ 373 0126 97010000 		.4byte	0x197
+ 374 012a 06       		.uleb128 0x6
+ 375 012b 72657300 		.ascii	"res\000"
+ 376 012f 01       		.byte	0x1
+ 377 0130 4A       		.byte	0x4a
+ 378 0131 8C000000 		.4byte	0x8c
+ 379 0135 DE000000 		.4byte	.LLST3
+ 380 0139 08       		.uleb128 0x8
+ 381 013a 72010000 		.4byte	.LASF22
+ 382 013e 01       		.byte	0x1
+ 383 013f 76       		.byte	0x76
+ 384 0140 AC010000 		.4byte	0x1ac
+ 385 0144 02       		.uleb128 0x2
+ 386 0145 91       		.byte	0x91
+ 387 0146 50       		.sleb128 -48
+ 388 0147 08       		.uleb128 0x8
+ 389 0148 46010000 		.4byte	.LASF23
+ 390 014c 01       		.byte	0x1
+ 391 014d 77       		.byte	0x77
+ 392 014e B1010000 		.4byte	0x1b1
+ 393 0152 03       		.uleb128 0x3
+ 394 0153 91       		.byte	0x91
+ 395 0154 B87F     		.sleb128 -72
+ 396 0156 09       		.uleb128 0x9
+ 397 0157 6900     		.ascii	"i\000"
+ 398 0159 01       		.byte	0x1
+ 399 015a 79       		.byte	0x79
+ 400 015b 80000000 		.4byte	0x80
+ 401 015f 1D010000 		.4byte	.LLST4
+ 402 0163 07       		.uleb128 0x7
+ 403 0164 67010000 		.4byte	.LASF24
+ 404 0168 01       		.byte	0x1
+ 405 0169 7A       		.byte	0x7a
+ 406 016a 98000000 		.4byte	0x98
+ 407 016e 69010000 		.4byte	.LLST5
+ 408 0172 0A       		.uleb128 0xa
+ 409 0173 48000000 		.4byte	.LVL19
+ 410 0177 CA000000 		.4byte	0xca
+ 411 017b 86010000 		.4byte	0x186
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 11
+
+
+ 412 017f 0B       		.uleb128 0xb
+ 413 0180 01       		.uleb128 0x1
+ 414 0181 51       		.byte	0x51
+ 415 0182 02       		.uleb128 0x2
+ 416 0183 75       		.byte	0x75
+ 417 0184 00       		.sleb128 0
+ 418 0185 00       		.byte	0
+ 419 0186 0C       		.uleb128 0xc
+ 420 0187 78000000 		.4byte	.LVL27
+ 421 018b CA000000 		.4byte	0xca
+ 422 018f 0B       		.uleb128 0xb
+ 423 0190 01       		.uleb128 0x1
+ 424 0191 51       		.byte	0x51
+ 425 0192 02       		.uleb128 0x2
+ 426 0193 75       		.byte	0x75
+ 427 0194 00       		.sleb128 0
+ 428 0195 00       		.byte	0
+ 429 0196 00       		.byte	0
+ 430 0197 0D       		.uleb128 0xd
+ 431 0198 A7010000 		.4byte	0x1a7
+ 432 019c A7010000 		.4byte	0x1a7
+ 433 01a0 0E       		.uleb128 0xe
+ 434 01a1 72000000 		.4byte	0x72
+ 435 01a5 05       		.byte	0x5
+ 436 01a6 00       		.byte	0
+ 437 01a7 0F       		.uleb128 0xf
+ 438 01a8 98000000 		.4byte	0x98
+ 439 01ac 0F       		.uleb128 0xf
+ 440 01ad 97010000 		.4byte	0x197
+ 441 01b1 0F       		.uleb128 0xf
+ 442 01b2 97010000 		.4byte	0x197
+ 443 01b6 00       		.byte	0
+ 444              		.section	.debug_abbrev,"",%progbits
+ 445              	.Ldebug_abbrev0:
+ 446 0000 01       		.uleb128 0x1
+ 447 0001 11       		.uleb128 0x11
+ 448 0002 01       		.byte	0x1
+ 449 0003 25       		.uleb128 0x25
+ 450 0004 0E       		.uleb128 0xe
+ 451 0005 13       		.uleb128 0x13
+ 452 0006 0B       		.uleb128 0xb
+ 453 0007 03       		.uleb128 0x3
+ 454 0008 0E       		.uleb128 0xe
+ 455 0009 1B       		.uleb128 0x1b
+ 456 000a 0E       		.uleb128 0xe
+ 457 000b 55       		.uleb128 0x55
+ 458 000c 17       		.uleb128 0x17
+ 459 000d 11       		.uleb128 0x11
+ 460 000e 01       		.uleb128 0x1
+ 461 000f 10       		.uleb128 0x10
+ 462 0010 17       		.uleb128 0x17
+ 463 0011 00       		.byte	0
+ 464 0012 00       		.byte	0
+ 465 0013 02       		.uleb128 0x2
+ 466 0014 24       		.uleb128 0x24
+ 467 0015 00       		.byte	0
+ 468 0016 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 12
+
+
+ 469 0017 0B       		.uleb128 0xb
+ 470 0018 3E       		.uleb128 0x3e
+ 471 0019 0B       		.uleb128 0xb
+ 472 001a 03       		.uleb128 0x3
+ 473 001b 0E       		.uleb128 0xe
+ 474 001c 00       		.byte	0
+ 475 001d 00       		.byte	0
+ 476 001e 03       		.uleb128 0x3
+ 477 001f 24       		.uleb128 0x24
+ 478 0020 00       		.byte	0
+ 479 0021 0B       		.uleb128 0xb
+ 480 0022 0B       		.uleb128 0xb
+ 481 0023 3E       		.uleb128 0x3e
+ 482 0024 0B       		.uleb128 0xb
+ 483 0025 03       		.uleb128 0x3
+ 484 0026 08       		.uleb128 0x8
+ 485 0027 00       		.byte	0
+ 486 0028 00       		.byte	0
+ 487 0029 04       		.uleb128 0x4
+ 488 002a 16       		.uleb128 0x16
+ 489 002b 00       		.byte	0
+ 490 002c 03       		.uleb128 0x3
+ 491 002d 0E       		.uleb128 0xe
+ 492 002e 3A       		.uleb128 0x3a
+ 493 002f 0B       		.uleb128 0xb
+ 494 0030 3B       		.uleb128 0x3b
+ 495 0031 05       		.uleb128 0x5
+ 496 0032 49       		.uleb128 0x49
+ 497 0033 13       		.uleb128 0x13
+ 498 0034 00       		.byte	0
+ 499 0035 00       		.byte	0
+ 500 0036 05       		.uleb128 0x5
+ 501 0037 2E       		.uleb128 0x2e
+ 502 0038 01       		.byte	0x1
+ 503 0039 3F       		.uleb128 0x3f
+ 504 003a 19       		.uleb128 0x19
+ 505 003b 03       		.uleb128 0x3
+ 506 003c 0E       		.uleb128 0xe
+ 507 003d 3A       		.uleb128 0x3a
+ 508 003e 0B       		.uleb128 0xb
+ 509 003f 3B       		.uleb128 0x3b
+ 510 0040 0B       		.uleb128 0xb
+ 511 0041 27       		.uleb128 0x27
+ 512 0042 19       		.uleb128 0x19
+ 513 0043 49       		.uleb128 0x49
+ 514 0044 13       		.uleb128 0x13
+ 515 0045 11       		.uleb128 0x11
+ 516 0046 01       		.uleb128 0x1
+ 517 0047 12       		.uleb128 0x12
+ 518 0048 06       		.uleb128 0x6
+ 519 0049 40       		.uleb128 0x40
+ 520 004a 18       		.uleb128 0x18
+ 521 004b 9742     		.uleb128 0x2117
+ 522 004d 19       		.uleb128 0x19
+ 523 004e 01       		.uleb128 0x1
+ 524 004f 13       		.uleb128 0x13
+ 525 0050 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 13
+
+
+ 526 0051 00       		.byte	0
+ 527 0052 06       		.uleb128 0x6
+ 528 0053 05       		.uleb128 0x5
+ 529 0054 00       		.byte	0
+ 530 0055 03       		.uleb128 0x3
+ 531 0056 08       		.uleb128 0x8
+ 532 0057 3A       		.uleb128 0x3a
+ 533 0058 0B       		.uleb128 0xb
+ 534 0059 3B       		.uleb128 0x3b
+ 535 005a 0B       		.uleb128 0xb
+ 536 005b 49       		.uleb128 0x49
+ 537 005c 13       		.uleb128 0x13
+ 538 005d 02       		.uleb128 0x2
+ 539 005e 17       		.uleb128 0x17
+ 540 005f 00       		.byte	0
+ 541 0060 00       		.byte	0
+ 542 0061 07       		.uleb128 0x7
+ 543 0062 34       		.uleb128 0x34
+ 544 0063 00       		.byte	0
+ 545 0064 03       		.uleb128 0x3
+ 546 0065 0E       		.uleb128 0xe
+ 547 0066 3A       		.uleb128 0x3a
+ 548 0067 0B       		.uleb128 0xb
+ 549 0068 3B       		.uleb128 0x3b
+ 550 0069 0B       		.uleb128 0xb
+ 551 006a 49       		.uleb128 0x49
+ 552 006b 13       		.uleb128 0x13
+ 553 006c 02       		.uleb128 0x2
+ 554 006d 17       		.uleb128 0x17
+ 555 006e 00       		.byte	0
+ 556 006f 00       		.byte	0
+ 557 0070 08       		.uleb128 0x8
+ 558 0071 34       		.uleb128 0x34
+ 559 0072 00       		.byte	0
+ 560 0073 03       		.uleb128 0x3
+ 561 0074 0E       		.uleb128 0xe
+ 562 0075 3A       		.uleb128 0x3a
+ 563 0076 0B       		.uleb128 0xb
+ 564 0077 3B       		.uleb128 0x3b
+ 565 0078 0B       		.uleb128 0xb
+ 566 0079 49       		.uleb128 0x49
+ 567 007a 13       		.uleb128 0x13
+ 568 007b 02       		.uleb128 0x2
+ 569 007c 18       		.uleb128 0x18
+ 570 007d 00       		.byte	0
+ 571 007e 00       		.byte	0
+ 572 007f 09       		.uleb128 0x9
+ 573 0080 34       		.uleb128 0x34
+ 574 0081 00       		.byte	0
+ 575 0082 03       		.uleb128 0x3
+ 576 0083 08       		.uleb128 0x8
+ 577 0084 3A       		.uleb128 0x3a
+ 578 0085 0B       		.uleb128 0xb
+ 579 0086 3B       		.uleb128 0x3b
+ 580 0087 0B       		.uleb128 0xb
+ 581 0088 49       		.uleb128 0x49
+ 582 0089 13       		.uleb128 0x13
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 14
+
+
+ 583 008a 02       		.uleb128 0x2
+ 584 008b 17       		.uleb128 0x17
+ 585 008c 00       		.byte	0
+ 586 008d 00       		.byte	0
+ 587 008e 0A       		.uleb128 0xa
+ 588 008f 898201   		.uleb128 0x4109
+ 589 0092 01       		.byte	0x1
+ 590 0093 11       		.uleb128 0x11
+ 591 0094 01       		.uleb128 0x1
+ 592 0095 31       		.uleb128 0x31
+ 593 0096 13       		.uleb128 0x13
+ 594 0097 01       		.uleb128 0x1
+ 595 0098 13       		.uleb128 0x13
+ 596 0099 00       		.byte	0
+ 597 009a 00       		.byte	0
+ 598 009b 0B       		.uleb128 0xb
+ 599 009c 8A8201   		.uleb128 0x410a
+ 600 009f 00       		.byte	0
+ 601 00a0 02       		.uleb128 0x2
+ 602 00a1 18       		.uleb128 0x18
+ 603 00a2 9142     		.uleb128 0x2111
+ 604 00a4 18       		.uleb128 0x18
+ 605 00a5 00       		.byte	0
+ 606 00a6 00       		.byte	0
+ 607 00a7 0C       		.uleb128 0xc
+ 608 00a8 898201   		.uleb128 0x4109
+ 609 00ab 01       		.byte	0x1
+ 610 00ac 11       		.uleb128 0x11
+ 611 00ad 01       		.uleb128 0x1
+ 612 00ae 31       		.uleb128 0x31
+ 613 00af 13       		.uleb128 0x13
+ 614 00b0 00       		.byte	0
+ 615 00b1 00       		.byte	0
+ 616 00b2 0D       		.uleb128 0xd
+ 617 00b3 01       		.uleb128 0x1
+ 618 00b4 01       		.byte	0x1
+ 619 00b5 49       		.uleb128 0x49
+ 620 00b6 13       		.uleb128 0x13
+ 621 00b7 01       		.uleb128 0x1
+ 622 00b8 13       		.uleb128 0x13
+ 623 00b9 00       		.byte	0
+ 624 00ba 00       		.byte	0
+ 625 00bb 0E       		.uleb128 0xe
+ 626 00bc 21       		.uleb128 0x21
+ 627 00bd 00       		.byte	0
+ 628 00be 49       		.uleb128 0x49
+ 629 00bf 13       		.uleb128 0x13
+ 630 00c0 2F       		.uleb128 0x2f
+ 631 00c1 0B       		.uleb128 0xb
+ 632 00c2 00       		.byte	0
+ 633 00c3 00       		.byte	0
+ 634 00c4 0F       		.uleb128 0xf
+ 635 00c5 26       		.uleb128 0x26
+ 636 00c6 00       		.byte	0
+ 637 00c7 49       		.uleb128 0x49
+ 638 00c8 13       		.uleb128 0x13
+ 639 00c9 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 15
+
+
+ 640 00ca 00       		.byte	0
+ 641 00cb 00       		.byte	0
+ 642              		.section	.debug_loc,"",%progbits
+ 643              	.Ldebug_loc0:
+ 644              	.LLST0:
+ 645 0000 00000000 		.4byte	.LVL0
+ 646 0004 0A000000 		.4byte	.LVL2
+ 647 0008 0100     		.2byte	0x1
+ 648 000a 50       		.byte	0x50
+ 649 000b 0A000000 		.4byte	.LVL2
+ 650 000f 30000000 		.4byte	.LFE0
+ 651 0013 0400     		.2byte	0x4
+ 652 0015 F3       		.byte	0xf3
+ 653 0016 01       		.uleb128 0x1
+ 654 0017 50       		.byte	0x50
+ 655 0018 9F       		.byte	0x9f
+ 656 0019 00000000 		.4byte	0
+ 657 001d 00000000 		.4byte	0
+ 658              	.LLST1:
+ 659 0021 00000000 		.4byte	.LVL0
+ 660 0025 0E000000 		.4byte	.LVL3
+ 661 0029 0100     		.2byte	0x1
+ 662 002b 51       		.byte	0x51
+ 663 002c 0E000000 		.4byte	.LVL3
+ 664 0030 14000000 		.4byte	.LVL4
+ 665 0034 0100     		.2byte	0x1
+ 666 0036 53       		.byte	0x53
+ 667 0037 14000000 		.4byte	.LVL4
+ 668 003b 30000000 		.4byte	.LFE0
+ 669 003f 0400     		.2byte	0x4
+ 670 0041 F3       		.byte	0xf3
+ 671 0042 01       		.uleb128 0x1
+ 672 0043 51       		.byte	0x51
+ 673 0044 9F       		.byte	0x9f
+ 674 0045 00000000 		.4byte	0
+ 675 0049 00000000 		.4byte	0
+ 676              	.LLST2:
+ 677 004d 04000000 		.4byte	.LVL1
+ 678 0051 0E000000 		.4byte	.LVL3
+ 679 0055 0A00     		.2byte	0xa
+ 680 0057 9E       		.byte	0x9e
+ 681 0058 08       		.uleb128 0x8
+ 682 0059 00000000 		.8byte	0
+ 682      00000000 
+ 683 0061 0E000000 		.4byte	.LVL3
+ 684 0065 18000000 		.4byte	.LVL5
+ 685 0069 0600     		.2byte	0x6
+ 686 006b 50       		.byte	0x50
+ 687 006c 93       		.byte	0x93
+ 688 006d 04       		.uleb128 0x4
+ 689 006e 51       		.byte	0x51
+ 690 006f 93       		.byte	0x93
+ 691 0070 04       		.uleb128 0x4
+ 692 0071 18000000 		.4byte	.LVL5
+ 693 0075 1C000000 		.4byte	.LVL6
+ 694 0079 1000     		.2byte	0x10
+ 695 007b F3       		.byte	0xf3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 16
+
+
+ 696 007c 01       		.uleb128 0x1
+ 697 007d 50       		.byte	0x50
+ 698 007e F7       		.byte	0xf7
+ 699 007f 2C       		.uleb128 0x2c
+ 700 0080 F7       		.byte	0xf7
+ 701 0081 25       		.uleb128 0x25
+ 702 0082 F3       		.byte	0xf3
+ 703 0083 01       		.uleb128 0x1
+ 704 0084 51       		.byte	0x51
+ 705 0085 F7       		.byte	0xf7
+ 706 0086 2C       		.uleb128 0x2c
+ 707 0087 F7       		.byte	0xf7
+ 708 0088 25       		.uleb128 0x25
+ 709 0089 1E       		.byte	0x1e
+ 710 008a 9F       		.byte	0x9f
+ 711 008b 1C000000 		.4byte	.LVL6
+ 712 008f 1E000000 		.4byte	.LVL7
+ 713 0093 0600     		.2byte	0x6
+ 714 0095 50       		.byte	0x50
+ 715 0096 93       		.byte	0x93
+ 716 0097 04       		.uleb128 0x4
+ 717 0098 51       		.byte	0x51
+ 718 0099 93       		.byte	0x93
+ 719 009a 04       		.uleb128 0x4
+ 720 009b 22000000 		.4byte	.LVL8
+ 721 009f 24000000 		.4byte	.LVL9
+ 722 00a3 0700     		.2byte	0x7
+ 723 00a5 70       		.byte	0x70
+ 724 00a6 00       		.sleb128 0
+ 725 00a7 F7       		.byte	0xf7
+ 726 00a8 33       		.uleb128 0x33
+ 727 00a9 F7       		.byte	0xf7
+ 728 00aa 25       		.uleb128 0x25
+ 729 00ab 9F       		.byte	0x9f
+ 730 00ac 26000000 		.4byte	.LVL10
+ 731 00b0 28000000 		.4byte	.LVL11
+ 732 00b4 0600     		.2byte	0x6
+ 733 00b6 50       		.byte	0x50
+ 734 00b7 93       		.byte	0x93
+ 735 00b8 04       		.uleb128 0x4
+ 736 00b9 51       		.byte	0x51
+ 737 00ba 93       		.byte	0x93
+ 738 00bb 04       		.uleb128 0x4
+ 739 00bc 28000000 		.4byte	.LVL11
+ 740 00c0 2C000000 		.4byte	.LVL12
+ 741 00c4 1000     		.2byte	0x10
+ 742 00c6 F3       		.byte	0xf3
+ 743 00c7 01       		.uleb128 0x1
+ 744 00c8 50       		.byte	0x50
+ 745 00c9 F7       		.byte	0xf7
+ 746 00ca 2C       		.uleb128 0x2c
+ 747 00cb F7       		.byte	0xf7
+ 748 00cc 25       		.uleb128 0x25
+ 749 00cd F3       		.byte	0xf3
+ 750 00ce 01       		.uleb128 0x1
+ 751 00cf 51       		.byte	0x51
+ 752 00d0 F7       		.byte	0xf7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 17
+
+
+ 753 00d1 2C       		.uleb128 0x2c
+ 754 00d2 F7       		.byte	0xf7
+ 755 00d3 25       		.uleb128 0x25
+ 756 00d4 1E       		.byte	0x1e
+ 757 00d5 9F       		.byte	0x9f
+ 758 00d6 00000000 		.4byte	0
+ 759 00da 00000000 		.4byte	0
+ 760              	.LLST3:
+ 761 00de 00000000 		.4byte	.LVL13
+ 762 00e2 0E000000 		.4byte	.LVL14
+ 763 00e6 0100     		.2byte	0x1
+ 764 00e8 50       		.byte	0x50
+ 765 00e9 0E000000 		.4byte	.LVL14
+ 766 00ed 30000000 		.4byte	.LVL16
+ 767 00f1 0100     		.2byte	0x1
+ 768 00f3 57       		.byte	0x57
+ 769 00f4 30000000 		.4byte	.LVL16
+ 770 00f8 5E000000 		.4byte	.LVL23
+ 771 00fc 0100     		.2byte	0x1
+ 772 00fe 55       		.byte	0x55
+ 773 00ff 5E000000 		.4byte	.LVL23
+ 774 0103 60000000 		.4byte	.LVL24
+ 775 0107 0100     		.2byte	0x1
+ 776 0109 57       		.byte	0x57
+ 777 010a 60000000 		.4byte	.LVL24
+ 778 010e 90000000 		.4byte	.LVL31
+ 779 0112 0100     		.2byte	0x1
+ 780 0114 55       		.byte	0x55
+ 781 0115 00000000 		.4byte	0
+ 782 0119 00000000 		.4byte	0
+ 783              	.LLST4:
+ 784 011d 30000000 		.4byte	.LVL16
+ 785 0121 36000000 		.4byte	.LVL17
+ 786 0125 0200     		.2byte	0x2
+ 787 0127 35       		.byte	0x35
+ 788 0128 9F       		.byte	0x9f
+ 789 0129 36000000 		.4byte	.LVL17
+ 790 012d 4A000000 		.4byte	.LVL20
+ 791 0131 0100     		.2byte	0x1
+ 792 0133 54       		.byte	0x54
+ 793 0134 4C000000 		.4byte	.LVL21
+ 794 0138 5E000000 		.4byte	.LVL23
+ 795 013c 0100     		.2byte	0x1
+ 796 013e 54       		.byte	0x54
+ 797 013f 60000000 		.4byte	.LVL24
+ 798 0143 66000000 		.4byte	.LVL25
+ 799 0147 0200     		.2byte	0x2
+ 800 0149 35       		.byte	0x35
+ 801 014a 9F       		.byte	0x9f
+ 802 014b 66000000 		.4byte	.LVL25
+ 803 014f 7A000000 		.4byte	.LVL28
+ 804 0153 0100     		.2byte	0x1
+ 805 0155 54       		.byte	0x54
+ 806 0156 7C000000 		.4byte	.LVL29
+ 807 015a 90000000 		.4byte	.LVL31
+ 808 015e 0100     		.2byte	0x1
+ 809 0160 54       		.byte	0x54
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 18
+
+
+ 810 0161 00000000 		.4byte	0
+ 811 0165 00000000 		.4byte	0
+ 812              	.LLST5:
+ 813 0169 28000000 		.4byte	.LVL15
+ 814 016d 36000000 		.4byte	.LVL17
+ 815 0171 0200     		.2byte	0x2
+ 816 0173 30       		.byte	0x30
+ 817 0174 9F       		.byte	0x9f
+ 818 0175 36000000 		.4byte	.LVL17
+ 819 0179 44000000 		.4byte	.LVL18
+ 820 017d 0100     		.2byte	0x1
+ 821 017f 50       		.byte	0x50
+ 822 0180 48000000 		.4byte	.LVL19
+ 823 0184 5E000000 		.4byte	.LVL23
+ 824 0188 0100     		.2byte	0x1
+ 825 018a 50       		.byte	0x50
+ 826 018b 5E000000 		.4byte	.LVL23
+ 827 018f 66000000 		.4byte	.LVL25
+ 828 0193 0200     		.2byte	0x2
+ 829 0195 30       		.byte	0x30
+ 830 0196 9F       		.byte	0x9f
+ 831 0197 66000000 		.4byte	.LVL25
+ 832 019b 74000000 		.4byte	.LVL26
+ 833 019f 0100     		.2byte	0x1
+ 834 01a1 50       		.byte	0x50
+ 835 01a2 78000000 		.4byte	.LVL27
+ 836 01a6 A0000000 		.4byte	.LFE1
+ 837 01aa 0100     		.2byte	0x1
+ 838 01ac 50       		.byte	0x50
+ 839 01ad 00000000 		.4byte	0
+ 840 01b1 00000000 		.4byte	0
+ 841              		.section	.debug_aranges,"",%progbits
+ 842 0000 24000000 		.4byte	0x24
+ 843 0004 0200     		.2byte	0x2
+ 844 0006 00000000 		.4byte	.Ldebug_info0
+ 845 000a 04       		.byte	0x4
+ 846 000b 00       		.byte	0
+ 847 000c 0000     		.2byte	0
+ 848 000e 0000     		.2byte	0
+ 849 0010 00000000 		.4byte	.LFB0
+ 850 0014 30000000 		.4byte	.LFE0-.LFB0
+ 851 0018 00000000 		.4byte	.LFB1
+ 852 001c A0000000 		.4byte	.LFE1-.LFB1
+ 853 0020 00000000 		.4byte	0
+ 854 0024 00000000 		.4byte	0
+ 855              		.section	.debug_ranges,"",%progbits
+ 856              	.Ldebug_ranges0:
+ 857 0000 00000000 		.4byte	.LFB0
+ 858 0004 30000000 		.4byte	.LFE0
+ 859 0008 00000000 		.4byte	.LFB1
+ 860 000c A0000000 		.4byte	.LFE1
+ 861 0010 00000000 		.4byte	0
+ 862 0014 00000000 		.4byte	0
+ 863              		.section	.debug_line,"",%progbits
+ 864              	.Ldebug_line0:
+ 865 0000 A4000000 		.section	.debug_str,"MS",%progbits,1
+ 865      02004200 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 19
+
+
+ 865      00000201 
+ 865      FB0E0D00 
+ 865      01010101 
+ 866              	.LASF19:
+ 867 0000 5254445F 		.ascii	"RTD_1_MultShift24\000"
+ 867      315F4D75 
+ 867      6C745368 
+ 867      69667432 
+ 867      3400
+ 868              	.LASF18:
+ 869 0012 75696E74 		.ascii	"uint64\000"
+ 869      363400
+ 870              	.LASF20:
+ 871 0019 5254445F 		.ascii	"RTD_1_GetTemperature\000"
+ 871      315F4765 
+ 871      7454656D 
+ 871      70657261 
+ 871      74757265 
+ 872              	.LASF27:
+ 873 002e 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 873      73657273 
+ 873      5C6E6963 
+ 873      6F5F5C53 
+ 873      756E6468 
+ 874 005c 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 874      6C6F725C 
+ 874      42616368 
+ 874      656C6F72 
+ 874      50726F6A 
+ 875 008c 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 875      636F6F6C 
+ 875      696E6773 
+ 875      79737465 
+ 875      6D2E6379 
+ 876              	.LASF15:
+ 877 00a4 666C6F61 		.ascii	"float\000"
+ 877      7400
+ 878              	.LASF5:
+ 879 00aa 756E7369 		.ascii	"unsigned char\000"
+ 879      676E6564 
+ 879      20636861 
+ 879      7200
+ 880              	.LASF25:
+ 881 00b8 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 881      43313120 
+ 881      352E342E 
+ 881      31203230 
+ 881      31363036 
+ 882 00eb 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 882      20726576 
+ 882      6973696F 
+ 882      6E203233 
+ 882      37373135 
+ 883 011e 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 883      66756E63 
+ 883      74696F6E 
+ 883      2D736563 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 20
+
+
+ 883      74696F6E 
+ 884              	.LASF23:
+ 885 0146 5254445F 		.ascii	"RTD_1_coeffNeg\000"
+ 885      315F636F 
+ 885      6566664E 
+ 885      656700
+ 886              	.LASF9:
+ 887 0155 6C6F6E67 		.ascii	"long unsigned int\000"
+ 887      20756E73 
+ 887      69676E65 
+ 887      6420696E 
+ 887      7400
+ 888              	.LASF24:
+ 889 0167 74656D70 		.ascii	"temp\000"
+ 889      00
+ 890              	.LASF14:
+ 891 016c 696E7433 		.ascii	"int32\000"
+ 891      3200
+ 892              	.LASF22:
+ 893 0172 5254445F 		.ascii	"RTD_1_coeffPos\000"
+ 893      315F636F 
+ 893      65666650 
+ 893      6F7300
+ 894              	.LASF16:
+ 895 0181 646F7562 		.ascii	"double\000"
+ 895      6C6500
+ 896              	.LASF13:
+ 897 0188 75696E74 		.ascii	"uint32\000"
+ 897      333200
+ 898              	.LASF1:
+ 899 018f 756E7369 		.ascii	"unsigned int\000"
+ 899      676E6564 
+ 899      20696E74 
+ 899      00
+ 900              	.LASF0:
+ 901 019c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 901      206C6F6E 
+ 901      6720756E 
+ 901      7369676E 
+ 901      65642069 
+ 902              	.LASF21:
+ 903 01b3 72657375 		.ascii	"result\000"
+ 903      6C7400
+ 904              	.LASF26:
+ 905 01ba 47656E65 		.ascii	"Generated_Source\\PSoC5\\RTD_1.c\000"
+ 905      72617465 
+ 905      645F536F 
+ 905      75726365 
+ 905      5C50536F 
+ 906              	.LASF10:
+ 907 01d9 73697A65 		.ascii	"sizetype\000"
+ 907      74797065 
+ 907      00
+ 908              	.LASF2:
+ 909 01e2 6C6F6E67 		.ascii	"long long int\000"
+ 909      206C6F6E 
+ 909      6720696E 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccdOq2D0.s 			page 21
+
+
+ 909      7400
+ 910              	.LASF11:
+ 911 01f0 63686172 		.ascii	"char\000"
+ 911      00
+ 912              	.LASF6:
+ 913 01f5 73686F72 		.ascii	"short int\000"
+ 913      7420696E 
+ 913      7400
+ 914              	.LASF12:
+ 915 01ff 75696E74 		.ascii	"uint8\000"
+ 915      3800
+ 916              	.LASF8:
+ 917 0205 6C6F6E67 		.ascii	"long int\000"
+ 917      20696E74 
+ 917      00
+ 918              	.LASF3:
+ 919 020e 6C6F6E67 		.ascii	"long double\000"
+ 919      20646F75 
+ 919      626C6500 
+ 920              	.LASF4:
+ 921 021a 7369676E 		.ascii	"signed char\000"
+ 921      65642063 
+ 921      68617200 
+ 922              	.LASF7:
+ 923 0226 73686F72 		.ascii	"short unsigned int\000"
+ 923      7420756E 
+ 923      7369676E 
+ 923      65642069 
+ 923      6E7400
+ 924              	.LASF17:
+ 925 0239 696E7436 		.ascii	"int64\000"
+ 925      3400
+ 926              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

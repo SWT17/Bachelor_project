@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Pin_1.h  
+* File Name: Speed_pin.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_Pin_1_ALIASES_H) /* Pins Pin_1_ALIASES_H */
-#define CY_PINS_Pin_1_ALIASES_H
+#if !defined(CY_PINS_Speed_pin_ALIASES_H) /* Pins Speed_pin_ALIASES_H */
+#define CY_PINS_Speed_pin_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define Pin_1_0			(Pin_1__0__PC)
-#define Pin_1_0_INTR	((uint16)((uint16)0x0001u << Pin_1__0__SHIFT))
+#define Speed_pin_0			(Speed_pin__0__PC)
+#define Speed_pin_0_INTR	((uint16)((uint16)0x0001u << Speed_pin__0__SHIFT))
 
-#define Pin_1_INTR_ALL	 ((uint16)(Pin_1_0_INTR))
+#define Speed_pin_INTR_ALL	 ((uint16)(Speed_pin_0_INTR))
 
-#endif /* End Pins Pin_1_ALIASES_H */
+#endif /* End Pins Speed_pin_ALIASES_H */
 
 
 /* [] END OF FILE */

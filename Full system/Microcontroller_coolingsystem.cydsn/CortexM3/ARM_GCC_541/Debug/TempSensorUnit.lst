@@ -1,0 +1,1106 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"TempSensorUnit.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.GetRtdRatio,"ax",%progbits
+  20              		.align	2
+  21              		.global	GetRtdRatio
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	GetRtdRatio, %function
+  25              	GetRtdRatio:
+  26              	.LFB2:
+  27              		.file 1 "TempSensorUnit.c"
+   1:TempSensorUnit.c **** /* ========================================
+   2:TempSensorUnit.c ****  *
+   3:TempSensorUnit.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:TempSensorUnit.c ****  * All Rights Reserved
+   5:TempSensorUnit.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:TempSensorUnit.c ****  *
+   7:TempSensorUnit.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:TempSensorUnit.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:TempSensorUnit.c ****  *
+  10:TempSensorUnit.c ****  * ========================================
+  11:TempSensorUnit.c **** */
+  12:TempSensorUnit.c **** #include "TempSensorUnit.h"
+  13:TempSensorUnit.c **** #include "AmplifierRegisters.h"
+  14:TempSensorUnit.c **** 
+  15:TempSensorUnit.c **** /*Internal function declarations*/
+  16:TempSensorUnit.c **** void SPI_Setup();
+  17:TempSensorUnit.c **** void Set_WireSetup();
+  18:TempSensorUnit.c **** void Set_FilterSetup();
+  19:TempSensorUnit.c **** void WriteByteToAdress(char adress);
+  20:TempSensorUnit.c **** char ReadByteFromAdress(char adress);
+  21:TempSensorUnit.c **** 
+  22:TempSensorUnit.c **** /*Internal variables declartion*/
+  23:TempSensorUnit.c **** uint16_t rtd_ratio;
+  24:TempSensorUnit.c **** 
+  25:TempSensorUnit.c **** 
+  26:TempSensorUnit.c **** /*Does initial setup of the amplifier*/
+  27:TempSensorUnit.c **** void Amplifier_Setup()
+  28:TempSensorUnit.c **** {
+  29:TempSensorUnit.c ****     SPI_Setup();
+  30:TempSensorUnit.c ****     Set_WireSetup();
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 2
+
+
+  31:TempSensorUnit.c ****     Set_FilterSetup();
+  32:TempSensorUnit.c **** }
+  33:TempSensorUnit.c **** 
+  34:TempSensorUnit.c **** 
+  35:TempSensorUnit.c **** /*Retrieve RTD ration by reading the RTD msb byte and 
+  36:TempSensorUnit.c **** the RTD lsb byte from the amplifier registers*/
+  37:TempSensorUnit.c **** uint16_t GetRtdRatio()
+  38:TempSensorUnit.c **** {
+  28              		.loc 1 38 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 38B5     		push	{r3, r4, r5, lr}
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 3, -16
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 5, -8
+  37              		.cfi_offset 14, -4
+  39:TempSensorUnit.c ****     uint16_t rtd_ratio;
+  40:TempSensorUnit.c ****     //Read MSB byte from amplifier
+  41:TempSensorUnit.c ****     char RTD_msb = ReadByteFromAdress(READ_RTD_MSB_Reg_Adress);
+  38              		.loc 1 41 0
+  39 0002 074C     		ldr	r4, .L3
+  40 0004 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+  41 0006 FFF7FEFF 		bl	ReadByteFromAdress
+  42              	.LVL0:
+  43 000a 0546     		mov	r5, r0
+  44              	.LVL1:
+  42:TempSensorUnit.c ****     
+  43:TempSensorUnit.c ****     //Read LSB byte from amplifier
+  44:TempSensorUnit.c ****     char RTD_lsb = ReadByteFromAdress(READ_RTD_LSB_Reg_Adress);
+  45              		.loc 1 44 0
+  46 000c 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+  47 000e FFF7FEFF 		bl	ReadByteFromAdress
+  48              	.LVL2:
+  45:TempSensorUnit.c ****     
+  46:TempSensorUnit.c ****     //Concatenate MSB and LSB to form the 15Bit RTD ration according to datasheet MAX31865 page 15 
+  47:TempSensorUnit.c ****     rtd_ratio = ((uint16_t)RTD_msb << 7) | RTD_lsb>>1;
+  49              		.loc 1 47 0
+  50 0012 C0F34700 		ubfx	r0, r0, #1, #8
+  51              	.LVL3:
+  52 0016 40EAC510 		orr	r0, r0, r5, lsl #7
+  53              	.LVL4:
+  48:TempSensorUnit.c ****     
+  49:TempSensorUnit.c ****     return rtd_ratio;
+  50:TempSensorUnit.c **** }
+  54              		.loc 1 50 0
+  55 001a 80B2     		uxth	r0, r0
+  56 001c 38BD     		pop	{r3, r4, r5, pc}
+  57              	.LVL5:
+  58              	.L4:
+  59 001e 00BF     		.align	2
+  60              	.L3:
+  61 0020 00000000 		.word	.LANCHOR0
+  62              		.cfi_endproc
+  63              	.LFE2:
+  64              		.size	GetRtdRatio, .-GetRtdRatio
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 3
+
+
+  65              		.section	.text.Amplifier_Shutdown,"ax",%progbits
+  66              		.align	2
+  67              		.global	Amplifier_Shutdown
+  68              		.thumb
+  69              		.thumb_func
+  70              		.type	Amplifier_Shutdown, %function
+  71              	Amplifier_Shutdown:
+  72              	.LFB3:
+  51:TempSensorUnit.c **** 
+  52:TempSensorUnit.c **** /*Make a controller shuwdown off the amplifier*/
+  53:TempSensorUnit.c **** void Amplifier_Shutdown()
+  54:TempSensorUnit.c **** {
+  73              		.loc 1 54 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77 0000 08B5     		push	{r3, lr}
+  78              		.cfi_def_cfa_offset 8
+  79              		.cfi_offset 3, -8
+  80              		.cfi_offset 14, -4
+  55:TempSensorUnit.c ****     //Set conversion mode "normally off", VBIAS off. See datasheet max31865
+  56:TempSensorUnit.c ****     
+  57:TempSensorUnit.c ****     Amplifier_Config |= 0 << 7; //VBiAS = "OFF";
+  58:TempSensorUnit.c ****     Amplifier_Config |= 0 << 6; //Conversion mode = "Normally OFF";
+  59:TempSensorUnit.c ****     
+  60:TempSensorUnit.c ****     //Write new configuration to the amplifier.
+  61:TempSensorUnit.c ****     WriteByteToAdress(Amplifier_Config);
+  81              		.loc 1 61 0
+  82 0002 024B     		ldr	r3, .L7
+  83 0004 9878     		ldrb	r0, [r3, #2]	@ zero_extendqisi2
+  84 0006 FFF7FEFF 		bl	WriteByteToAdress
+  85              	.LVL6:
+  86 000a 08BD     		pop	{r3, pc}
+  87              	.L8:
+  88              		.align	2
+  89              	.L7:
+  90 000c 00000000 		.word	.LANCHOR0
+  91              		.cfi_endproc
+  92              	.LFE3:
+  93              		.size	Amplifier_Shutdown, .-Amplifier_Shutdown
+  94              		.section	.text.Amplifier_Startup,"ax",%progbits
+  95              		.align	2
+  96              		.global	Amplifier_Startup
+  97              		.thumb
+  98              		.thumb_func
+  99              		.type	Amplifier_Startup, %function
+ 100              	Amplifier_Startup:
+ 101              	.LFB4:
+  62:TempSensorUnit.c ****     
+  63:TempSensorUnit.c **** }
+  64:TempSensorUnit.c **** 
+  65:TempSensorUnit.c **** 
+  66:TempSensorUnit.c **** /*Controlled startup after being shutdown*/
+  67:TempSensorUnit.c **** void Amplifier_Startup()
+  68:TempSensorUnit.c **** {
+ 102              		.loc 1 68 0
+ 103              		.cfi_startproc
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 4
+
+
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107 0000 7047     		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE4:
+ 110              		.size	Amplifier_Startup, .-Amplifier_Startup
+ 111 0002 00BF     		.section	.text.SPI_Setup,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	SPI_Setup
+ 114              		.thumb
+ 115              		.thumb_func
+ 116              		.type	SPI_Setup, %function
+ 117              	SPI_Setup:
+ 118              	.LFB5:
+  69:TempSensorUnit.c ****     
+  70:TempSensorUnit.c **** }
+  71:TempSensorUnit.c **** 
+  72:TempSensorUnit.c **** 
+  73:TempSensorUnit.c **** 
+  74:TempSensorUnit.c **** 
+  75:TempSensorUnit.c **** 
+  76:TempSensorUnit.c **** /*Setup SPI communication*/
+  77:TempSensorUnit.c **** void SPI_Setup()
+  78:TempSensorUnit.c **** {
+ 119              		.loc 1 78 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123              		@ link register save eliminated.
+ 124 0000 7047     		bx	lr
+ 125              		.cfi_endproc
+ 126              	.LFE5:
+ 127              		.size	SPI_Setup, .-SPI_Setup
+ 128 0002 00BF     		.section	.text.Set_WireSetup,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	Set_WireSetup
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.type	Set_WireSetup, %function
+ 134              	Set_WireSetup:
+ 135              	.LFB6:
+  79:TempSensorUnit.c ****     
+  80:TempSensorUnit.c **** }
+  81:TempSensorUnit.c **** 
+  82:TempSensorUnit.c **** /*Setting up the amplifier for the current wire configuration
+  83:TempSensorUnit.c **** This being a 2-wire config. Possible to do 3 og 4 wire as well*/
+  84:TempSensorUnit.c **** void Set_WireSetup()
+  85:TempSensorUnit.c **** {
+ 136              		.loc 1 85 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              		.loc 1 85 0
+ 141 0000 08B5     		push	{r3, lr}
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 3, -8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 5
+
+
+ 144              		.cfi_offset 14, -4
+  86:TempSensorUnit.c ****     //Code to communicate the 2 wire config to the amplifier
+  87:TempSensorUnit.c ****     //Set Bit D4 = 0. Look at datasheet for Max865
+  88:TempSensorUnit.c ****     Amplifier_Config |= 0 << 4;
+  89:TempSensorUnit.c ****     WriteByteToAdress(Amplifier_Config);
+ 145              		.loc 1 89 0
+ 146 0002 024B     		ldr	r3, .L13
+ 147 0004 9878     		ldrb	r0, [r3, #2]	@ zero_extendqisi2
+ 148 0006 FFF7FEFF 		bl	WriteByteToAdress
+ 149              	.LVL7:
+ 150 000a 08BD     		pop	{r3, pc}
+ 151              	.L14:
+ 152              		.align	2
+ 153              	.L13:
+ 154 000c 00000000 		.word	.LANCHOR0
+ 155              		.cfi_endproc
+ 156              	.LFE6:
+ 157              		.size	Set_WireSetup, .-Set_WireSetup
+ 158              		.section	.text.Set_FilterSetup,"ax",%progbits
+ 159              		.align	2
+ 160              		.global	Set_FilterSetup
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.type	Set_FilterSetup, %function
+ 164              	Set_FilterSetup:
+ 165              	.LFB7:
+  90:TempSensorUnit.c **** }
+  91:TempSensorUnit.c **** 
+  92:TempSensorUnit.c **** 
+  93:TempSensorUnit.c **** 
+  94:TempSensorUnit.c **** /*Setting up the filter setup, either 50Hz or 60Hz
+  95:TempSensorUnit.c **** Dependent on country (Denmark), this will be 50Hz*/
+  96:TempSensorUnit.c **** void Set_FilterSetup()
+  97:TempSensorUnit.c **** {  
+ 166              		.loc 1 97 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 0000 08B5     		push	{r3, lr}
+ 171              		.cfi_def_cfa_offset 8
+ 172              		.cfi_offset 3, -8
+ 173              		.cfi_offset 14, -4
+  98:TempSensorUnit.c ****     //Code to communicate the 50Hz filter configuration to the amplifier on top of base setup.
+  99:TempSensorUnit.c ****     //Set Bit D0 = 1. Look at datasheet for Max865
+ 100:TempSensorUnit.c ****     Amplifier_Config |= 1 << 0;
+ 174              		.loc 1 100 0
+ 175 0002 044B     		ldr	r3, .L17
+ 176 0004 9878     		ldrb	r0, [r3, #2]	@ zero_extendqisi2
+ 177 0006 40F00100 		orr	r0, r0, #1
+ 178 000a 9870     		strb	r0, [r3, #2]
+ 101:TempSensorUnit.c ****     WriteByteToAdress(Amplifier_Config);
+ 179              		.loc 1 101 0
+ 180 000c FFF7FEFF 		bl	WriteByteToAdress
+ 181              	.LVL8:
+ 182 0010 08BD     		pop	{r3, pc}
+ 183              	.L18:
+ 184 0012 00BF     		.align	2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 6
+
+
+ 185              	.L17:
+ 186 0014 00000000 		.word	.LANCHOR0
+ 187              		.cfi_endproc
+ 188              	.LFE7:
+ 189              		.size	Set_FilterSetup, .-Set_FilterSetup
+ 190              		.section	.text.Amplifier_Setup,"ax",%progbits
+ 191              		.align	2
+ 192              		.global	Amplifier_Setup
+ 193              		.thumb
+ 194              		.thumb_func
+ 195              		.type	Amplifier_Setup, %function
+ 196              	Amplifier_Setup:
+ 197              	.LFB1:
+  28:TempSensorUnit.c ****     SPI_Setup();
+ 198              		.loc 1 28 0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 0
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+ 202 0000 08B5     		push	{r3, lr}
+ 203              		.cfi_def_cfa_offset 8
+ 204              		.cfi_offset 3, -8
+ 205              		.cfi_offset 14, -4
+  30:TempSensorUnit.c ****     Set_FilterSetup();
+ 206              		.loc 1 30 0
+ 207 0002 FFF7FEFF 		bl	Set_WireSetup
+ 208              	.LVL9:
+  31:TempSensorUnit.c **** }
+ 209              		.loc 1 31 0
+ 210 0006 FFF7FEFF 		bl	Set_FilterSetup
+ 211              	.LVL10:
+ 212 000a 08BD     		pop	{r3, pc}
+ 213              		.cfi_endproc
+ 214              	.LFE1:
+ 215              		.size	Amplifier_Setup, .-Amplifier_Setup
+ 216              		.comm	rtd_ratio,2,2
+ 217              		.global	Amplifier_Config
+ 218              		.global	READ_RTD_LSB_Reg_Adress
+ 219              		.global	READ_RTD_MSB_Reg_Adress
+ 220              		.global	WRITE_Config_Reg_Adress
+ 221              		.global	READ_Config_Reg_Adress
+ 222              		.data
+ 223              		.set	.LANCHOR0,. + 0
+ 224              		.type	READ_RTD_MSB_Reg_Adress, %object
+ 225              		.size	READ_RTD_MSB_Reg_Adress, 1
+ 226              	READ_RTD_MSB_Reg_Adress:
+ 227 0000 01       		.byte	1
+ 228              		.type	READ_RTD_LSB_Reg_Adress, %object
+ 229              		.size	READ_RTD_LSB_Reg_Adress, 1
+ 230              	READ_RTD_LSB_Reg_Adress:
+ 231 0001 02       		.byte	2
+ 232              		.type	Amplifier_Config, %object
+ 233              		.size	Amplifier_Config, 1
+ 234              	Amplifier_Config:
+ 235 0002 C0       		.byte	-64
+ 236              		.type	WRITE_Config_Reg_Adress, %object
+ 237              		.size	WRITE_Config_Reg_Adress, 1
+ 238              	WRITE_Config_Reg_Adress:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 7
+
+
+ 239 0003 80       		.byte	-128
+ 240              		.bss
+ 241              		.type	READ_Config_Reg_Adress, %object
+ 242              		.size	READ_Config_Reg_Adress, 1
+ 243              	READ_Config_Reg_Adress:
+ 244 0000 00       		.space	1
+ 245              		.text
+ 246              	.Letext0:
+ 247              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 248              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 249              		.file 4 "AmplifierRegisters.h"
+ 250              		.section	.debug_info,"",%progbits
+ 251              	.Ldebug_info0:
+ 252 0000 0D020000 		.4byte	0x20d
+ 253 0004 0400     		.2byte	0x4
+ 254 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 255 000a 04       		.byte	0x4
+ 256 000b 01       		.uleb128 0x1
+ 257 000c CF000000 		.4byte	.LASF30
+ 258 0010 0C       		.byte	0xc
+ 259 0011 28000000 		.4byte	.LASF31
+ 260 0015 39000000 		.4byte	.LASF32
+ 261 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 262 001d 00000000 		.4byte	0
+ 263 0021 00000000 		.4byte	.Ldebug_line0
+ 264 0025 02       		.uleb128 0x2
+ 265 0026 01       		.byte	0x1
+ 266 0027 06       		.byte	0x6
+ 267 0028 D3020000 		.4byte	.LASF0
+ 268 002c 02       		.uleb128 0x2
+ 269 002d 01       		.byte	0x1
+ 270 002e 08       		.byte	0x8
+ 271 002f C1000000 		.4byte	.LASF1
+ 272 0033 02       		.uleb128 0x2
+ 273 0034 02       		.byte	0x2
+ 274 0035 05       		.byte	0x5
+ 275 0036 61020000 		.4byte	.LASF2
+ 276 003a 03       		.uleb128 0x3
+ 277 003b 9A010000 		.4byte	.LASF12
+ 278 003f 02       		.byte	0x2
+ 279 0040 2B       		.byte	0x2b
+ 280 0041 45000000 		.4byte	0x45
+ 281 0045 02       		.uleb128 0x2
+ 282 0046 02       		.byte	0x2
+ 283 0047 07       		.byte	0x7
+ 284 0048 87010000 		.4byte	.LASF3
+ 285 004c 02       		.uleb128 0x2
+ 286 004d 04       		.byte	0x4
+ 287 004e 05       		.byte	0x5
+ 288 004f A4020000 		.4byte	.LASF4
+ 289 0053 02       		.uleb128 0x2
+ 290 0054 04       		.byte	0x4
+ 291 0055 07       		.byte	0x7
+ 292 0056 75010000 		.4byte	.LASF5
+ 293 005a 02       		.uleb128 0x2
+ 294 005b 08       		.byte	0x8
+ 295 005c 05       		.byte	0x5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 8
+
+
+ 296 005d 25020000 		.4byte	.LASF6
+ 297 0061 02       		.uleb128 0x2
+ 298 0062 08       		.byte	0x8
+ 299 0063 07       		.byte	0x7
+ 300 0064 DC010000 		.4byte	.LASF7
+ 301 0068 04       		.uleb128 0x4
+ 302 0069 04       		.byte	0x4
+ 303 006a 05       		.byte	0x5
+ 304 006b 696E7400 		.ascii	"int\000"
+ 305 006f 02       		.uleb128 0x2
+ 306 0070 04       		.byte	0x4
+ 307 0071 07       		.byte	0x7
+ 308 0072 B8010000 		.4byte	.LASF8
+ 309 0076 02       		.uleb128 0x2
+ 310 0077 08       		.byte	0x8
+ 311 0078 04       		.byte	0x4
+ 312 0079 C7020000 		.4byte	.LASF9
+ 313 007d 02       		.uleb128 0x2
+ 314 007e 04       		.byte	0x4
+ 315 007f 07       		.byte	0x7
+ 316 0080 14020000 		.4byte	.LASF10
+ 317 0084 02       		.uleb128 0x2
+ 318 0085 01       		.byte	0x1
+ 319 0086 08       		.byte	0x8
+ 320 0087 33020000 		.4byte	.LASF11
+ 321 008b 03       		.uleb128 0x3
+ 322 008c 83020000 		.4byte	.LASF13
+ 323 0090 03       		.byte	0x3
+ 324 0091 24       		.byte	0x24
+ 325 0092 3A000000 		.4byte	0x3a
+ 326 0096 05       		.uleb128 0x5
+ 327 0097 4B020000 		.4byte	.LASF33
+ 328 009b 01       		.byte	0x1
+ 329 009c 25       		.byte	0x25
+ 330 009d 8B000000 		.4byte	0x8b
+ 331 00a1 00000000 		.4byte	.LFB2
+ 332 00a5 24000000 		.4byte	.LFE2-.LFB2
+ 333 00a9 01       		.uleb128 0x1
+ 334 00aa 9C       		.byte	0x9c
+ 335 00ab ED000000 		.4byte	0xed
+ 336 00af 06       		.uleb128 0x6
+ 337 00b0 57020000 		.4byte	.LASF14
+ 338 00b4 01       		.byte	0x1
+ 339 00b5 27       		.byte	0x27
+ 340 00b6 8B000000 		.4byte	0x8b
+ 341 00ba 01       		.uleb128 0x1
+ 342 00bb 50       		.byte	0x50
+ 343 00bc 07       		.uleb128 0x7
+ 344 00bd 0E000000 		.4byte	.LASF15
+ 345 00c1 01       		.byte	0x1
+ 346 00c2 29       		.byte	0x29
+ 347 00c3 84000000 		.4byte	0x84
+ 348 00c7 00000000 		.4byte	.LLST0
+ 349 00cb 07       		.uleb128 0x7
+ 350 00cc 1D020000 		.4byte	.LASF16
+ 351 00d0 01       		.byte	0x1
+ 352 00d1 2C       		.byte	0x2c
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 9
+
+
+ 353 00d2 84000000 		.4byte	0x84
+ 354 00d6 13000000 		.4byte	.LLST1
+ 355 00da 08       		.uleb128 0x8
+ 356 00db 0A000000 		.4byte	.LVL0
+ 357 00df FA010000 		.4byte	0x1fa
+ 358 00e3 08       		.uleb128 0x8
+ 359 00e4 12000000 		.4byte	.LVL2
+ 360 00e8 FA010000 		.4byte	0x1fa
+ 361 00ec 00       		.byte	0
+ 362 00ed 09       		.uleb128 0x9
+ 363 00ee 38020000 		.4byte	.LASF19
+ 364 00f2 01       		.byte	0x1
+ 365 00f3 35       		.byte	0x35
+ 366 00f4 00000000 		.4byte	.LFB3
+ 367 00f8 10000000 		.4byte	.LFE3-.LFB3
+ 368 00fc 01       		.uleb128 0x1
+ 369 00fd 9C       		.byte	0x9c
+ 370 00fe 0C010000 		.4byte	0x10c
+ 371 0102 08       		.uleb128 0x8
+ 372 0103 0A000000 		.4byte	.LVL6
+ 373 0107 05020000 		.4byte	0x205
+ 374 010b 00       		.byte	0
+ 375 010c 0A       		.uleb128 0xa
+ 376 010d 16000000 		.4byte	.LASF17
+ 377 0111 01       		.byte	0x1
+ 378 0112 43       		.byte	0x43
+ 379 0113 00000000 		.4byte	.LFB4
+ 380 0117 02000000 		.4byte	.LFE4-.LFB4
+ 381 011b 01       		.uleb128 0x1
+ 382 011c 9C       		.byte	0x9c
+ 383 011d 0A       		.uleb128 0xa
+ 384 011e BD020000 		.4byte	.LASF18
+ 385 0122 01       		.byte	0x1
+ 386 0123 4D       		.byte	0x4d
+ 387 0124 00000000 		.4byte	.LFB5
+ 388 0128 02000000 		.4byte	.LFE5-.LFB5
+ 389 012c 01       		.uleb128 0x1
+ 390 012d 9C       		.byte	0x9c
+ 391 012e 09       		.uleb128 0x9
+ 392 012f 00000000 		.4byte	.LASF20
+ 393 0133 01       		.byte	0x1
+ 394 0134 54       		.byte	0x54
+ 395 0135 00000000 		.4byte	.LFB6
+ 396 0139 10000000 		.4byte	.LFE6-.LFB6
+ 397 013d 01       		.uleb128 0x1
+ 398 013e 9C       		.byte	0x9c
+ 399 013f 4D010000 		.4byte	0x14d
+ 400 0143 08       		.uleb128 0x8
+ 401 0144 0A000000 		.4byte	.LVL7
+ 402 0148 05020000 		.4byte	0x205
+ 403 014c 00       		.byte	0
+ 404 014d 09       		.uleb128 0x9
+ 405 014e AD020000 		.4byte	.LASF21
+ 406 0152 01       		.byte	0x1
+ 407 0153 60       		.byte	0x60
+ 408 0154 00000000 		.4byte	.LFB7
+ 409 0158 18000000 		.4byte	.LFE7-.LFB7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 10
+
+
+ 410 015c 01       		.uleb128 0x1
+ 411 015d 9C       		.byte	0x9c
+ 412 015e 6C010000 		.4byte	0x16c
+ 413 0162 08       		.uleb128 0x8
+ 414 0163 10000000 		.4byte	.LVL8
+ 415 0167 05020000 		.4byte	0x205
+ 416 016b 00       		.byte	0
+ 417 016c 09       		.uleb128 0x9
+ 418 016d 04020000 		.4byte	.LASF22
+ 419 0171 01       		.byte	0x1
+ 420 0172 1B       		.byte	0x1b
+ 421 0173 00000000 		.4byte	.LFB1
+ 422 0177 0C000000 		.4byte	.LFE1-.LFB1
+ 423 017b 01       		.uleb128 0x1
+ 424 017c 9C       		.byte	0x9c
+ 425 017d 94010000 		.4byte	0x194
+ 426 0181 08       		.uleb128 0x8
+ 427 0182 06000000 		.4byte	.LVL9
+ 428 0186 2E010000 		.4byte	0x12e
+ 429 018a 08       		.uleb128 0x8
+ 430 018b 0A000000 		.4byte	.LVL10
+ 431 018f 4D010000 		.4byte	0x14d
+ 432 0193 00       		.byte	0
+ 433 0194 0B       		.uleb128 0xb
+ 434 0195 C5010000 		.4byte	.LASF23
+ 435 0199 04       		.byte	0x4
+ 436 019a 0E       		.byte	0xe
+ 437 019b 84000000 		.4byte	0x84
+ 438 019f 05       		.uleb128 0x5
+ 439 01a0 03       		.byte	0x3
+ 440 01a1 00000000 		.4byte	READ_Config_Reg_Adress
+ 441 01a5 0B       		.uleb128 0xb
+ 442 01a6 6B020000 		.4byte	.LASF24
+ 443 01aa 04       		.byte	0x4
+ 444 01ab 0F       		.byte	0xf
+ 445 01ac 84000000 		.4byte	0x84
+ 446 01b0 05       		.uleb128 0x5
+ 447 01b1 03       		.byte	0x3
+ 448 01b2 00000000 		.4byte	WRITE_Config_Reg_Adress
+ 449 01b6 0B       		.uleb128 0xb
+ 450 01b7 8C020000 		.4byte	.LASF25
+ 451 01bb 04       		.byte	0x4
+ 452 01bc 10       		.byte	0x10
+ 453 01bd 84000000 		.4byte	0x84
+ 454 01c1 05       		.uleb128 0x5
+ 455 01c2 03       		.byte	0x3
+ 456 01c3 00000000 		.4byte	READ_RTD_MSB_Reg_Adress
+ 457 01c7 0B       		.uleb128 0xb
+ 458 01c8 5D010000 		.4byte	.LASF26
+ 459 01cc 04       		.byte	0x4
+ 460 01cd 11       		.byte	0x11
+ 461 01ce 84000000 		.4byte	0x84
+ 462 01d2 05       		.uleb128 0x5
+ 463 01d3 03       		.byte	0x3
+ 464 01d4 00000000 		.4byte	READ_RTD_LSB_Reg_Adress
+ 465 01d8 0B       		.uleb128 0xb
+ 466 01d9 F3010000 		.4byte	.LASF27
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 11
+
+
+ 467 01dd 04       		.byte	0x4
+ 468 01de 15       		.byte	0x15
+ 469 01df 84000000 		.4byte	0x84
+ 470 01e3 05       		.uleb128 0x5
+ 471 01e4 03       		.byte	0x3
+ 472 01e5 00000000 		.4byte	Amplifier_Config
+ 473 01e9 0B       		.uleb128 0xb
+ 474 01ea 57020000 		.4byte	.LASF14
+ 475 01ee 01       		.byte	0x1
+ 476 01ef 17       		.byte	0x17
+ 477 01f0 8B000000 		.4byte	0x8b
+ 478 01f4 05       		.uleb128 0x5
+ 479 01f5 03       		.byte	0x3
+ 480 01f6 00000000 		.4byte	rtd_ratio
+ 481 01fa 0C       		.uleb128 0xc
+ 482 01fb A5010000 		.4byte	.LASF28
+ 483 01ff A5010000 		.4byte	.LASF28
+ 484 0203 01       		.byte	0x1
+ 485 0204 14       		.byte	0x14
+ 486 0205 0C       		.uleb128 0xc
+ 487 0206 AF000000 		.4byte	.LASF29
+ 488 020a AF000000 		.4byte	.LASF29
+ 489 020e 01       		.byte	0x1
+ 490 020f 13       		.byte	0x13
+ 491 0210 00       		.byte	0
+ 492              		.section	.debug_abbrev,"",%progbits
+ 493              	.Ldebug_abbrev0:
+ 494 0000 01       		.uleb128 0x1
+ 495 0001 11       		.uleb128 0x11
+ 496 0002 01       		.byte	0x1
+ 497 0003 25       		.uleb128 0x25
+ 498 0004 0E       		.uleb128 0xe
+ 499 0005 13       		.uleb128 0x13
+ 500 0006 0B       		.uleb128 0xb
+ 501 0007 03       		.uleb128 0x3
+ 502 0008 0E       		.uleb128 0xe
+ 503 0009 1B       		.uleb128 0x1b
+ 504 000a 0E       		.uleb128 0xe
+ 505 000b 55       		.uleb128 0x55
+ 506 000c 17       		.uleb128 0x17
+ 507 000d 11       		.uleb128 0x11
+ 508 000e 01       		.uleb128 0x1
+ 509 000f 10       		.uleb128 0x10
+ 510 0010 17       		.uleb128 0x17
+ 511 0011 00       		.byte	0
+ 512 0012 00       		.byte	0
+ 513 0013 02       		.uleb128 0x2
+ 514 0014 24       		.uleb128 0x24
+ 515 0015 00       		.byte	0
+ 516 0016 0B       		.uleb128 0xb
+ 517 0017 0B       		.uleb128 0xb
+ 518 0018 3E       		.uleb128 0x3e
+ 519 0019 0B       		.uleb128 0xb
+ 520 001a 03       		.uleb128 0x3
+ 521 001b 0E       		.uleb128 0xe
+ 522 001c 00       		.byte	0
+ 523 001d 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 12
+
+
+ 524 001e 03       		.uleb128 0x3
+ 525 001f 16       		.uleb128 0x16
+ 526 0020 00       		.byte	0
+ 527 0021 03       		.uleb128 0x3
+ 528 0022 0E       		.uleb128 0xe
+ 529 0023 3A       		.uleb128 0x3a
+ 530 0024 0B       		.uleb128 0xb
+ 531 0025 3B       		.uleb128 0x3b
+ 532 0026 0B       		.uleb128 0xb
+ 533 0027 49       		.uleb128 0x49
+ 534 0028 13       		.uleb128 0x13
+ 535 0029 00       		.byte	0
+ 536 002a 00       		.byte	0
+ 537 002b 04       		.uleb128 0x4
+ 538 002c 24       		.uleb128 0x24
+ 539 002d 00       		.byte	0
+ 540 002e 0B       		.uleb128 0xb
+ 541 002f 0B       		.uleb128 0xb
+ 542 0030 3E       		.uleb128 0x3e
+ 543 0031 0B       		.uleb128 0xb
+ 544 0032 03       		.uleb128 0x3
+ 545 0033 08       		.uleb128 0x8
+ 546 0034 00       		.byte	0
+ 547 0035 00       		.byte	0
+ 548 0036 05       		.uleb128 0x5
+ 549 0037 2E       		.uleb128 0x2e
+ 550 0038 01       		.byte	0x1
+ 551 0039 3F       		.uleb128 0x3f
+ 552 003a 19       		.uleb128 0x19
+ 553 003b 03       		.uleb128 0x3
+ 554 003c 0E       		.uleb128 0xe
+ 555 003d 3A       		.uleb128 0x3a
+ 556 003e 0B       		.uleb128 0xb
+ 557 003f 3B       		.uleb128 0x3b
+ 558 0040 0B       		.uleb128 0xb
+ 559 0041 49       		.uleb128 0x49
+ 560 0042 13       		.uleb128 0x13
+ 561 0043 11       		.uleb128 0x11
+ 562 0044 01       		.uleb128 0x1
+ 563 0045 12       		.uleb128 0x12
+ 564 0046 06       		.uleb128 0x6
+ 565 0047 40       		.uleb128 0x40
+ 566 0048 18       		.uleb128 0x18
+ 567 0049 9742     		.uleb128 0x2117
+ 568 004b 19       		.uleb128 0x19
+ 569 004c 01       		.uleb128 0x1
+ 570 004d 13       		.uleb128 0x13
+ 571 004e 00       		.byte	0
+ 572 004f 00       		.byte	0
+ 573 0050 06       		.uleb128 0x6
+ 574 0051 34       		.uleb128 0x34
+ 575 0052 00       		.byte	0
+ 576 0053 03       		.uleb128 0x3
+ 577 0054 0E       		.uleb128 0xe
+ 578 0055 3A       		.uleb128 0x3a
+ 579 0056 0B       		.uleb128 0xb
+ 580 0057 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 13
+
+
+ 581 0058 0B       		.uleb128 0xb
+ 582 0059 49       		.uleb128 0x49
+ 583 005a 13       		.uleb128 0x13
+ 584 005b 02       		.uleb128 0x2
+ 585 005c 18       		.uleb128 0x18
+ 586 005d 00       		.byte	0
+ 587 005e 00       		.byte	0
+ 588 005f 07       		.uleb128 0x7
+ 589 0060 34       		.uleb128 0x34
+ 590 0061 00       		.byte	0
+ 591 0062 03       		.uleb128 0x3
+ 592 0063 0E       		.uleb128 0xe
+ 593 0064 3A       		.uleb128 0x3a
+ 594 0065 0B       		.uleb128 0xb
+ 595 0066 3B       		.uleb128 0x3b
+ 596 0067 0B       		.uleb128 0xb
+ 597 0068 49       		.uleb128 0x49
+ 598 0069 13       		.uleb128 0x13
+ 599 006a 02       		.uleb128 0x2
+ 600 006b 17       		.uleb128 0x17
+ 601 006c 00       		.byte	0
+ 602 006d 00       		.byte	0
+ 603 006e 08       		.uleb128 0x8
+ 604 006f 898201   		.uleb128 0x4109
+ 605 0072 00       		.byte	0
+ 606 0073 11       		.uleb128 0x11
+ 607 0074 01       		.uleb128 0x1
+ 608 0075 31       		.uleb128 0x31
+ 609 0076 13       		.uleb128 0x13
+ 610 0077 00       		.byte	0
+ 611 0078 00       		.byte	0
+ 612 0079 09       		.uleb128 0x9
+ 613 007a 2E       		.uleb128 0x2e
+ 614 007b 01       		.byte	0x1
+ 615 007c 3F       		.uleb128 0x3f
+ 616 007d 19       		.uleb128 0x19
+ 617 007e 03       		.uleb128 0x3
+ 618 007f 0E       		.uleb128 0xe
+ 619 0080 3A       		.uleb128 0x3a
+ 620 0081 0B       		.uleb128 0xb
+ 621 0082 3B       		.uleb128 0x3b
+ 622 0083 0B       		.uleb128 0xb
+ 623 0084 11       		.uleb128 0x11
+ 624 0085 01       		.uleb128 0x1
+ 625 0086 12       		.uleb128 0x12
+ 626 0087 06       		.uleb128 0x6
+ 627 0088 40       		.uleb128 0x40
+ 628 0089 18       		.uleb128 0x18
+ 629 008a 9742     		.uleb128 0x2117
+ 630 008c 19       		.uleb128 0x19
+ 631 008d 01       		.uleb128 0x1
+ 632 008e 13       		.uleb128 0x13
+ 633 008f 00       		.byte	0
+ 634 0090 00       		.byte	0
+ 635 0091 0A       		.uleb128 0xa
+ 636 0092 2E       		.uleb128 0x2e
+ 637 0093 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 14
+
+
+ 638 0094 3F       		.uleb128 0x3f
+ 639 0095 19       		.uleb128 0x19
+ 640 0096 03       		.uleb128 0x3
+ 641 0097 0E       		.uleb128 0xe
+ 642 0098 3A       		.uleb128 0x3a
+ 643 0099 0B       		.uleb128 0xb
+ 644 009a 3B       		.uleb128 0x3b
+ 645 009b 0B       		.uleb128 0xb
+ 646 009c 11       		.uleb128 0x11
+ 647 009d 01       		.uleb128 0x1
+ 648 009e 12       		.uleb128 0x12
+ 649 009f 06       		.uleb128 0x6
+ 650 00a0 40       		.uleb128 0x40
+ 651 00a1 18       		.uleb128 0x18
+ 652 00a2 9742     		.uleb128 0x2117
+ 653 00a4 19       		.uleb128 0x19
+ 654 00a5 00       		.byte	0
+ 655 00a6 00       		.byte	0
+ 656 00a7 0B       		.uleb128 0xb
+ 657 00a8 34       		.uleb128 0x34
+ 658 00a9 00       		.byte	0
+ 659 00aa 03       		.uleb128 0x3
+ 660 00ab 0E       		.uleb128 0xe
+ 661 00ac 3A       		.uleb128 0x3a
+ 662 00ad 0B       		.uleb128 0xb
+ 663 00ae 3B       		.uleb128 0x3b
+ 664 00af 0B       		.uleb128 0xb
+ 665 00b0 49       		.uleb128 0x49
+ 666 00b1 13       		.uleb128 0x13
+ 667 00b2 3F       		.uleb128 0x3f
+ 668 00b3 19       		.uleb128 0x19
+ 669 00b4 02       		.uleb128 0x2
+ 670 00b5 18       		.uleb128 0x18
+ 671 00b6 00       		.byte	0
+ 672 00b7 00       		.byte	0
+ 673 00b8 0C       		.uleb128 0xc
+ 674 00b9 2E       		.uleb128 0x2e
+ 675 00ba 00       		.byte	0
+ 676 00bb 3F       		.uleb128 0x3f
+ 677 00bc 19       		.uleb128 0x19
+ 678 00bd 3C       		.uleb128 0x3c
+ 679 00be 19       		.uleb128 0x19
+ 680 00bf 6E       		.uleb128 0x6e
+ 681 00c0 0E       		.uleb128 0xe
+ 682 00c1 03       		.uleb128 0x3
+ 683 00c2 0E       		.uleb128 0xe
+ 684 00c3 3A       		.uleb128 0x3a
+ 685 00c4 0B       		.uleb128 0xb
+ 686 00c5 3B       		.uleb128 0x3b
+ 687 00c6 0B       		.uleb128 0xb
+ 688 00c7 00       		.byte	0
+ 689 00c8 00       		.byte	0
+ 690 00c9 00       		.byte	0
+ 691              		.section	.debug_loc,"",%progbits
+ 692              	.Ldebug_loc0:
+ 693              	.LLST0:
+ 694 0000 0C000000 		.4byte	.LVL1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 15
+
+
+ 695 0004 1E000000 		.4byte	.LVL5
+ 696 0008 0100     		.2byte	0x1
+ 697 000a 55       		.byte	0x55
+ 698 000b 00000000 		.4byte	0
+ 699 000f 00000000 		.4byte	0
+ 700              	.LLST1:
+ 701 0013 12000000 		.4byte	.LVL2
+ 702 0017 16000000 		.4byte	.LVL3
+ 703 001b 0100     		.2byte	0x1
+ 704 001d 50       		.byte	0x50
+ 705 001e 00000000 		.4byte	0
+ 706 0022 00000000 		.4byte	0
+ 707              		.section	.debug_aranges,"",%progbits
+ 708 0000 4C000000 		.4byte	0x4c
+ 709 0004 0200     		.2byte	0x2
+ 710 0006 00000000 		.4byte	.Ldebug_info0
+ 711 000a 04       		.byte	0x4
+ 712 000b 00       		.byte	0
+ 713 000c 0000     		.2byte	0
+ 714 000e 0000     		.2byte	0
+ 715 0010 00000000 		.4byte	.LFB2
+ 716 0014 24000000 		.4byte	.LFE2-.LFB2
+ 717 0018 00000000 		.4byte	.LFB3
+ 718 001c 10000000 		.4byte	.LFE3-.LFB3
+ 719 0020 00000000 		.4byte	.LFB4
+ 720 0024 02000000 		.4byte	.LFE4-.LFB4
+ 721 0028 00000000 		.4byte	.LFB5
+ 722 002c 02000000 		.4byte	.LFE5-.LFB5
+ 723 0030 00000000 		.4byte	.LFB6
+ 724 0034 10000000 		.4byte	.LFE6-.LFB6
+ 725 0038 00000000 		.4byte	.LFB7
+ 726 003c 18000000 		.4byte	.LFE7-.LFB7
+ 727 0040 00000000 		.4byte	.LFB1
+ 728 0044 0C000000 		.4byte	.LFE1-.LFB1
+ 729 0048 00000000 		.4byte	0
+ 730 004c 00000000 		.4byte	0
+ 731              		.section	.debug_ranges,"",%progbits
+ 732              	.Ldebug_ranges0:
+ 733 0000 00000000 		.4byte	.LFB2
+ 734 0004 24000000 		.4byte	.LFE2
+ 735 0008 00000000 		.4byte	.LFB3
+ 736 000c 10000000 		.4byte	.LFE3
+ 737 0010 00000000 		.4byte	.LFB4
+ 738 0014 02000000 		.4byte	.LFE4
+ 739 0018 00000000 		.4byte	.LFB5
+ 740 001c 02000000 		.4byte	.LFE5
+ 741 0020 00000000 		.4byte	.LFB6
+ 742 0024 10000000 		.4byte	.LFE6
+ 743 0028 00000000 		.4byte	.LFB7
+ 744 002c 18000000 		.4byte	.LFE7
+ 745 0030 00000000 		.4byte	.LFB1
+ 746 0034 0C000000 		.4byte	.LFE1
+ 747 0038 00000000 		.4byte	0
+ 748 003c 00000000 		.4byte	0
+ 749              		.section	.debug_line,"",%progbits
+ 750              	.Ldebug_line0:
+ 751 0000 BA010000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 16
+
+
+ 751      02003C01 
+ 751      00000201 
+ 751      FB0E0D00 
+ 751      01010101 
+ 752              	.LASF20:
+ 753 0000 5365745F 		.ascii	"Set_WireSetup\000"
+ 753      57697265 
+ 753      53657475 
+ 753      7000
+ 754              	.LASF15:
+ 755 000e 5254445F 		.ascii	"RTD_msb\000"
+ 755      6D736200 
+ 756              	.LASF17:
+ 757 0016 416D706C 		.ascii	"Amplifier_Startup\000"
+ 757      69666965 
+ 757      725F5374 
+ 757      61727475 
+ 757      7000
+ 758              	.LASF31:
+ 759 0028 54656D70 		.ascii	"TempSensorUnit.c\000"
+ 759      53656E73 
+ 759      6F72556E 
+ 759      69742E63 
+ 759      00
+ 760              	.LASF32:
+ 761 0039 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 761      73657273 
+ 761      5C6E6963 
+ 761      6F5F5C53 
+ 761      756E6468 
+ 762 0067 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 762      6C6F725C 
+ 762      42616368 
+ 762      656C6F72 
+ 762      50726F6A 
+ 763 0097 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 763      636F6F6C 
+ 763      696E6773 
+ 763      79737465 
+ 763      6D2E6379 
+ 764              	.LASF29:
+ 765 00af 57726974 		.ascii	"WriteByteToAdress\000"
+ 765      65427974 
+ 765      65546F41 
+ 765      64726573 
+ 765      7300
+ 766              	.LASF1:
+ 767 00c1 756E7369 		.ascii	"unsigned char\000"
+ 767      676E6564 
+ 767      20636861 
+ 767      7200
+ 768              	.LASF30:
+ 769 00cf 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 769      43313120 
+ 769      352E342E 
+ 769      31203230 
+ 769      31363036 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 17
+
+
+ 770 0102 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 770      20726576 
+ 770      6973696F 
+ 770      6E203233 
+ 770      37373135 
+ 771 0135 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 771      66756E63 
+ 771      74696F6E 
+ 771      2D736563 
+ 771      74696F6E 
+ 772              	.LASF26:
+ 773 015d 52454144 		.ascii	"READ_RTD_LSB_Reg_Adress\000"
+ 773      5F525444 
+ 773      5F4C5342 
+ 773      5F526567 
+ 773      5F416472 
+ 774              	.LASF5:
+ 775 0175 6C6F6E67 		.ascii	"long unsigned int\000"
+ 775      20756E73 
+ 775      69676E65 
+ 775      6420696E 
+ 775      7400
+ 776              	.LASF3:
+ 777 0187 73686F72 		.ascii	"short unsigned int\000"
+ 777      7420756E 
+ 777      7369676E 
+ 777      65642069 
+ 777      6E7400
+ 778              	.LASF12:
+ 779 019a 5F5F7569 		.ascii	"__uint16_t\000"
+ 779      6E743136 
+ 779      5F7400
+ 780              	.LASF28:
+ 781 01a5 52656164 		.ascii	"ReadByteFromAdress\000"
+ 781      42797465 
+ 781      46726F6D 
+ 781      41647265 
+ 781      737300
+ 782              	.LASF8:
+ 783 01b8 756E7369 		.ascii	"unsigned int\000"
+ 783      676E6564 
+ 783      20696E74 
+ 783      00
+ 784              	.LASF23:
+ 785 01c5 52454144 		.ascii	"READ_Config_Reg_Adress\000"
+ 785      5F436F6E 
+ 785      6669675F 
+ 785      5265675F 
+ 785      41647265 
+ 786              	.LASF7:
+ 787 01dc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 787      206C6F6E 
+ 787      6720756E 
+ 787      7369676E 
+ 787      65642069 
+ 788              	.LASF27:
+ 789 01f3 416D706C 		.ascii	"Amplifier_Config\000"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 18
+
+
+ 789      69666965 
+ 789      725F436F 
+ 789      6E666967 
+ 789      00
+ 790              	.LASF22:
+ 791 0204 416D706C 		.ascii	"Amplifier_Setup\000"
+ 791      69666965 
+ 791      725F5365 
+ 791      74757000 
+ 792              	.LASF10:
+ 793 0214 73697A65 		.ascii	"sizetype\000"
+ 793      74797065 
+ 793      00
+ 794              	.LASF16:
+ 795 021d 5254445F 		.ascii	"RTD_lsb\000"
+ 795      6C736200 
+ 796              	.LASF6:
+ 797 0225 6C6F6E67 		.ascii	"long long int\000"
+ 797      206C6F6E 
+ 797      6720696E 
+ 797      7400
+ 798              	.LASF11:
+ 799 0233 63686172 		.ascii	"char\000"
+ 799      00
+ 800              	.LASF19:
+ 801 0238 416D706C 		.ascii	"Amplifier_Shutdown\000"
+ 801      69666965 
+ 801      725F5368 
+ 801      7574646F 
+ 801      776E00
+ 802              	.LASF33:
+ 803 024b 47657452 		.ascii	"GetRtdRatio\000"
+ 803      74645261 
+ 803      74696F00 
+ 804              	.LASF14:
+ 805 0257 7274645F 		.ascii	"rtd_ratio\000"
+ 805      72617469 
+ 805      6F00
+ 806              	.LASF2:
+ 807 0261 73686F72 		.ascii	"short int\000"
+ 807      7420696E 
+ 807      7400
+ 808              	.LASF24:
+ 809 026b 57524954 		.ascii	"WRITE_Config_Reg_Adress\000"
+ 809      455F436F 
+ 809      6E666967 
+ 809      5F526567 
+ 809      5F416472 
+ 810              	.LASF13:
+ 811 0283 75696E74 		.ascii	"uint16_t\000"
+ 811      31365F74 
+ 811      00
+ 812              	.LASF25:
+ 813 028c 52454144 		.ascii	"READ_RTD_MSB_Reg_Adress\000"
+ 813      5F525444 
+ 813      5F4D5342 
+ 813      5F526567 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1NYhSW.s 			page 19
+
+
+ 813      5F416472 
+ 814              	.LASF4:
+ 815 02a4 6C6F6E67 		.ascii	"long int\000"
+ 815      20696E74 
+ 815      00
+ 816              	.LASF21:
+ 817 02ad 5365745F 		.ascii	"Set_FilterSetup\000"
+ 817      46696C74 
+ 817      65725365 
+ 817      74757000 
+ 818              	.LASF18:
+ 819 02bd 5350495F 		.ascii	"SPI_Setup\000"
+ 819      53657475 
+ 819      7000
+ 820              	.LASF9:
+ 821 02c7 6C6F6E67 		.ascii	"long double\000"
+ 821      20646F75 
+ 821      626C6500 
+ 822              	.LASF0:
+ 823 02d3 7369676E 		.ascii	"signed char\000"
+ 823      65642063 
+ 823      68617200 
+ 824              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

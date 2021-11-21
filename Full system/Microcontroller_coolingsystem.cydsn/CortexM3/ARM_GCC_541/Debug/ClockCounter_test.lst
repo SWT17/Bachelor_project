@@ -1,0 +1,652 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ClockCounter_test.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ISR_CLOCK_test_handler,"ax",%progbits
+  20              		.align	2
+  21              		.global	ISR_CLOCK_test_handler
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ISR_CLOCK_test_handler, %function
+  25              	ISR_CLOCK_test_handler:
+  26              	.LFB1:
+  27              		.file 1 "ClockCounter_test.c"
+   1:ClockCounter_test.c **** /* ========================================
+   2:ClockCounter_test.c ****  *
+   3:ClockCounter_test.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:ClockCounter_test.c ****  * All Rights Reserved
+   5:ClockCounter_test.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:ClockCounter_test.c ****  *
+   7:ClockCounter_test.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:ClockCounter_test.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:ClockCounter_test.c ****  *
+  10:ClockCounter_test.c ****  * ========================================
+  11:ClockCounter_test.c **** */
+  12:ClockCounter_test.c **** #include "ClockCounter_test.h"
+  13:ClockCounter_test.c **** 
+  14:ClockCounter_test.c **** void ClockCounter_test_run()
+  15:ClockCounter_test.c **** {  
+  16:ClockCounter_test.c ****     UART_1_Start();
+  17:ClockCounter_test.c ****     UART_1_PutString("CLock counter test started \r\n");
+  18:ClockCounter_test.c ****     /*Start interrupts*/
+  19:ClockCounter_test.c ****     isr_clock_StartEx(ISR_CLOCK_test_handler); 
+  20:ClockCounter_test.c ****     Temp_sample_counter_Start();
+  21:ClockCounter_test.c ****     
+  22:ClockCounter_test.c ****     for(;;)
+  23:ClockCounter_test.c ****     {
+  24:ClockCounter_test.c ****     }
+  25:ClockCounter_test.c **** }
+  26:ClockCounter_test.c **** 
+  27:ClockCounter_test.c **** CY_ISR(ISR_CLOCK_test_handler)
+  28:ClockCounter_test.c **** {
+  28              		.loc 1 28 0
+  29              		.cfi_startproc
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 2
+
+
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  29:ClockCounter_test.c ****     UART_1_PutString("Clock counter triggered \r\n");
+  36              		.loc 1 29 0
+  37 0002 0348     		ldr	r0, .L3
+  38 0004 FFF7FEFF 		bl	UART_1_PutString
+  39              	.LVL0:
+  30:ClockCounter_test.c ****     Temp_sample_counter_ReadStatusRegister();
+  40              		.loc 1 30 0
+  41 0008 FFF7FEFF 		bl	Temp_sample_counter_ReadStatusRegister
+  42              	.LVL1:
+  43 000c 08BD     		pop	{r3, pc}
+  44              	.L4:
+  45 000e 00BF     		.align	2
+  46              	.L3:
+  47 0010 00000000 		.word	.LC0
+  48              		.cfi_endproc
+  49              	.LFE1:
+  50              		.size	ISR_CLOCK_test_handler, .-ISR_CLOCK_test_handler
+  51              		.section	.text.ClockCounter_test_run,"ax",%progbits
+  52              		.align	2
+  53              		.global	ClockCounter_test_run
+  54              		.thumb
+  55              		.thumb_func
+  56              		.type	ClockCounter_test_run, %function
+  57              	ClockCounter_test_run:
+  58              	.LFB0:
+  15:ClockCounter_test.c ****     UART_1_Start();
+  59              		.loc 1 15 0
+  60              		.cfi_startproc
+  61              		@ Volatile: function does not return.
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64 0000 08B5     		push	{r3, lr}
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 3, -8
+  67              		.cfi_offset 14, -4
+  16:ClockCounter_test.c ****     UART_1_PutString("CLock counter test started \r\n");
+  68              		.loc 1 16 0
+  69 0002 FFF7FEFF 		bl	UART_1_Start
+  70              	.LVL2:
+  17:ClockCounter_test.c ****     /*Start interrupts*/
+  71              		.loc 1 17 0
+  72 0006 0448     		ldr	r0, .L8
+  73 0008 FFF7FEFF 		bl	UART_1_PutString
+  74              	.LVL3:
+  19:ClockCounter_test.c ****     Temp_sample_counter_Start();
+  75              		.loc 1 19 0
+  76 000c 0348     		ldr	r0, .L8+4
+  77 000e FFF7FEFF 		bl	isr_clock_StartEx
+  78              	.LVL4:
+  20:ClockCounter_test.c ****     
+  79              		.loc 1 20 0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 3
+
+
+  80 0012 FFF7FEFF 		bl	Temp_sample_counter_Start
+  81              	.LVL5:
+  82              	.L6:
+  83 0016 FEE7     		b	.L6
+  84              	.L9:
+  85              		.align	2
+  86              	.L8:
+  87 0018 1C000000 		.word	.LC1
+  88 001c 00000000 		.word	ISR_CLOCK_test_handler
+  89              		.cfi_endproc
+  90              	.LFE0:
+  91              		.size	ClockCounter_test_run, .-ClockCounter_test_run
+  92              		.section	.rodata.str1.4,"aMS",%progbits,1
+  93              		.align	2
+  94              	.LC0:
+  95 0000 436C6F63 		.ascii	"Clock counter triggered \015\012\000"
+  95      6B20636F 
+  95      756E7465 
+  95      72207472 
+  95      69676765 
+  96 001b 00       		.space	1
+  97              	.LC1:
+  98 001c 434C6F63 		.ascii	"CLock counter test started \015\012\000"
+  98      6B20636F 
+  98      756E7465 
+  98      72207465 
+  98      73742073 
+  99              		.text
+ 100              	.Letext0:
+ 101              		.file 2 "Generated_Source\\PSoC5/UART_1.h"
+ 102              		.file 3 "Generated_Source\\PSoC5/Temp_sample_counter.h"
+ 103              		.file 4 "Generated_Source\\PSoC5/isr_clock.h"
+ 104              		.section	.debug_info,"",%progbits
+ 105              	.Ldebug_info0:
+ 106 0000 4E010000 		.4byte	0x14e
+ 107 0004 0400     		.2byte	0x4
+ 108 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 109 000a 04       		.byte	0x4
+ 110 000b 01       		.uleb128 0x1
+ 111 000c 2D000000 		.4byte	.LASF21
+ 112 0010 0C       		.byte	0xc
+ 113 0011 18020000 		.4byte	.LASF22
+ 114 0015 BB000000 		.4byte	.LASF23
+ 115 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 116 001d 00000000 		.4byte	0
+ 117 0021 00000000 		.4byte	.Ldebug_line0
+ 118 0025 02       		.uleb128 0x2
+ 119 0026 01       		.byte	0x1
+ 120 0027 06       		.byte	0x6
+ 121 0028 E5010000 		.4byte	.LASF0
+ 122 002c 02       		.uleb128 0x2
+ 123 002d 01       		.byte	0x1
+ 124 002e 08       		.byte	0x8
+ 125 002f 7E010000 		.4byte	.LASF1
+ 126 0033 02       		.uleb128 0x2
+ 127 0034 02       		.byte	0x2
+ 128 0035 05       		.byte	0x5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 4
+
+
+ 129 0036 38020000 		.4byte	.LASF2
+ 130 003a 02       		.uleb128 0x2
+ 131 003b 02       		.byte	0x2
+ 132 003c 07       		.byte	0x7
+ 133 003d D2010000 		.4byte	.LASF3
+ 134 0041 02       		.uleb128 0x2
+ 135 0042 04       		.byte	0x4
+ 136 0043 05       		.byte	0x5
+ 137 0044 91010000 		.4byte	.LASF4
+ 138 0048 02       		.uleb128 0x2
+ 139 0049 04       		.byte	0x4
+ 140 004a 07       		.byte	0x7
+ 141 004b 31010000 		.4byte	.LASF5
+ 142 004f 02       		.uleb128 0x2
+ 143 0050 08       		.byte	0x8
+ 144 0051 05       		.byte	0x5
+ 145 0052 00000000 		.4byte	.LASF6
+ 146 0056 02       		.uleb128 0x2
+ 147 0057 08       		.byte	0x8
+ 148 0058 07       		.byte	0x7
+ 149 0059 43010000 		.4byte	.LASF7
+ 150 005d 03       		.uleb128 0x3
+ 151 005e 04       		.byte	0x4
+ 152 005f 05       		.byte	0x5
+ 153 0060 696E7400 		.ascii	"int\000"
+ 154 0064 02       		.uleb128 0x2
+ 155 0065 04       		.byte	0x4
+ 156 0066 07       		.byte	0x7
+ 157 0067 0E000000 		.4byte	.LASF8
+ 158 006b 02       		.uleb128 0x2
+ 159 006c 04       		.byte	0x4
+ 160 006d 04       		.byte	0x4
+ 161 006e 6B010000 		.4byte	.LASF9
+ 162 0072 02       		.uleb128 0x2
+ 163 0073 08       		.byte	0x8
+ 164 0074 04       		.byte	0x4
+ 165 0075 B4010000 		.4byte	.LASF10
+ 166 0079 02       		.uleb128 0x2
+ 167 007a 01       		.byte	0x1
+ 168 007b 08       		.byte	0x8
+ 169 007c 8C010000 		.4byte	.LASF11
+ 170 0080 02       		.uleb128 0x2
+ 171 0081 08       		.byte	0x8
+ 172 0082 04       		.byte	0x4
+ 173 0083 2C020000 		.4byte	.LASF12
+ 174 0087 02       		.uleb128 0x2
+ 175 0088 04       		.byte	0x4
+ 176 0089 07       		.byte	0x7
+ 177 008a 58020000 		.4byte	.LASF13
+ 178 008e 04       		.uleb128 0x4
+ 179 008f BB010000 		.4byte	.LASF14
+ 180 0093 01       		.byte	0x1
+ 181 0094 1B       		.byte	0x1b
+ 182 0095 00000000 		.4byte	.LFB1
+ 183 0099 14000000 		.4byte	.LFE1-.LFB1
+ 184 009d 01       		.uleb128 0x1
+ 185 009e 9C       		.byte	0x9c
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 5
+
+
+ 186 009f C4000000 		.4byte	0xc4
+ 187 00a3 05       		.uleb128 0x5
+ 188 00a4 08000000 		.4byte	.LVL0
+ 189 00a8 1A010000 		.4byte	0x11a
+ 190 00ac BA000000 		.4byte	0xba
+ 191 00b0 06       		.uleb128 0x6
+ 192 00b1 01       		.uleb128 0x1
+ 193 00b2 50       		.byte	0x50
+ 194 00b3 05       		.uleb128 0x5
+ 195 00b4 03       		.byte	0x3
+ 196 00b5 00000000 		.4byte	.LC0
+ 197 00b9 00       		.byte	0
+ 198 00ba 07       		.uleb128 0x7
+ 199 00bb 0C000000 		.4byte	.LVL1
+ 200 00bf 25010000 		.4byte	0x125
+ 201 00c3 00       		.byte	0
+ 202 00c4 08       		.uleb128 0x8
+ 203 00c5 42020000 		.4byte	.LASF15
+ 204 00c9 01       		.byte	0x1
+ 205 00ca 0E       		.byte	0xe
+ 206 00cb 00000000 		.4byte	.LFB0
+ 207 00cf 20000000 		.4byte	.LFE0-.LFB0
+ 208 00d3 01       		.uleb128 0x1
+ 209 00d4 9C       		.byte	0x9c
+ 210 00d5 1A010000 		.4byte	0x11a
+ 211 00d9 07       		.uleb128 0x7
+ 212 00da 06000000 		.4byte	.LVL2
+ 213 00de 30010000 		.4byte	0x130
+ 214 00e2 05       		.uleb128 0x5
+ 215 00e3 0C000000 		.4byte	.LVL3
+ 216 00e7 1A010000 		.4byte	0x11a
+ 217 00eb F9000000 		.4byte	0xf9
+ 218 00ef 06       		.uleb128 0x6
+ 219 00f0 01       		.uleb128 0x1
+ 220 00f1 50       		.byte	0x50
+ 221 00f2 05       		.uleb128 0x5
+ 222 00f3 03       		.byte	0x3
+ 223 00f4 1C000000 		.4byte	.LC1
+ 224 00f8 00       		.byte	0
+ 225 00f9 05       		.uleb128 0x5
+ 226 00fa 12000000 		.4byte	.LVL4
+ 227 00fe 3B010000 		.4byte	0x13b
+ 228 0102 10010000 		.4byte	0x110
+ 229 0106 06       		.uleb128 0x6
+ 230 0107 01       		.uleb128 0x1
+ 231 0108 50       		.byte	0x50
+ 232 0109 05       		.uleb128 0x5
+ 233 010a 03       		.byte	0x3
+ 234 010b 00000000 		.4byte	ISR_CLOCK_test_handler
+ 235 010f 00       		.byte	0
+ 236 0110 07       		.uleb128 0x7
+ 237 0111 16000000 		.4byte	.LVL5
+ 238 0115 46010000 		.4byte	0x146
+ 239 0119 00       		.byte	0
+ 240 011a 09       		.uleb128 0x9
+ 241 011b 5A010000 		.4byte	.LASF16
+ 242 011f 5A010000 		.4byte	.LASF16
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 6
+
+
+ 243 0123 02       		.byte	0x2
+ 244 0124 8B       		.byte	0x8b
+ 245 0125 09       		.uleb128 0x9
+ 246 0126 F1010000 		.4byte	.LASF17
+ 247 012a F1010000 		.4byte	.LASF17
+ 248 012e 03       		.byte	0x3
+ 249 012f 52       		.byte	0x52
+ 250 0130 09       		.uleb128 0x9
+ 251 0131 71010000 		.4byte	.LASF18
+ 252 0135 71010000 		.4byte	.LASF18
+ 253 0139 02       		.byte	0x2
+ 254 013a 54       		.byte	0x54
+ 255 013b 09       		.uleb128 0x9
+ 256 013c 1B000000 		.4byte	.LASF19
+ 257 0140 1B000000 		.4byte	.LASF19
+ 258 0144 04       		.byte	0x4
+ 259 0145 18       		.byte	0x18
+ 260 0146 09       		.uleb128 0x9
+ 261 0147 9A010000 		.4byte	.LASF20
+ 262 014b 9A010000 		.4byte	.LASF20
+ 263 014f 03       		.byte	0x3
+ 264 0150 4F       		.byte	0x4f
+ 265 0151 00       		.byte	0
+ 266              		.section	.debug_abbrev,"",%progbits
+ 267              	.Ldebug_abbrev0:
+ 268 0000 01       		.uleb128 0x1
+ 269 0001 11       		.uleb128 0x11
+ 270 0002 01       		.byte	0x1
+ 271 0003 25       		.uleb128 0x25
+ 272 0004 0E       		.uleb128 0xe
+ 273 0005 13       		.uleb128 0x13
+ 274 0006 0B       		.uleb128 0xb
+ 275 0007 03       		.uleb128 0x3
+ 276 0008 0E       		.uleb128 0xe
+ 277 0009 1B       		.uleb128 0x1b
+ 278 000a 0E       		.uleb128 0xe
+ 279 000b 55       		.uleb128 0x55
+ 280 000c 17       		.uleb128 0x17
+ 281 000d 11       		.uleb128 0x11
+ 282 000e 01       		.uleb128 0x1
+ 283 000f 10       		.uleb128 0x10
+ 284 0010 17       		.uleb128 0x17
+ 285 0011 00       		.byte	0
+ 286 0012 00       		.byte	0
+ 287 0013 02       		.uleb128 0x2
+ 288 0014 24       		.uleb128 0x24
+ 289 0015 00       		.byte	0
+ 290 0016 0B       		.uleb128 0xb
+ 291 0017 0B       		.uleb128 0xb
+ 292 0018 3E       		.uleb128 0x3e
+ 293 0019 0B       		.uleb128 0xb
+ 294 001a 03       		.uleb128 0x3
+ 295 001b 0E       		.uleb128 0xe
+ 296 001c 00       		.byte	0
+ 297 001d 00       		.byte	0
+ 298 001e 03       		.uleb128 0x3
+ 299 001f 24       		.uleb128 0x24
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 7
+
+
+ 300 0020 00       		.byte	0
+ 301 0021 0B       		.uleb128 0xb
+ 302 0022 0B       		.uleb128 0xb
+ 303 0023 3E       		.uleb128 0x3e
+ 304 0024 0B       		.uleb128 0xb
+ 305 0025 03       		.uleb128 0x3
+ 306 0026 08       		.uleb128 0x8
+ 307 0027 00       		.byte	0
+ 308 0028 00       		.byte	0
+ 309 0029 04       		.uleb128 0x4
+ 310 002a 2E       		.uleb128 0x2e
+ 311 002b 01       		.byte	0x1
+ 312 002c 3F       		.uleb128 0x3f
+ 313 002d 19       		.uleb128 0x19
+ 314 002e 03       		.uleb128 0x3
+ 315 002f 0E       		.uleb128 0xe
+ 316 0030 3A       		.uleb128 0x3a
+ 317 0031 0B       		.uleb128 0xb
+ 318 0032 3B       		.uleb128 0x3b
+ 319 0033 0B       		.uleb128 0xb
+ 320 0034 27       		.uleb128 0x27
+ 321 0035 19       		.uleb128 0x19
+ 322 0036 11       		.uleb128 0x11
+ 323 0037 01       		.uleb128 0x1
+ 324 0038 12       		.uleb128 0x12
+ 325 0039 06       		.uleb128 0x6
+ 326 003a 40       		.uleb128 0x40
+ 327 003b 18       		.uleb128 0x18
+ 328 003c 9742     		.uleb128 0x2117
+ 329 003e 19       		.uleb128 0x19
+ 330 003f 01       		.uleb128 0x1
+ 331 0040 13       		.uleb128 0x13
+ 332 0041 00       		.byte	0
+ 333 0042 00       		.byte	0
+ 334 0043 05       		.uleb128 0x5
+ 335 0044 898201   		.uleb128 0x4109
+ 336 0047 01       		.byte	0x1
+ 337 0048 11       		.uleb128 0x11
+ 338 0049 01       		.uleb128 0x1
+ 339 004a 31       		.uleb128 0x31
+ 340 004b 13       		.uleb128 0x13
+ 341 004c 01       		.uleb128 0x1
+ 342 004d 13       		.uleb128 0x13
+ 343 004e 00       		.byte	0
+ 344 004f 00       		.byte	0
+ 345 0050 06       		.uleb128 0x6
+ 346 0051 8A8201   		.uleb128 0x410a
+ 347 0054 00       		.byte	0
+ 348 0055 02       		.uleb128 0x2
+ 349 0056 18       		.uleb128 0x18
+ 350 0057 9142     		.uleb128 0x2111
+ 351 0059 18       		.uleb128 0x18
+ 352 005a 00       		.byte	0
+ 353 005b 00       		.byte	0
+ 354 005c 07       		.uleb128 0x7
+ 355 005d 898201   		.uleb128 0x4109
+ 356 0060 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 8
+
+
+ 357 0061 11       		.uleb128 0x11
+ 358 0062 01       		.uleb128 0x1
+ 359 0063 31       		.uleb128 0x31
+ 360 0064 13       		.uleb128 0x13
+ 361 0065 00       		.byte	0
+ 362 0066 00       		.byte	0
+ 363 0067 08       		.uleb128 0x8
+ 364 0068 2E       		.uleb128 0x2e
+ 365 0069 01       		.byte	0x1
+ 366 006a 3F       		.uleb128 0x3f
+ 367 006b 19       		.uleb128 0x19
+ 368 006c 03       		.uleb128 0x3
+ 369 006d 0E       		.uleb128 0xe
+ 370 006e 3A       		.uleb128 0x3a
+ 371 006f 0B       		.uleb128 0xb
+ 372 0070 3B       		.uleb128 0x3b
+ 373 0071 0B       		.uleb128 0xb
+ 374 0072 8701     		.uleb128 0x87
+ 375 0074 19       		.uleb128 0x19
+ 376 0075 11       		.uleb128 0x11
+ 377 0076 01       		.uleb128 0x1
+ 378 0077 12       		.uleb128 0x12
+ 379 0078 06       		.uleb128 0x6
+ 380 0079 40       		.uleb128 0x40
+ 381 007a 18       		.uleb128 0x18
+ 382 007b 9742     		.uleb128 0x2117
+ 383 007d 19       		.uleb128 0x19
+ 384 007e 01       		.uleb128 0x1
+ 385 007f 13       		.uleb128 0x13
+ 386 0080 00       		.byte	0
+ 387 0081 00       		.byte	0
+ 388 0082 09       		.uleb128 0x9
+ 389 0083 2E       		.uleb128 0x2e
+ 390 0084 00       		.byte	0
+ 391 0085 3F       		.uleb128 0x3f
+ 392 0086 19       		.uleb128 0x19
+ 393 0087 3C       		.uleb128 0x3c
+ 394 0088 19       		.uleb128 0x19
+ 395 0089 6E       		.uleb128 0x6e
+ 396 008a 0E       		.uleb128 0xe
+ 397 008b 03       		.uleb128 0x3
+ 398 008c 0E       		.uleb128 0xe
+ 399 008d 3A       		.uleb128 0x3a
+ 400 008e 0B       		.uleb128 0xb
+ 401 008f 3B       		.uleb128 0x3b
+ 402 0090 0B       		.uleb128 0xb
+ 403 0091 00       		.byte	0
+ 404 0092 00       		.byte	0
+ 405 0093 00       		.byte	0
+ 406              		.section	.debug_aranges,"",%progbits
+ 407 0000 24000000 		.4byte	0x24
+ 408 0004 0200     		.2byte	0x2
+ 409 0006 00000000 		.4byte	.Ldebug_info0
+ 410 000a 04       		.byte	0x4
+ 411 000b 00       		.byte	0
+ 412 000c 0000     		.2byte	0
+ 413 000e 0000     		.2byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 9
+
+
+ 414 0010 00000000 		.4byte	.LFB1
+ 415 0014 14000000 		.4byte	.LFE1-.LFB1
+ 416 0018 00000000 		.4byte	.LFB0
+ 417 001c 20000000 		.4byte	.LFE0-.LFB0
+ 418 0020 00000000 		.4byte	0
+ 419 0024 00000000 		.4byte	0
+ 420              		.section	.debug_ranges,"",%progbits
+ 421              	.Ldebug_ranges0:
+ 422 0000 00000000 		.4byte	.LFB1
+ 423 0004 14000000 		.4byte	.LFE1
+ 424 0008 00000000 		.4byte	.LFB0
+ 425 000c 20000000 		.4byte	.LFE0
+ 426 0010 00000000 		.4byte	0
+ 427 0014 00000000 		.4byte	0
+ 428              		.section	.debug_line,"",%progbits
+ 429              	.Ldebug_line0:
+ 430 0000 9F000000 		.section	.debug_str,"MS",%progbits,1
+ 430      02007500 
+ 430      00000201 
+ 430      FB0E0D00 
+ 430      01010101 
+ 431              	.LASF6:
+ 432 0000 6C6F6E67 		.ascii	"long long int\000"
+ 432      206C6F6E 
+ 432      6720696E 
+ 432      7400
+ 433              	.LASF8:
+ 434 000e 756E7369 		.ascii	"unsigned int\000"
+ 434      676E6564 
+ 434      20696E74 
+ 434      00
+ 435              	.LASF19:
+ 436 001b 6973725F 		.ascii	"isr_clock_StartEx\000"
+ 436      636C6F63 
+ 436      6B5F5374 
+ 436      61727445 
+ 436      7800
+ 437              	.LASF21:
+ 438 002d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 438      43313120 
+ 438      352E342E 
+ 438      31203230 
+ 438      31363036 
+ 439 0060 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 439      20726576 
+ 439      6973696F 
+ 439      6E203233 
+ 439      37373135 
+ 440 0093 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 440      66756E63 
+ 440      74696F6E 
+ 440      2D736563 
+ 440      74696F6E 
+ 441              	.LASF23:
+ 442 00bb 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 442      73657273 
+ 442      5C6E6963 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 10
+
+
+ 442      6F5F5C53 
+ 442      756E6468 
+ 443 00e9 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 443      6C6F725C 
+ 443      42616368 
+ 443      656C6F72 
+ 443      50726F6A 
+ 444 0119 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 444      636F6F6C 
+ 444      696E6773 
+ 444      79737465 
+ 444      6D2E6379 
+ 445              	.LASF5:
+ 446 0131 6C6F6E67 		.ascii	"long unsigned int\000"
+ 446      20756E73 
+ 446      69676E65 
+ 446      6420696E 
+ 446      7400
+ 447              	.LASF7:
+ 448 0143 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 448      206C6F6E 
+ 448      6720756E 
+ 448      7369676E 
+ 448      65642069 
+ 449              	.LASF16:
+ 450 015a 55415254 		.ascii	"UART_1_PutString\000"
+ 450      5F315F50 
+ 450      75745374 
+ 450      72696E67 
+ 450      00
+ 451              	.LASF9:
+ 452 016b 666C6F61 		.ascii	"float\000"
+ 452      7400
+ 453              	.LASF18:
+ 454 0171 55415254 		.ascii	"UART_1_Start\000"
+ 454      5F315F53 
+ 454      74617274 
+ 454      00
+ 455              	.LASF1:
+ 456 017e 756E7369 		.ascii	"unsigned char\000"
+ 456      676E6564 
+ 456      20636861 
+ 456      7200
+ 457              	.LASF11:
+ 458 018c 63686172 		.ascii	"char\000"
+ 458      00
+ 459              	.LASF4:
+ 460 0191 6C6F6E67 		.ascii	"long int\000"
+ 460      20696E74 
+ 460      00
+ 461              	.LASF20:
+ 462 019a 54656D70 		.ascii	"Temp_sample_counter_Start\000"
+ 462      5F73616D 
+ 462      706C655F 
+ 462      636F756E 
+ 462      7465725F 
+ 463              	.LASF10:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc981nAb.s 			page 11
+
+
+ 464 01b4 646F7562 		.ascii	"double\000"
+ 464      6C6500
+ 465              	.LASF14:
+ 466 01bb 4953525F 		.ascii	"ISR_CLOCK_test_handler\000"
+ 466      434C4F43 
+ 466      4B5F7465 
+ 466      73745F68 
+ 466      616E646C 
+ 467              	.LASF3:
+ 468 01d2 73686F72 		.ascii	"short unsigned int\000"
+ 468      7420756E 
+ 468      7369676E 
+ 468      65642069 
+ 468      6E7400
+ 469              	.LASF0:
+ 470 01e5 7369676E 		.ascii	"signed char\000"
+ 470      65642063 
+ 470      68617200 
+ 471              	.LASF17:
+ 472 01f1 54656D70 		.ascii	"Temp_sample_counter_ReadStatusRegister\000"
+ 472      5F73616D 
+ 472      706C655F 
+ 472      636F756E 
+ 472      7465725F 
+ 473              	.LASF22:
+ 474 0218 436C6F63 		.ascii	"ClockCounter_test.c\000"
+ 474      6B436F75 
+ 474      6E746572 
+ 474      5F746573 
+ 474      742E6300 
+ 475              	.LASF12:
+ 476 022c 6C6F6E67 		.ascii	"long double\000"
+ 476      20646F75 
+ 476      626C6500 
+ 477              	.LASF2:
+ 478 0238 73686F72 		.ascii	"short int\000"
+ 478      7420696E 
+ 478      7400
+ 479              	.LASF15:
+ 480 0242 436C6F63 		.ascii	"ClockCounter_test_run\000"
+ 480      6B436F75 
+ 480      6E746572 
+ 480      5F746573 
+ 480      745F7275 
+ 481              	.LASF13:
+ 482 0258 73697A65 		.ascii	"sizetype\000"
+ 482      74797065 
+ 482      00
+ 483              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
