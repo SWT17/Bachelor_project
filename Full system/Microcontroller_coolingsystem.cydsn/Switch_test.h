@@ -14,6 +14,7 @@
 #include "UART_1.h"
 #include "switch_input_interrupt.h"
 #include "Switch_input.h"
+#include "Switch_output.h"
 
 
 void Switch_test_run();

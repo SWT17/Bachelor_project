@@ -11,13 +11,25 @@
 */
 #pragma once
 #include "project.h"
-#include "Switch.h"
+#include "switch.h"
+#include "Amplifier.h"
+#include "PumpCtrl.h"
+#include "Temperature.h"
 #include "SystemController.h"
-#include "Switch_test.h"
+#include "SystemController_interrupt.h"
+
 #include <stdio.h>
 
+//Test includes
+#include "Switch_test.h"
+#include "SPI_test.h"
+#include "TempSensor_test.h"
+
+
+//Function delcations
 void System_Setup();
 void System_On();
 void System_Off();
+
 
 /* [] END OF FILE */

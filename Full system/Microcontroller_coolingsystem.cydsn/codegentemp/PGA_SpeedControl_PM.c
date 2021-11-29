@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: PGA_1_PM.c  
+* File Name: PGA_SpeedControl_PM.c  
 * Version 2.0
 *
 * Description:
@@ -15,13 +15,13 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "PGA_1.h"
+#include "PGA_SpeedControl.h"
 
-static PGA_1_BACKUP_STRUCT  PGA_1_backup;
+static PGA_SpeedControl_BACKUP_STRUCT  PGA_SpeedControl_backup;
 
 
 /*******************************************************************************
-* Function Name: PGA_1_SaveConfig
+* Function Name: PGA_SpeedControl_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -34,14 +34,14 @@ static PGA_1_BACKUP_STRUCT  PGA_1_backup;
 *  void
 *
 *******************************************************************************/
-void PGA_1_SaveConfig(void) 
+void PGA_SpeedControl_SaveConfig(void) 
 {
     /* Nothing to save as registers are System reset on retention flops */
 }
 
 
 /*******************************************************************************  
-* Function Name: PGA_1_RestoreConfig
+* Function Name: PGA_SpeedControl_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -54,14 +54,14 @@ void PGA_1_SaveConfig(void)
 *  void
 *
 *******************************************************************************/
-void PGA_1_RestoreConfig(void) 
+void PGA_SpeedControl_RestoreConfig(void) 
 {
     /* Nothing to restore */
 }
 
 
 /*******************************************************************************   
-* Function Name: PGA_1_Sleep
+* Function Name: PGA_SpeedControl_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -75,32 +75,32 @@ void PGA_1_RestoreConfig(void)
 *  None
 *
 * Global variables:
-*  PGA_1_backup: The structure field 'enableState' is modified 
+*  PGA_SpeedControl_backup: The structure field 'enableState' is modified 
 *  depending on the enable state of the block before entering to sleep mode.
 *
 *******************************************************************************/
-void PGA_1_Sleep(void) 
+void PGA_SpeedControl_Sleep(void) 
 {
     /* Save PGA enable state */
-    if((PGA_1_PM_ACT_CFG_REG & PGA_1_ACT_PWR_EN) != 0u)
+    if((PGA_SpeedControl_PM_ACT_CFG_REG & PGA_SpeedControl_ACT_PWR_EN) != 0u)
     {
         /* Component is enabled */
-        PGA_1_backup.enableState = 1u;
+        PGA_SpeedControl_backup.enableState = 1u;
         /* Stop the configuration */
-        PGA_1_Stop();
+        PGA_SpeedControl_Stop();
     }
     else
     {
         /* Component is disabled */
-        PGA_1_backup.enableState = 0u;
+        PGA_SpeedControl_backup.enableState = 0u;
     }
     /* Save the configuration */
-    PGA_1_SaveConfig();
+    PGA_SpeedControl_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: PGA_1_Wakeup
+* Function Name: PGA_SpeedControl_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -114,18 +114,18 @@ void PGA_1_Sleep(void)
 *  void
 *
 * Global variables:
-*  PGA_1_backup: The structure field 'enableState' is used to 
+*  PGA_SpeedControl_backup: The structure field 'enableState' is used to 
 *  restore the enable state of block after wakeup from sleep mode.
 * 
 *******************************************************************************/
-void PGA_1_Wakeup(void) 
+void PGA_SpeedControl_Wakeup(void) 
 {
     /* Restore the configurations */
-    PGA_1_RestoreConfig();
+    PGA_SpeedControl_RestoreConfig();
      /* Enables the component operation */
-    if(PGA_1_backup.enableState == 1u)
+    if(PGA_SpeedControl_backup.enableState == 1u)
     {
-        PGA_1_Enable();
+        PGA_SpeedControl_Enable();
     } /* Do nothing if component was disable before */
 }
 

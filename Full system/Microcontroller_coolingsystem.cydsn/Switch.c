@@ -9,60 +9,50 @@
  *
  * ========================================
 */
-#include "Switch.h"
-#include "UART_1.h"
-#include "SystemController.h"
 
-uint8_t Switch_State; //State off the system. 0 = System OFF , 1 = System ON
+#include "switch.h"
+
+/*Setup interrupt handler*/
+CY_ISR_PROTO(switch_newState);
+
+/* Declared functions for Switch class*/
+CY_ISR(switch_newState);
 
 /* Do inital setup of interrupt and internal state*/
 void Switch_Setup()
 {
-    //Set state to 0, system off.
-    Switch_State = 0;
+    //Set High input to the switch priming it.
+    Switch_Startup();
     
     //Enable the interrupt on the switch.
     switch_input_interrupt_StartEx(switch_newState);
-    UART_1_PutString("Switch setup done\r\n");
+
     
 }
 
-void Switch_on()
+/*Controlled shutdown on switch, shutoff the input power for the switch disabling it*/
+void Switch_Shutdown()
 {
-    //Start system by calling system controller.
-    System_On();
+    Switch_output_Write(0);
 }
 
-void Switch_off()
+/*Startup of the switch. Enable the input power enabling the switch*/
+void Switch_Startup()
 {
-    //Shutdown system by calling system controller
-    System_Off(); 
+    Switch_output_Write(255);
 }
-
 
 /*Interrupt handler for the switch interrupt*/
 CY_ISR(switch_newState)
 {
-    if(!Switch_State)
-    {
-        //Set new state to 0.
-        Switch_State = 1;
-        //Turn system on. 
-        Switch_on();
-        
-    }else
-    {
-        //New state 1.
-        Switch_State = 0;
-        //Turn system off. 
-        Switch_off();
-        
-    }
-    
-    UART_1_PutString("Switch interrupt activated \r\n");
-    
+      
     /*Clears interrupts and enable detection of future interrupts*/
     Switch_input_ClearInterrupt();
+    
+    //Call system controller that new state is triggered.
+    System_newState();
+    
+    
 }
 
 /* [] END OF FILE */

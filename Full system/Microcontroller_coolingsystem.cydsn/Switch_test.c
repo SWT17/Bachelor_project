@@ -15,6 +15,8 @@
 
 void Switch_test_run()
 {
+    //Set voltage to HW switch input pin to high.  
+    Switch_output_Write(255);
     UART_1_Start();
     switch_input_interrupt_StartEx(switch_newState_test);
     UART_1_PutString("Switch test has been started \r\n");

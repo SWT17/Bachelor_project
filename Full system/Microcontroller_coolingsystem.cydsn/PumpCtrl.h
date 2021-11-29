@@ -11,9 +11,11 @@
 */
 #pragma once
 #include <stdio.h>
-#include "VDAC8_1.h"
+#include "VDAC8_SpeedControl.h"
+#include "PGA_SpeedControl.h"
+#include "VDAC8_Enabling.h"
+#include "Enable_pin.h"
 
-void Pump_Setup();
 void Pump_Shutdown();
 void Pump_Startup();
 void Pump_Stop();

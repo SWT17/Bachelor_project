@@ -79,7 +79,7 @@ int32 RTD_1_GetTemperature(uint32 res)
     /***************************************
     *  Customizer Generated Coefficients
     ***************************************/
-    const int32 CYCODE RTD_1_coeffPos[] = { -25278589, 204845931, 56348529, 32097701, 15406835, 33370960 };
+    const int32 CYCODE RTD_1_coeffPos[] = { -6576679, 30545721, -34422451, 146602132, -278862068, 214083159 };
     const int32 CYCODE RTD_1_coeffNeg[] = { -24840535, 96778662, 34796121, 16032724, -204779973, 302671863 };
 
     uint8 i=0u;
@@ -115,7 +115,7 @@ int32 RTD_1_GetTemperature(uint32 res)
     /***************************************
     *  Customizer Generated Coefficients
     ***************************************/
-    const int32 CYCODE RTD_1_coeffPos[] = { -25278589, 204845931, 56348529, 32097701, 15406835, 33370960 };
+    const int32 CYCODE RTD_1_coeffPos[] = { -6576679, 30545721, -34422451, 146602132, -278862068, 214083159 };
     const int32 CYCODE RTD_1_coeffNeg[] = { -24840535, 96778662, 34796121, 16032724, -204779973, 302671863 };
 
     uint8 i;

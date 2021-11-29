@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: VDAC8_1_PM.c  
+* File Name: VDAC8_Enabling_PM.c  
 * Version 1.90
 *
 * Description:
@@ -16,13 +16,13 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "VDAC8_1.h"
+#include "VDAC8_Enabling.h"
 
-static VDAC8_1_backupStruct VDAC8_1_backup;
+static VDAC8_Enabling_backupStruct VDAC8_Enabling_backup;
 
 
 /*******************************************************************************
-* Function Name: VDAC8_1_SaveConfig
+* Function Name: VDAC8_Enabling_SaveConfig
 ********************************************************************************
 * Summary:
 *  Save the current user configuration
@@ -34,17 +34,17 @@ static VDAC8_1_backupStruct VDAC8_1_backup;
 *  void
 *
 *******************************************************************************/
-void VDAC8_1_SaveConfig(void) 
+void VDAC8_Enabling_SaveConfig(void) 
 {
-    if (!((VDAC8_1_CR1 & VDAC8_1_SRC_MASK) == VDAC8_1_SRC_UDB))
+    if (!((VDAC8_Enabling_CR1 & VDAC8_Enabling_SRC_MASK) == VDAC8_Enabling_SRC_UDB))
     {
-        VDAC8_1_backup.data_value = VDAC8_1_Data;
+        VDAC8_Enabling_backup.data_value = VDAC8_Enabling_Data;
     }
 }
 
 
 /*******************************************************************************
-* Function Name: VDAC8_1_RestoreConfig
+* Function Name: VDAC8_Enabling_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -57,26 +57,26 @@ void VDAC8_1_SaveConfig(void)
 *  void
 *
 *******************************************************************************/
-void VDAC8_1_RestoreConfig(void) 
+void VDAC8_Enabling_RestoreConfig(void) 
 {
-    if (!((VDAC8_1_CR1 & VDAC8_1_SRC_MASK) == VDAC8_1_SRC_UDB))
+    if (!((VDAC8_Enabling_CR1 & VDAC8_Enabling_SRC_MASK) == VDAC8_Enabling_SRC_UDB))
     {
-        if((VDAC8_1_Strobe & VDAC8_1_STRB_MASK) == VDAC8_1_STRB_EN)
+        if((VDAC8_Enabling_Strobe & VDAC8_Enabling_STRB_MASK) == VDAC8_Enabling_STRB_EN)
         {
-            VDAC8_1_Strobe &= (uint8)(~VDAC8_1_STRB_MASK);
-            VDAC8_1_Data = VDAC8_1_backup.data_value;
-            VDAC8_1_Strobe |= VDAC8_1_STRB_EN;
+            VDAC8_Enabling_Strobe &= (uint8)(~VDAC8_Enabling_STRB_MASK);
+            VDAC8_Enabling_Data = VDAC8_Enabling_backup.data_value;
+            VDAC8_Enabling_Strobe |= VDAC8_Enabling_STRB_EN;
         }
         else
         {
-            VDAC8_1_Data = VDAC8_1_backup.data_value;
+            VDAC8_Enabling_Data = VDAC8_Enabling_backup.data_value;
         }
     }
 }
 
 
 /*******************************************************************************
-* Function Name: VDAC8_1_Sleep
+* Function Name: VDAC8_Enabling_Sleep
 ********************************************************************************
 * Summary:
 *  Stop and Save the user configuration
@@ -88,31 +88,31 @@ void VDAC8_1_RestoreConfig(void)
 *  void
 *
 * Global variables:
-*  VDAC8_1_backup.enableState:  Is modified depending on the enable 
+*  VDAC8_Enabling_backup.enableState:  Is modified depending on the enable 
 *  state  of the block before entering sleep mode.
 *
 *******************************************************************************/
-void VDAC8_1_Sleep(void) 
+void VDAC8_Enabling_Sleep(void) 
 {
     /* Save VDAC8's enable state */    
-    if(VDAC8_1_ACT_PWR_EN == (VDAC8_1_PWRMGR & VDAC8_1_ACT_PWR_EN))
+    if(VDAC8_Enabling_ACT_PWR_EN == (VDAC8_Enabling_PWRMGR & VDAC8_Enabling_ACT_PWR_EN))
     {
         /* VDAC8 is enabled */
-        VDAC8_1_backup.enableState = 1u;
+        VDAC8_Enabling_backup.enableState = 1u;
     }
     else
     {
         /* VDAC8 is disabled */
-        VDAC8_1_backup.enableState = 0u;
+        VDAC8_Enabling_backup.enableState = 0u;
     }
     
-    VDAC8_1_Stop();
-    VDAC8_1_SaveConfig();
+    VDAC8_Enabling_Stop();
+    VDAC8_Enabling_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: VDAC8_1_Wakeup
+* Function Name: VDAC8_Enabling_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -125,21 +125,21 @@ void VDAC8_1_Sleep(void)
 *  void
 *
 * Global variables:
-*  VDAC8_1_backup.enableState:  Is used to restore the enable state of 
+*  VDAC8_Enabling_backup.enableState:  Is used to restore the enable state of 
 *  block on wakeup from sleep mode.
 *
 *******************************************************************************/
-void VDAC8_1_Wakeup(void) 
+void VDAC8_Enabling_Wakeup(void) 
 {
-    VDAC8_1_RestoreConfig();
+    VDAC8_Enabling_RestoreConfig();
     
-    if(VDAC8_1_backup.enableState == 1u)
+    if(VDAC8_Enabling_backup.enableState == 1u)
     {
         /* Enable VDAC8's operation */
-        VDAC8_1_Enable();
+        VDAC8_Enabling_Enable();
 
         /* Restore the data register */
-        VDAC8_1_SetValue(VDAC8_1_Data);
+        VDAC8_Enabling_SetValue(VDAC8_Enabling_Data);
     } /* Do nothing if VDAC8 was disabled before */    
 }
 

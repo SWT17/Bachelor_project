@@ -35,9 +35,9 @@
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SS_aliases.h" value="HEADER;;;;;SS" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SS.c" value="SOURCE_C;CortexM3;;;;SS" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SS.h" value="HEADER;;;;;SS" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_1.c" value="SOURCE_C;CortexM3;;;;PGA_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_1.h" value="HEADER;;;;;PGA_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_1_PM.c" value="SOURCE_C;CortexM3;;;;PGA_1" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_SpeedControl.c" value="SOURCE_C;CortexM3;;;;PGA_SpeedControl" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_SpeedControl.h" value="HEADER;;;;;PGA_SpeedControl" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\PGA_SpeedControl_PM.c" value="SOURCE_C;CortexM3;;;;PGA_SpeedControl" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Speed_pin_aliases.h" value="HEADER;;;;;Speed_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Speed_pin.c" value="SOURCE_C;CortexM3;;;;Speed_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Speed_pin.h" value="HEADER;;;;;Speed_pin" />
@@ -48,17 +48,17 @@
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\UART_1_BOOT.c" value="SOURCE_C;CortexM3;;;;UART_1" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\isr_uart_rx.c" value="SOURCE_C;CortexM3;;;;isr_uart_rx" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\isr_uart_rx.h" value="HEADER;;;;;isr_uart_rx" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_1.c" value="SOURCE_C;CortexM3;;;;VDAC8_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_1.h" value="HEADER;;;;;VDAC8_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_1_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_1" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_SpeedControl.c" value="SOURCE_C;CortexM3;;;;VDAC8_SpeedControl" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_SpeedControl.h" value="HEADER;;;;;VDAC8_SpeedControl" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_SpeedControl_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_SpeedControl" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Enable_pin_aliases.h" value="HEADER;;;;;Enable_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Enable_pin.c" value="SOURCE_C;CortexM3;;;;Enable_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Enable_pin.h" value="HEADER;;;;;Enable_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\LED_pin_aliases.h" value="HEADER;;;;;LED_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\LED_pin.c" value="SOURCE_C;CortexM3;;;;LED_pin" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\LED_pin.h" value="HEADER;;;;;LED_pin" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_1.c" value="SOURCE_C;CortexM3;;;;Clock_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_1.h" value="HEADER;;;;;Clock_1" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_TempSampling.c" value="SOURCE_C;CortexM3;;;;Clock_TempSampling" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_TempSampling.h" value="HEADER;;;;;Clock_TempSampling" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\RTD_1.c" value="SOURCE_C;CortexM3;;;;RTD_1" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\RTD_1.h" value="HEADER;;;;;RTD_1" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Temp_sample_counter.c" value="SOURCE_C;CortexM3;;;;Temp_sample_counter" />
@@ -74,6 +74,14 @@
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Switch_input.h" value="HEADER;;;;;Switch_input" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\switch_input_interrupt.c" value="SOURCE_C;CortexM3;;;;switch_input_interrupt" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\switch_input_interrupt.h" value="HEADER;;;;;switch_input_interrupt" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_SPI.c" value="SOURCE_C;CortexM3;;;;Clock_SPI" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_SPI.h" value="HEADER;;;;;Clock_SPI" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.h" value="HEADER;;;;;VDAC8_Enabling" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1_aliases.h" value="HEADER;;;;;Pin_1" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1.c" value="SOURCE_C;CortexM3;;;;Pin_1" />
+  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1.h" value="HEADER;;;;;Pin_1" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SPIM_1_IntClock.c" value="SOURCE_C;CortexM3;;;;SPIM_1_IntClock" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SPIM_1_IntClock.h" value="HEADER;;;;;SPIM_1_IntClock" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\UART_1_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_1_IntClock" />

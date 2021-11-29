@@ -9,13 +9,10 @@
  *
  * ========================================
 */
-/*Byte Adresses for amplifier registers*/
+#pragma once
 #include <stdio.h>
+#include "SPIM_1.h"
 
-
-void Amplifier_Setup();
-void Amplifier_Shutdown();
-void Amplifier_Startup();
-uint16_t GetRtdRatio();
+void TempSensor_testrun();
 
 /* [] END OF FILE */

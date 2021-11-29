@@ -10,15 +10,13 @@
  * ========================================
 */
 #pragma once
-
+#include "Switch_output.h"
 #include "Switch_input.h"
 #include "switch_input_interrupt.h"
+#include "SystemController_interrupt.h"
 
 void Switch_Setup();
-/*Setup interrupt handler*/
-CY_ISR_PROTO(switch_newState);
-
-/* Declared functions for Switch class*/
-CY_ISR(switch_newState);
+void Switch_Shutdown();
+void Switch_Startup();
 
 /* [] END OF FILE */

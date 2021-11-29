@@ -34,8 +34,8 @@
 ***************************************/
 
 #define     RTD_1_ORDER_POS   (0x6u)
-#define     RTD_1_POS_INPUT_SCALE   (13)
-#define     RTD_1_POS_COEFF_SCALE   (10)
+#define     RTD_1_POS_INPUT_SCALE   (12)
+#define     RTD_1_POS_COEFF_SCALE   (8)
 #define     RTD_1_ORDER_NEG   (0x6u)
 #define     RTD_1_NEG_INPUT_SCALE   (12)
 #define     RTD_1_NEG_COEFF_SCALE   (10)
