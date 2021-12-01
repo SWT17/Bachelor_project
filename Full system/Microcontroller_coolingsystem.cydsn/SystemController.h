@@ -17,19 +17,18 @@
 #include "Temperature.h"
 #include "SystemController.h"
 #include "SystemController_interrupt.h"
+#include "LED.h"
 
 #include <stdio.h>
 
 //Test includes
-#include "Switch_test.h"
-#include "SPI_test.h"
-#include "TempSensor_test.h"
+#include "PumpCtrlUnitTest.h"
+#include "SwitchUnitTest.h"
+#include "TemperatureUnitTest.h"
 
 
-//Function delcations
-void System_Setup();
-void System_On();
-void System_Off();
+
+
 
 
 /* [] END OF FILE */

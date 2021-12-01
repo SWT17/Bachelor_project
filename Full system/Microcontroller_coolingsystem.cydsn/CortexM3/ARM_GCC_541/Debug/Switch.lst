@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 1
 
 
    1              		.syntax unified
@@ -26,7 +26,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 1
   23              		.thumb_func
   24              		.type	switch_newState, %function
   25              	switch_newState:
-  26              	.LFB1:
+  26              	.LFB3:
   27              		.file 1 "switch.c"
    1:switch.c      **** /* ========================================
    2:switch.c      ****  *
@@ -41,29 +41,45 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 1
   11:switch.c      **** */
   12:switch.c      **** 
   13:switch.c      **** #include "switch.h"
-  14:switch.c      **** 
-  15:switch.c      **** uint8_t Switch_State; //State off the system. 0 = System OFF , 1 = System ON
-  16:switch.c      **** 
-  17:switch.c      **** /* Do inital setup of interrupt and internal state*/
-  18:switch.c      **** void Switch_Setup()
-  19:switch.c      **** {
-  20:switch.c      ****     //Set High input to the switch priming it.
-  21:switch.c      ****     Switch_output_Write(255);
-  22:switch.c      ****     
-  23:switch.c      ****     //Enable the interrupt on the switch.
-  24:switch.c      ****     switch_input_interrupt_StartEx(switch_newState);
-  25:switch.c      **** 
-  26:switch.c      ****     
-  27:switch.c      **** }
-  28:switch.c      **** 
-  29:switch.c      **** 
-  30:switch.c      **** /*Interrupt handler for the switch interrupt*/
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 2
+  14:switch.c      **** #include "UART_1.h"
+  15:switch.c      **** 
+  16:switch.c      **** /*Setup interrupt handler*/
+  17:switch.c      **** CY_ISR_PROTO(switch_newState);
+  18:switch.c      **** 
+  19:switch.c      **** /* Declared functions for Switch class*/
+  20:switch.c      **** CY_ISR(switch_newState);
+  21:switch.c      **** 
+  22:switch.c      **** /* Do inital setup of interrupt and internal state*/
+  23:switch.c      **** void Switch_Setup()
+  24:switch.c      **** {
+  25:switch.c      ****     //Set High input to the switch priming it.
+  26:switch.c      ****     Switch_Startup();
+  27:switch.c      ****     
+  28:switch.c      ****     //Enable the interrupt on the switch.
+  29:switch.c      ****     switch_input_interrupt_StartEx(switch_newState);
+  30:switch.c      **** 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 2
 
 
-  31:switch.c      **** CY_ISR(switch_newState)
-  32:switch.c      **** {
-  28              		.loc 1 32 0
+  31:switch.c      ****     
+  32:switch.c      **** }
+  33:switch.c      **** 
+  34:switch.c      **** /*Controlled shutdown on switch, shutoff the input power for the switch disabling it*/
+  35:switch.c      **** void Switch_Shutdown()
+  36:switch.c      **** {
+  37:switch.c      ****     Switch_output_Write(0);
+  38:switch.c      **** }
+  39:switch.c      **** 
+  40:switch.c      **** /*Startup of the switch. Enable the input power enabling the switch*/
+  41:switch.c      **** void Switch_Startup()
+  42:switch.c      **** {
+  43:switch.c      ****     Switch_output_Write(255);
+  44:switch.c      **** }
+  45:switch.c      **** 
+  46:switch.c      **** /*Interrupt handler for the switch interrupt*/
+  47:switch.c      **** CY_ISR(switch_newState)
+  48:switch.c      **** {    
+  28              		.loc 1 48 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -71,584 +87,683 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  33:switch.c      ****       
-  34:switch.c      ****     /*Clears interrupts and enable detection of future interrupts*/
-  35:switch.c      ****     Switch_input_ClearInterrupt();
-  36              		.loc 1 35 0
-  37 0002 FFF7FEFF 		bl	Switch_input_ClearInterrupt
-  38              	.LVL0:
-  36:switch.c      ****     
-  37:switch.c      ****     //Call system controller that new state is triggered.
-  38:switch.c      ****     System_newState();
-  39              		.loc 1 38 0
-  40 0006 FFF7FEFF 		bl	System_newState
-  41              	.LVL1:
-  42 000a 08BD     		pop	{r3, pc}
-  43              		.cfi_endproc
-  44              	.LFE1:
-  45              		.size	switch_newState, .-switch_newState
-  46              		.section	.text.Switch_Setup,"ax",%progbits
-  47              		.align	2
-  48              		.global	Switch_Setup
-  49              		.thumb
-  50              		.thumb_func
-  51              		.type	Switch_Setup, %function
-  52              	Switch_Setup:
-  53              	.LFB0:
-  19:switch.c      ****     //Set High input to the switch priming it.
-  54              		.loc 1 19 0
-  55              		.cfi_startproc
-  56              		@ args = 0, pretend = 0, frame = 0
-  57              		@ frame_needed = 0, uses_anonymous_args = 0
-  58 0000 08B5     		push	{r3, lr}
-  59              		.cfi_def_cfa_offset 8
-  60              		.cfi_offset 3, -8
-  61              		.cfi_offset 14, -4
-  21:switch.c      ****     
-  62              		.loc 1 21 0
-  63 0002 FF20     		movs	r0, #255
-  64 0004 FFF7FEFF 		bl	Switch_output_Write
-  65              	.LVL2:
-  24:switch.c      **** 
-  66              		.loc 1 24 0
-  67 0008 0148     		ldr	r0, .L5
-  68 000a FFF7FEFF 		bl	switch_input_interrupt_StartEx
-  69              	.LVL3:
-  70 000e 08BD     		pop	{r3, pc}
-  71              	.L6:
-  72              		.align	2
-  73              	.L5:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 3
+  49:switch.c      ****     UART_1_PutString("Switch has been triggered \r\n");
+  36              		.loc 1 49 0
+  37 0002 0448     		ldr	r0, .L3
+  38 0004 FFF7FEFF 		bl	UART_1_PutString
+  39              	.LVL0:
+  50:switch.c      ****     /*Clears interrupts and enable detection of future interrupts*/
+  51:switch.c      ****     Switch_input_ClearInterrupt();
+  40              		.loc 1 51 0
+  41 0008 FFF7FEFF 		bl	Switch_input_ClearInterrupt
+  42              	.LVL1:
+  52:switch.c      ****     
+  53:switch.c      **** 
+  54:switch.c      ****     //Call system controller that new state is triggered.
+  55:switch.c      ****     System_newState();
+  43              		.loc 1 55 0
+  44 000c FFF7FEFF 		bl	System_newState
+  45              	.LVL2:
+  46 0010 08BD     		pop	{r3, pc}
+  47              	.L4:
+  48 0012 00BF     		.align	2
+  49              	.L3:
+  50 0014 00000000 		.word	.LC0
+  51              		.cfi_endproc
+  52              	.LFE3:
+  53              		.size	switch_newState, .-switch_newState
+  54              		.section	.text.Switch_Shutdown,"ax",%progbits
+  55              		.align	2
+  56              		.global	Switch_Shutdown
+  57              		.thumb
+  58              		.thumb_func
+  59              		.type	Switch_Shutdown, %function
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 3
 
 
-  74 0010 00000000 		.word	switch_newState
+  60              	Switch_Shutdown:
+  61              	.LFB1:
+  36:switch.c      ****     Switch_output_Write(0);
+  62              		.loc 1 36 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66 0000 08B5     		push	{r3, lr}
+  67              		.cfi_def_cfa_offset 8
+  68              		.cfi_offset 3, -8
+  69              		.cfi_offset 14, -4
+  37:switch.c      **** }
+  70              		.loc 1 37 0
+  71 0002 0020     		movs	r0, #0
+  72 0004 FFF7FEFF 		bl	Switch_output_Write
+  73              	.LVL3:
+  74 0008 08BD     		pop	{r3, pc}
   75              		.cfi_endproc
-  76              	.LFE0:
-  77              		.size	Switch_Setup, .-Switch_Setup
-  78              		.comm	Switch_State,1,1
-  79              		.text
-  80              	.Letext0:
-  81              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  82              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  83              		.file 4 "Generated_Source\\PSoC5/Switch_input.h"
-  84              		.file 5 "SystemController_interrupt.h"
-  85              		.file 6 "Generated_Source\\PSoC5/Switch_output.h"
-  86              		.file 7 "Generated_Source\\PSoC5/switch_input_interrupt.h"
-  87              		.section	.debug_info,"",%progbits
-  88              	.Ldebug_info0:
-  89 0000 35010000 		.4byte	0x135
-  90 0004 0400     		.2byte	0x4
-  91 0006 00000000 		.4byte	.Ldebug_abbrev0
-  92 000a 04       		.byte	0x4
-  93 000b 01       		.uleb128 0x1
-  94 000c CF000000 		.4byte	.LASF18
-  95 0010 0C       		.byte	0xc
-  96 0011 10020000 		.4byte	.LASF19
-  97 0015 0A000000 		.4byte	.LASF20
-  98 0019 00000000 		.4byte	.Ldebug_ranges0+0
-  99 001d 00000000 		.4byte	0
- 100 0021 00000000 		.4byte	.Ldebug_line0
- 101 0025 02       		.uleb128 0x2
- 102 0026 01       		.byte	0x1
- 103 0027 06       		.byte	0x6
- 104 0028 22020000 		.4byte	.LASF0
- 105 002c 03       		.uleb128 0x3
- 106 002d 00000000 		.4byte	.LASF9
- 107 0031 02       		.byte	0x2
- 108 0032 1D       		.byte	0x1d
- 109 0033 37000000 		.4byte	0x37
- 110 0037 02       		.uleb128 0x2
- 111 0038 01       		.byte	0x1
- 112 0039 08       		.byte	0x8
- 113 003a C1000000 		.4byte	.LASF1
- 114 003e 02       		.uleb128 0x2
- 115 003f 02       		.byte	0x2
- 116 0040 05       		.byte	0x5
- 117 0041 06020000 		.4byte	.LASF2
- 118 0045 02       		.uleb128 0x2
- 119 0046 02       		.byte	0x2
- 120 0047 07       		.byte	0x7
- 121 0048 6F010000 		.4byte	.LASF3
- 122 004c 02       		.uleb128 0x2
- 123 004d 04       		.byte	0x4
- 124 004e 05       		.byte	0x5
- 125 004f 19020000 		.4byte	.LASF4
- 126 0053 02       		.uleb128 0x2
- 127 0054 04       		.byte	0x4
- 128 0055 07       		.byte	0x7
- 129 0056 5D010000 		.4byte	.LASF5
- 130 005a 02       		.uleb128 0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 4
+  76              	.LFE1:
+  77              		.size	Switch_Shutdown, .-Switch_Shutdown
+  78 000a 00BF     		.section	.text.Switch_Startup,"ax",%progbits
+  79              		.align	2
+  80              		.global	Switch_Startup
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	Switch_Startup, %function
+  84              	Switch_Startup:
+  85              	.LFB2:
+  42:switch.c      ****     Switch_output_Write(255);
+  86              		.loc 1 42 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 08B5     		push	{r3, lr}
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 3, -8
+  93              		.cfi_offset 14, -4
+  43:switch.c      **** }
+  94              		.loc 1 43 0
+  95 0002 FF20     		movs	r0, #255
+  96 0004 FFF7FEFF 		bl	Switch_output_Write
+  97              	.LVL4:
+  98 0008 08BD     		pop	{r3, pc}
+  99              		.cfi_endproc
+ 100              	.LFE2:
+ 101              		.size	Switch_Startup, .-Switch_Startup
+ 102 000a 00BF     		.section	.text.Switch_Setup,"ax",%progbits
+ 103              		.align	2
+ 104              		.global	Switch_Setup
+ 105              		.thumb
+ 106              		.thumb_func
+ 107              		.type	Switch_Setup, %function
+ 108              	Switch_Setup:
+ 109              	.LFB0:
+  24:switch.c      ****     //Set High input to the switch priming it.
+ 110              		.loc 1 24 0
+ 111              		.cfi_startproc
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 4
 
 
- 131 005b 08       		.byte	0x8
- 132 005c 05       		.byte	0x5
- 133 005d F3010000 		.4byte	.LASF6
- 134 0061 02       		.uleb128 0x2
- 135 0062 08       		.byte	0x8
- 136 0063 07       		.byte	0x7
- 137 0064 BA010000 		.4byte	.LASF7
- 138 0068 04       		.uleb128 0x4
- 139 0069 04       		.byte	0x4
- 140 006a 05       		.byte	0x5
- 141 006b 696E7400 		.ascii	"int\000"
- 142 006f 02       		.uleb128 0x2
- 143 0070 04       		.byte	0x4
- 144 0071 07       		.byte	0x7
- 145 0072 AD010000 		.4byte	.LASF8
- 146 0076 03       		.uleb128 0x3
- 147 0077 D1010000 		.4byte	.LASF10
- 148 007b 03       		.byte	0x3
- 149 007c 18       		.byte	0x18
- 150 007d 2C000000 		.4byte	0x2c
- 151 0081 02       		.uleb128 0x2
- 152 0082 04       		.byte	0x4
- 153 0083 04       		.byte	0x4
- 154 0084 BB000000 		.4byte	.LASF11
- 155 0088 02       		.uleb128 0x2
- 156 0089 08       		.byte	0x8
- 157 008a 04       		.byte	0x4
- 158 008b A6010000 		.4byte	.LASF12
- 159 008f 02       		.uleb128 0x2
- 160 0090 01       		.byte	0x1
- 161 0091 08       		.byte	0x8
- 162 0092 01020000 		.4byte	.LASF13
- 163 0096 05       		.uleb128 0x5
- 164 0097 96010000 		.4byte	.LASF21
- 165 009b 01       		.byte	0x1
- 166 009c 1F       		.byte	0x1f
- 167 009d 00000000 		.4byte	.LFB1
- 168 00a1 0C000000 		.4byte	.LFE1-.LFB1
- 169 00a5 01       		.uleb128 0x1
- 170 00a6 9C       		.byte	0x9c
- 171 00a7 BE000000 		.4byte	0xbe
- 172 00ab 06       		.uleb128 0x6
- 173 00ac 06000000 		.4byte	.LVL0
- 174 00b0 0C010000 		.4byte	0x10c
- 175 00b4 06       		.uleb128 0x6
- 176 00b5 0A000000 		.4byte	.LVL1
- 177 00b9 17010000 		.4byte	0x117
- 178 00bd 00       		.byte	0
- 179 00be 07       		.uleb128 0x7
- 180 00bf E6010000 		.4byte	.LASF22
- 181 00c3 01       		.byte	0x1
- 182 00c4 12       		.byte	0x12
- 183 00c5 00000000 		.4byte	.LFB0
- 184 00c9 14000000 		.4byte	.LFE0-.LFB0
- 185 00cd 01       		.uleb128 0x1
- 186 00ce 9C       		.byte	0x9c
- 187 00cf FB000000 		.4byte	0xfb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 5
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114 0000 08B5     		push	{r3, lr}
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 3, -8
+ 117              		.cfi_offset 14, -4
+  26:switch.c      ****     
+ 118              		.loc 1 26 0
+ 119 0002 FFF7FEFF 		bl	Switch_Startup
+ 120              	.LVL5:
+  29:switch.c      **** 
+ 121              		.loc 1 29 0
+ 122 0006 0248     		ldr	r0, .L11
+ 123 0008 FFF7FEFF 		bl	switch_input_interrupt_StartEx
+ 124              	.LVL6:
+ 125 000c 08BD     		pop	{r3, pc}
+ 126              	.L12:
+ 127 000e 00BF     		.align	2
+ 128              	.L11:
+ 129 0010 00000000 		.word	switch_newState
+ 130              		.cfi_endproc
+ 131              	.LFE0:
+ 132              		.size	Switch_Setup, .-Switch_Setup
+ 133              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 134              		.align	2
+ 135              	.LC0:
+ 136 0000 53776974 		.ascii	"Switch has been triggered \015\012\000"
+ 136      63682068 
+ 136      61732062 
+ 136      65656E20 
+ 136      74726967 
+ 137              		.text
+ 138              	.Letext0:
+ 139              		.file 2 "Generated_Source\\PSoC5/UART_1.h"
+ 140              		.file 3 "Generated_Source\\PSoC5/Switch_input.h"
+ 141              		.file 4 "SystemController_interrupt.h"
+ 142              		.file 5 "Generated_Source\\PSoC5/Switch_output.h"
+ 143              		.file 6 "Generated_Source\\PSoC5/switch_input_interrupt.h"
+ 144              		.section	.debug_info,"",%progbits
+ 145              	.Ldebug_info0:
+ 146 0000 7E010000 		.4byte	0x17e
+ 147 0004 0400     		.2byte	0x4
+ 148 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 149 000a 04       		.byte	0x4
+ 150 000b 01       		.uleb128 0x1
+ 151 000c 3D000000 		.4byte	.LASF22
+ 152 0010 0C       		.byte	0xc
+ 153 0011 1C020000 		.4byte	.LASF23
+ 154 0015 1A010000 		.4byte	.LASF24
+ 155 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 156 001d 00000000 		.4byte	0
+ 157 0021 00000000 		.4byte	.Ldebug_line0
+ 158 0025 02       		.uleb128 0x2
+ 159 0026 01       		.byte	0x1
+ 160 0027 06       		.byte	0x6
+ 161 0028 04020000 		.4byte	.LASF0
+ 162 002c 02       		.uleb128 0x2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 5
 
 
- 188 00d3 08       		.uleb128 0x8
- 189 00d4 08000000 		.4byte	.LVL2
- 190 00d8 22010000 		.4byte	0x122
- 191 00dc E7000000 		.4byte	0xe7
- 192 00e0 09       		.uleb128 0x9
- 193 00e1 01       		.uleb128 0x1
- 194 00e2 50       		.byte	0x50
- 195 00e3 02       		.uleb128 0x2
- 196 00e4 09       		.byte	0x9
- 197 00e5 FF       		.byte	0xff
- 198 00e6 00       		.byte	0
- 199 00e7 0A       		.uleb128 0xa
- 200 00e8 0E000000 		.4byte	.LVL3
- 201 00ec 2D010000 		.4byte	0x12d
- 202 00f0 09       		.uleb128 0x9
- 203 00f1 01       		.uleb128 0x1
- 204 00f2 50       		.byte	0x50
- 205 00f3 05       		.uleb128 0x5
- 206 00f4 03       		.byte	0x3
- 207 00f5 00000000 		.4byte	switch_newState
- 208 00f9 00       		.byte	0
- 209 00fa 00       		.byte	0
- 210 00fb 0B       		.uleb128 0xb
- 211 00fc D9010000 		.4byte	.LASF23
- 212 0100 01       		.byte	0x1
- 213 0101 0F       		.byte	0xf
- 214 0102 76000000 		.4byte	0x76
- 215 0106 05       		.uleb128 0x5
- 216 0107 03       		.byte	0x3
- 217 0108 00000000 		.4byte	Switch_State
- 218 010c 0C       		.uleb128 0xc
- 219 010d 80000000 		.4byte	.LASF14
- 220 0111 80000000 		.4byte	.LASF14
- 221 0115 04       		.byte	0x4
- 222 0116 2B       		.byte	0x2b
- 223 0117 0C       		.uleb128 0xc
- 224 0118 2E020000 		.4byte	.LASF15
- 225 011c 2E020000 		.4byte	.LASF15
- 226 0120 05       		.byte	0x5
- 227 0121 0D       		.byte	0xd
- 228 0122 0C       		.uleb128 0xc
- 229 0123 82010000 		.4byte	.LASF16
- 230 0127 82010000 		.4byte	.LASF16
- 231 012b 06       		.byte	0x6
- 232 012c 26       		.byte	0x26
- 233 012d 0C       		.uleb128 0xc
- 234 012e 9C000000 		.4byte	.LASF17
- 235 0132 9C000000 		.4byte	.LASF17
- 236 0136 07       		.byte	0x7
- 237 0137 18       		.byte	0x18
- 238 0138 00       		.byte	0
- 239              		.section	.debug_abbrev,"",%progbits
- 240              	.Ldebug_abbrev0:
- 241 0000 01       		.uleb128 0x1
- 242 0001 11       		.uleb128 0x11
- 243 0002 01       		.byte	0x1
- 244 0003 25       		.uleb128 0x25
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 6
+ 163 002d 01       		.byte	0x1
+ 164 002e 08       		.byte	0x8
+ 165 002f 90010000 		.4byte	.LASF1
+ 166 0033 02       		.uleb128 0x2
+ 167 0034 02       		.byte	0x2
+ 168 0035 05       		.byte	0x5
+ 169 0036 2E020000 		.4byte	.LASF2
+ 170 003a 02       		.uleb128 0x2
+ 171 003b 02       		.byte	0x2
+ 172 003c 07       		.byte	0x7
+ 173 003d F1010000 		.4byte	.LASF3
+ 174 0041 02       		.uleb128 0x2
+ 175 0042 04       		.byte	0x4
+ 176 0043 05       		.byte	0x5
+ 177 0044 C3010000 		.4byte	.LASF4
+ 178 0048 02       		.uleb128 0x2
+ 179 0049 04       		.byte	0x4
+ 180 004a 07       		.byte	0x7
+ 181 004b CB000000 		.4byte	.LASF5
+ 182 004f 02       		.uleb128 0x2
+ 183 0050 08       		.byte	0x8
+ 184 0051 05       		.byte	0x5
+ 185 0052 D3010000 		.4byte	.LASF6
+ 186 0056 02       		.uleb128 0x2
+ 187 0057 08       		.byte	0x8
+ 188 0058 07       		.byte	0x7
+ 189 0059 EC000000 		.4byte	.LASF7
+ 190 005d 03       		.uleb128 0x3
+ 191 005e 04       		.byte	0x4
+ 192 005f 05       		.byte	0x5
+ 193 0060 696E7400 		.ascii	"int\000"
+ 194 0064 02       		.uleb128 0x2
+ 195 0065 04       		.byte	0x4
+ 196 0066 07       		.byte	0x7
+ 197 0067 1C000000 		.4byte	.LASF8
+ 198 006b 02       		.uleb128 0x2
+ 199 006c 04       		.byte	0x4
+ 200 006d 04       		.byte	0x4
+ 201 006e 14010000 		.4byte	.LASF9
+ 202 0072 02       		.uleb128 0x2
+ 203 0073 08       		.byte	0x8
+ 204 0074 04       		.byte	0x4
+ 205 0075 CC010000 		.4byte	.LASF10
+ 206 0079 02       		.uleb128 0x2
+ 207 007a 01       		.byte	0x1
+ 208 007b 08       		.byte	0x8
+ 209 007c AE010000 		.4byte	.LASF11
+ 210 0080 02       		.uleb128 0x2
+ 211 0081 08       		.byte	0x8
+ 212 0082 04       		.byte	0x4
+ 213 0083 10020000 		.4byte	.LASF12
+ 214 0087 02       		.uleb128 0x2
+ 215 0088 04       		.byte	0x4
+ 216 0089 07       		.byte	0x7
+ 217 008a 25020000 		.4byte	.LASF13
+ 218 008e 04       		.uleb128 0x4
+ 219 008f E1010000 		.4byte	.LASF25
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 6
 
 
- 245 0004 0E       		.uleb128 0xe
- 246 0005 13       		.uleb128 0x13
- 247 0006 0B       		.uleb128 0xb
- 248 0007 03       		.uleb128 0x3
- 249 0008 0E       		.uleb128 0xe
- 250 0009 1B       		.uleb128 0x1b
- 251 000a 0E       		.uleb128 0xe
- 252 000b 55       		.uleb128 0x55
- 253 000c 17       		.uleb128 0x17
- 254 000d 11       		.uleb128 0x11
- 255 000e 01       		.uleb128 0x1
- 256 000f 10       		.uleb128 0x10
- 257 0010 17       		.uleb128 0x17
- 258 0011 00       		.byte	0
- 259 0012 00       		.byte	0
- 260 0013 02       		.uleb128 0x2
- 261 0014 24       		.uleb128 0x24
- 262 0015 00       		.byte	0
- 263 0016 0B       		.uleb128 0xb
- 264 0017 0B       		.uleb128 0xb
- 265 0018 3E       		.uleb128 0x3e
- 266 0019 0B       		.uleb128 0xb
- 267 001a 03       		.uleb128 0x3
- 268 001b 0E       		.uleb128 0xe
- 269 001c 00       		.byte	0
- 270 001d 00       		.byte	0
- 271 001e 03       		.uleb128 0x3
- 272 001f 16       		.uleb128 0x16
- 273 0020 00       		.byte	0
- 274 0021 03       		.uleb128 0x3
- 275 0022 0E       		.uleb128 0xe
- 276 0023 3A       		.uleb128 0x3a
- 277 0024 0B       		.uleb128 0xb
- 278 0025 3B       		.uleb128 0x3b
- 279 0026 0B       		.uleb128 0xb
- 280 0027 49       		.uleb128 0x49
- 281 0028 13       		.uleb128 0x13
- 282 0029 00       		.byte	0
- 283 002a 00       		.byte	0
- 284 002b 04       		.uleb128 0x4
- 285 002c 24       		.uleb128 0x24
- 286 002d 00       		.byte	0
- 287 002e 0B       		.uleb128 0xb
- 288 002f 0B       		.uleb128 0xb
- 289 0030 3E       		.uleb128 0x3e
- 290 0031 0B       		.uleb128 0xb
- 291 0032 03       		.uleb128 0x3
- 292 0033 08       		.uleb128 0x8
- 293 0034 00       		.byte	0
- 294 0035 00       		.byte	0
- 295 0036 05       		.uleb128 0x5
- 296 0037 2E       		.uleb128 0x2e
- 297 0038 01       		.byte	0x1
- 298 0039 3F       		.uleb128 0x3f
- 299 003a 19       		.uleb128 0x19
- 300 003b 03       		.uleb128 0x3
- 301 003c 0E       		.uleb128 0xe
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 7
+ 220 0093 01       		.byte	0x1
+ 221 0094 2F       		.byte	0x2f
+ 222 0095 00000000 		.4byte	.LFB3
+ 223 0099 18000000 		.4byte	.LFE3-.LFB3
+ 224 009d 01       		.uleb128 0x1
+ 225 009e 9C       		.byte	0x9c
+ 226 009f CD000000 		.4byte	0xcd
+ 227 00a3 05       		.uleb128 0x5
+ 228 00a4 08000000 		.4byte	.LVL0
+ 229 00a8 4A010000 		.4byte	0x14a
+ 230 00ac BA000000 		.4byte	0xba
+ 231 00b0 06       		.uleb128 0x6
+ 232 00b1 01       		.uleb128 0x1
+ 233 00b2 50       		.byte	0x50
+ 234 00b3 05       		.uleb128 0x5
+ 235 00b4 03       		.byte	0x3
+ 236 00b5 00000000 		.4byte	.LC0
+ 237 00b9 00       		.byte	0
+ 238 00ba 07       		.uleb128 0x7
+ 239 00bb 0C000000 		.4byte	.LVL1
+ 240 00bf 55010000 		.4byte	0x155
+ 241 00c3 07       		.uleb128 0x7
+ 242 00c4 10000000 		.4byte	.LVL2
+ 243 00c8 60010000 		.4byte	0x160
+ 244 00cc 00       		.byte	0
+ 245 00cd 08       		.uleb128 0x8
+ 246 00ce B3010000 		.4byte	.LASF14
+ 247 00d2 01       		.byte	0x1
+ 248 00d3 23       		.byte	0x23
+ 249 00d4 00000000 		.4byte	.LFB1
+ 250 00d8 0A000000 		.4byte	.LFE1-.LFB1
+ 251 00dc 01       		.uleb128 0x1
+ 252 00dd 9C       		.byte	0x9c
+ 253 00de F2000000 		.4byte	0xf2
+ 254 00e2 09       		.uleb128 0x9
+ 255 00e3 08000000 		.4byte	.LVL3
+ 256 00e7 6B010000 		.4byte	0x16b
+ 257 00eb 06       		.uleb128 0x6
+ 258 00ec 01       		.uleb128 0x1
+ 259 00ed 50       		.byte	0x50
+ 260 00ee 01       		.uleb128 0x1
+ 261 00ef 30       		.byte	0x30
+ 262 00f0 00       		.byte	0
+ 263 00f1 00       		.byte	0
+ 264 00f2 08       		.uleb128 0x8
+ 265 00f3 DD000000 		.4byte	.LASF15
+ 266 00f7 01       		.byte	0x1
+ 267 00f8 29       		.byte	0x29
+ 268 00f9 00000000 		.4byte	.LFB2
+ 269 00fd 0A000000 		.4byte	.LFE2-.LFB2
+ 270 0101 01       		.uleb128 0x1
+ 271 0102 9C       		.byte	0x9c
+ 272 0103 18010000 		.4byte	0x118
+ 273 0107 09       		.uleb128 0x9
+ 274 0108 08000000 		.4byte	.LVL4
+ 275 010c 6B010000 		.4byte	0x16b
+ 276 0110 06       		.uleb128 0x6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 7
 
 
- 302 003d 3A       		.uleb128 0x3a
- 303 003e 0B       		.uleb128 0xb
- 304 003f 3B       		.uleb128 0x3b
- 305 0040 0B       		.uleb128 0xb
- 306 0041 27       		.uleb128 0x27
- 307 0042 19       		.uleb128 0x19
- 308 0043 11       		.uleb128 0x11
- 309 0044 01       		.uleb128 0x1
- 310 0045 12       		.uleb128 0x12
- 311 0046 06       		.uleb128 0x6
- 312 0047 40       		.uleb128 0x40
- 313 0048 18       		.uleb128 0x18
- 314 0049 9742     		.uleb128 0x2117
- 315 004b 19       		.uleb128 0x19
- 316 004c 01       		.uleb128 0x1
- 317 004d 13       		.uleb128 0x13
- 318 004e 00       		.byte	0
- 319 004f 00       		.byte	0
- 320 0050 06       		.uleb128 0x6
- 321 0051 898201   		.uleb128 0x4109
- 322 0054 00       		.byte	0
- 323 0055 11       		.uleb128 0x11
- 324 0056 01       		.uleb128 0x1
- 325 0057 31       		.uleb128 0x31
- 326 0058 13       		.uleb128 0x13
- 327 0059 00       		.byte	0
- 328 005a 00       		.byte	0
- 329 005b 07       		.uleb128 0x7
- 330 005c 2E       		.uleb128 0x2e
- 331 005d 01       		.byte	0x1
- 332 005e 3F       		.uleb128 0x3f
- 333 005f 19       		.uleb128 0x19
- 334 0060 03       		.uleb128 0x3
- 335 0061 0E       		.uleb128 0xe
- 336 0062 3A       		.uleb128 0x3a
- 337 0063 0B       		.uleb128 0xb
- 338 0064 3B       		.uleb128 0x3b
- 339 0065 0B       		.uleb128 0xb
- 340 0066 11       		.uleb128 0x11
- 341 0067 01       		.uleb128 0x1
- 342 0068 12       		.uleb128 0x12
- 343 0069 06       		.uleb128 0x6
- 344 006a 40       		.uleb128 0x40
- 345 006b 18       		.uleb128 0x18
- 346 006c 9742     		.uleb128 0x2117
- 347 006e 19       		.uleb128 0x19
- 348 006f 01       		.uleb128 0x1
- 349 0070 13       		.uleb128 0x13
- 350 0071 00       		.byte	0
- 351 0072 00       		.byte	0
- 352 0073 08       		.uleb128 0x8
- 353 0074 898201   		.uleb128 0x4109
- 354 0077 01       		.byte	0x1
- 355 0078 11       		.uleb128 0x11
- 356 0079 01       		.uleb128 0x1
- 357 007a 31       		.uleb128 0x31
- 358 007b 13       		.uleb128 0x13
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 8
+ 277 0111 01       		.uleb128 0x1
+ 278 0112 50       		.byte	0x50
+ 279 0113 02       		.uleb128 0x2
+ 280 0114 09       		.byte	0x9
+ 281 0115 FF       		.byte	0xff
+ 282 0116 00       		.byte	0
+ 283 0117 00       		.byte	0
+ 284 0118 08       		.uleb128 0x8
+ 285 0119 38020000 		.4byte	.LASF16
+ 286 011d 01       		.byte	0x1
+ 287 011e 17       		.byte	0x17
+ 288 011f 00000000 		.4byte	.LFB0
+ 289 0123 14000000 		.4byte	.LFE0-.LFB0
+ 290 0127 01       		.uleb128 0x1
+ 291 0128 9C       		.byte	0x9c
+ 292 0129 4A010000 		.4byte	0x14a
+ 293 012d 07       		.uleb128 0x7
+ 294 012e 06000000 		.4byte	.LVL5
+ 295 0132 F2000000 		.4byte	0xf2
+ 296 0136 09       		.uleb128 0x9
+ 297 0137 0C000000 		.4byte	.LVL6
+ 298 013b 76010000 		.4byte	0x176
+ 299 013f 06       		.uleb128 0x6
+ 300 0140 01       		.uleb128 0x1
+ 301 0141 50       		.byte	0x50
+ 302 0142 05       		.uleb128 0x5
+ 303 0143 03       		.byte	0x3
+ 304 0144 00000000 		.4byte	switch_newState
+ 305 0148 00       		.byte	0
+ 306 0149 00       		.byte	0
+ 307 014a 0A       		.uleb128 0xa
+ 308 014b 03010000 		.4byte	.LASF17
+ 309 014f 03010000 		.4byte	.LASF17
+ 310 0153 02       		.byte	0x2
+ 311 0154 8B       		.byte	0x8b
+ 312 0155 0A       		.uleb128 0xa
+ 313 0156 00000000 		.4byte	.LASF18
+ 314 015a 00000000 		.4byte	.LASF18
+ 315 015e 03       		.byte	0x3
+ 316 015f 2B       		.byte	0x2b
+ 317 0160 0A       		.uleb128 0xa
+ 318 0161 9E010000 		.4byte	.LASF19
+ 319 0165 9E010000 		.4byte	.LASF19
+ 320 0169 04       		.byte	0x4
+ 321 016a 0D       		.byte	0xd
+ 322 016b 0A       		.uleb128 0xa
+ 323 016c 29000000 		.4byte	.LASF20
+ 324 0170 29000000 		.4byte	.LASF20
+ 325 0174 05       		.byte	0x5
+ 326 0175 26       		.byte	0x26
+ 327 0176 0A       		.uleb128 0xa
+ 328 0177 45020000 		.4byte	.LASF21
+ 329 017b 45020000 		.4byte	.LASF21
+ 330 017f 06       		.byte	0x6
+ 331 0180 18       		.byte	0x18
+ 332 0181 00       		.byte	0
+ 333              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 8
 
 
- 359 007c 01       		.uleb128 0x1
- 360 007d 13       		.uleb128 0x13
- 361 007e 00       		.byte	0
- 362 007f 00       		.byte	0
- 363 0080 09       		.uleb128 0x9
- 364 0081 8A8201   		.uleb128 0x410a
- 365 0084 00       		.byte	0
- 366 0085 02       		.uleb128 0x2
- 367 0086 18       		.uleb128 0x18
- 368 0087 9142     		.uleb128 0x2111
- 369 0089 18       		.uleb128 0x18
- 370 008a 00       		.byte	0
- 371 008b 00       		.byte	0
- 372 008c 0A       		.uleb128 0xa
- 373 008d 898201   		.uleb128 0x4109
- 374 0090 01       		.byte	0x1
- 375 0091 11       		.uleb128 0x11
- 376 0092 01       		.uleb128 0x1
- 377 0093 31       		.uleb128 0x31
- 378 0094 13       		.uleb128 0x13
- 379 0095 00       		.byte	0
- 380 0096 00       		.byte	0
- 381 0097 0B       		.uleb128 0xb
- 382 0098 34       		.uleb128 0x34
- 383 0099 00       		.byte	0
- 384 009a 03       		.uleb128 0x3
- 385 009b 0E       		.uleb128 0xe
- 386 009c 3A       		.uleb128 0x3a
- 387 009d 0B       		.uleb128 0xb
- 388 009e 3B       		.uleb128 0x3b
- 389 009f 0B       		.uleb128 0xb
- 390 00a0 49       		.uleb128 0x49
- 391 00a1 13       		.uleb128 0x13
- 392 00a2 3F       		.uleb128 0x3f
- 393 00a3 19       		.uleb128 0x19
- 394 00a4 02       		.uleb128 0x2
- 395 00a5 18       		.uleb128 0x18
- 396 00a6 00       		.byte	0
- 397 00a7 00       		.byte	0
- 398 00a8 0C       		.uleb128 0xc
- 399 00a9 2E       		.uleb128 0x2e
- 400 00aa 00       		.byte	0
- 401 00ab 3F       		.uleb128 0x3f
- 402 00ac 19       		.uleb128 0x19
- 403 00ad 3C       		.uleb128 0x3c
- 404 00ae 19       		.uleb128 0x19
- 405 00af 6E       		.uleb128 0x6e
- 406 00b0 0E       		.uleb128 0xe
- 407 00b1 03       		.uleb128 0x3
- 408 00b2 0E       		.uleb128 0xe
- 409 00b3 3A       		.uleb128 0x3a
- 410 00b4 0B       		.uleb128 0xb
- 411 00b5 3B       		.uleb128 0x3b
- 412 00b6 0B       		.uleb128 0xb
- 413 00b7 00       		.byte	0
- 414 00b8 00       		.byte	0
- 415 00b9 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 9
+ 334              	.Ldebug_abbrev0:
+ 335 0000 01       		.uleb128 0x1
+ 336 0001 11       		.uleb128 0x11
+ 337 0002 01       		.byte	0x1
+ 338 0003 25       		.uleb128 0x25
+ 339 0004 0E       		.uleb128 0xe
+ 340 0005 13       		.uleb128 0x13
+ 341 0006 0B       		.uleb128 0xb
+ 342 0007 03       		.uleb128 0x3
+ 343 0008 0E       		.uleb128 0xe
+ 344 0009 1B       		.uleb128 0x1b
+ 345 000a 0E       		.uleb128 0xe
+ 346 000b 55       		.uleb128 0x55
+ 347 000c 17       		.uleb128 0x17
+ 348 000d 11       		.uleb128 0x11
+ 349 000e 01       		.uleb128 0x1
+ 350 000f 10       		.uleb128 0x10
+ 351 0010 17       		.uleb128 0x17
+ 352 0011 00       		.byte	0
+ 353 0012 00       		.byte	0
+ 354 0013 02       		.uleb128 0x2
+ 355 0014 24       		.uleb128 0x24
+ 356 0015 00       		.byte	0
+ 357 0016 0B       		.uleb128 0xb
+ 358 0017 0B       		.uleb128 0xb
+ 359 0018 3E       		.uleb128 0x3e
+ 360 0019 0B       		.uleb128 0xb
+ 361 001a 03       		.uleb128 0x3
+ 362 001b 0E       		.uleb128 0xe
+ 363 001c 00       		.byte	0
+ 364 001d 00       		.byte	0
+ 365 001e 03       		.uleb128 0x3
+ 366 001f 24       		.uleb128 0x24
+ 367 0020 00       		.byte	0
+ 368 0021 0B       		.uleb128 0xb
+ 369 0022 0B       		.uleb128 0xb
+ 370 0023 3E       		.uleb128 0x3e
+ 371 0024 0B       		.uleb128 0xb
+ 372 0025 03       		.uleb128 0x3
+ 373 0026 08       		.uleb128 0x8
+ 374 0027 00       		.byte	0
+ 375 0028 00       		.byte	0
+ 376 0029 04       		.uleb128 0x4
+ 377 002a 2E       		.uleb128 0x2e
+ 378 002b 01       		.byte	0x1
+ 379 002c 3F       		.uleb128 0x3f
+ 380 002d 19       		.uleb128 0x19
+ 381 002e 03       		.uleb128 0x3
+ 382 002f 0E       		.uleb128 0xe
+ 383 0030 3A       		.uleb128 0x3a
+ 384 0031 0B       		.uleb128 0xb
+ 385 0032 3B       		.uleb128 0x3b
+ 386 0033 0B       		.uleb128 0xb
+ 387 0034 27       		.uleb128 0x27
+ 388 0035 19       		.uleb128 0x19
+ 389 0036 11       		.uleb128 0x11
+ 390 0037 01       		.uleb128 0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 9
 
 
- 416              		.section	.debug_aranges,"",%progbits
- 417 0000 24000000 		.4byte	0x24
- 418 0004 0200     		.2byte	0x2
- 419 0006 00000000 		.4byte	.Ldebug_info0
- 420 000a 04       		.byte	0x4
- 421 000b 00       		.byte	0
- 422 000c 0000     		.2byte	0
- 423 000e 0000     		.2byte	0
- 424 0010 00000000 		.4byte	.LFB1
- 425 0014 0C000000 		.4byte	.LFE1-.LFB1
- 426 0018 00000000 		.4byte	.LFB0
- 427 001c 14000000 		.4byte	.LFE0-.LFB0
- 428 0020 00000000 		.4byte	0
- 429 0024 00000000 		.4byte	0
- 430              		.section	.debug_ranges,"",%progbits
- 431              	.Ldebug_ranges0:
- 432 0000 00000000 		.4byte	.LFB1
- 433 0004 0C000000 		.4byte	.LFE1
- 434 0008 00000000 		.4byte	.LFB0
- 435 000c 14000000 		.4byte	.LFE0
- 436 0010 00000000 		.4byte	0
- 437 0014 00000000 		.4byte	0
- 438              		.section	.debug_line,"",%progbits
- 439              	.Ldebug_line0:
- 440 0000 BC010000 		.section	.debug_str,"MS",%progbits,1
- 440      02009401 
- 440      00000201 
- 440      FB0E0D00 
- 440      01010101 
- 441              	.LASF9:
- 442 0000 5F5F7569 		.ascii	"__uint8_t\000"
- 442      6E74385F 
- 442      7400
- 443              	.LASF20:
- 444 000a 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
- 444      73657273 
- 444      5C6E6963 
- 444      6F5F5C53 
- 444      756E6468 
- 445 0038 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
- 445      6C6F725C 
- 445      42616368 
- 445      656C6F72 
- 445      50726F6A 
- 446 0068 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
- 446      636F6F6C 
- 446      696E6773 
- 446      79737465 
- 446      6D2E6379 
- 447              	.LASF14:
- 448 0080 53776974 		.ascii	"Switch_input_ClearInterrupt\000"
- 448      63685F69 
- 448      6E707574 
- 448      5F436C65 
- 448      6172496E 
- 449              	.LASF17:
- 450 009c 73776974 		.ascii	"switch_input_interrupt_StartEx\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 10
+ 391 0038 12       		.uleb128 0x12
+ 392 0039 06       		.uleb128 0x6
+ 393 003a 40       		.uleb128 0x40
+ 394 003b 18       		.uleb128 0x18
+ 395 003c 9742     		.uleb128 0x2117
+ 396 003e 19       		.uleb128 0x19
+ 397 003f 01       		.uleb128 0x1
+ 398 0040 13       		.uleb128 0x13
+ 399 0041 00       		.byte	0
+ 400 0042 00       		.byte	0
+ 401 0043 05       		.uleb128 0x5
+ 402 0044 898201   		.uleb128 0x4109
+ 403 0047 01       		.byte	0x1
+ 404 0048 11       		.uleb128 0x11
+ 405 0049 01       		.uleb128 0x1
+ 406 004a 31       		.uleb128 0x31
+ 407 004b 13       		.uleb128 0x13
+ 408 004c 01       		.uleb128 0x1
+ 409 004d 13       		.uleb128 0x13
+ 410 004e 00       		.byte	0
+ 411 004f 00       		.byte	0
+ 412 0050 06       		.uleb128 0x6
+ 413 0051 8A8201   		.uleb128 0x410a
+ 414 0054 00       		.byte	0
+ 415 0055 02       		.uleb128 0x2
+ 416 0056 18       		.uleb128 0x18
+ 417 0057 9142     		.uleb128 0x2111
+ 418 0059 18       		.uleb128 0x18
+ 419 005a 00       		.byte	0
+ 420 005b 00       		.byte	0
+ 421 005c 07       		.uleb128 0x7
+ 422 005d 898201   		.uleb128 0x4109
+ 423 0060 00       		.byte	0
+ 424 0061 11       		.uleb128 0x11
+ 425 0062 01       		.uleb128 0x1
+ 426 0063 31       		.uleb128 0x31
+ 427 0064 13       		.uleb128 0x13
+ 428 0065 00       		.byte	0
+ 429 0066 00       		.byte	0
+ 430 0067 08       		.uleb128 0x8
+ 431 0068 2E       		.uleb128 0x2e
+ 432 0069 01       		.byte	0x1
+ 433 006a 3F       		.uleb128 0x3f
+ 434 006b 19       		.uleb128 0x19
+ 435 006c 03       		.uleb128 0x3
+ 436 006d 0E       		.uleb128 0xe
+ 437 006e 3A       		.uleb128 0x3a
+ 438 006f 0B       		.uleb128 0xb
+ 439 0070 3B       		.uleb128 0x3b
+ 440 0071 0B       		.uleb128 0xb
+ 441 0072 11       		.uleb128 0x11
+ 442 0073 01       		.uleb128 0x1
+ 443 0074 12       		.uleb128 0x12
+ 444 0075 06       		.uleb128 0x6
+ 445 0076 40       		.uleb128 0x40
+ 446 0077 18       		.uleb128 0x18
+ 447 0078 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 10
 
 
- 450      63685F69 
- 450      6E707574 
- 450      5F696E74 
- 450      65727275 
- 451              	.LASF11:
- 452 00bb 666C6F61 		.ascii	"float\000"
- 452      7400
- 453              	.LASF1:
- 454 00c1 756E7369 		.ascii	"unsigned char\000"
- 454      676E6564 
- 454      20636861 
- 454      7200
- 455              	.LASF18:
- 456 00cf 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 456      43313120 
- 456      352E342E 
- 456      31203230 
- 456      31363036 
- 457 0102 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 457      20726576 
- 457      6973696F 
- 457      6E203233 
- 457      37373135 
- 458 0135 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 458      66756E63 
- 458      74696F6E 
- 458      2D736563 
- 458      74696F6E 
- 459              	.LASF5:
- 460 015d 6C6F6E67 		.ascii	"long unsigned int\000"
- 460      20756E73 
- 460      69676E65 
- 460      6420696E 
- 460      7400
- 461              	.LASF3:
- 462 016f 73686F72 		.ascii	"short unsigned int\000"
- 462      7420756E 
- 462      7369676E 
- 462      65642069 
- 462      6E7400
- 463              	.LASF16:
- 464 0182 53776974 		.ascii	"Switch_output_Write\000"
- 464      63685F6F 
- 464      75747075 
- 464      745F5772 
- 464      69746500 
- 465              	.LASF21:
- 466 0196 73776974 		.ascii	"switch_newState\000"
- 466      63685F6E 
- 466      65775374 
- 466      61746500 
- 467              	.LASF12:
- 468 01a6 646F7562 		.ascii	"double\000"
- 468      6C6500
- 469              	.LASF8:
- 470 01ad 756E7369 		.ascii	"unsigned int\000"
- 470      676E6564 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccwIoyfK.s 			page 11
+ 448 007a 19       		.uleb128 0x19
+ 449 007b 01       		.uleb128 0x1
+ 450 007c 13       		.uleb128 0x13
+ 451 007d 00       		.byte	0
+ 452 007e 00       		.byte	0
+ 453 007f 09       		.uleb128 0x9
+ 454 0080 898201   		.uleb128 0x4109
+ 455 0083 01       		.byte	0x1
+ 456 0084 11       		.uleb128 0x11
+ 457 0085 01       		.uleb128 0x1
+ 458 0086 31       		.uleb128 0x31
+ 459 0087 13       		.uleb128 0x13
+ 460 0088 00       		.byte	0
+ 461 0089 00       		.byte	0
+ 462 008a 0A       		.uleb128 0xa
+ 463 008b 2E       		.uleb128 0x2e
+ 464 008c 00       		.byte	0
+ 465 008d 3F       		.uleb128 0x3f
+ 466 008e 19       		.uleb128 0x19
+ 467 008f 3C       		.uleb128 0x3c
+ 468 0090 19       		.uleb128 0x19
+ 469 0091 6E       		.uleb128 0x6e
+ 470 0092 0E       		.uleb128 0xe
+ 471 0093 03       		.uleb128 0x3
+ 472 0094 0E       		.uleb128 0xe
+ 473 0095 3A       		.uleb128 0x3a
+ 474 0096 0B       		.uleb128 0xb
+ 475 0097 3B       		.uleb128 0x3b
+ 476 0098 0B       		.uleb128 0xb
+ 477 0099 00       		.byte	0
+ 478 009a 00       		.byte	0
+ 479 009b 00       		.byte	0
+ 480              		.section	.debug_aranges,"",%progbits
+ 481 0000 34000000 		.4byte	0x34
+ 482 0004 0200     		.2byte	0x2
+ 483 0006 00000000 		.4byte	.Ldebug_info0
+ 484 000a 04       		.byte	0x4
+ 485 000b 00       		.byte	0
+ 486 000c 0000     		.2byte	0
+ 487 000e 0000     		.2byte	0
+ 488 0010 00000000 		.4byte	.LFB3
+ 489 0014 18000000 		.4byte	.LFE3-.LFB3
+ 490 0018 00000000 		.4byte	.LFB1
+ 491 001c 0A000000 		.4byte	.LFE1-.LFB1
+ 492 0020 00000000 		.4byte	.LFB2
+ 493 0024 0A000000 		.4byte	.LFE2-.LFB2
+ 494 0028 00000000 		.4byte	.LFB0
+ 495 002c 14000000 		.4byte	.LFE0-.LFB0
+ 496 0030 00000000 		.4byte	0
+ 497 0034 00000000 		.4byte	0
+ 498              		.section	.debug_ranges,"",%progbits
+ 499              	.Ldebug_ranges0:
+ 500 0000 00000000 		.4byte	.LFB3
+ 501 0004 18000000 		.4byte	.LFE3
+ 502 0008 00000000 		.4byte	.LFB1
+ 503 000c 0A000000 		.4byte	.LFE1
+ 504 0010 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 11
 
 
- 470      20696E74 
- 470      00
- 471              	.LASF7:
- 472 01ba 6C6F6E67 		.ascii	"long long unsigned int\000"
- 472      206C6F6E 
- 472      6720756E 
- 472      7369676E 
- 472      65642069 
- 473              	.LASF10:
- 474 01d1 75696E74 		.ascii	"uint8_t\000"
- 474      385F7400 
- 475              	.LASF23:
- 476 01d9 53776974 		.ascii	"Switch_State\000"
- 476      63685F53 
- 476      74617465 
- 476      00
- 477              	.LASF22:
- 478 01e6 53776974 		.ascii	"Switch_Setup\000"
- 478      63685F53 
- 478      65747570 
- 478      00
- 479              	.LASF6:
- 480 01f3 6C6F6E67 		.ascii	"long long int\000"
- 480      206C6F6E 
- 480      6720696E 
- 480      7400
- 481              	.LASF13:
- 482 0201 63686172 		.ascii	"char\000"
- 482      00
- 483              	.LASF2:
- 484 0206 73686F72 		.ascii	"short int\000"
- 484      7420696E 
- 484      7400
- 485              	.LASF19:
- 486 0210 73776974 		.ascii	"switch.c\000"
- 486      63682E63 
- 486      00
- 487              	.LASF4:
- 488 0219 6C6F6E67 		.ascii	"long int\000"
- 488      20696E74 
- 488      00
- 489              	.LASF0:
- 490 0222 7369676E 		.ascii	"signed char\000"
- 490      65642063 
- 490      68617200 
- 491              	.LASF15:
- 492 022e 53797374 		.ascii	"System_newState\000"
- 492      656D5F6E 
- 492      65775374 
- 492      61746500 
- 493              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 505 0014 0A000000 		.4byte	.LFE2
+ 506 0018 00000000 		.4byte	.LFB0
+ 507 001c 14000000 		.4byte	.LFE0
+ 508 0020 00000000 		.4byte	0
+ 509 0024 00000000 		.4byte	0
+ 510              		.section	.debug_line,"",%progbits
+ 511              	.Ldebug_line0:
+ 512 0000 EC000000 		.section	.debug_str,"MS",%progbits,1
+ 512      0200A300 
+ 512      00000201 
+ 512      FB0E0D00 
+ 512      01010101 
+ 513              	.LASF18:
+ 514 0000 53776974 		.ascii	"Switch_input_ClearInterrupt\000"
+ 514      63685F69 
+ 514      6E707574 
+ 514      5F436C65 
+ 514      6172496E 
+ 515              	.LASF8:
+ 516 001c 756E7369 		.ascii	"unsigned int\000"
+ 516      676E6564 
+ 516      20696E74 
+ 516      00
+ 517              	.LASF20:
+ 518 0029 53776974 		.ascii	"Switch_output_Write\000"
+ 518      63685F6F 
+ 518      75747075 
+ 518      745F5772 
+ 518      69746500 
+ 519              	.LASF22:
+ 520 003d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 520      43313120 
+ 520      352E342E 
+ 520      31203230 
+ 520      31363036 
+ 521 0070 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 521      20726576 
+ 521      6973696F 
+ 521      6E203233 
+ 521      37373135 
+ 522 00a3 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 522      66756E63 
+ 522      74696F6E 
+ 522      2D736563 
+ 522      74696F6E 
+ 523              	.LASF5:
+ 524 00cb 6C6F6E67 		.ascii	"long unsigned int\000"
+ 524      20756E73 
+ 524      69676E65 
+ 524      6420696E 
+ 524      7400
+ 525              	.LASF15:
+ 526 00dd 53776974 		.ascii	"Switch_Startup\000"
+ 526      63685F53 
+ 526      74617274 
+ 526      757000
+ 527              	.LASF7:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 12
+
+
+ 528 00ec 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 528      206C6F6E 
+ 528      6720756E 
+ 528      7369676E 
+ 528      65642069 
+ 529              	.LASF17:
+ 530 0103 55415254 		.ascii	"UART_1_PutString\000"
+ 530      5F315F50 
+ 530      75745374 
+ 530      72696E67 
+ 530      00
+ 531              	.LASF9:
+ 532 0114 666C6F61 		.ascii	"float\000"
+ 532      7400
+ 533              	.LASF24:
+ 534 011a 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 534      73657273 
+ 534      5C6E6963 
+ 534      6F5F5C53 
+ 534      756E6468 
+ 535 0148 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 535      6C6F725C 
+ 535      42616368 
+ 535      656C6F72 
+ 535      50726F6A 
+ 536 0178 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 536      636F6F6C 
+ 536      696E6773 
+ 536      79737465 
+ 536      6D2E6379 
+ 537              	.LASF1:
+ 538 0190 756E7369 		.ascii	"unsigned char\000"
+ 538      676E6564 
+ 538      20636861 
+ 538      7200
+ 539              	.LASF19:
+ 540 019e 53797374 		.ascii	"System_newState\000"
+ 540      656D5F6E 
+ 540      65775374 
+ 540      61746500 
+ 541              	.LASF11:
+ 542 01ae 63686172 		.ascii	"char\000"
+ 542      00
+ 543              	.LASF14:
+ 544 01b3 53776974 		.ascii	"Switch_Shutdown\000"
+ 544      63685F53 
+ 544      68757464 
+ 544      6F776E00 
+ 545              	.LASF4:
+ 546 01c3 6C6F6E67 		.ascii	"long int\000"
+ 546      20696E74 
+ 546      00
+ 547              	.LASF10:
+ 548 01cc 646F7562 		.ascii	"double\000"
+ 548      6C6500
+ 549              	.LASF6:
+ 550 01d3 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cce3LmLi.s 			page 13
+
+
+ 550      206C6F6E 
+ 550      6720696E 
+ 550      7400
+ 551              	.LASF25:
+ 552 01e1 73776974 		.ascii	"switch_newState\000"
+ 552      63685F6E 
+ 552      65775374 
+ 552      61746500 
+ 553              	.LASF3:
+ 554 01f1 73686F72 		.ascii	"short unsigned int\000"
+ 554      7420756E 
+ 554      7369676E 
+ 554      65642069 
+ 554      6E7400
+ 555              	.LASF0:
+ 556 0204 7369676E 		.ascii	"signed char\000"
+ 556      65642063 
+ 556      68617200 
+ 557              	.LASF12:
+ 558 0210 6C6F6E67 		.ascii	"long double\000"
+ 558      20646F75 
+ 558      626C6500 
+ 559              	.LASF23:
+ 560 021c 73776974 		.ascii	"switch.c\000"
+ 560      63682E63 
+ 560      00
+ 561              	.LASF13:
+ 562 0225 73697A65 		.ascii	"sizetype\000"
+ 562      74797065 
+ 562      00
+ 563              	.LASF2:
+ 564 022e 73686F72 		.ascii	"short int\000"
+ 564      7420696E 
+ 564      7400
+ 565              	.LASF16:
+ 566 0238 53776974 		.ascii	"Switch_Setup\000"
+ 566      63685F53 
+ 566      65747570 
+ 566      00
+ 567              	.LASF21:
+ 568 0245 73776974 		.ascii	"switch_input_interrupt_StartEx\000"
+ 568      63685F69 
+ 568      6E707574 
+ 568      5F696E74 
+ 568      65727275 
+ 569              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

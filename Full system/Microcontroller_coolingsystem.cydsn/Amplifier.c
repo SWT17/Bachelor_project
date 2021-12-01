@@ -22,7 +22,7 @@ void Clear_Fault();
 void Set_ConverionMode(char conversionmode);
 void WriteByteToAdress(char adress, char data);
 char ReadByteFromAdress(char adress);
-uint16_t Concacenate_RTDdata(uint8_t MSB, uint8_t LSB);
+uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB);
 
 /*Internal variables declartion*/
 uint16_t rtd_ratio;
@@ -48,7 +48,7 @@ void MAX31865_Setup()
 
 /*Retrieve RTD ration by reading the RTD msb byte and 
 the RTD lsb byte from the amplifier registers*/
-uint16_t GetRtdRatio()
+uint16 GetRtdRatio()
 {
     
     uint16_t rtd_ratio;
@@ -58,7 +58,7 @@ uint16_t GetRtdRatio()
     //Read LSB byte from amplifier
     char RTD_lsb = ReadByteFromAdress(READ_RTD_LSB_REG_ADRESS);
     
-    rtd_ratio = Concacenate_RTDdata(RTD_msb, RTD_lsb);
+    rtd_ratio = Conc_RTDdata(RTD_msb, RTD_lsb);
     
     return rtd_ratio;
 }
@@ -91,7 +91,7 @@ void Amplifier_Startup()
 }
 
 
-uint16_t Concacenate_RTDdata(uint8_t MSB, uint8_t LSB)
+uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB)
 {
     //Concatenate MSB and LSB to form the 15 Bit RTD ration according to datasheet MAX31865 page 15 Table. 4
     rtd_ratio = ((uint16_t)MSB << 7) | LSB>>1;

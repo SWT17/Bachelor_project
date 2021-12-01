@@ -11,29 +11,32 @@
 */
 
 #include "SystemController.h"
+#include "RTD_1.h"
 
-
+/*Function delcations*/
+void System_Setup();
+void System_On();
+void System_Off();
 CY_ISR_PROTO(ISR_CLOCK_handler);
 
+/*Varible decleration*/
 uint8_t Switch_State;
 uint16 rtd_ratio ;
-uint16 ref_res = 4300;
-char bit;
+uint16 ref_res = 4300; //Reference resistance on the amplifier circuit
 
 
 int main(void)
 {   
 
-    
+
     System_Setup();
+
+    calc_Calctemp_RatiosSent_RTDresistancereceived();
     
-    /*Start counter*/
-    Temp_sample_counter_Start();
-    
-    
+    /*Wait for interrupts*/
     for(;;)
     {
-        /* Place your application code here. */
+       
     }
  
 }
@@ -45,14 +48,16 @@ void System_On()
     Amplifier_Startup();
     
     //Start up the pump
-    Pump_Startup();
+    Pump_Startup(2500);
     
      /*Start Clock interrupt form polling temperature data.*/
     Clock_TempSampling_Start();
+    /*Start counter for sampling the temperature*/
+    Temp_sample_counter_Start();
     isr_clock_StartEx(ISR_CLOCK_handler); 
     
     //Turn on indicator LED
-    LED_pin_Write(255);
+    TurnON();
 }
 
 /*Turn system off after being in system on state*/
@@ -68,7 +73,7 @@ void System_Off()
     Amplifier_Shutdown();
     
     //Turn off the indicator LED
-    LED_pin_Write(0);
+    TurnOFF();
     
 }
 
@@ -79,25 +84,22 @@ void System_Setup()
     CyGlobalIntEnable; 
     //System is off, set state to 0.
     Switch_State = 0;
-    
+       
     /*Start UART*/
     UART_1_Start();
     
     /*Set up input voltage to HIGH on HW switch input pin*/     
     Switch_Setup();
     
-    /* Stop pump from starting because of setup of transistor*/
+    /*Setup the two VDAC and the PGA. Stop pump from starting because of setup of transistor*/
     Pump_Setup();
      
-    /*Setup amplifier*/
+    /*Setup SPI and then the amplifier*/
     Amplifier_Setup();
     
     /*Setup the Temperature domain class with reference resistance value*/
     Temperature_Setup(ref_res);
-        
-    /* Setup switch*/
-    Switch_Setup();
-    
+            
 }
 
 void System_newState()
@@ -120,9 +122,7 @@ void System_newState()
 
 CY_ISR(ISR_CLOCK_handler)
 {
-    
-    UART_1_PutString("Counter interrupt activated \r\n");
-    
+
     //Code to fetch temperature here
     rtd_ratio = GetRtdRatio();
     

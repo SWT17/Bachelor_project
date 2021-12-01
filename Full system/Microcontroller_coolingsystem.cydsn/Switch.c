@@ -11,6 +11,7 @@
 */
 
 #include "switch.h"
+#include "UART_1.h"
 
 /*Setup interrupt handler*/
 CY_ISR_PROTO(switch_newState);
@@ -44,11 +45,12 @@ void Switch_Startup()
 
 /*Interrupt handler for the switch interrupt*/
 CY_ISR(switch_newState)
-{
-      
+{    
+    UART_1_PutString("Switch has been triggered \r\n");
     /*Clears interrupts and enable detection of future interrupts*/
     Switch_input_ClearInterrupt();
     
+
     //Call system controller that new state is triggered.
     System_newState();
     

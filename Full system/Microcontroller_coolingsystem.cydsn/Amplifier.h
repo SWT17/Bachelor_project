@@ -19,7 +19,7 @@
 void Amplifier_Setup();
 void Amplifier_Shutdown();
 void Amplifier_Startup();
-uint16_t GetRtdRatio();
+uint16 GetRtdRatio();
 
 
 /* [] END OF FILE */

@@ -79,9 +79,6 @@
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.h" value="HEADER;;;;;VDAC8_Enabling" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1_aliases.h" value="HEADER;;;;;Pin_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1.c" value="SOURCE_C;CortexM3;;;;Pin_1" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Pin_1.h" value="HEADER;;;;;Pin_1" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SPIM_1_IntClock.c" value="SOURCE_C;CortexM3;;;;SPIM_1_IntClock" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\SPIM_1_IntClock.h" value="HEADER;;;;;SPIM_1_IntClock" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\UART_1_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_1_IntClock" />

@@ -2,7 +2,7 @@
 --	Conversion of Microcontroller_coolingsystem.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat Nov 27 21:00:16 2021
+--	Mon Nov 29 19:07:11 2021
 --
 
 USE cypress.cypress.all;
@@ -561,12 +561,6 @@ SIGNAL \VDAC8_Enabling:Net_83\ : bit;
 SIGNAL \VDAC8_Enabling:Net_81\ : bit;
 SIGNAL \VDAC8_Enabling:Net_82\ : bit;
 TERMINAL \VDAC8_Enabling:Net_77\ : bit;
-SIGNAL tmpOE__Pin_1_net_0 : bit;
-SIGNAL tmpFB_0__Pin_1_net_0 : bit;
-TERMINAL Net_228 : bit;
-SIGNAL tmpIO_0__Pin_1_net_0 : bit;
-TERMINAL tmpSIOVREF__Pin_1_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__Pin_1_net_0 : bit;
 SIGNAL Net_25D : bit;
 SIGNAL \SPIM_1:BSPIM:dpcounter_one_reg\\D\ : bit;
 SIGNAL \SPIM_1:BSPIM:so_send_reg\\D\ : bit;
@@ -1941,7 +1935,7 @@ Switch_output:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"39f5748d-4be2-4f7e-b606-1eed3fb78ade",
 		drive_mode=>"011",
 		ibuf_enabled=>"1",
-		init_dr_st=>"1",
+		init_dr_st=>"0",
 		input_sync=>"1",
 		input_clk_en=>'0',
 		input_sync_mode=>"0",
@@ -2106,76 +2100,6 @@ Clock_SPI:cy_clock_v1_0
 		iout=>\VDAC8_Enabling:Net_77\);
 \VDAC8_Enabling:cy_analog_noconnect_1\:cy_analog_noconnect_v1_0
 	PORT MAP(noconnect=>\VDAC8_Enabling:Net_77\);
-Pin_1:cy_psoc3_pins_v1_10
-	GENERIC MAP(id=>"8fc508cf-5db0-4bc7-89c7-981473dd2b20",
-		drive_mode=>"000",
-		ibuf_enabled=>"0",
-		init_dr_st=>"0",
-		input_sync=>"1",
-		input_clk_en=>'0',
-		input_sync_mode=>"0",
-		intr_mode=>"00",
-		invert_in_clock=>'0',
-		invert_in_clock_en=>'0',
-		invert_in_reset=>'0',
-		invert_out_clock=>'0',
-		invert_out_clock_en=>'0',
-		invert_out_reset=>'0',
-		io_voltage=>"",
-		layout_mode=>"CONTIGUOUS",
-		output_conn=>"0",
-		output_sync=>"0",
-		output_clk_en=>'0',
-		output_mode=>"0",
-		output_reset=>'0',
-		output_clock_mode=>"0",
-		oe_sync=>"0",
-		oe_conn=>"0",
-		oe_reset=>'0',
-		pin_aliases=>"",
-		pin_mode=>"A",
-		por_state=>4,
-		sio_group_cnt=>0,
-		sio_hifreq=>"00000000",
-		sio_hyst=>"1",
-		sio_ibuf=>"00000000",
-		sio_info=>"00",
-		sio_obuf=>"00000000",
-		sio_refsel=>"00000000",
-		sio_vtrip=>"00000000",
-		sio_vohsel=>"00000000",
-		slew_rate=>"0",
-		spanning=>'0',
-		sw_only=>'0',
-		vtrip=>"10",
-		width=>1,
-		port_alias_required=>'0',
-		port_alias_group=>"",
-		use_annotation=>"0",
-		pa_in_clock=>-1,
-		pa_in_clock_en=>-1,
-		pa_in_reset=>-1,
-		pa_out_clock=>-1,
-		pa_out_clock_en=>-1,
-		pa_out_reset=>-1,
-		ovt_needed=>"0",
-		ovt_slew_control=>"00",
-		ovt_hyst_trim=>"0",
-		input_buffer_sel=>"00")
-	PORT MAP(oe=>(tmpOE__MISO_2_net_0),
-		y=>(zero),
-		fb=>(tmpFB_0__Pin_1_net_0),
-		analog=>Net_228,
-		io=>(tmpIO_0__Pin_1_net_0),
-		siovref=>(tmpSIOVREF__Pin_1_net_0),
-		annotation=>(open),
-		in_clock=>zero,
-		in_clock_en=>tmpOE__MISO_2_net_0,
-		in_reset=>zero,
-		out_clock=>zero,
-		out_clock_en=>tmpOE__MISO_2_net_0,
-		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__Pin_1_net_0);
 Net_25:cy_dff
 	PORT MAP(d=>Net_25D,
 		clk=>\SPIM_1:BSPIM:clk_fin\,

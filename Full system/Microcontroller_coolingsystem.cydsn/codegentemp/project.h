@@ -50,8 +50,6 @@
 #include "switch_input_interrupt.h"
 #include "Clock_SPI.h"
 #include "VDAC8_Enabling.h"
-#include "Pin_1_aliases.h"
-#include "Pin_1.h"
 #include "SPIM_1_IntClock.h"
 #include "UART_1_IntClock.h"
 #include "core_cm3_psoc5.h"

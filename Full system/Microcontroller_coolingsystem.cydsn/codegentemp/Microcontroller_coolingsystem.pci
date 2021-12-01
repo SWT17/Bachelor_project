@@ -1,5 +1,5 @@
 # Microcontroller_coolingsystem
-# 2021-11-27 20:00:18Z
+# 2021-11-29 18:07:13Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -15,7 +15,9 @@ set_io "Speed_pin(0)" iocell 0 2
 set_io "Rx_1(0)" iocell 12 6
 set_io "Tx_1(0)" iocell 12 7
 set_io "Enable_pin(0)" iocell 1 7
-set_io "Pin_1(0)" iocell 3 5
+set_io "LED_pin(0)" iocell 0 1
+set_io "Switch_output(0)" iocell 0 3
+set_io "Switch_input(0)" iocell 0 0
 set_location "\PGA_SpeedControl:SC\" sccell -1 -1 2
 set_location "\VDAC8_SpeedControl:viDAC8\" vidaccell -1 -1 2
-set_location "\VDAC8_Enabling:viDAC8\" vidaccell -1 -1 3
+set_location "\VDAC8_Enabling:viDAC8\" vidaccell -1 -1 1

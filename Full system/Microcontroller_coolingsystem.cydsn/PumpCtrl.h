@@ -16,8 +16,9 @@
 #include "VDAC8_Enabling.h"
 #include "Enable_pin.h"
 
+void Pump_Setup();
 void Pump_Shutdown();
-void Pump_Startup();
+void Pump_Startup(uint16 constVoltage);
 void Pump_Stop();
 void Pump_Start();
 

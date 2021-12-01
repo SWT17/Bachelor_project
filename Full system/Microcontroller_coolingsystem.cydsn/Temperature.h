@@ -11,10 +11,11 @@
 */
 #pragma once
 #include <stdio.h>
+#include <math.h>
 #include "RTD_1.h"
 
 void Temperature_Setup(uint16_t ref_res);
-uint8_t GetTemperature();
-void SetTemperature(uint16_t rtd_ratio);
+int32 GetTemperature();
+void SetTemperature(uint16 rtd_ratio);
 
 /* [] END OF FILE */
