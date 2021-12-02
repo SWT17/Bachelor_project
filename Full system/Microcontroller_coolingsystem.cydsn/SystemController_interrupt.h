@@ -10,6 +10,7 @@
  * ========================================
 */
 
-void System_newState();
+#include "cytypes.h"
+void System_newState(uint8 state);
 
 /* [] END OF FILE */

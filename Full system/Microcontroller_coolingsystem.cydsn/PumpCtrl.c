@@ -12,6 +12,10 @@
 #include "PumpCtrl.h"
 
 float voltage;
+uint8 output_voltage;
+uint8 speed;
+uint8 const_speed;
+
 void SetSpeed(uint8_t speed);
 uint8 SetConstSpeed(uint16 speed_control_voltage);
 
@@ -26,7 +30,6 @@ void Pump_Setup()
     
     //Set range for the VDAC for enabling through the transistor
     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V);   
-
     
     //Start VDAC_enabling
     VDAC8_Enabling_Start();
@@ -52,16 +55,17 @@ void Pump_Shutdown()
 /*Controlled startup of pump*/
 void Pump_Startup(uint16 constVoltage)
 {
+    //Start VDAC to output the speed control voltage
+    VDAC8_SpeedControl_Start();
     //Start PGA for speed control
     PGA_SpeedControl_Start();
     
+
+    
     //Set speed control voltage to 2.5V
-    uint8 speed = SetConstSpeed(constVoltage);
+    speed = SetConstSpeed(constVoltage);
     VDAC8_SpeedControl_SetValue(speed);
      
-    //Start VDAC to output the speed control voltage
-    VDAC8_SpeedControl_Start();
-    
     //Call Pump start
     Pump_Start();
 }
@@ -81,7 +85,8 @@ board to ground. This stop the pump.*/
 void Pump_Stop()
 {
     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
-    VDAC8_Enabling_SetValue(4.080*3.2/255); 
+    output_voltage = (uint8)(3200*4080/255);
+    VDAC8_Enabling_SetValue(output_voltage); 
     
 }
 
@@ -117,7 +122,7 @@ void SetSpeed(uint8_t speed)
 /*Set a constant hardcoded speed for the speed control.*/
 uint8 SetConstSpeed(uint16 speed_control_voltage)
 {
-    uint8 const_speed = (speed_control_voltage*256)/(4096*2); //Calculate the speed corresponding to 2.5V output
+    const_speed = (speed_control_voltage*256)/(4080*2); //Calculate the speed corresponding to 2.5V output
     return const_speed;
 }
 /* [] END OF FILE */

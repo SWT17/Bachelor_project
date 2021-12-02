@@ -74,8 +74,6 @@
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Switch_input.h" value="HEADER;;;;;Switch_input" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\switch_input_interrupt.c" value="SOURCE_C;CortexM3;;;;switch_input_interrupt" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\switch_input_interrupt.h" value="HEADER;;;;;switch_input_interrupt" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_SPI.c" value="SOURCE_C;CortexM3;;;;Clock_SPI" />
-  <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\Clock_SPI.h" value="HEADER;;;;;Clock_SPI" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling.h" value="HEADER;;;;;VDAC8_Enabling" />
   <file name="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\codegentemp\VDAC8_Enabling_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_Enabling" />

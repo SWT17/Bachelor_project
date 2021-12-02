@@ -48,7 +48,6 @@
 #include "Switch_input_aliases.h"
 #include "Switch_input.h"
 #include "switch_input_interrupt.h"
-#include "Clock_SPI.h"
 #include "VDAC8_Enabling.h"
 #include "SPIM_1_IntClock.h"
 #include "UART_1_IntClock.h"

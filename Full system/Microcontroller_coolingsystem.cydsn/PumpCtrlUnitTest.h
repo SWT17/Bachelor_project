@@ -12,7 +12,6 @@
 #pragma once
 #include "PumpCtrl.h"
 #include "UART_1.h"
-static char outputBuffer[256];
 
 void Run_Tests();
 /* [] END OF FILE */

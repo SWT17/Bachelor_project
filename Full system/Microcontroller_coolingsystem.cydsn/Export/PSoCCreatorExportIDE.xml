@@ -179,8 +179,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_SpeedControl.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_SpeedControl.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_SpeedControl_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_SPI.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_SPI.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_Enabling.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_Enabling.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_Enabling_PM.c</File>

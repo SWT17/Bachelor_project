@@ -20,7 +20,7 @@ void System_Off();
 CY_ISR_PROTO(ISR_CLOCK_handler);
 
 /*Varible decleration*/
-uint8_t Switch_State;
+uint8 Switch_State;
 uint16 rtd_ratio ;
 uint16 ref_res = 4300; //Reference resistance on the amplifier circuit
 
@@ -28,10 +28,8 @@ uint16 ref_res = 4300; //Reference resistance on the amplifier circuit
 int main(void)
 {   
 
-
     System_Setup();
 
-    calc_Calctemp_RatiosSent_RTDresistancereceived();
     
     /*Wait for interrupts*/
     for(;;)
@@ -48,12 +46,14 @@ void System_On()
     Amplifier_Startup();
     
     //Start up the pump
-    Pump_Startup(2500);
+    Pump_Startup(2000);
     
      /*Start Clock interrupt form polling temperature data.*/
     Clock_TempSampling_Start();
+    
     /*Start counter for sampling the temperature*/
     Temp_sample_counter_Start();
+    Clock_TempSampling_Start();
     isr_clock_StartEx(ISR_CLOCK_handler); 
     
     //Turn on indicator LED
@@ -65,6 +65,9 @@ void System_Off()
 {
     //Stop the clock interrupt routine
     isr_clock_Disable();
+    
+    //Stop the clock of the temperature sampling
+    Clock_TempSampling_Stop();
     
     //Shut down the pump
     Pump_Shutdown();
@@ -102,19 +105,17 @@ void System_Setup()
             
 }
 
-void System_newState()
+void System_newState(uint8 switchstate)
 {
+    Switch_State = switchstate;
+    
     if(!Switch_State)
     {
-        //Set new state to 0.
-        Switch_State = 1;
         //Turn system on. 
         System_On();
         
     }else
     {
-        //New state 1.
-        Switch_State = 0;
         //Turn system off. 
         System_Off();
     }
@@ -128,9 +129,18 @@ CY_ISR(ISR_CLOCK_handler)
     
     //Set the new temperature measurement.
     SetTemperature(rtd_ratio);
+    
+    //Get temperature sample and print to uart
+    char temp[50];
+            
+    float temp_string = GetTemperature();
+    sprintf(temp,"Temperatur: %f\n\r",temp_string);
+    UART_1_PutString(temp);
+
        
     /*Clears counter     interrupt*/
     Temp_sample_counter_ReadStatusRegister();
+    
 }
 
 

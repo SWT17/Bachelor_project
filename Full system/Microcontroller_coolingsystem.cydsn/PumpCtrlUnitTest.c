@@ -32,14 +32,14 @@ void setConstantSpeed_SetVoltage1_5_and2_4_SpeedIs47_and_75()
     UART_1_PutString("Speed control voltage set to 1500 mV\r\n");
     Pump_Startup(1500);
     speed = (1500*256)/(4096*2);;
-    snprintf(outputBuffer, sizeof(outputBuffer), "Expected result is 46: result = %u;\r\n",speed);
-    UART_1_PutString(outputBuffer);
-    
+//    snprintf(outputBuffer, sizeof(outputBuffer), "Expected result is 46: result = %u;\r\n",speed);
+//    UART_1_PutString(outputBuffer);
+//    
     UART_1_PutString("Speed control voltage set to 24000 mV\r\n");
     Pump_Startup(1500);
     speed = (2400*256)/(4096*2);;
-    snprintf(outputBuffer, sizeof(outputBuffer), "Expected result is 75: result = %u;\r\n",speed);
-    UART_1_PutString(outputBuffer);
+//    snprintf(outputBuffer, sizeof(outputBuffer), "Expected result is 75: result = %u;\r\n",speed);
+//    UART_1_PutString(outputBuffer);
 
 }
 

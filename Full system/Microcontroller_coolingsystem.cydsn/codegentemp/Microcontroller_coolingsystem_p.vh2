@@ -1,5 +1,5 @@
 -- Project:   Microcontroller_coolingsystem
--- Generated: 11/29/2021 19:07:13
+-- Generated: 12/02/2021 13:02:59
 -- PSoC Creator  4.4
 
 ENTITY Microcontroller_coolingsystem IS
@@ -47,9 +47,6 @@ ARCHITECTURE __DEFAULT__ OF Microcontroller_coolingsystem IS
     SIGNAL Net_14 : bit;
     SIGNAL Net_167 : bit;
     SIGNAL Net_19 : bit;
-    SIGNAL Net_210 : bit;
-    ATTRIBUTE global_signal OF Net_210 : SIGNAL IS true;
-    SIGNAL Net_210_local : bit;
     SIGNAL Net_212 : bit;
     SIGNAL Net_23 : bit;
     SIGNAL Net_25 : bit;
@@ -147,7 +144,7 @@ ARCHITECTURE __DEFAULT__ OF Microcontroller_coolingsystem IS
     ATTRIBUTE POWER OF tmpOE__MISO_2_net_0 : SIGNAL IS true;
     SIGNAL zero : bit;
     ATTRIBUTE GROUND OF zero : SIGNAL IS true;
-    SIGNAL \ClockBlock.dclk_glb_ff_3__sig\ : bit;
+    SIGNAL \ClockBlock.dclk_glb_ff_2__sig\ : bit;
     ATTRIBUTE lib_model OF MISO_2(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF MISO_2(0) : LABEL IS "P15[0]";
     ATTRIBUTE lib_model OF MOSI_2(0) : LABEL IS "iocell2";
@@ -586,11 +583,9 @@ BEGIN
             dclk_0 => \SPIM_1:Net_276_local\,
             dclk_glb_1 => \UART_1:Net_9\,
             dclk_1 => \UART_1:Net_9_local\,
-            dclk_glb_2 => Net_210,
-            dclk_2 => Net_210_local,
-            dclk_glb_3 => Net_134,
-            dclk_3 => Net_134_local,
-            dclk_glb_ff_3 => \ClockBlock.dclk_glb_ff_3__sig\);
+            dclk_glb_2 => Net_134,
+            dclk_2 => Net_134_local,
+            dclk_glb_ff_2 => \ClockBlock.dclk_glb_ff_2__sig\);
 
     MISO_2:logicalport
         GENERIC MAP(
@@ -2041,7 +2036,7 @@ BEGIN
         GENERIC MAP(
             cy_registers => "")
         PORT MAP(
-            clock => \ClockBlock.dclk_glb_ff_3__sig\,
+            clock => \ClockBlock.dclk_glb_ff_2__sig\,
             kill => open,
             enable => __ZERO__,
             capture => open,

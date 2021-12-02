@@ -2,7 +2,7 @@
 --	Conversion of Microcontroller_coolingsystem.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Nov 29 19:07:11 2021
+--	Thu Dec 02 13:02:58 2021
 --
 
 USE cypress.cypress.all;
@@ -556,7 +556,6 @@ SIGNAL tmpFB_0__Switch_input_net_0 : bit;
 SIGNAL tmpIO_0__Switch_input_net_0 : bit;
 TERMINAL tmpSIOVREF__Switch_input_net_0 : bit;
 SIGNAL Net_167 : bit;
-SIGNAL Net_210 : bit;
 SIGNAL \VDAC8_Enabling:Net_83\ : bit;
 SIGNAL \VDAC8_Enabling:Net_81\ : bit;
 SIGNAL \VDAC8_Enabling:Net_82\ : bit;
@@ -2075,16 +2074,6 @@ switch_input_interrupt:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_167);
-Clock_SPI:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"6757803e-dfdc-4b53-a2ae-5598ff6dd469",
-		source_clock_id=>"",
-		divisor=>0,
-		period=>"25000000000",
-		is_direct=>'0',
-		is_digital=>'1')
-	PORT MAP(clock_out=>Net_210,
-		dig_domain_out=>open);
 \VDAC8_Enabling:viDAC8\:cy_psoc3_vidac8_v1_0
 	GENERIC MAP(cy_registers=>"",
 		reg_data=>'0',

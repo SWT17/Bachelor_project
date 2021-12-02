@@ -26,8 +26,12 @@ uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB);
 
 /*Internal variables declartion*/
 uint16_t rtd_ratio;
+uint8 dummy_bytes;
+uint8 bytes_received ;
+char config;
 
 
+void ReadReg();
 
 /*Does initial setup of the amplifier*/
 void Amplifier_Setup()
@@ -44,6 +48,7 @@ void MAX31865_Setup()
     Set_FilterSetup(FILTER_50HZ);
     Set_VBIAS(VBIAS_ON);
     Clear_Fault();
+    ReadReg();
 }
 
 /*Retrieve RTD ration by reading the RTD msb byte and 
@@ -70,7 +75,6 @@ void Amplifier_Shutdown()
     Set_ConverionMode(CONVERSIONMODE_OFF);
     Set_VBIAS(VBIAS_OFF);
     
-    Clock_SPI_Stop();
     SPIM_1_Stop();
     
 }
@@ -81,13 +85,12 @@ starting SPI communication again*/
 void Amplifier_Startup()
 {
     //Starts SPI again
-    Clock_SPI_Start();
     SPI_Setup();
     
     Set_VBIAS(VBIAS_ON);
     Set_ConverionMode(CONVERSIONMODE_AUTO);
     Clear_Fault();
-    
+ 
 }
 
 
@@ -103,7 +106,6 @@ uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB)
 void SPI_Setup()
 {
     //Start up SPI. All setups are done in the TopDesign file.
-    Clock_SPI_Start();
     SPIM_1_Start();
 }
 
@@ -113,7 +115,7 @@ void Set_WireSetup(char wireconfig)
 {
     //Code to communicate the 2 wire config to the amplifier
     //Set Bit D4 = 0. Look at datasheet for Max865
-    char config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     
     if(wireconfig == TWO_OR_FOUR_WIRECONFIG)
     {
@@ -138,7 +140,7 @@ void Set_WireSetup(char wireconfig)
 Dependent on country (Denmark), this will be 50Hz*/
 void Set_FilterSetup(char filterconfig)
 {  
-    char config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     if(filterconfig == FILTER_50HZ)
     {
        config |= FILTER_50HZ;
@@ -157,7 +159,7 @@ void Set_FilterSetup(char filterconfig)
 void Set_ConverionMode(char conversionmode)
 {
     
-    char config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     if(conversionmode == CONVERSIONMODE_AUTO)
     {
         config |= CONVERSIONMODE_AUTO;
@@ -174,10 +176,10 @@ void Set_ConverionMode(char conversionmode)
 
 void Set_VBIAS(char vbias_mode)
 {    
-    char config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     if(vbias_mode == VBIAS_ON)
     {
-        config |= CONVERSIONMODE_AUTO;
+        config |= VBIAS_ON;
         WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,config);        
     }
     if(vbias_mode == VBIAS_OFF)
@@ -192,44 +194,56 @@ void Set_VBIAS(char vbias_mode)
 //Clears the fault register upon setup
 void Clear_Fault()
 {
-    char config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     config |= CLEAR_FAULTBIT;
     WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,config);
 }
 
 char ReadByteFromAdress(char adress)
 {
+
     
     SS_Write(0);
     //According to the datasheet for the max31865 the amplifier first needs the read adress
     //Then it needs a default signal, to return what is on the adress requested in the first SPI write msg.
     SPIM_1_WriteTxData(adress);
     SPIM_1_WriteTxData(0xFF);
+    CyDelay(20);
     SS_Write(255);
     
-    char msg = SPIM_1_ReadRxData();
-    msg = SPIM_1_ReadRxData();
+    dummy_bytes = SPIM_1_ReadRxData();
+    bytes_received = SPIM_1_ReadRxData();
+
     
     //Clear TX and RX FIFO for the SPI to make it ready for the next transmission.
-    SPIM_1_ClearFIFO();
     
-    return msg;
+    return bytes_received;
     
-   
 }
 
 void WriteByteToAdress(char adress, char data)
 {
+    
+    
     //Pull Slave select low, start transmission.
     SS_Write(0);
     SPIM_1_WriteTxData(adress);
     SPIM_1_WriteTxData(data);
     //Pull slave select up, end transmission.
+    CyDelay(20);
     SS_Write(255);
     
-    //This is done to empty the data received for every WRITE in the RX buffer and TX
-   SPIM_1_ClearFIFO();
+    dummy_bytes = SPIM_1_ReadRxData();
+    dummy_bytes = SPIM_1_ReadRxData();
     
+    //This is done to empty the data received for every WRITE in the RX buffer and TX
+
+       
+}
+
+void ReadReg()
+{
+    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     
 }
 

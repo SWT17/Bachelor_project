@@ -34,7 +34,7 @@ void Temperature_Setup(uint16_t ref_res)
     Temperature = 0;
 }
 
-int32 GetTemperature()
+float GetTemperature()
 {
     return temp_float; 
 }

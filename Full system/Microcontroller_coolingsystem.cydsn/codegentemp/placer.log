@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Nov 29 2021 19:07:13
+#File Generated:     Dec 2 2021 13:02:59
 
 #Purpose:            
 
@@ -79,17 +79,16 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 10
-Clock: Clock_SPI            | Frequency: N/A       | Target:   0.0 MHz
+Number of clocks: 9
 Clock: Clock_TempSampling   | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_TempSampling(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
-Clock: CyBUS_CLK            | Frequency:  47.8 MHz | Target:  24.0 MHz
+Clock: CyBUS_CLK            | Frequency:  48.3 MHz | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-Clock: SPIM_1_IntClock      | Frequency:  65.2 MHz | Target:   2.0 MHz
-Clock: UART_1_IntClock      | Frequency:  45.8 MHz | Target:   0.5 MHz
+Clock: SPIM_1_IntClock      | Frequency:  62.9 MHz | Target:   2.0 MHz
+Clock: UART_1_IntClock      | Frequency:  44.4 MHz | Target:   0.5 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -101,8 +100,7 @@ Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 10
-Clock: Clock_SPI            | Frequency: N/A       | Target:   0.0 MHz
+Number of clocks: 9
 Clock: Clock_TempSampling   | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_TempSampling(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyBUS_CLK            | Frequency:   2.7 MHz | Target:  24.0 MHz
@@ -110,7 +108,7 @@ Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-Clock: SPIM_1_IntClock      | Frequency:  52.9 MHz | Target:   2.0 MHz
+Clock: SPIM_1_IntClock      | Frequency:  50.0 MHz | Target:   2.0 MHz
 Clock: UART_1_IntClock      | Frequency:   2.7 MHz | Target:   0.5 MHz
 
 ======================================================================
@@ -146,17 +144,16 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 10
-Clock: Clock_SPI            | Frequency: N/A       | Target:   0.0 MHz
+Number of clocks: 9
 Clock: Clock_TempSampling   | Frequency: N/A       | Target:   0.0 MHz
 Clock: Clock_TempSampling(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
-Clock: CyBUS_CLK            | Frequency:   2.8 MHz | Target:  24.0 MHz
+Clock: CyBUS_CLK            | Frequency:   2.9 MHz | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-Clock: SPIM_1_IntClock      | Frequency:  47.4 MHz | Target:   2.0 MHz
-Clock: UART_1_IntClock      | Frequency:   2.8 MHz | Target:   0.5 MHz
+Clock: SPIM_1_IntClock      | Frequency:  62.9 MHz | Target:   2.0 MHz
+Clock: UART_1_IntClock      | Frequency:   2.9 MHz | Target:   0.5 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -167,5 +164,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.1 sec.
+I2076: Total run-time: 1.2 sec.
 

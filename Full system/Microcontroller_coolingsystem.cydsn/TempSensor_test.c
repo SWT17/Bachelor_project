@@ -35,45 +35,45 @@ void TempSensor_testrun()
         
         //Read the config register on max31865
         SS_Write(0);    
-        SPIM_1_WriteTxData(0x80);
-        SPIM_1_WriteTxData(0xC1);
-        
+        SPIM_1_WriteTxData(0x80);  
+        SPIM_1_WriteTxData(0xD1);
+        CyDelay(10);
         SS_Write(255);
         
+
+
+        
         config_reg = SPIM_1_ReadRxData();
         config_reg = SPIM_1_ReadRxData();
+        
+
         
         SS_Write(0);
         SPIM_1_WriteTxData(0x00);
+
         SPIM_1_WriteTxData(0xFF);
+        
+        CyDelay(10);
+        
         SS_Write(255);
+        
         
         config_reg = 0;
         config_reg = SPIM_1_ReadRxData();
         config_reg = SPIM_1_ReadRxData();
+        
+        while(SPIM_1_GetRxBufferSize())
+        {
+           config_reg = SPIM_1_ReadRxData(); 
+        }
         //Read the data sent back from the config reg.
-        config_reg = SPIM_1_ReadRxData();
+
+        
+
+
     }
     
     
-    
-    
-    
-    
-    
-    //Write a write commando plus the change to that reg.
-    SPIM_1_WriteTxData(0x80);
-    config_reg = SPIM_1_ReadRxData();
-    SPIM_1_WriteTxData(0xC3);
-    config_reg = SPIM_1_ReadRxData();
-    
-    //Read the new config register
-    SPIM_1_WriteTxData(0x00);
-    config_reg = SPIM_1_ReadRxData();
-   
-    
-    rx_stat = SPIM_1_GetRxBufferSize();
-    tx_stat = SPIM_1_GetTxBufferSize();
     
 }
 

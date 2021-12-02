@@ -1,6 +1,6 @@
 // ======================================================================
 // Microcontroller_coolingsystem.v generated from TopDesign.cysch
-// 11/29/2021 at 19:07
+// 12/02/2021 at 13:02
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -639,7 +639,6 @@ module top ;
 
           wire  Net_213;
           wire [7:0] Net_214;
-          wire  Net_207;
           wire  Net_227;
           wire  Net_226;
           wire  Net_225;
@@ -674,7 +673,6 @@ module top ;
           wire  Net_134;
           wire  Net_135;
     electrical  Net_215;
-          wire  Net_210;
           wire  Net_167;
     electrical  Net_117;
     electrical  Net_114;
@@ -1618,18 +1616,6 @@ module top ;
 		#(.int_type(2'b10))
 		switch_input_interrupt
 		 (.int_signal(Net_167));
-
-
-
-	cy_clock_v1_0
-		#(.id("6757803e-dfdc-4b53-a2ae-5598ff6dd469"),
-		  .source_clock_id(""),
-		  .divisor(0),
-		  .period("25000000000"),
-		  .is_direct(0),
-		  .is_digital(1))
-		Clock_SPI
-		 (.clock_out(Net_210));
 
 
     VDAC8_v1_90_5 VDAC8_Enabling (
