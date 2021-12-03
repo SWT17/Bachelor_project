@@ -12,7 +12,7 @@
 #pragma once
 #include "LED_pin.h"
 
-void TurnON();
-void TurnOFF();
+void Turn_ON();
+void Turn_OFF();
 
 /* [] END OF FILE */

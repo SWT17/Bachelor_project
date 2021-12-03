@@ -39,48 +39,7 @@ int main(void)
  
 }
 
-/*Turn system On after being in system off state*/
-void System_On()
-{
-    //Start up the amplifier to get new temperature conversion
-    Amplifier_Startup();
-    
-    //Start up the pump
-    Pump_Startup(2000);
-    
-     /*Start Clock interrupt form polling temperature data.*/
-    Clock_TempSampling_Start();
-    
-    /*Start counter for sampling the temperature*/
-    Temp_sample_counter_Start();
-    Clock_TempSampling_Start();
-    isr_clock_StartEx(ISR_CLOCK_handler); 
-    
-    //Turn on indicator LED
-    TurnON();
-}
-
-/*Turn system off after being in system on state*/
-void System_Off()
-{
-    //Stop the clock interrupt routine
-    isr_clock_Disable();
-    
-    //Stop the clock of the temperature sampling
-    Clock_TempSampling_Stop();
-    
-    //Shut down the pump
-    Pump_Shutdown();
-    
-    //Shutdown the amplifier
-    Amplifier_Shutdown();
-    
-    //Turn off the indicator LED
-    TurnOFF();
-    
-}
-
-
+//Initial setup upon Powering the PSOC
 void System_Setup()
 {
     /* Enable global interrupts. */
@@ -104,6 +63,50 @@ void System_Setup()
     Temperature_Setup(ref_res);
             
 }
+
+
+
+/*Turn system On after being in system off state*/
+void System_On()
+{
+    //Start up the amplifier to get new temperature conversion
+    Amplifier_Startup();
+    
+    //Start up the pump
+    Pump_Startup(2000);
+    
+    /*Start counter for sampling the temperature*/
+    Temp_sample_counter_Start();
+    Clock_TempSampling_Start();
+    isr_clock_StartEx(ISR_CLOCK_handler); 
+    
+    //Turn on indicator LED
+    TurnON();
+}
+
+/*Turn system off after being in system on state*/
+void System_Off()
+{
+    //Stop the clock interrupt routine
+    isr_clock_Disable();
+    
+    //Stop the clock of the temperature sampling
+    Temp_sample_counter_Stop();
+    Clock_TempSampling_Stop();
+    
+    //Shut down the pump
+    Pump_Shutdown();
+    
+    //Shutdown the amplifier
+    Amplifier_Shutdown();
+    
+    //Turn off the indicator LED
+    TurnOFF();
+    
+}
+
+
+
 
 void System_newState(uint8 switchstate)
 {

@@ -61,7 +61,6 @@ void Pump_Startup(uint16 constVoltage)
     PGA_SpeedControl_Start();
     
 
-    
     //Set speed control voltage to 2.5V
     speed = SetConstSpeed(constVoltage);
     VDAC8_SpeedControl_SetValue(speed);
@@ -125,4 +124,17 @@ uint8 SetConstSpeed(uint16 speed_control_voltage)
     const_speed = (speed_control_voltage*256)/(4080*2); //Calculate the speed corresponding to 2.5V output
     return const_speed;
 }
+
+
+/*Method for controlling the direction of flow
+when regulating the temperature with on/off regulation*/
+
+void FlowDirection()
+{
+    /*How does the bidirectional pin work? Is it high/low input or 
+    the same as with the enabling pin.
+    Then we need and ADC to control the other MOSFET.*/
+}
+
+
 /* [] END OF FILE */

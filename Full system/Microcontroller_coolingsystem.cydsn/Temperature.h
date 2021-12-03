@@ -14,8 +14,9 @@
 #include <math.h>
 #include "RTD_1.h"
 
-void Temperature_Setup(uint16_t ref_res);
+
 float GetTemperature();
 void SetTemperature(uint16 rtd_ratio);
+void Temperature_Setup(uint16_t ref_res);
 
 /* [] END OF FILE */

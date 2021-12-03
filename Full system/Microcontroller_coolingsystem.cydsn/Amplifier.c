@@ -13,16 +13,17 @@
 #include "AmplifierRegisters.h"
 
 /*Internal function declarations*/
+uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB);
 void SPI_Setup();
 void MAX31865_Setup();
 void Set_WireSetup(char wireconfig);
 void Set_FilterSetup(char filterconfig);
 void Set_VBIAS(char vbias_mode);
-void Clear_Fault();
 void Set_ConverionMode(char conversionmode);
+void Clear_Fault();
 void WriteByteToAdress(char adress, char data);
 char ReadByteFromAdress(char adress);
-uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB);
+
 
 /*Internal variables declartion*/
 uint16_t rtd_ratio;

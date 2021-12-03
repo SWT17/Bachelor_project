@@ -11,11 +11,11 @@
 */
 #include "LED.h"
 
-void TurnON()
+void Turn_ON()
 {
     LED_pin_Write(255);
 }
-void TurnOFF()
+void Turn_OFF()
 {
     LED_pin_Write(0);
 }

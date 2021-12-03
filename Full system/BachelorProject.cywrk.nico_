@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\TempSensor_test.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\TopDesign">
 <ExpandedNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
@@ -105,18 +105,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\ClockCounter_test.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\ReceiveBytes.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\SPI_test.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\SPI_test.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\Switch_test.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\Switch_test.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\TempSensor_test.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\TempSensor_test.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\VDAC_test.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\VDAC_test.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\PumpCtrlUnitTest</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\SwitchUnitTest</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest\TemperatureUnitTest.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest\TemperatureUnitTest.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -240,18 +228,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Speed_pin.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_test.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_INT.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_IntClock.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_PM.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SS.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_input.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\switch_input_interrupt.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_output.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SwitchUnitTest.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SystemController.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Temp_sample_counter.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Temp_sample_counter_PM.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -310,14 +286,10 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.h" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.c" />
 <name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
 <name v=".\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" />
-<name v=".\Microcontroller_coolingsystem.cydsn\switch.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Amplifier.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -325,7 +297,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1338, 728" SelectedTabbedMdiWindow="787d1c27-9d65-4924-8e0c-51da166d1f85"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.c" Guid="3fc94ed4-7363-491e-966a-31575411bb41" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="a4566102-ca60-45a8-adbe-76a68d6f3db2" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="657b5b98-b0ae-4f0a-818a-c9aaafc30b3f" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="59a67198-4aca-4266-8fcd-e8056b05585a" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\switch.c" Guid="787d1c27-9d65-4924-8e0c-51da166d1f85" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Amplifier.c" Guid="9057726c-b796-4dc7-875e-73e18243936a" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.c" Guid="e06ce4ea-b896-439e-b8cb-790440d565f3" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.h" Guid="da082d4a-9048-4163-999f-ffb0c62f1783" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="954, 581" SelectedTabbedMdiWindow="dfc1b163-48c4-40be-a2da-bc67f734ea24"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.h" Guid="63115090-3aca-4727-90fd-deb3d398554d" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.c" Guid="0bcd5acc-fc65-4316-8a30-40083ac15784" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="dfc1b163-48c4-40be-a2da-bc67f734ea24" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="b9606217-5fda-4337-bae6-c0618f9bc199" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
