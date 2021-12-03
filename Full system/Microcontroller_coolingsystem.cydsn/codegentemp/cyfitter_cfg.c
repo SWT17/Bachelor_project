@@ -173,11 +173,11 @@ CYPACKED typedef struct
 /* IOPINS0_8 Address: CYREG_PRT15_DR Size (bytes): 10 */
 #define BS_IOPINS0_8_VAL ((const uint8 CYFAR *)0x480006ACu)
 
-/* IOPINS0_1 Address: CYREG_PRT1_DR Size (bytes): 10 */
+/* IOPINS0_1 Address: CYREG_PRT1_DM0 Size (bytes): 8 */
 #define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x480006B8u)
 
 /* IOPINS0_3 Address: CYREG_PRT3_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x480006C4u)
+#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x480006C0u)
 
 
 /*******************************************************************************
@@ -304,12 +304,13 @@ static void AnalogSetDefault(void)
 	uint8 bg_xover_inl_trim = CY_GET_XTND_REG8((void CYFAR *)(CYREG_FLSHID_MFG_CFG_BG_XOVER_INL_TRIM + 1u));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_BG_DFT0), (bg_xover_inl_trim & 0x07u));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_BG_DFT1), ((bg_xover_inl_trim >> 4) & 0x0Fu));
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_PRT0_AG, 0x04u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_PRT1_AMUX, 0x80u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_SC2_SW0, 0x20u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_SC2_SW8, 0x40u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_PRT0_AMUX, 0x04u);
+	CY_SET_XTND_REG16((void CYFAR *)CYREG_PRT1_AMUX, 0x8040u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_SC1_SW0, 0x10u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_SC1_SW8, 0x08u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC0_SW3, 0x01u);
 	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC1_SW3, 0x01u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC2_SW0, 0x20u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC3_SW0, 0x10u);
 	CY_SET_XTND_REG8((void CYFAR *)CYREG_PUMP_CR0, 0x44u);
 }
 
@@ -444,7 +445,7 @@ void cyfitter_cfg(void)
 	CYCONFIGCPY((void CYFAR *)(CYREG_PRT0_DM0), (const void CYFAR *)(BS_IOPINS0_0_VAL), 8u);
 	CYCONFIGCPY((void CYFAR *)(CYREG_PRT12_DR), (const void CYFAR *)(BS_IOPINS0_7_VAL), 10u);
 	CYCONFIGCPY((void CYFAR *)(CYREG_PRT15_DR), (const void CYFAR *)(BS_IOPINS0_8_VAL), 10u);
-	CYCONFIGCPY((void CYFAR *)(CYREG_PRT1_DR), (const void CYFAR *)(BS_IOPINS0_1_VAL), 10u);
+	CYCONFIGCPY((void CYFAR *)(CYREG_PRT1_DM0), (const void CYFAR *)(BS_IOPINS0_1_VAL), 8u);
 	CYCONFIGCPY((void CYFAR *)(CYREG_PRT3_DM0), (const void CYFAR *)(BS_IOPINS0_3_VAL), 8u);
 	/* Switch Boost to the precision bandgap reference from its internal reference */
 	CY_SET_REG8((void CYXDATA *)CYREG_BOOST_CR2, (CY_GET_REG8((void CYXDATA *)CYREG_BOOST_CR2) | 0x08u));

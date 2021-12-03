@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 1
 
 
    1              		.syntax unified
@@ -40,74 +40,75 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
   10:PumpCtrl.c    ****  * ========================================
   11:PumpCtrl.c    **** */
   12:PumpCtrl.c    **** #include "PumpCtrl.h"
-  13:PumpCtrl.c    **** 
-  14:PumpCtrl.c    **** float voltage;
-  15:PumpCtrl.c    **** uint8 output_voltage;
-  16:PumpCtrl.c    **** uint8 speed;
-  17:PumpCtrl.c    **** uint8 const_speed;
-  18:PumpCtrl.c    **** 
-  19:PumpCtrl.c    **** void SetSpeed(uint8_t speed);
-  20:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage);
-  21:PumpCtrl.c    **** 
-  22:PumpCtrl.c    **** 
-  23:PumpCtrl.c    **** /*Initialize the VDAC component for speed control and enabling pin*/
-  24:PumpCtrl.c    **** void Pump_Setup()
-  25:PumpCtrl.c    **** {
-  26:PumpCtrl.c    ****     //Set the range for the VDAC Speed control to the 0V-4.080V range
-  27:PumpCtrl.c    ****     VDAC8_SpeedControl_SetRange(VDAC8_SpeedControl_RANGE_4V);
-  28:PumpCtrl.c    ****     //Set initial speed to 0;
-  29:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
-  30:PumpCtrl.c    ****     
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 2
+  13:PumpCtrl.c    **** #include "UART_1.h"
+  14:PumpCtrl.c    **** 
+  15:PumpCtrl.c    **** float voltage;
+  16:PumpCtrl.c    **** uint8 output_voltage;
+  17:PumpCtrl.c    **** uint8 speed;
+  18:PumpCtrl.c    **** uint8 const_speed;
+  19:PumpCtrl.c    **** uint8 output_voltage_direction;
+  20:PumpCtrl.c    **** 
+  21:PumpCtrl.c    **** void SetSpeed(uint8_t speed);
+  22:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage);
+  23:PumpCtrl.c    **** 
+  24:PumpCtrl.c    **** 
+  25:PumpCtrl.c    **** /*Initialize the VDAC component for speed control and enabling pin*/
+  26:PumpCtrl.c    **** void Pump_Setup()
+  27:PumpCtrl.c    **** {
+  28:PumpCtrl.c    ****     output_voltage = 0;
+  29:PumpCtrl.c    ****     //Start VDAC_enabling
+  30:PumpCtrl.c    ****     VDAC8_Enabling_Start();
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 2
 
 
-  31:PumpCtrl.c    ****     //Set range for the VDAC for enabling through the transistor
-  32:PumpCtrl.c    ****     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V);   
+  31:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
+  32:PumpCtrl.c    ****     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V); 
   33:PumpCtrl.c    ****     
-  34:PumpCtrl.c    ****     //Start VDAC_enabling
-  35:PumpCtrl.c    ****     VDAC8_Enabling_Start();
-  36:PumpCtrl.c    **** 
-  37:PumpCtrl.c    ****     //Stop pump.
-  38:PumpCtrl.c    ****     Pump_Stop();
-  39:PumpCtrl.c    **** }
-  40:PumpCtrl.c    **** 
-  41:PumpCtrl.c    **** /*Controlled shutdown of pump and it's software components*/
-  42:PumpCtrl.c    **** void Pump_Shutdown()
-  43:PumpCtrl.c    **** {
-  44:PumpCtrl.c    **** 
-  45:PumpCtrl.c    ****     //Stop VDAC in outputting the speed control voltage. Set output value to 0.
-  46:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
-  47:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
-  48:PumpCtrl.c    ****     
-  49:PumpCtrl.c    ****     PGA_SpeedControl_Stop();
+  34:PumpCtrl.c    ****     
+  35:PumpCtrl.c    ****     //Start VDAC for flow direction control
+  36:PumpCtrl.c    ****     VDAC8_Direction_Start();
+  37:PumpCtrl.c    ****     VDAC8_Direction_SetValue(0);
+  38:PumpCtrl.c    **** 
+  39:PumpCtrl.c    ****     //Stop pump.
+  40:PumpCtrl.c    ****     Pump_Stop();
+  41:PumpCtrl.c    **** }
+  42:PumpCtrl.c    **** 
+  43:PumpCtrl.c    **** /*Controlled shutdown of pump and it's software components*/
+  44:PumpCtrl.c    **** void Pump_Shutdown()
+  45:PumpCtrl.c    **** {
+  46:PumpCtrl.c    **** 
+  47:PumpCtrl.c    ****     //Stop VDAC in outputting the speed control voltage. Set output value to 0.
+  48:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
+  49:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
   50:PumpCtrl.c    ****     
-  51:PumpCtrl.c    ****     //Stop the pump
-  52:PumpCtrl.c    ****     Pump_Stop();
-  53:PumpCtrl.c    **** }
-  54:PumpCtrl.c    **** 
-  55:PumpCtrl.c    **** /*Controlled startup of pump*/
-  56:PumpCtrl.c    **** void Pump_Startup(uint16 constVoltage)
-  57:PumpCtrl.c    **** {
-  58:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
-  59:PumpCtrl.c    ****     VDAC8_SpeedControl_Start();
-  60:PumpCtrl.c    ****     //Start PGA for speed control
-  61:PumpCtrl.c    ****     PGA_SpeedControl_Start();
-  62:PumpCtrl.c    ****     
-  63:PumpCtrl.c    **** 
+  51:PumpCtrl.c    ****     PGA_SpeedControl_Stop();
+  52:PumpCtrl.c    ****     
+  53:PumpCtrl.c    ****     //Stop the pump
+  54:PumpCtrl.c    ****     Pump_Stop();
+  55:PumpCtrl.c    **** }
+  56:PumpCtrl.c    **** 
+  57:PumpCtrl.c    **** /*Controlled startup of pump*/
+  58:PumpCtrl.c    **** void Pump_Startup(uint16 constVoltage)
+  59:PumpCtrl.c    **** {
+  60:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
+  61:PumpCtrl.c    ****     VDAC8_SpeedControl_Start();
+  62:PumpCtrl.c    ****     //Start PGA for speed control
+  63:PumpCtrl.c    ****     PGA_SpeedControl_Start();
   64:PumpCtrl.c    ****     
-  65:PumpCtrl.c    ****     //Set speed control voltage to 2.5V
-  66:PumpCtrl.c    ****     speed = SetConstSpeed(constVoltage);
-  67:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
-  68:PumpCtrl.c    ****      
-  69:PumpCtrl.c    ****     //Call Pump start
-  70:PumpCtrl.c    ****     Pump_Start();
-  71:PumpCtrl.c    **** }
-  72:PumpCtrl.c    **** 
+  65:PumpCtrl.c    **** 
+  66:PumpCtrl.c    ****     //Set speed control voltage to 2.5V
+  67:PumpCtrl.c    ****     speed = SetConstSpeed(constVoltage);
+  68:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
+  69:PumpCtrl.c    ****      
+  70:PumpCtrl.c    ****     //Call Pump start
+  71:PumpCtrl.c    ****     Pump_Start();
+  72:PumpCtrl.c    **** }
   73:PumpCtrl.c    **** 
-  74:PumpCtrl.c    **** /*Start the pump by enabling it, and setting the speed control variable*/
-  75:PumpCtrl.c    **** void Pump_Start()
-  76:PumpCtrl.c    **** {
-  28              		.loc 1 76 0
+  74:PumpCtrl.c    **** 
+  75:PumpCtrl.c    **** /*Start the pump by enabling it, and setting the speed control variable*/
+  76:PumpCtrl.c    **** void Pump_Start()
+  77:PumpCtrl.c    **** {
+  28              		.loc 1 77 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -115,12 +116,12 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  77:PumpCtrl.c    ****     //Enable pump through closing transistor.
-  78:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(0);
-  36              		.loc 1 78 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 3
+  78:PumpCtrl.c    ****     //Enable pump through closing transistor.
+  79:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(0);
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 3
 
 
+  36              		.loc 1 79 0
   37 0002 0020     		movs	r0, #0
   38 0004 FFF7FEFF 		bl	VDAC8_Enabling_SetValue
   39              	.LVL0:
@@ -136,15 +137,15 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
   49              		.type	Pump_Stop, %function
   50              	Pump_Stop:
   51              	.LFB5:
-  79:PumpCtrl.c    ****     
-  80:PumpCtrl.c    **** }
-  81:PumpCtrl.c    **** 
+  80:PumpCtrl.c    ****     
+  81:PumpCtrl.c    **** }
   82:PumpCtrl.c    **** 
-  83:PumpCtrl.c    **** /*Opens up the transistor, connecting the enable pin on pump controller
-  84:PumpCtrl.c    **** board to ground. This stop the pump.*/
-  85:PumpCtrl.c    **** void Pump_Stop()
-  86:PumpCtrl.c    **** {
-  52              		.loc 1 86 0
+  83:PumpCtrl.c    **** 
+  84:PumpCtrl.c    **** /*Opens up the transistor, connecting the enable pin on pump controller
+  85:PumpCtrl.c    **** board to ground. This stop the pump.*/
+  86:PumpCtrl.c    **** void Pump_Stop()
+  87:PumpCtrl.c    **** {
+  52              		.loc 1 87 0
   53              		.cfi_startproc
   54              		@ args = 0, pretend = 0, frame = 0
   55              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -152,14 +153,14 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
   57              		.cfi_def_cfa_offset 8
   58              		.cfi_offset 3, -8
   59              		.cfi_offset 14, -4
-  87:PumpCtrl.c    ****     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
-  88:PumpCtrl.c    ****     output_voltage = (uint8)(3200*4080/255);
-  60              		.loc 1 88 0
-  61 0002 0020     		movs	r0, #0
+  88:PumpCtrl.c    ****     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
+  89:PumpCtrl.c    ****     output_voltage = (uint8)(4080 * 255/(4080));
+  60              		.loc 1 89 0
+  61 0002 FF20     		movs	r0, #255
   62 0004 024B     		ldr	r3, .L5
   63 0006 1870     		strb	r0, [r3]
-  89:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(output_voltage); 
-  64              		.loc 1 89 0
+  90:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(output_voltage); 
+  64              		.loc 1 90 0
   65 0008 FFF7FEFF 		bl	VDAC8_Enabling_SetValue
   66              	.LVL1:
   67 000c 08BD     		pop	{r3, pc}
@@ -177,205 +178,212 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
   79              		.thumb_func
   80              		.type	Pump_Setup, %function
   81              	Pump_Setup:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 4
+
+
   82              	.LFB1:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 4
-
-
-  25:PumpCtrl.c    ****     //Set the range for the VDAC Speed control to the 0V-4.080V range
-  83              		.loc 1 25 0
+  27:PumpCtrl.c    ****     output_voltage = 0;
+  83              		.loc 1 27 0
   84              		.cfi_startproc
   85              		@ args = 0, pretend = 0, frame = 0
   86              		@ frame_needed = 0, uses_anonymous_args = 0
-  87 0000 08B5     		push	{r3, lr}
+  87 0000 10B5     		push	{r4, lr}
   88              		.cfi_def_cfa_offset 8
-  89              		.cfi_offset 3, -8
+  89              		.cfi_offset 4, -8
   90              		.cfi_offset 14, -4
-  27:PumpCtrl.c    ****     //Set initial speed to 0;
-  91              		.loc 1 27 0
-  92 0002 0420     		movs	r0, #4
-  93 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_SetRange
-  94              	.LVL2:
-  29:PumpCtrl.c    ****     
-  95              		.loc 1 29 0
-  96 0008 0020     		movs	r0, #0
-  97 000a FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
-  98              	.LVL3:
+  28:PumpCtrl.c    ****     //Start VDAC_enabling
+  91              		.loc 1 28 0
+  92 0002 0024     		movs	r4, #0
+  93 0004 074B     		ldr	r3, .L9
+  94 0006 1C70     		strb	r4, [r3]
+  30:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
+  95              		.loc 1 30 0
+  96 0008 FFF7FEFF 		bl	VDAC8_Enabling_Start
+  97              	.LVL2:
   32:PumpCtrl.c    ****     
-  99              		.loc 1 32 0
- 100 000e 0420     		movs	r0, #4
- 101 0010 FFF7FEFF 		bl	VDAC8_Enabling_SetRange
- 102              	.LVL4:
-  35:PumpCtrl.c    **** 
- 103              		.loc 1 35 0
- 104 0014 FFF7FEFF 		bl	VDAC8_Enabling_Start
- 105              	.LVL5:
-  38:PumpCtrl.c    **** }
- 106              		.loc 1 38 0
- 107 0018 FFF7FEFF 		bl	Pump_Stop
- 108              	.LVL6:
- 109 001c 08BD     		pop	{r3, pc}
- 110              		.cfi_endproc
- 111              	.LFE1:
- 112              		.size	Pump_Setup, .-Pump_Setup
- 113 001e 00BF     		.section	.text.Pump_Shutdown,"ax",%progbits
- 114              		.align	2
- 115              		.global	Pump_Shutdown
- 116              		.thumb
- 117              		.thumb_func
- 118              		.type	Pump_Shutdown, %function
- 119              	Pump_Shutdown:
- 120              	.LFB2:
-  43:PumpCtrl.c    **** 
- 121              		.loc 1 43 0
- 122              		.cfi_startproc
- 123              		@ args = 0, pretend = 0, frame = 0
- 124              		@ frame_needed = 0, uses_anonymous_args = 0
- 125 0000 08B5     		push	{r3, lr}
- 126              		.cfi_def_cfa_offset 8
- 127              		.cfi_offset 3, -8
- 128              		.cfi_offset 14, -4
-  46:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
- 129              		.loc 1 46 0
- 130 0002 FFF7FEFF 		bl	VDAC8_SpeedControl_Stop
- 131              	.LVL7:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 5
+  98              		.loc 1 32 0
+  99 000c 0420     		movs	r0, #4
+ 100 000e FFF7FEFF 		bl	VDAC8_Enabling_SetRange
+ 101              	.LVL3:
+  36:PumpCtrl.c    ****     VDAC8_Direction_SetValue(0);
+ 102              		.loc 1 36 0
+ 103 0012 FFF7FEFF 		bl	VDAC8_Direction_Start
+ 104              	.LVL4:
+  37:PumpCtrl.c    **** 
+ 105              		.loc 1 37 0
+ 106 0016 2046     		mov	r0, r4
+ 107 0018 FFF7FEFF 		bl	VDAC8_Direction_SetValue
+ 108              	.LVL5:
+  40:PumpCtrl.c    **** }
+ 109              		.loc 1 40 0
+ 110 001c FFF7FEFF 		bl	Pump_Stop
+ 111              	.LVL6:
+ 112 0020 10BD     		pop	{r4, pc}
+ 113              	.L10:
+ 114 0022 00BF     		.align	2
+ 115              	.L9:
+ 116 0024 00000000 		.word	output_voltage
+ 117              		.cfi_endproc
+ 118              	.LFE1:
+ 119              		.size	Pump_Setup, .-Pump_Setup
+ 120              		.section	.text.Pump_Shutdown,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	Pump_Shutdown
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.type	Pump_Shutdown, %function
+ 126              	Pump_Shutdown:
+ 127              	.LFB2:
+  45:PumpCtrl.c    **** 
+ 128              		.loc 1 45 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 5
 
 
-  47:PumpCtrl.c    ****     
- 132              		.loc 1 47 0
- 133 0006 0020     		movs	r0, #0
- 134 0008 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
- 135              	.LVL8:
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132 0000 08B5     		push	{r3, lr}
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 3, -8
+ 135              		.cfi_offset 14, -4
+  48:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
+ 136              		.loc 1 48 0
+ 137 0002 0020     		movs	r0, #0
+ 138 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
+ 139              	.LVL7:
   49:PumpCtrl.c    ****     
- 136              		.loc 1 49 0
- 137 000c FFF7FEFF 		bl	PGA_SpeedControl_Stop
- 138              	.LVL9:
-  52:PumpCtrl.c    **** }
- 139              		.loc 1 52 0
- 140 0010 FFF7FEFF 		bl	Pump_Stop
- 141              	.LVL10:
- 142 0014 08BD     		pop	{r3, pc}
- 143              		.cfi_endproc
- 144              	.LFE2:
- 145              		.size	Pump_Shutdown, .-Pump_Shutdown
- 146              		.global	__aeabi_ui2f
- 147              		.global	__aeabi_fmul
- 148              		.global	__aeabi_fadd
- 149              		.global	__aeabi_fcmplt
- 150              		.global	__aeabi_fcmpgt
- 151 0016 00BF     		.section	.text.SetSpeed,"ax",%progbits
- 152              		.align	2
- 153              		.global	SetSpeed
- 154              		.thumb
- 155              		.thumb_func
- 156              		.type	SetSpeed, %function
- 157              	SetSpeed:
- 158              	.LFB6:
-  90:PumpCtrl.c    ****     
-  91:PumpCtrl.c    **** }
-  92:PumpCtrl.c    **** 
+ 140              		.loc 1 49 0
+ 141 0008 FFF7FEFF 		bl	VDAC8_SpeedControl_Stop
+ 142              	.LVL8:
+  51:PumpCtrl.c    ****     
+ 143              		.loc 1 51 0
+ 144 000c FFF7FEFF 		bl	PGA_SpeedControl_Stop
+ 145              	.LVL9:
+  54:PumpCtrl.c    **** }
+ 146              		.loc 1 54 0
+ 147 0010 FFF7FEFF 		bl	Pump_Stop
+ 148              	.LVL10:
+ 149 0014 08BD     		pop	{r3, pc}
+ 150              		.cfi_endproc
+ 151              	.LFE2:
+ 152              		.size	Pump_Shutdown, .-Pump_Shutdown
+ 153              		.global	__aeabi_ui2f
+ 154              		.global	__aeabi_fmul
+ 155              		.global	__aeabi_fadd
+ 156              		.global	__aeabi_fcmplt
+ 157              		.global	__aeabi_fcmpgt
+ 158 0016 00BF     		.section	.text.SetSpeed,"ax",%progbits
+ 159              		.align	2
+ 160              		.global	SetSpeed
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.type	SetSpeed, %function
+ 164              	SetSpeed:
+ 165              	.LFB6:
+  91:PumpCtrl.c    ****     
+  92:PumpCtrl.c    **** }
   93:PumpCtrl.c    **** 
   94:PumpCtrl.c    **** 
   95:PumpCtrl.c    **** /*Iteration 3 adjustable speed on pump
   96:PumpCtrl.c    **** Set speed of the pump via the VDAC component*/
   97:PumpCtrl.c    **** void SetSpeed(uint8_t speed)
   98:PumpCtrl.c    **** {
- 159              		.loc 1 98 0
- 160              		.cfi_startproc
- 161              		@ args = 0, pretend = 0, frame = 0
- 162              		@ frame_needed = 0, uses_anonymous_args = 0
- 163              	.LVL11:
- 164 0000 38B5     		push	{r3, r4, r5, lr}
- 165              		.cfi_def_cfa_offset 16
- 166              		.cfi_offset 3, -16
- 167              		.cfi_offset 4, -12
- 168              		.cfi_offset 5, -8
- 169              		.cfi_offset 14, -4
- 170 0002 0546     		mov	r5, r0
+ 166              		.loc 1 98 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              	.LVL11:
+ 171 0000 38B5     		push	{r3, r4, r5, lr}
+ 172              		.cfi_def_cfa_offset 16
+ 173              		.cfi_offset 3, -16
+ 174              		.cfi_offset 4, -12
+ 175              		.cfi_offset 5, -8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 6
+
+
+ 176              		.cfi_offset 14, -4
+ 177 0002 0546     		mov	r5, r0
   99:PumpCtrl.c    ****     
  100:PumpCtrl.c    ****     voltage = ((float)speed/256)*4096*2; //Calculate the new voltage for the speed control.
- 171              		.loc 1 100 0
- 172 0004 FFF7FEFF 		bl	__aeabi_ui2f
- 173              	.LVL12:
- 174 0008 4FF06E51 		mov	r1, #998244352
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 6
-
-
- 175 000c FFF7FEFF 		bl	__aeabi_fmul
- 176              	.LVL13:
- 177 0010 4FF08B41 		mov	r1, #1166016512
- 178 0014 FFF7FEFF 		bl	__aeabi_fmul
- 179              	.LVL14:
- 180 0018 0146     		mov	r1, r0
- 181 001a FFF7FEFF 		bl	__aeabi_fadd
- 182              	.LVL15:
- 183 001e 0446     		mov	r4, r0
- 184 0020 0B4B     		ldr	r3, .L22
- 185 0022 1860     		str	r0, [r3]	@ float
+ 178              		.loc 1 100 0
+ 179 0004 FFF7FEFF 		bl	__aeabi_ui2f
+ 180              	.LVL12:
+ 181 0008 4FF06E51 		mov	r1, #998244352
+ 182 000c FFF7FEFF 		bl	__aeabi_fmul
+ 183              	.LVL13:
+ 184 0010 4FF08B41 		mov	r1, #1166016512
+ 185 0014 FFF7FEFF 		bl	__aeabi_fmul
+ 186              	.LVL14:
+ 187 0018 0146     		mov	r1, r0
+ 188 001a FFF7FEFF 		bl	__aeabi_fadd
+ 189              	.LVL15:
+ 190 001e 0446     		mov	r4, r0
+ 191 0020 0B4B     		ldr	r3, .L24
+ 192 0022 1860     		str	r0, [r3]	@ float
  101:PumpCtrl.c    ****     
  102:PumpCtrl.c    ****     /*Check if voltage is below zero == speed has become negative*/
  103:PumpCtrl.c    ****     if(voltage < 0)
- 186              		.loc 1 103 0
- 187 0024 0021     		movs	r1, #0
- 188 0026 FFF7FEFF 		bl	__aeabi_fcmplt
- 189              	.LVL16:
- 190 002a 18B1     		cbz	r0, .L19
+ 193              		.loc 1 103 0
+ 194 0024 0021     		movs	r1, #0
+ 195 0026 FFF7FEFF 		bl	__aeabi_fcmplt
+ 196              	.LVL16:
+ 197 002a 18B1     		cbz	r0, .L21
  104:PumpCtrl.c    ****     {
  105:PumpCtrl.c    ****         VDAC8_SpeedControl_SetValue(0);       
- 191              		.loc 1 105 0
- 192 002c 0020     		movs	r0, #0
- 193 002e FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
- 194              	.LVL17:
- 195 0032 38BD     		pop	{r3, r4, r5, pc}
- 196              	.L19:
+ 198              		.loc 1 105 0
+ 199 002c 0020     		movs	r0, #0
+ 200 002e FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
+ 201              	.LVL17:
+ 202 0032 38BD     		pop	{r3, r4, r5, pc}
+ 203              	.L21:
  106:PumpCtrl.c    ****     }
  107:PumpCtrl.c    ****     /*Check if voltage is above maximum*/
  108:PumpCtrl.c    ****     else if(voltage > 4500)
- 197              		.loc 1 108 0
- 198 0034 0749     		ldr	r1, .L22+4
- 199 0036 2046     		mov	r0, r4
- 200 0038 FFF7FEFF 		bl	__aeabi_fcmpgt
- 201              	.LVL18:
- 202 003c 18B1     		cbz	r0, .L20
- 203              	.LVL19:
+ 204              		.loc 1 108 0
+ 205 0034 0749     		ldr	r1, .L24+4
+ 206 0036 2046     		mov	r0, r4
+ 207 0038 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 208              	.LVL18:
+ 209 003c 18B1     		cbz	r0, .L22
+ 210              	.LVL19:
  109:PumpCtrl.c    ****     {
  110:PumpCtrl.c    ****         speed = (uint8)((4500 * 255) / (4096 * 2)); //Maximum speed when PGA gain is 2.
  111:PumpCtrl.c    ****         VDAC8_SpeedControl_SetValue(speed);
- 204              		.loc 1 111 0
- 205 003e 8C20     		movs	r0, #140
- 206 0040 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
- 207              	.LVL20:
- 208 0044 38BD     		pop	{r3, r4, r5, pc}
- 209              	.LVL21:
- 210              	.L20:
+ 211              		.loc 1 111 0
+ 212 003e 8C20     		movs	r0, #140
+ 213 0040 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
+ 214              	.LVL20:
+ 215 0044 38BD     		pop	{r3, r4, r5, pc}
+ 216              	.LVL21:
+ 217              	.L22:
  112:PumpCtrl.c    ****     }
  113:PumpCtrl.c    ****     else
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 7
+
+
  114:PumpCtrl.c    ****     {
  115:PumpCtrl.c    ****         VDAC8_SpeedControl_SetValue(speed);
- 211              		.loc 1 115 0
- 212 0046 2846     		mov	r0, r5
- 213 0048 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
- 214              	.LVL22:
- 215 004c 38BD     		pop	{r3, r4, r5, pc}
- 216              	.L23:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 7
-
-
- 217 004e 00BF     		.align	2
- 218              	.L22:
- 219 0050 00000000 		.word	voltage
- 220 0054 00A08C45 		.word	1166843904
- 221              		.cfi_endproc
- 222              	.LFE6:
- 223              		.size	SetSpeed, .-SetSpeed
- 224              		.section	.text.SetConstSpeed,"ax",%progbits
- 225              		.align	2
- 226              		.global	SetConstSpeed
- 227              		.thumb
- 228              		.thumb_func
- 229              		.type	SetConstSpeed, %function
- 230              	SetConstSpeed:
- 231              	.LFB7:
+ 218              		.loc 1 115 0
+ 219 0046 2846     		mov	r0, r5
+ 220 0048 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
+ 221              	.LVL22:
+ 222 004c 38BD     		pop	{r3, r4, r5, pc}
+ 223              	.L25:
+ 224 004e 00BF     		.align	2
+ 225              	.L24:
+ 226 0050 00000000 		.word	voltage
+ 227 0054 00A08C45 		.word	1166843904
+ 228              		.cfi_endproc
+ 229              	.LFE6:
+ 230              		.size	SetSpeed, .-SetSpeed
+ 231              		.section	.text.SetConstSpeed,"ax",%progbits
+ 232              		.align	2
+ 233              		.global	SetConstSpeed
+ 234              		.thumb
+ 235              		.thumb_func
+ 236              		.type	SetConstSpeed, %function
+ 237              	SetConstSpeed:
+ 238              	.LFB7:
  116:PumpCtrl.c    ****     }
  117:PumpCtrl.c    ****     
  118:PumpCtrl.c    ****     
@@ -385,1124 +393,1338 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 1
  122:PumpCtrl.c    **** /*Set a constant hardcoded speed for the speed control.*/
  123:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage)
  124:PumpCtrl.c    **** {
- 232              		.loc 1 124 0
- 233              		.cfi_startproc
- 234              		@ args = 0, pretend = 0, frame = 0
- 235              		@ frame_needed = 0, uses_anonymous_args = 0
- 236              		@ link register save eliminated.
- 237              	.LVL23:
+ 239              		.loc 1 124 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              		@ link register save eliminated.
+ 244              	.LVL23:
  125:PumpCtrl.c    ****     const_speed = (speed_control_voltage*256)/(4080*2); //Calculate the speed corresponding to 2.5V
- 238              		.loc 1 125 0
- 239 0000 0002     		lsls	r0, r0, #8
- 240              	.LVL24:
- 241 0002 044B     		ldr	r3, .L25
- 242 0004 83FB0023 		smull	r2, r3, r3, r0
- 243 0008 1844     		add	r0, r0, r3
- 244 000a C0F30730 		ubfx	r0, r0, #12, #8
- 245 000e 024B     		ldr	r3, .L25+4
- 246 0010 1870     		strb	r0, [r3]
+ 245              		.loc 1 125 0
+ 246 0000 0002     		lsls	r0, r0, #8
+ 247              	.LVL24:
+ 248 0002 044B     		ldr	r3, .L27
+ 249 0004 83FB0023 		smull	r2, r3, r3, r0
+ 250 0008 1844     		add	r0, r0, r3
+ 251 000a C0F30730 		ubfx	r0, r0, #12, #8
+ 252 000e 024B     		ldr	r3, .L27+4
+ 253 0010 1870     		strb	r0, [r3]
  126:PumpCtrl.c    ****     return const_speed;
  127:PumpCtrl.c    **** }
- 247              		.loc 1 127 0
- 248 0012 7047     		bx	lr
- 249              	.L26:
- 250              		.align	2
- 251              	.L25:
- 252 0014 81808080 		.word	-2139062143
- 253 0018 00000000 		.word	const_speed
- 254              		.cfi_endproc
- 255              	.LFE7:
- 256              		.size	SetConstSpeed, .-SetConstSpeed
- 257              		.section	.text.Pump_Startup,"ax",%progbits
- 258              		.align	2
- 259              		.global	Pump_Startup
- 260              		.thumb
- 261              		.thumb_func
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 8
+ 254              		.loc 1 127 0
+ 255 0012 7047     		bx	lr
+ 256              	.L28:
+ 257              		.align	2
+ 258              	.L27:
+ 259 0014 81808080 		.word	-2139062143
+ 260 0018 00000000 		.word	const_speed
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 8
 
 
- 262              		.type	Pump_Startup, %function
- 263              	Pump_Startup:
- 264              	.LFB3:
-  57:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
- 265              		.loc 1 57 0
- 266              		.cfi_startproc
- 267              		@ args = 0, pretend = 0, frame = 0
- 268              		@ frame_needed = 0, uses_anonymous_args = 0
- 269              	.LVL25:
- 270 0000 10B5     		push	{r4, lr}
- 271              		.cfi_def_cfa_offset 8
- 272              		.cfi_offset 4, -8
- 273              		.cfi_offset 14, -4
- 274 0002 0446     		mov	r4, r0
-  59:PumpCtrl.c    ****     //Start PGA for speed control
- 275              		.loc 1 59 0
- 276 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_Start
- 277              	.LVL26:
-  61:PumpCtrl.c    ****     
- 278              		.loc 1 61 0
- 279 0008 FFF7FEFF 		bl	PGA_SpeedControl_Start
- 280              	.LVL27:
-  66:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
- 281              		.loc 1 66 0
- 282 000c 2046     		mov	r0, r4
- 283 000e FFF7FEFF 		bl	SetConstSpeed
- 284              	.LVL28:
- 285 0012 034B     		ldr	r3, .L29
- 286 0014 1870     		strb	r0, [r3]
-  67:PumpCtrl.c    ****      
- 287              		.loc 1 67 0
- 288 0016 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
- 289              	.LVL29:
-  70:PumpCtrl.c    **** }
- 290              		.loc 1 70 0
- 291 001a FFF7FEFF 		bl	Pump_Start
- 292              	.LVL30:
- 293 001e 10BD     		pop	{r4, pc}
- 294              	.L30:
- 295              		.align	2
- 296              	.L29:
- 297 0020 00000000 		.word	speed
- 298              		.cfi_endproc
- 299              	.LFE3:
- 300              		.size	Pump_Startup, .-Pump_Startup
- 301              		.comm	const_speed,1,1
- 302              		.comm	speed,1,1
- 303              		.comm	output_voltage,1,1
- 304              		.comm	voltage,4,4
- 305              		.text
- 306              	.Letext0:
- 307              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 308              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 309              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 310              		.file 5 "Generated_Source\\PSoC5/VDAC8_Enabling.h"
- 311              		.file 6 "Generated_Source\\PSoC5/VDAC8_SpeedControl.h"
- 312              		.file 7 "Generated_Source\\PSoC5/PGA_SpeedControl.h"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 9
+ 261              		.cfi_endproc
+ 262              	.LFE7:
+ 263              		.size	SetConstSpeed, .-SetConstSpeed
+ 264              		.section	.text.Pump_Startup,"ax",%progbits
+ 265              		.align	2
+ 266              		.global	Pump_Startup
+ 267              		.thumb
+ 268              		.thumb_func
+ 269              		.type	Pump_Startup, %function
+ 270              	Pump_Startup:
+ 271              	.LFB3:
+  59:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
+ 272              		.loc 1 59 0
+ 273              		.cfi_startproc
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276              	.LVL25:
+ 277 0000 10B5     		push	{r4, lr}
+ 278              		.cfi_def_cfa_offset 8
+ 279              		.cfi_offset 4, -8
+ 280              		.cfi_offset 14, -4
+ 281 0002 0446     		mov	r4, r0
+  61:PumpCtrl.c    ****     //Start PGA for speed control
+ 282              		.loc 1 61 0
+ 283 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_Start
+ 284              	.LVL26:
+  63:PumpCtrl.c    ****     
+ 285              		.loc 1 63 0
+ 286 0008 FFF7FEFF 		bl	PGA_SpeedControl_Start
+ 287              	.LVL27:
+  67:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
+ 288              		.loc 1 67 0
+ 289 000c 2046     		mov	r0, r4
+ 290 000e FFF7FEFF 		bl	SetConstSpeed
+ 291              	.LVL28:
+ 292 0012 034B     		ldr	r3, .L31
+ 293 0014 1870     		strb	r0, [r3]
+  68:PumpCtrl.c    ****      
+ 294              		.loc 1 68 0
+ 295 0016 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
+ 296              	.LVL29:
+  71:PumpCtrl.c    **** }
+ 297              		.loc 1 71 0
+ 298 001a FFF7FEFF 		bl	Pump_Start
+ 299              	.LVL30:
+ 300 001e 10BD     		pop	{r4, pc}
+ 301              	.L32:
+ 302              		.align	2
+ 303              	.L31:
+ 304 0020 00000000 		.word	speed
+ 305              		.cfi_endproc
+ 306              	.LFE3:
+ 307              		.size	Pump_Startup, .-Pump_Startup
+ 308              		.section	.text.FlowDirection,"ax",%progbits
+ 309              		.align	2
+ 310              		.global	FlowDirection
+ 311              		.thumb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 9
 
 
- 313              		.section	.debug_info,"",%progbits
- 314              	.Ldebug_info0:
- 315 0000 31030000 		.4byte	0x331
- 316 0004 0400     		.2byte	0x4
- 317 0006 00000000 		.4byte	.Ldebug_abbrev0
- 318 000a 04       		.byte	0x4
- 319 000b 01       		.uleb128 0x1
- 320 000c 0F010000 		.4byte	.LASF39
- 321 0010 0C       		.byte	0xc
- 322 0011 B1000000 		.4byte	.LASF40
- 323 0015 3B000000 		.4byte	.LASF41
- 324 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 325 001d 00000000 		.4byte	0
- 326 0021 00000000 		.4byte	.Ldebug_line0
- 327 0025 02       		.uleb128 0x2
- 328 0026 01       		.byte	0x1
- 329 0027 06       		.byte	0x6
- 330 0028 30030000 		.4byte	.LASF0
- 331 002c 03       		.uleb128 0x3
- 332 002d 18000000 		.4byte	.LASF12
- 333 0031 02       		.byte	0x2
- 334 0032 1D       		.byte	0x1d
- 335 0033 37000000 		.4byte	0x37
- 336 0037 02       		.uleb128 0x2
- 337 0038 01       		.byte	0x1
- 338 0039 08       		.byte	0x8
- 339 003a 01010000 		.4byte	.LASF1
- 340 003e 02       		.uleb128 0x2
- 341 003f 02       		.byte	0x2
- 342 0040 05       		.byte	0x5
- 343 0041 F5020000 		.4byte	.LASF2
- 344 0045 02       		.uleb128 0x2
- 345 0046 02       		.byte	0x2
- 346 0047 07       		.byte	0x7
- 347 0048 28000000 		.4byte	.LASF3
- 348 004c 02       		.uleb128 0x2
- 349 004d 04       		.byte	0x4
- 350 004e 05       		.byte	0x5
- 351 004f 1B030000 		.4byte	.LASF4
- 352 0053 02       		.uleb128 0x2
- 353 0054 04       		.byte	0x4
- 354 0055 07       		.byte	0x7
- 355 0056 CD010000 		.4byte	.LASF5
- 356 005a 02       		.uleb128 0x2
- 357 005b 08       		.byte	0x8
- 358 005c 05       		.byte	0x5
- 359 005d E2020000 		.4byte	.LASF6
- 360 0061 02       		.uleb128 0x2
- 361 0062 08       		.byte	0x8
- 362 0063 07       		.byte	0x7
- 363 0064 8A020000 		.4byte	.LASF7
- 364 0068 04       		.uleb128 0x4
- 365 0069 04       		.byte	0x4
- 366 006a 05       		.byte	0x5
- 367 006b 696E7400 		.ascii	"int\000"
- 368 006f 02       		.uleb128 0x2
- 369 0070 04       		.byte	0x4
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 10
+ 312              		.thumb_func
+ 313              		.type	FlowDirection, %function
+ 314              	FlowDirection:
+ 315              	.LFB8:
+ 128:PumpCtrl.c    **** 
+ 129:PumpCtrl.c    **** 
+ 130:PumpCtrl.c    **** /*Method for controlling the direction of flow
+ 131:PumpCtrl.c    **** when regulating the temperature with on/off regulation*/
+ 132:PumpCtrl.c    **** 
+ 133:PumpCtrl.c    **** void FlowDirection(uint8 regulation)
+ 134:PumpCtrl.c    **** {
+ 316              		.loc 1 134 0
+ 317              		.cfi_startproc
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320              	.LVL31:
+ 321 0000 08B5     		push	{r3, lr}
+ 322              		.cfi_def_cfa_offset 8
+ 323              		.cfi_offset 3, -8
+ 324              		.cfi_offset 14, -4
+ 135:PumpCtrl.c    ****     /*How does the bidirectional pin work? Is it high/low input or 
+ 136:PumpCtrl.c    ****     the same as with the enabling pin.
+ 137:PumpCtrl.c    ****     Then we need and ADC to control the other MOSFET.*/
+ 138:PumpCtrl.c    ****     
+ 139:PumpCtrl.c    ****     
+ 140:PumpCtrl.c    ****     
+ 141:PumpCtrl.c    ****     if(regulation == 0)
+ 325              		.loc 1 141 0
+ 326 0002 58B9     		cbnz	r0, .L34
+ 142:PumpCtrl.c    ****     {
+ 143:PumpCtrl.c    ****         output_voltage_direction = (uint8) (4080*255/4080);
+ 327              		.loc 1 143 0
+ 328 0004 FF20     		movs	r0, #255
+ 329              	.LVL32:
+ 330 0006 094B     		ldr	r3, .L37
+ 331 0008 1870     		strb	r0, [r3]
+ 144:PumpCtrl.c    ****         
+ 145:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
+ 332              		.loc 1 145 0
+ 333 000a FFF7FEFF 		bl	VDAC8_Direction_SetValue
+ 334              	.LVL33:
+ 146:PumpCtrl.c    ****         CyDelay(10500);
+ 335              		.loc 1 146 0
+ 336 000e 42F60410 		movw	r0, #10500
+ 337 0012 FFF7FEFF 		bl	CyDelay
+ 338              	.LVL34:
+ 147:PumpCtrl.c    ****         Pump_Stop();
+ 339              		.loc 1 147 0
+ 340 0016 FFF7FEFF 		bl	Pump_Stop
+ 341              	.LVL35:
+ 342 001a 08BD     		pop	{r3, pc}
+ 343              	.LVL36:
+ 344              	.L34:
+ 148:PumpCtrl.c    ****         
+ 149:PumpCtrl.c    ****     }else
+ 150:PumpCtrl.c    ****     {
+ 151:PumpCtrl.c    ****         output_voltage_direction = 0;
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 10
 
 
- 370 0071 07       		.byte	0x7
- 371 0072 6F020000 		.4byte	.LASF8
- 372 0076 02       		.uleb128 0x2
- 373 0077 08       		.byte	0x8
- 374 0078 04       		.byte	0x4
- 375 0079 24030000 		.4byte	.LASF9
- 376 007d 02       		.uleb128 0x2
- 377 007e 04       		.byte	0x4
- 378 007f 07       		.byte	0x7
- 379 0080 D9020000 		.4byte	.LASF10
- 380 0084 02       		.uleb128 0x2
- 381 0085 01       		.byte	0x1
- 382 0086 08       		.byte	0x8
- 383 0087 F0020000 		.4byte	.LASF11
- 384 008b 03       		.uleb128 0x3
- 385 008c A1020000 		.4byte	.LASF13
- 386 0090 03       		.byte	0x3
- 387 0091 18       		.byte	0x18
- 388 0092 2C000000 		.4byte	0x2c
- 389 0096 05       		.uleb128 0x5
- 390 0097 ED010000 		.4byte	.LASF14
- 391 009b 04       		.byte	0x4
- 392 009c E901     		.2byte	0x1e9
- 393 009e 37000000 		.4byte	0x37
- 394 00a2 05       		.uleb128 0x5
- 395 00a3 50020000 		.4byte	.LASF15
- 396 00a7 04       		.byte	0x4
- 397 00a8 EA01     		.2byte	0x1ea
- 398 00aa 45000000 		.4byte	0x45
- 399 00ae 02       		.uleb128 0x2
- 400 00af 04       		.byte	0x4
- 401 00b0 04       		.byte	0x4
- 402 00b1 EF000000 		.4byte	.LASF16
- 403 00b5 02       		.uleb128 0x2
- 404 00b6 08       		.byte	0x8
- 405 00b7 04       		.byte	0x4
- 406 00b8 20020000 		.4byte	.LASF17
- 407 00bc 06       		.uleb128 0x6
- 408 00bd 57020000 		.4byte	.LASF18
- 409 00c1 01       		.byte	0x1
- 410 00c2 4B       		.byte	0x4b
- 411 00c3 00000000 		.4byte	.LFB4
- 412 00c7 0A000000 		.4byte	.LFE4-.LFB4
- 413 00cb 01       		.uleb128 0x1
- 414 00cc 9C       		.byte	0x9c
- 415 00cd E1000000 		.4byte	0xe1
- 416 00d1 07       		.uleb128 0x7
- 417 00d2 08000000 		.4byte	.LVL0
- 418 00d6 D1020000 		.4byte	0x2d1
- 419 00da 08       		.uleb128 0x8
- 420 00db 01       		.uleb128 0x1
- 421 00dc 50       		.byte	0x50
- 422 00dd 01       		.uleb128 0x1
- 423 00de 30       		.byte	0x30
- 424 00df 00       		.byte	0
- 425 00e0 00       		.byte	0
- 426 00e1 06       		.uleb128 0x6
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 11
+ 345              		.loc 1 151 0
+ 346 001c 0020     		movs	r0, #0
+ 347              	.LVL37:
+ 348 001e 034B     		ldr	r3, .L37
+ 349 0020 1870     		strb	r0, [r3]
+ 152:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
+ 350              		.loc 1 152 0
+ 351 0022 FFF7FEFF 		bl	VDAC8_Direction_SetValue
+ 352              	.LVL38:
+ 153:PumpCtrl.c    ****         Pump_Start();
+ 353              		.loc 1 153 0
+ 354 0026 FFF7FEFF 		bl	Pump_Start
+ 355              	.LVL39:
+ 356 002a 08BD     		pop	{r3, pc}
+ 357              	.L38:
+ 358              		.align	2
+ 359              	.L37:
+ 360 002c 00000000 		.word	output_voltage_direction
+ 361              		.cfi_endproc
+ 362              	.LFE8:
+ 363              		.size	FlowDirection, .-FlowDirection
+ 364              		.comm	output_voltage_direction,1,1
+ 365              		.comm	const_speed,1,1
+ 366              		.comm	speed,1,1
+ 367              		.comm	output_voltage,1,1
+ 368              		.comm	voltage,4,4
+ 369              		.text
+ 370              	.Letext0:
+ 371              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 372              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 373              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 374              		.file 5 "Generated_Source\\PSoC5/VDAC8_Enabling.h"
+ 375              		.file 6 "Generated_Source\\PSoC5/VDAC8_Direction.h"
+ 376              		.file 7 "Generated_Source\\PSoC5/VDAC8_SpeedControl.h"
+ 377              		.file 8 "Generated_Source\\PSoC5/PGA_SpeedControl.h"
+ 378              		.file 9 "Generated_Source\\PSoC5/CyLib.h"
+ 379              		.section	.debug_info,"",%progbits
+ 380              	.Ldebug_info0:
+ 381 0000 C3030000 		.4byte	0x3c3
+ 382 0004 0400     		.2byte	0x4
+ 383 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 384 000a 04       		.byte	0x4
+ 385 000b 01       		.uleb128 0x1
+ 386 000c 49010000 		.4byte	.LASF44
+ 387 0010 0C       		.byte	0xc
+ 388 0011 E0000000 		.4byte	.LASF45
+ 389 0015 6A000000 		.4byte	.LASF46
+ 390 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 391 001d 00000000 		.4byte	0
+ 392 0021 00000000 		.4byte	.Ldebug_line0
+ 393 0025 02       		.uleb128 0x2
+ 394 0026 01       		.byte	0x1
+ 395 0027 06       		.byte	0x6
+ 396 0028 75030000 		.4byte	.LASF0
+ 397 002c 03       		.uleb128 0x3
+ 398 002d 18000000 		.4byte	.LASF12
+ 399 0031 02       		.byte	0x2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 11
 
 
- 427 00e2 A9020000 		.4byte	.LASF19
- 428 00e6 01       		.byte	0x1
- 429 00e7 55       		.byte	0x55
- 430 00e8 00000000 		.4byte	.LFB5
- 431 00ec 14000000 		.4byte	.LFE5-.LFB5
- 432 00f0 01       		.uleb128 0x1
- 433 00f1 9C       		.byte	0x9c
- 434 00f2 06010000 		.4byte	0x106
- 435 00f6 07       		.uleb128 0x7
- 436 00f7 0C000000 		.4byte	.LVL1
- 437 00fb D1020000 		.4byte	0x2d1
- 438 00ff 08       		.uleb128 0x8
- 439 0100 01       		.uleb128 0x1
- 440 0101 50       		.byte	0x50
- 441 0102 01       		.uleb128 0x1
- 442 0103 30       		.byte	0x30
- 443 0104 00       		.byte	0
- 444 0105 00       		.byte	0
- 445 0106 06       		.uleb128 0x6
- 446 0107 27020000 		.4byte	.LASF20
- 447 010b 01       		.byte	0x1
- 448 010c 18       		.byte	0x18
- 449 010d 00000000 		.4byte	.LFB1
- 450 0111 1E000000 		.4byte	.LFE1-.LFB1
- 451 0115 01       		.uleb128 0x1
- 452 0116 9C       		.byte	0x9c
- 453 0117 67010000 		.4byte	0x167
- 454 011b 09       		.uleb128 0x9
- 455 011c 08000000 		.4byte	.LVL2
- 456 0120 DC020000 		.4byte	0x2dc
- 457 0124 2E010000 		.4byte	0x12e
- 458 0128 08       		.uleb128 0x8
- 459 0129 01       		.uleb128 0x1
- 460 012a 50       		.byte	0x50
- 461 012b 01       		.uleb128 0x1
- 462 012c 34       		.byte	0x34
- 463 012d 00       		.byte	0
- 464 012e 09       		.uleb128 0x9
- 465 012f 0E000000 		.4byte	.LVL3
- 466 0133 E7020000 		.4byte	0x2e7
- 467 0137 41010000 		.4byte	0x141
- 468 013b 08       		.uleb128 0x8
- 469 013c 01       		.uleb128 0x1
- 470 013d 50       		.byte	0x50
- 471 013e 01       		.uleb128 0x1
- 472 013f 30       		.byte	0x30
- 473 0140 00       		.byte	0
- 474 0141 09       		.uleb128 0x9
- 475 0142 14000000 		.4byte	.LVL4
- 476 0146 F2020000 		.4byte	0x2f2
- 477 014a 54010000 		.4byte	0x154
- 478 014e 08       		.uleb128 0x8
- 479 014f 01       		.uleb128 0x1
- 480 0150 50       		.byte	0x50
- 481 0151 01       		.uleb128 0x1
- 482 0152 34       		.byte	0x34
- 483 0153 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 12
+ 400 0032 1D       		.byte	0x1d
+ 401 0033 37000000 		.4byte	0x37
+ 402 0037 02       		.uleb128 0x2
+ 403 0038 01       		.byte	0x1
+ 404 0039 08       		.byte	0x8
+ 405 003a 3B010000 		.4byte	.LASF1
+ 406 003e 02       		.uleb128 0x2
+ 407 003f 02       		.byte	0x2
+ 408 0040 05       		.byte	0x5
+ 409 0041 2F030000 		.4byte	.LASF2
+ 410 0045 02       		.uleb128 0x2
+ 411 0046 02       		.byte	0x2
+ 412 0047 07       		.byte	0x7
+ 413 0048 57000000 		.4byte	.LASF3
+ 414 004c 02       		.uleb128 0x2
+ 415 004d 04       		.byte	0x4
+ 416 004e 05       		.byte	0x5
+ 417 004f 60030000 		.4byte	.LASF4
+ 418 0053 02       		.uleb128 0x2
+ 419 0054 04       		.byte	0x4
+ 420 0055 07       		.byte	0x7
+ 421 0056 07020000 		.4byte	.LASF5
+ 422 005a 02       		.uleb128 0x2
+ 423 005b 08       		.byte	0x8
+ 424 005c 05       		.byte	0x5
+ 425 005d 1C030000 		.4byte	.LASF6
+ 426 0061 02       		.uleb128 0x2
+ 427 0062 08       		.byte	0x8
+ 428 0063 07       		.byte	0x7
+ 429 0064 C4020000 		.4byte	.LASF7
+ 430 0068 04       		.uleb128 0x4
+ 431 0069 04       		.byte	0x4
+ 432 006a 05       		.byte	0x5
+ 433 006b 696E7400 		.ascii	"int\000"
+ 434 006f 02       		.uleb128 0x2
+ 435 0070 04       		.byte	0x4
+ 436 0071 07       		.byte	0x7
+ 437 0072 A9020000 		.4byte	.LASF8
+ 438 0076 02       		.uleb128 0x2
+ 439 0077 08       		.byte	0x8
+ 440 0078 04       		.byte	0x4
+ 441 0079 69030000 		.4byte	.LASF9
+ 442 007d 02       		.uleb128 0x2
+ 443 007e 04       		.byte	0x4
+ 444 007f 07       		.byte	0x7
+ 445 0080 13030000 		.4byte	.LASF10
+ 446 0084 02       		.uleb128 0x2
+ 447 0085 01       		.byte	0x1
+ 448 0086 08       		.byte	0x8
+ 449 0087 2A030000 		.4byte	.LASF11
+ 450 008b 03       		.uleb128 0x3
+ 451 008c DB020000 		.4byte	.LASF13
+ 452 0090 03       		.byte	0x3
+ 453 0091 18       		.byte	0x18
+ 454 0092 2C000000 		.4byte	0x2c
+ 455 0096 05       		.uleb128 0x5
+ 456 0097 27020000 		.4byte	.LASF14
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 12
 
 
- 484 0154 0A       		.uleb128 0xa
- 485 0155 18000000 		.4byte	.LVL5
- 486 0159 FD020000 		.4byte	0x2fd
- 487 015d 0A       		.uleb128 0xa
- 488 015e 1C000000 		.4byte	.LVL6
- 489 0162 E1000000 		.4byte	0xe1
- 490 0166 00       		.byte	0
- 491 0167 06       		.uleb128 0x6
- 492 0168 DF010000 		.4byte	.LASF21
- 493 016c 01       		.byte	0x1
- 494 016d 2A       		.byte	0x2a
- 495 016e 00000000 		.4byte	.LFB2
- 496 0172 16000000 		.4byte	.LFE2-.LFB2
- 497 0176 01       		.uleb128 0x1
- 498 0177 9C       		.byte	0x9c
- 499 0178 AB010000 		.4byte	0x1ab
- 500 017c 0A       		.uleb128 0xa
- 501 017d 06000000 		.4byte	.LVL7
- 502 0181 08030000 		.4byte	0x308
- 503 0185 09       		.uleb128 0x9
- 504 0186 0C000000 		.4byte	.LVL8
- 505 018a E7020000 		.4byte	0x2e7
- 506 018e 98010000 		.4byte	0x198
- 507 0192 08       		.uleb128 0x8
- 508 0193 01       		.uleb128 0x1
- 509 0194 50       		.byte	0x50
- 510 0195 01       		.uleb128 0x1
- 511 0196 30       		.byte	0x30
- 512 0197 00       		.byte	0
- 513 0198 0A       		.uleb128 0xa
- 514 0199 10000000 		.4byte	.LVL9
- 515 019d 13030000 		.4byte	0x313
- 516 01a1 0A       		.uleb128 0xa
- 517 01a2 14000000 		.4byte	.LVL10
- 518 01a6 E1000000 		.4byte	0xe1
- 519 01aa 00       		.byte	0
- 520 01ab 0B       		.uleb128 0xb
- 521 01ac 47020000 		.4byte	.LASF24
- 522 01b0 01       		.byte	0x1
- 523 01b1 61       		.byte	0x61
- 524 01b2 00000000 		.4byte	.LFB6
- 525 01b6 58000000 		.4byte	.LFE6-.LFB6
- 526 01ba 01       		.uleb128 0x1
- 527 01bb 9C       		.byte	0x9c
- 528 01bc 07020000 		.4byte	0x207
- 529 01c0 0C       		.uleb128 0xc
- 530 01c1 22000000 		.4byte	.LASF22
- 531 01c5 01       		.byte	0x1
- 532 01c6 61       		.byte	0x61
- 533 01c7 8B000000 		.4byte	0x8b
- 534 01cb 00000000 		.4byte	.LLST0
- 535 01cf 09       		.uleb128 0x9
- 536 01d0 32000000 		.4byte	.LVL17
- 537 01d4 E7020000 		.4byte	0x2e7
- 538 01d8 E2010000 		.4byte	0x1e2
- 539 01dc 08       		.uleb128 0x8
- 540 01dd 01       		.uleb128 0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 13
+ 457 009b 04       		.byte	0x4
+ 458 009c E901     		.2byte	0x1e9
+ 459 009e 37000000 		.4byte	0x37
+ 460 00a2 05       		.uleb128 0x5
+ 461 00a3 8A020000 		.4byte	.LASF15
+ 462 00a7 04       		.byte	0x4
+ 463 00a8 EA01     		.2byte	0x1ea
+ 464 00aa 45000000 		.4byte	0x45
+ 465 00ae 02       		.uleb128 0x2
+ 466 00af 04       		.byte	0x4
+ 467 00b0 04       		.byte	0x4
+ 468 00b1 02010000 		.4byte	.LASF16
+ 469 00b5 02       		.uleb128 0x2
+ 470 00b6 08       		.byte	0x8
+ 471 00b7 04       		.byte	0x4
+ 472 00b8 5A020000 		.4byte	.LASF17
+ 473 00bc 06       		.uleb128 0x6
+ 474 00bd 91020000 		.4byte	.LASF18
+ 475 00c1 01       		.byte	0x1
+ 476 00c2 4C       		.byte	0x4c
+ 477 00c3 00000000 		.4byte	.LFB4
+ 478 00c7 0A000000 		.4byte	.LFE4-.LFB4
+ 479 00cb 01       		.uleb128 0x1
+ 480 00cc 9C       		.byte	0x9c
+ 481 00cd E1000000 		.4byte	0xe1
+ 482 00d1 07       		.uleb128 0x7
+ 483 00d2 08000000 		.4byte	.LVL0
+ 484 00d6 4D030000 		.4byte	0x34d
+ 485 00da 08       		.uleb128 0x8
+ 486 00db 01       		.uleb128 0x1
+ 487 00dc 50       		.byte	0x50
+ 488 00dd 01       		.uleb128 0x1
+ 489 00de 30       		.byte	0x30
+ 490 00df 00       		.byte	0
+ 491 00e0 00       		.byte	0
+ 492 00e1 06       		.uleb128 0x6
+ 493 00e2 E3020000 		.4byte	.LASF19
+ 494 00e6 01       		.byte	0x1
+ 495 00e7 56       		.byte	0x56
+ 496 00e8 00000000 		.4byte	.LFB5
+ 497 00ec 14000000 		.4byte	.LFE5-.LFB5
+ 498 00f0 01       		.uleb128 0x1
+ 499 00f1 9C       		.byte	0x9c
+ 500 00f2 07010000 		.4byte	0x107
+ 501 00f6 07       		.uleb128 0x7
+ 502 00f7 0C000000 		.4byte	.LVL1
+ 503 00fb 4D030000 		.4byte	0x34d
+ 504 00ff 08       		.uleb128 0x8
+ 505 0100 01       		.uleb128 0x1
+ 506 0101 50       		.byte	0x50
+ 507 0102 02       		.uleb128 0x2
+ 508 0103 09       		.byte	0x9
+ 509 0104 FF       		.byte	0xff
+ 510 0105 00       		.byte	0
+ 511 0106 00       		.byte	0
+ 512 0107 06       		.uleb128 0x6
+ 513 0108 61020000 		.4byte	.LASF20
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 13
 
 
- 541 01de 50       		.byte	0x50
- 542 01df 01       		.uleb128 0x1
- 543 01e0 30       		.byte	0x30
- 544 01e1 00       		.byte	0
- 545 01e2 09       		.uleb128 0x9
- 546 01e3 44000000 		.4byte	.LVL20
- 547 01e7 E7020000 		.4byte	0x2e7
- 548 01eb F6010000 		.4byte	0x1f6
- 549 01ef 08       		.uleb128 0x8
- 550 01f0 01       		.uleb128 0x1
- 551 01f1 50       		.byte	0x50
- 552 01f2 02       		.uleb128 0x2
- 553 01f3 09       		.byte	0x9
- 554 01f4 8C       		.byte	0x8c
- 555 01f5 00       		.byte	0
- 556 01f6 07       		.uleb128 0x7
- 557 01f7 4C000000 		.4byte	.LVL22
- 558 01fb E7020000 		.4byte	0x2e7
- 559 01ff 08       		.uleb128 0x8
- 560 0200 01       		.uleb128 0x1
- 561 0201 50       		.byte	0x50
- 562 0202 02       		.uleb128 0x2
- 563 0203 75       		.byte	0x75
- 564 0204 00       		.sleb128 0
- 565 0205 00       		.byte	0
- 566 0206 00       		.byte	0
- 567 0207 0D       		.uleb128 0xd
- 568 0208 7C020000 		.4byte	.LASF42
- 569 020c 01       		.byte	0x1
- 570 020d 7B       		.byte	0x7b
- 571 020e 96000000 		.4byte	0x96
- 572 0212 00000000 		.4byte	.LFB7
- 573 0216 1C000000 		.4byte	.LFE7-.LFB7
- 574 021a 01       		.uleb128 0x1
- 575 021b 9C       		.byte	0x9c
- 576 021c 30020000 		.4byte	0x230
- 577 0220 0C       		.uleb128 0xc
- 578 0221 0A020000 		.4byte	.LASF23
- 579 0225 01       		.byte	0x1
- 580 0226 7B       		.byte	0x7b
- 581 0227 A2000000 		.4byte	0xa2
- 582 022b 3C000000 		.4byte	.LLST1
- 583 022f 00       		.byte	0
- 584 0230 0E       		.uleb128 0xe
- 585 0231 62020000 		.4byte	.LASF25
- 586 0235 01       		.byte	0x1
- 587 0236 38       		.byte	0x38
- 588 0237 00000000 		.4byte	.LFB3
- 589 023b 24000000 		.4byte	.LFE3-.LFB3
- 590 023f 01       		.uleb128 0x1
- 591 0240 9C       		.byte	0x9c
- 592 0241 8D020000 		.4byte	0x28d
- 593 0245 0C       		.uleb128 0xc
- 594 0246 B3020000 		.4byte	.LASF26
- 595 024a 01       		.byte	0x1
- 596 024b 38       		.byte	0x38
- 597 024c A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 14
+ 514 010c 01       		.byte	0x1
+ 515 010d 1A       		.byte	0x1a
+ 516 010e 00000000 		.4byte	.LFB1
+ 517 0112 28000000 		.4byte	.LFE1-.LFB1
+ 518 0116 01       		.uleb128 0x1
+ 519 0117 9C       		.byte	0x9c
+ 520 0118 5F010000 		.4byte	0x15f
+ 521 011c 09       		.uleb128 0x9
+ 522 011d 0C000000 		.4byte	.LVL2
+ 523 0121 58030000 		.4byte	0x358
+ 524 0125 0A       		.uleb128 0xa
+ 525 0126 12000000 		.4byte	.LVL3
+ 526 012a 63030000 		.4byte	0x363
+ 527 012e 38010000 		.4byte	0x138
+ 528 0132 08       		.uleb128 0x8
+ 529 0133 01       		.uleb128 0x1
+ 530 0134 50       		.byte	0x50
+ 531 0135 01       		.uleb128 0x1
+ 532 0136 34       		.byte	0x34
+ 533 0137 00       		.byte	0
+ 534 0138 09       		.uleb128 0x9
+ 535 0139 16000000 		.4byte	.LVL4
+ 536 013d 6E030000 		.4byte	0x36e
+ 537 0141 0A       		.uleb128 0xa
+ 538 0142 1C000000 		.4byte	.LVL5
+ 539 0146 79030000 		.4byte	0x379
+ 540 014a 55010000 		.4byte	0x155
+ 541 014e 08       		.uleb128 0x8
+ 542 014f 01       		.uleb128 0x1
+ 543 0150 50       		.byte	0x50
+ 544 0151 02       		.uleb128 0x2
+ 545 0152 74       		.byte	0x74
+ 546 0153 00       		.sleb128 0
+ 547 0154 00       		.byte	0
+ 548 0155 09       		.uleb128 0x9
+ 549 0156 20000000 		.4byte	.LVL6
+ 550 015a E1000000 		.4byte	0xe1
+ 551 015e 00       		.byte	0
+ 552 015f 06       		.uleb128 0x6
+ 553 0160 19020000 		.4byte	.LASF21
+ 554 0164 01       		.byte	0x1
+ 555 0165 2C       		.byte	0x2c
+ 556 0166 00000000 		.4byte	.LFB2
+ 557 016a 16000000 		.4byte	.LFE2-.LFB2
+ 558 016e 01       		.uleb128 0x1
+ 559 016f 9C       		.byte	0x9c
+ 560 0170 A3010000 		.4byte	0x1a3
+ 561 0174 0A       		.uleb128 0xa
+ 562 0175 08000000 		.4byte	.LVL7
+ 563 0179 84030000 		.4byte	0x384
+ 564 017d 87010000 		.4byte	0x187
+ 565 0181 08       		.uleb128 0x8
+ 566 0182 01       		.uleb128 0x1
+ 567 0183 50       		.byte	0x50
+ 568 0184 01       		.uleb128 0x1
+ 569 0185 30       		.byte	0x30
+ 570 0186 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 14
 
 
- 598 0250 5D000000 		.4byte	.LLST2
- 599 0254 0A       		.uleb128 0xa
- 600 0255 08000000 		.4byte	.LVL26
- 601 0259 1E030000 		.4byte	0x31e
- 602 025d 0A       		.uleb128 0xa
- 603 025e 0C000000 		.4byte	.LVL27
- 604 0262 29030000 		.4byte	0x329
- 605 0266 09       		.uleb128 0x9
- 606 0267 12000000 		.4byte	.LVL28
- 607 026b 07020000 		.4byte	0x207
- 608 026f 7A020000 		.4byte	0x27a
- 609 0273 08       		.uleb128 0x8
- 610 0274 01       		.uleb128 0x1
- 611 0275 50       		.byte	0x50
- 612 0276 02       		.uleb128 0x2
- 613 0277 74       		.byte	0x74
- 614 0278 00       		.sleb128 0
- 615 0279 00       		.byte	0
- 616 027a 0A       		.uleb128 0xa
- 617 027b 1A000000 		.4byte	.LVL29
- 618 027f E7020000 		.4byte	0x2e7
- 619 0283 0A       		.uleb128 0xa
- 620 0284 1E000000 		.4byte	.LVL30
- 621 0288 BC000000 		.4byte	0xbc
- 622 028c 00       		.byte	0
- 623 028d 0F       		.uleb128 0xf
- 624 028e F3010000 		.4byte	.LASF27
- 625 0292 01       		.byte	0x1
- 626 0293 0E       		.byte	0xe
- 627 0294 AE000000 		.4byte	0xae
- 628 0298 05       		.uleb128 0x5
- 629 0299 03       		.byte	0x3
- 630 029a 00000000 		.4byte	voltage
- 631 029e 0F       		.uleb128 0xf
- 632 029f FB010000 		.4byte	.LASF28
- 633 02a3 01       		.byte	0x1
- 634 02a4 0F       		.byte	0xf
- 635 02a5 96000000 		.4byte	0x96
- 636 02a9 05       		.uleb128 0x5
- 637 02aa 03       		.byte	0x3
- 638 02ab 00000000 		.4byte	output_voltage
- 639 02af 0F       		.uleb128 0xf
- 640 02b0 22000000 		.4byte	.LASF22
- 641 02b4 01       		.byte	0x1
- 642 02b5 10       		.byte	0x10
- 643 02b6 96000000 		.4byte	0x96
- 644 02ba 05       		.uleb128 0x5
- 645 02bb 03       		.byte	0x3
- 646 02bc 00000000 		.4byte	speed
- 647 02c0 0F       		.uleb128 0xf
- 648 02c1 F5000000 		.4byte	.LASF29
- 649 02c5 01       		.byte	0x1
- 650 02c6 11       		.byte	0x11
- 651 02c7 96000000 		.4byte	0x96
- 652 02cb 05       		.uleb128 0x5
- 653 02cc 03       		.byte	0x3
- 654 02cd 00000000 		.4byte	const_speed
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 15
+ 571 0187 09       		.uleb128 0x9
+ 572 0188 0C000000 		.4byte	.LVL8
+ 573 018c 8F030000 		.4byte	0x38f
+ 574 0190 09       		.uleb128 0x9
+ 575 0191 10000000 		.4byte	.LVL9
+ 576 0195 9A030000 		.4byte	0x39a
+ 577 0199 09       		.uleb128 0x9
+ 578 019a 14000000 		.4byte	.LVL10
+ 579 019e E1000000 		.4byte	0xe1
+ 580 01a2 00       		.byte	0
+ 581 01a3 0B       		.uleb128 0xb
+ 582 01a4 81020000 		.4byte	.LASF24
+ 583 01a8 01       		.byte	0x1
+ 584 01a9 61       		.byte	0x61
+ 585 01aa 00000000 		.4byte	.LFB6
+ 586 01ae 58000000 		.4byte	.LFE6-.LFB6
+ 587 01b2 01       		.uleb128 0x1
+ 588 01b3 9C       		.byte	0x9c
+ 589 01b4 FF010000 		.4byte	0x1ff
+ 590 01b8 0C       		.uleb128 0xc
+ 591 01b9 22000000 		.4byte	.LASF22
+ 592 01bd 01       		.byte	0x1
+ 593 01be 61       		.byte	0x61
+ 594 01bf 8B000000 		.4byte	0x8b
+ 595 01c3 00000000 		.4byte	.LLST0
+ 596 01c7 0A       		.uleb128 0xa
+ 597 01c8 32000000 		.4byte	.LVL17
+ 598 01cc 84030000 		.4byte	0x384
+ 599 01d0 DA010000 		.4byte	0x1da
+ 600 01d4 08       		.uleb128 0x8
+ 601 01d5 01       		.uleb128 0x1
+ 602 01d6 50       		.byte	0x50
+ 603 01d7 01       		.uleb128 0x1
+ 604 01d8 30       		.byte	0x30
+ 605 01d9 00       		.byte	0
+ 606 01da 0A       		.uleb128 0xa
+ 607 01db 44000000 		.4byte	.LVL20
+ 608 01df 84030000 		.4byte	0x384
+ 609 01e3 EE010000 		.4byte	0x1ee
+ 610 01e7 08       		.uleb128 0x8
+ 611 01e8 01       		.uleb128 0x1
+ 612 01e9 50       		.byte	0x50
+ 613 01ea 02       		.uleb128 0x2
+ 614 01eb 09       		.byte	0x9
+ 615 01ec 8C       		.byte	0x8c
+ 616 01ed 00       		.byte	0
+ 617 01ee 07       		.uleb128 0x7
+ 618 01ef 4C000000 		.4byte	.LVL22
+ 619 01f3 84030000 		.4byte	0x384
+ 620 01f7 08       		.uleb128 0x8
+ 621 01f8 01       		.uleb128 0x1
+ 622 01f9 50       		.byte	0x50
+ 623 01fa 02       		.uleb128 0x2
+ 624 01fb 75       		.byte	0x75
+ 625 01fc 00       		.sleb128 0
+ 626 01fd 00       		.byte	0
+ 627 01fe 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 15
 
 
- 655 02d1 10       		.uleb128 0x10
- 656 02d2 00000000 		.4byte	.LASF30
- 657 02d6 00000000 		.4byte	.LASF30
- 658 02da 05       		.byte	0x5
- 659 02db 37       		.byte	0x37
- 660 02dc 10       		.uleb128 0x10
- 661 02dd BC000000 		.4byte	.LASF31
- 662 02e1 BC000000 		.4byte	.LASF31
- 663 02e5 06       		.byte	0x6
- 664 02e6 36       		.byte	0x36
- 665 02e7 10       		.uleb128 0x10
- 666 02e8 FF020000 		.4byte	.LASF32
- 667 02ec FF020000 		.4byte	.LASF32
- 668 02f0 06       		.byte	0x6
- 669 02f1 37       		.byte	0x37
- 670 02f2 10       		.uleb128 0x10
- 671 02f3 9D010000 		.4byte	.LASF33
- 672 02f7 9D010000 		.4byte	.LASF33
- 673 02fb 05       		.byte	0x5
- 674 02fc 36       		.byte	0x36
- 675 02fd 10       		.uleb128 0x10
- 676 02fe 32020000 		.4byte	.LASF34
- 677 0302 32020000 		.4byte	.LASF34
- 678 0306 05       		.byte	0x5
- 679 0307 33       		.byte	0x33
- 680 0308 10       		.uleb128 0x10
- 681 0309 B5010000 		.4byte	.LASF35
- 682 030d B5010000 		.4byte	.LASF35
- 683 0311 06       		.byte	0x6
- 684 0312 34       		.byte	0x34
- 685 0313 10       		.uleb128 0x10
- 686 0314 3C030000 		.4byte	.LASF36
- 687 0318 3C030000 		.4byte	.LASF36
- 688 031c 07       		.byte	0x7
- 689 031d 3F       		.byte	0x3f
- 690 031e 10       		.uleb128 0x10
- 691 031f C0020000 		.4byte	.LASF37
- 692 0323 C0020000 		.4byte	.LASF37
- 693 0327 06       		.byte	0x6
- 694 0328 33       		.byte	0x33
- 695 0329 10       		.uleb128 0x10
- 696 032a D8000000 		.4byte	.LASF38
- 697 032e D8000000 		.4byte	.LASF38
- 698 0332 07       		.byte	0x7
- 699 0333 3E       		.byte	0x3e
- 700 0334 00       		.byte	0
- 701              		.section	.debug_abbrev,"",%progbits
- 702              	.Ldebug_abbrev0:
- 703 0000 01       		.uleb128 0x1
- 704 0001 11       		.uleb128 0x11
- 705 0002 01       		.byte	0x1
- 706 0003 25       		.uleb128 0x25
- 707 0004 0E       		.uleb128 0xe
- 708 0005 13       		.uleb128 0x13
- 709 0006 0B       		.uleb128 0xb
- 710 0007 03       		.uleb128 0x3
- 711 0008 0E       		.uleb128 0xe
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 16
+ 628 01ff 0D       		.uleb128 0xd
+ 629 0200 B6020000 		.4byte	.LASF47
+ 630 0204 01       		.byte	0x1
+ 631 0205 7B       		.byte	0x7b
+ 632 0206 96000000 		.4byte	0x96
+ 633 020a 00000000 		.4byte	.LFB7
+ 634 020e 1C000000 		.4byte	.LFE7-.LFB7
+ 635 0212 01       		.uleb128 0x1
+ 636 0213 9C       		.byte	0x9c
+ 637 0214 28020000 		.4byte	0x228
+ 638 0218 0C       		.uleb128 0xc
+ 639 0219 44020000 		.4byte	.LASF23
+ 640 021d 01       		.byte	0x1
+ 641 021e 7B       		.byte	0x7b
+ 642 021f A2000000 		.4byte	0xa2
+ 643 0223 3C000000 		.4byte	.LLST1
+ 644 0227 00       		.byte	0
+ 645 0228 0E       		.uleb128 0xe
+ 646 0229 9C020000 		.4byte	.LASF25
+ 647 022d 01       		.byte	0x1
+ 648 022e 3A       		.byte	0x3a
+ 649 022f 00000000 		.4byte	.LFB3
+ 650 0233 24000000 		.4byte	.LFE3-.LFB3
+ 651 0237 01       		.uleb128 0x1
+ 652 0238 9C       		.byte	0x9c
+ 653 0239 85020000 		.4byte	0x285
+ 654 023d 0C       		.uleb128 0xc
+ 655 023e ED020000 		.4byte	.LASF26
+ 656 0242 01       		.byte	0x1
+ 657 0243 3A       		.byte	0x3a
+ 658 0244 A2000000 		.4byte	0xa2
+ 659 0248 5D000000 		.4byte	.LLST2
+ 660 024c 09       		.uleb128 0x9
+ 661 024d 08000000 		.4byte	.LVL26
+ 662 0251 A5030000 		.4byte	0x3a5
+ 663 0255 09       		.uleb128 0x9
+ 664 0256 0C000000 		.4byte	.LVL27
+ 665 025a B0030000 		.4byte	0x3b0
+ 666 025e 0A       		.uleb128 0xa
+ 667 025f 12000000 		.4byte	.LVL28
+ 668 0263 FF010000 		.4byte	0x1ff
+ 669 0267 72020000 		.4byte	0x272
+ 670 026b 08       		.uleb128 0x8
+ 671 026c 01       		.uleb128 0x1
+ 672 026d 50       		.byte	0x50
+ 673 026e 02       		.uleb128 0x2
+ 674 026f 74       		.byte	0x74
+ 675 0270 00       		.sleb128 0
+ 676 0271 00       		.byte	0
+ 677 0272 09       		.uleb128 0x9
+ 678 0273 1A000000 		.4byte	.LVL29
+ 679 0277 84030000 		.4byte	0x384
+ 680 027b 09       		.uleb128 0x9
+ 681 027c 1E000000 		.4byte	.LVL30
+ 682 0280 BC000000 		.4byte	0xbc
+ 683 0284 00       		.byte	0
+ 684 0285 0E       		.uleb128 0xe
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 16
 
 
- 712 0009 1B       		.uleb128 0x1b
- 713 000a 0E       		.uleb128 0xe
- 714 000b 55       		.uleb128 0x55
- 715 000c 17       		.uleb128 0x17
- 716 000d 11       		.uleb128 0x11
- 717 000e 01       		.uleb128 0x1
- 718 000f 10       		.uleb128 0x10
- 719 0010 17       		.uleb128 0x17
- 720 0011 00       		.byte	0
- 721 0012 00       		.byte	0
- 722 0013 02       		.uleb128 0x2
- 723 0014 24       		.uleb128 0x24
- 724 0015 00       		.byte	0
- 725 0016 0B       		.uleb128 0xb
- 726 0017 0B       		.uleb128 0xb
- 727 0018 3E       		.uleb128 0x3e
- 728 0019 0B       		.uleb128 0xb
- 729 001a 03       		.uleb128 0x3
- 730 001b 0E       		.uleb128 0xe
- 731 001c 00       		.byte	0
- 732 001d 00       		.byte	0
- 733 001e 03       		.uleb128 0x3
- 734 001f 16       		.uleb128 0x16
- 735 0020 00       		.byte	0
- 736 0021 03       		.uleb128 0x3
- 737 0022 0E       		.uleb128 0xe
- 738 0023 3A       		.uleb128 0x3a
- 739 0024 0B       		.uleb128 0xb
- 740 0025 3B       		.uleb128 0x3b
- 741 0026 0B       		.uleb128 0xb
- 742 0027 49       		.uleb128 0x49
- 743 0028 13       		.uleb128 0x13
- 744 0029 00       		.byte	0
- 745 002a 00       		.byte	0
- 746 002b 04       		.uleb128 0x4
- 747 002c 24       		.uleb128 0x24
- 748 002d 00       		.byte	0
- 749 002e 0B       		.uleb128 0xb
- 750 002f 0B       		.uleb128 0xb
- 751 0030 3E       		.uleb128 0x3e
- 752 0031 0B       		.uleb128 0xb
- 753 0032 03       		.uleb128 0x3
- 754 0033 08       		.uleb128 0x8
- 755 0034 00       		.byte	0
- 756 0035 00       		.byte	0
- 757 0036 05       		.uleb128 0x5
- 758 0037 16       		.uleb128 0x16
- 759 0038 00       		.byte	0
- 760 0039 03       		.uleb128 0x3
- 761 003a 0E       		.uleb128 0xe
- 762 003b 3A       		.uleb128 0x3a
- 763 003c 0B       		.uleb128 0xb
- 764 003d 3B       		.uleb128 0x3b
- 765 003e 05       		.uleb128 0x5
- 766 003f 49       		.uleb128 0x49
- 767 0040 13       		.uleb128 0x13
- 768 0041 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 17
+ 685 0286 21010000 		.4byte	.LASF27
+ 686 028a 01       		.byte	0x1
+ 687 028b 85       		.byte	0x85
+ 688 028c 00000000 		.4byte	.LFB8
+ 689 0290 30000000 		.4byte	.LFE8-.LFB8
+ 690 0294 01       		.uleb128 0x1
+ 691 0295 9C       		.byte	0x9c
+ 692 0296 F8020000 		.4byte	0x2f8
+ 693 029a 0C       		.uleb128 0xc
+ 694 029b 39030000 		.4byte	.LASF28
+ 695 029f 01       		.byte	0x1
+ 696 02a0 85       		.byte	0x85
+ 697 02a1 96000000 		.4byte	0x96
+ 698 02a5 7E000000 		.4byte	.LLST3
+ 699 02a9 0A       		.uleb128 0xa
+ 700 02aa 0E000000 		.4byte	.LVL33
+ 701 02ae 79030000 		.4byte	0x379
+ 702 02b2 BD020000 		.4byte	0x2bd
+ 703 02b6 08       		.uleb128 0x8
+ 704 02b7 01       		.uleb128 0x1
+ 705 02b8 50       		.byte	0x50
+ 706 02b9 02       		.uleb128 0x2
+ 707 02ba 09       		.byte	0x9
+ 708 02bb FF       		.byte	0xff
+ 709 02bc 00       		.byte	0
+ 710 02bd 0A       		.uleb128 0xa
+ 711 02be 16000000 		.4byte	.LVL34
+ 712 02c2 BB030000 		.4byte	0x3bb
+ 713 02c6 D2020000 		.4byte	0x2d2
+ 714 02ca 08       		.uleb128 0x8
+ 715 02cb 01       		.uleb128 0x1
+ 716 02cc 50       		.byte	0x50
+ 717 02cd 03       		.uleb128 0x3
+ 718 02ce 0A       		.byte	0xa
+ 719 02cf 0429     		.2byte	0x2904
+ 720 02d1 00       		.byte	0
+ 721 02d2 09       		.uleb128 0x9
+ 722 02d3 1A000000 		.4byte	.LVL35
+ 723 02d7 E1000000 		.4byte	0xe1
+ 724 02db 0A       		.uleb128 0xa
+ 725 02dc 26000000 		.4byte	.LVL38
+ 726 02e0 79030000 		.4byte	0x379
+ 727 02e4 EE020000 		.4byte	0x2ee
+ 728 02e8 08       		.uleb128 0x8
+ 729 02e9 01       		.uleb128 0x1
+ 730 02ea 50       		.byte	0x50
+ 731 02eb 01       		.uleb128 0x1
+ 732 02ec 30       		.byte	0x30
+ 733 02ed 00       		.byte	0
+ 734 02ee 09       		.uleb128 0x9
+ 735 02ef 2A000000 		.4byte	.LVL39
+ 736 02f3 BC000000 		.4byte	0xbc
+ 737 02f7 00       		.byte	0
+ 738 02f8 0F       		.uleb128 0xf
+ 739 02f9 2D020000 		.4byte	.LASF29
+ 740 02fd 01       		.byte	0x1
+ 741 02fe 0F       		.byte	0xf
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 17
 
 
- 769 0042 00       		.byte	0
- 770 0043 06       		.uleb128 0x6
- 771 0044 2E       		.uleb128 0x2e
- 772 0045 01       		.byte	0x1
- 773 0046 3F       		.uleb128 0x3f
- 774 0047 19       		.uleb128 0x19
- 775 0048 03       		.uleb128 0x3
- 776 0049 0E       		.uleb128 0xe
- 777 004a 3A       		.uleb128 0x3a
- 778 004b 0B       		.uleb128 0xb
- 779 004c 3B       		.uleb128 0x3b
- 780 004d 0B       		.uleb128 0xb
- 781 004e 11       		.uleb128 0x11
- 782 004f 01       		.uleb128 0x1
- 783 0050 12       		.uleb128 0x12
- 784 0051 06       		.uleb128 0x6
- 785 0052 40       		.uleb128 0x40
- 786 0053 18       		.uleb128 0x18
- 787 0054 9742     		.uleb128 0x2117
- 788 0056 19       		.uleb128 0x19
- 789 0057 01       		.uleb128 0x1
- 790 0058 13       		.uleb128 0x13
- 791 0059 00       		.byte	0
- 792 005a 00       		.byte	0
- 793 005b 07       		.uleb128 0x7
- 794 005c 898201   		.uleb128 0x4109
- 795 005f 01       		.byte	0x1
- 796 0060 11       		.uleb128 0x11
- 797 0061 01       		.uleb128 0x1
- 798 0062 31       		.uleb128 0x31
- 799 0063 13       		.uleb128 0x13
- 800 0064 00       		.byte	0
- 801 0065 00       		.byte	0
- 802 0066 08       		.uleb128 0x8
- 803 0067 8A8201   		.uleb128 0x410a
- 804 006a 00       		.byte	0
- 805 006b 02       		.uleb128 0x2
- 806 006c 18       		.uleb128 0x18
- 807 006d 9142     		.uleb128 0x2111
- 808 006f 18       		.uleb128 0x18
- 809 0070 00       		.byte	0
- 810 0071 00       		.byte	0
- 811 0072 09       		.uleb128 0x9
- 812 0073 898201   		.uleb128 0x4109
- 813 0076 01       		.byte	0x1
- 814 0077 11       		.uleb128 0x11
- 815 0078 01       		.uleb128 0x1
- 816 0079 31       		.uleb128 0x31
- 817 007a 13       		.uleb128 0x13
- 818 007b 01       		.uleb128 0x1
- 819 007c 13       		.uleb128 0x13
- 820 007d 00       		.byte	0
- 821 007e 00       		.byte	0
- 822 007f 0A       		.uleb128 0xa
- 823 0080 898201   		.uleb128 0x4109
- 824 0083 00       		.byte	0
- 825 0084 11       		.uleb128 0x11
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 18
+ 742 02ff AE000000 		.4byte	0xae
+ 743 0303 05       		.uleb128 0x5
+ 744 0304 03       		.byte	0x3
+ 745 0305 00000000 		.4byte	voltage
+ 746 0309 0F       		.uleb128 0xf
+ 747 030a 35020000 		.4byte	.LASF30
+ 748 030e 01       		.byte	0x1
+ 749 030f 10       		.byte	0x10
+ 750 0310 96000000 		.4byte	0x96
+ 751 0314 05       		.uleb128 0x5
+ 752 0315 03       		.byte	0x3
+ 753 0316 00000000 		.4byte	output_voltage
+ 754 031a 0F       		.uleb128 0xf
+ 755 031b 22000000 		.4byte	.LASF22
+ 756 031f 01       		.byte	0x1
+ 757 0320 11       		.byte	0x11
+ 758 0321 96000000 		.4byte	0x96
+ 759 0325 05       		.uleb128 0x5
+ 760 0326 03       		.byte	0x3
+ 761 0327 00000000 		.4byte	speed
+ 762 032b 0F       		.uleb128 0xf
+ 763 032c 2F010000 		.4byte	.LASF31
+ 764 0330 01       		.byte	0x1
+ 765 0331 12       		.byte	0x12
+ 766 0332 96000000 		.4byte	0x96
+ 767 0336 05       		.uleb128 0x5
+ 768 0337 03       		.byte	0x3
+ 769 0338 00000000 		.4byte	const_speed
+ 770 033c 0F       		.uleb128 0xf
+ 771 033d 3E000000 		.4byte	.LASF32
+ 772 0341 01       		.byte	0x1
+ 773 0342 13       		.byte	0x13
+ 774 0343 96000000 		.4byte	0x96
+ 775 0347 05       		.uleb128 0x5
+ 776 0348 03       		.byte	0x3
+ 777 0349 00000000 		.4byte	output_voltage_direction
+ 778 034d 10       		.uleb128 0x10
+ 779 034e 00000000 		.4byte	.LASF33
+ 780 0352 00000000 		.4byte	.LASF33
+ 781 0356 05       		.byte	0x5
+ 782 0357 37       		.byte	0x37
+ 783 0358 10       		.uleb128 0x10
+ 784 0359 6C020000 		.4byte	.LASF34
+ 785 035d 6C020000 		.4byte	.LASF34
+ 786 0361 05       		.byte	0x5
+ 787 0362 33       		.byte	0x33
+ 788 0363 10       		.uleb128 0x10
+ 789 0364 D7010000 		.4byte	.LASF35
+ 790 0368 D7010000 		.4byte	.LASF35
+ 791 036c 05       		.byte	0x5
+ 792 036d 36       		.byte	0x36
+ 793 036e 10       		.uleb128 0x10
+ 794 036f 28000000 		.4byte	.LASF36
+ 795 0373 28000000 		.4byte	.LASF36
+ 796 0377 06       		.byte	0x6
+ 797 0378 33       		.byte	0x33
+ 798 0379 10       		.uleb128 0x10
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 18
 
 
- 826 0085 01       		.uleb128 0x1
- 827 0086 31       		.uleb128 0x31
- 828 0087 13       		.uleb128 0x13
- 829 0088 00       		.byte	0
- 830 0089 00       		.byte	0
- 831 008a 0B       		.uleb128 0xb
- 832 008b 2E       		.uleb128 0x2e
- 833 008c 01       		.byte	0x1
- 834 008d 3F       		.uleb128 0x3f
- 835 008e 19       		.uleb128 0x19
- 836 008f 03       		.uleb128 0x3
- 837 0090 0E       		.uleb128 0xe
- 838 0091 3A       		.uleb128 0x3a
- 839 0092 0B       		.uleb128 0xb
- 840 0093 3B       		.uleb128 0x3b
- 841 0094 0B       		.uleb128 0xb
- 842 0095 27       		.uleb128 0x27
- 843 0096 19       		.uleb128 0x19
- 844 0097 11       		.uleb128 0x11
- 845 0098 01       		.uleb128 0x1
- 846 0099 12       		.uleb128 0x12
- 847 009a 06       		.uleb128 0x6
- 848 009b 40       		.uleb128 0x40
- 849 009c 18       		.uleb128 0x18
- 850 009d 9642     		.uleb128 0x2116
- 851 009f 19       		.uleb128 0x19
- 852 00a0 01       		.uleb128 0x1
- 853 00a1 13       		.uleb128 0x13
- 854 00a2 00       		.byte	0
- 855 00a3 00       		.byte	0
- 856 00a4 0C       		.uleb128 0xc
- 857 00a5 05       		.uleb128 0x5
- 858 00a6 00       		.byte	0
- 859 00a7 03       		.uleb128 0x3
- 860 00a8 0E       		.uleb128 0xe
- 861 00a9 3A       		.uleb128 0x3a
- 862 00aa 0B       		.uleb128 0xb
- 863 00ab 3B       		.uleb128 0x3b
- 864 00ac 0B       		.uleb128 0xb
- 865 00ad 49       		.uleb128 0x49
- 866 00ae 13       		.uleb128 0x13
- 867 00af 02       		.uleb128 0x2
- 868 00b0 17       		.uleb128 0x17
- 869 00b1 00       		.byte	0
- 870 00b2 00       		.byte	0
- 871 00b3 0D       		.uleb128 0xd
- 872 00b4 2E       		.uleb128 0x2e
- 873 00b5 01       		.byte	0x1
- 874 00b6 3F       		.uleb128 0x3f
- 875 00b7 19       		.uleb128 0x19
- 876 00b8 03       		.uleb128 0x3
- 877 00b9 0E       		.uleb128 0xe
- 878 00ba 3A       		.uleb128 0x3a
- 879 00bb 0B       		.uleb128 0xb
- 880 00bc 3B       		.uleb128 0x3b
- 881 00bd 0B       		.uleb128 0xb
- 882 00be 27       		.uleb128 0x27
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 19
+ 799 037a 08010000 		.4byte	.LASF37
+ 800 037e 08010000 		.4byte	.LASF37
+ 801 0382 06       		.byte	0x6
+ 802 0383 37       		.byte	0x37
+ 803 0384 10       		.uleb128 0x10
+ 804 0385 44030000 		.4byte	.LASF38
+ 805 0389 44030000 		.4byte	.LASF38
+ 806 038d 07       		.byte	0x7
+ 807 038e 37       		.byte	0x37
+ 808 038f 10       		.uleb128 0x10
+ 809 0390 EF010000 		.4byte	.LASF39
+ 810 0394 EF010000 		.4byte	.LASF39
+ 811 0398 07       		.byte	0x7
+ 812 0399 34       		.byte	0x34
+ 813 039a 10       		.uleb128 0x10
+ 814 039b 89030000 		.4byte	.LASF40
+ 815 039f 89030000 		.4byte	.LASF40
+ 816 03a3 08       		.byte	0x8
+ 817 03a4 3F       		.byte	0x3f
+ 818 03a5 10       		.uleb128 0x10
+ 819 03a6 FA020000 		.4byte	.LASF41
+ 820 03aa FA020000 		.4byte	.LASF41
+ 821 03ae 07       		.byte	0x7
+ 822 03af 33       		.byte	0x33
+ 823 03b0 10       		.uleb128 0x10
+ 824 03b1 EB000000 		.4byte	.LASF42
+ 825 03b5 EB000000 		.4byte	.LASF42
+ 826 03b9 08       		.byte	0x8
+ 827 03ba 3E       		.byte	0x3e
+ 828 03bb 10       		.uleb128 0x10
+ 829 03bc 81030000 		.4byte	.LASF43
+ 830 03c0 81030000 		.4byte	.LASF43
+ 831 03c4 09       		.byte	0x9
+ 832 03c5 76       		.byte	0x76
+ 833 03c6 00       		.byte	0
+ 834              		.section	.debug_abbrev,"",%progbits
+ 835              	.Ldebug_abbrev0:
+ 836 0000 01       		.uleb128 0x1
+ 837 0001 11       		.uleb128 0x11
+ 838 0002 01       		.byte	0x1
+ 839 0003 25       		.uleb128 0x25
+ 840 0004 0E       		.uleb128 0xe
+ 841 0005 13       		.uleb128 0x13
+ 842 0006 0B       		.uleb128 0xb
+ 843 0007 03       		.uleb128 0x3
+ 844 0008 0E       		.uleb128 0xe
+ 845 0009 1B       		.uleb128 0x1b
+ 846 000a 0E       		.uleb128 0xe
+ 847 000b 55       		.uleb128 0x55
+ 848 000c 17       		.uleb128 0x17
+ 849 000d 11       		.uleb128 0x11
+ 850 000e 01       		.uleb128 0x1
+ 851 000f 10       		.uleb128 0x10
+ 852 0010 17       		.uleb128 0x17
+ 853 0011 00       		.byte	0
+ 854 0012 00       		.byte	0
+ 855 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 19
 
 
- 883 00bf 19       		.uleb128 0x19
- 884 00c0 49       		.uleb128 0x49
- 885 00c1 13       		.uleb128 0x13
- 886 00c2 11       		.uleb128 0x11
- 887 00c3 01       		.uleb128 0x1
- 888 00c4 12       		.uleb128 0x12
- 889 00c5 06       		.uleb128 0x6
- 890 00c6 40       		.uleb128 0x40
- 891 00c7 18       		.uleb128 0x18
- 892 00c8 9742     		.uleb128 0x2117
- 893 00ca 19       		.uleb128 0x19
- 894 00cb 01       		.uleb128 0x1
- 895 00cc 13       		.uleb128 0x13
- 896 00cd 00       		.byte	0
- 897 00ce 00       		.byte	0
- 898 00cf 0E       		.uleb128 0xe
- 899 00d0 2E       		.uleb128 0x2e
- 900 00d1 01       		.byte	0x1
- 901 00d2 3F       		.uleb128 0x3f
- 902 00d3 19       		.uleb128 0x19
- 903 00d4 03       		.uleb128 0x3
- 904 00d5 0E       		.uleb128 0xe
- 905 00d6 3A       		.uleb128 0x3a
- 906 00d7 0B       		.uleb128 0xb
- 907 00d8 3B       		.uleb128 0x3b
- 908 00d9 0B       		.uleb128 0xb
- 909 00da 27       		.uleb128 0x27
- 910 00db 19       		.uleb128 0x19
- 911 00dc 11       		.uleb128 0x11
- 912 00dd 01       		.uleb128 0x1
- 913 00de 12       		.uleb128 0x12
- 914 00df 06       		.uleb128 0x6
- 915 00e0 40       		.uleb128 0x40
- 916 00e1 18       		.uleb128 0x18
- 917 00e2 9742     		.uleb128 0x2117
- 918 00e4 19       		.uleb128 0x19
- 919 00e5 01       		.uleb128 0x1
- 920 00e6 13       		.uleb128 0x13
- 921 00e7 00       		.byte	0
- 922 00e8 00       		.byte	0
- 923 00e9 0F       		.uleb128 0xf
- 924 00ea 34       		.uleb128 0x34
- 925 00eb 00       		.byte	0
- 926 00ec 03       		.uleb128 0x3
- 927 00ed 0E       		.uleb128 0xe
- 928 00ee 3A       		.uleb128 0x3a
- 929 00ef 0B       		.uleb128 0xb
- 930 00f0 3B       		.uleb128 0x3b
- 931 00f1 0B       		.uleb128 0xb
- 932 00f2 49       		.uleb128 0x49
- 933 00f3 13       		.uleb128 0x13
- 934 00f4 3F       		.uleb128 0x3f
- 935 00f5 19       		.uleb128 0x19
- 936 00f6 02       		.uleb128 0x2
- 937 00f7 18       		.uleb128 0x18
- 938 00f8 00       		.byte	0
- 939 00f9 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 20
+ 856 0014 24       		.uleb128 0x24
+ 857 0015 00       		.byte	0
+ 858 0016 0B       		.uleb128 0xb
+ 859 0017 0B       		.uleb128 0xb
+ 860 0018 3E       		.uleb128 0x3e
+ 861 0019 0B       		.uleb128 0xb
+ 862 001a 03       		.uleb128 0x3
+ 863 001b 0E       		.uleb128 0xe
+ 864 001c 00       		.byte	0
+ 865 001d 00       		.byte	0
+ 866 001e 03       		.uleb128 0x3
+ 867 001f 16       		.uleb128 0x16
+ 868 0020 00       		.byte	0
+ 869 0021 03       		.uleb128 0x3
+ 870 0022 0E       		.uleb128 0xe
+ 871 0023 3A       		.uleb128 0x3a
+ 872 0024 0B       		.uleb128 0xb
+ 873 0025 3B       		.uleb128 0x3b
+ 874 0026 0B       		.uleb128 0xb
+ 875 0027 49       		.uleb128 0x49
+ 876 0028 13       		.uleb128 0x13
+ 877 0029 00       		.byte	0
+ 878 002a 00       		.byte	0
+ 879 002b 04       		.uleb128 0x4
+ 880 002c 24       		.uleb128 0x24
+ 881 002d 00       		.byte	0
+ 882 002e 0B       		.uleb128 0xb
+ 883 002f 0B       		.uleb128 0xb
+ 884 0030 3E       		.uleb128 0x3e
+ 885 0031 0B       		.uleb128 0xb
+ 886 0032 03       		.uleb128 0x3
+ 887 0033 08       		.uleb128 0x8
+ 888 0034 00       		.byte	0
+ 889 0035 00       		.byte	0
+ 890 0036 05       		.uleb128 0x5
+ 891 0037 16       		.uleb128 0x16
+ 892 0038 00       		.byte	0
+ 893 0039 03       		.uleb128 0x3
+ 894 003a 0E       		.uleb128 0xe
+ 895 003b 3A       		.uleb128 0x3a
+ 896 003c 0B       		.uleb128 0xb
+ 897 003d 3B       		.uleb128 0x3b
+ 898 003e 05       		.uleb128 0x5
+ 899 003f 49       		.uleb128 0x49
+ 900 0040 13       		.uleb128 0x13
+ 901 0041 00       		.byte	0
+ 902 0042 00       		.byte	0
+ 903 0043 06       		.uleb128 0x6
+ 904 0044 2E       		.uleb128 0x2e
+ 905 0045 01       		.byte	0x1
+ 906 0046 3F       		.uleb128 0x3f
+ 907 0047 19       		.uleb128 0x19
+ 908 0048 03       		.uleb128 0x3
+ 909 0049 0E       		.uleb128 0xe
+ 910 004a 3A       		.uleb128 0x3a
+ 911 004b 0B       		.uleb128 0xb
+ 912 004c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 20
 
 
- 940 00fa 10       		.uleb128 0x10
- 941 00fb 2E       		.uleb128 0x2e
- 942 00fc 00       		.byte	0
- 943 00fd 3F       		.uleb128 0x3f
- 944 00fe 19       		.uleb128 0x19
- 945 00ff 3C       		.uleb128 0x3c
- 946 0100 19       		.uleb128 0x19
- 947 0101 6E       		.uleb128 0x6e
- 948 0102 0E       		.uleb128 0xe
- 949 0103 03       		.uleb128 0x3
- 950 0104 0E       		.uleb128 0xe
- 951 0105 3A       		.uleb128 0x3a
- 952 0106 0B       		.uleb128 0xb
- 953 0107 3B       		.uleb128 0x3b
- 954 0108 0B       		.uleb128 0xb
- 955 0109 00       		.byte	0
- 956 010a 00       		.byte	0
- 957 010b 00       		.byte	0
- 958              		.section	.debug_loc,"",%progbits
- 959              	.Ldebug_loc0:
- 960              	.LLST0:
- 961 0000 00000000 		.4byte	.LVL11
- 962 0004 07000000 		.4byte	.LVL12-1
- 963 0008 0100     		.2byte	0x1
- 964 000a 50       		.byte	0x50
- 965 000b 07000000 		.4byte	.LVL12-1
- 966 000f 3E000000 		.4byte	.LVL19
- 967 0013 0400     		.2byte	0x4
- 968 0015 F3       		.byte	0xf3
- 969 0016 01       		.uleb128 0x1
- 970 0017 50       		.byte	0x50
- 971 0018 9F       		.byte	0x9f
- 972 0019 3E000000 		.4byte	.LVL19
- 973 001d 46000000 		.4byte	.LVL21
- 974 0021 0300     		.2byte	0x3
- 975 0023 09       		.byte	0x9
- 976 0024 8C       		.byte	0x8c
- 977 0025 9F       		.byte	0x9f
- 978 0026 46000000 		.4byte	.LVL21
- 979 002a 58000000 		.4byte	.LFE6
- 980 002e 0400     		.2byte	0x4
- 981 0030 F3       		.byte	0xf3
- 982 0031 01       		.uleb128 0x1
- 983 0032 50       		.byte	0x50
- 984 0033 9F       		.byte	0x9f
- 985 0034 00000000 		.4byte	0
- 986 0038 00000000 		.4byte	0
- 987              	.LLST1:
- 988 003c 00000000 		.4byte	.LVL23
- 989 0040 02000000 		.4byte	.LVL24
- 990 0044 0100     		.2byte	0x1
- 991 0046 50       		.byte	0x50
- 992 0047 02000000 		.4byte	.LVL24
- 993 004b 1C000000 		.4byte	.LFE7
- 994 004f 0400     		.2byte	0x4
- 995 0051 F3       		.byte	0xf3
- 996 0052 01       		.uleb128 0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 21
+ 913 004d 0B       		.uleb128 0xb
+ 914 004e 11       		.uleb128 0x11
+ 915 004f 01       		.uleb128 0x1
+ 916 0050 12       		.uleb128 0x12
+ 917 0051 06       		.uleb128 0x6
+ 918 0052 40       		.uleb128 0x40
+ 919 0053 18       		.uleb128 0x18
+ 920 0054 9742     		.uleb128 0x2117
+ 921 0056 19       		.uleb128 0x19
+ 922 0057 01       		.uleb128 0x1
+ 923 0058 13       		.uleb128 0x13
+ 924 0059 00       		.byte	0
+ 925 005a 00       		.byte	0
+ 926 005b 07       		.uleb128 0x7
+ 927 005c 898201   		.uleb128 0x4109
+ 928 005f 01       		.byte	0x1
+ 929 0060 11       		.uleb128 0x11
+ 930 0061 01       		.uleb128 0x1
+ 931 0062 31       		.uleb128 0x31
+ 932 0063 13       		.uleb128 0x13
+ 933 0064 00       		.byte	0
+ 934 0065 00       		.byte	0
+ 935 0066 08       		.uleb128 0x8
+ 936 0067 8A8201   		.uleb128 0x410a
+ 937 006a 00       		.byte	0
+ 938 006b 02       		.uleb128 0x2
+ 939 006c 18       		.uleb128 0x18
+ 940 006d 9142     		.uleb128 0x2111
+ 941 006f 18       		.uleb128 0x18
+ 942 0070 00       		.byte	0
+ 943 0071 00       		.byte	0
+ 944 0072 09       		.uleb128 0x9
+ 945 0073 898201   		.uleb128 0x4109
+ 946 0076 00       		.byte	0
+ 947 0077 11       		.uleb128 0x11
+ 948 0078 01       		.uleb128 0x1
+ 949 0079 31       		.uleb128 0x31
+ 950 007a 13       		.uleb128 0x13
+ 951 007b 00       		.byte	0
+ 952 007c 00       		.byte	0
+ 953 007d 0A       		.uleb128 0xa
+ 954 007e 898201   		.uleb128 0x4109
+ 955 0081 01       		.byte	0x1
+ 956 0082 11       		.uleb128 0x11
+ 957 0083 01       		.uleb128 0x1
+ 958 0084 31       		.uleb128 0x31
+ 959 0085 13       		.uleb128 0x13
+ 960 0086 01       		.uleb128 0x1
+ 961 0087 13       		.uleb128 0x13
+ 962 0088 00       		.byte	0
+ 963 0089 00       		.byte	0
+ 964 008a 0B       		.uleb128 0xb
+ 965 008b 2E       		.uleb128 0x2e
+ 966 008c 01       		.byte	0x1
+ 967 008d 3F       		.uleb128 0x3f
+ 968 008e 19       		.uleb128 0x19
+ 969 008f 03       		.uleb128 0x3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 21
 
 
- 997 0053 50       		.byte	0x50
- 998 0054 9F       		.byte	0x9f
- 999 0055 00000000 		.4byte	0
- 1000 0059 00000000 		.4byte	0
- 1001              	.LLST2:
- 1002 005d 00000000 		.4byte	.LVL25
- 1003 0061 07000000 		.4byte	.LVL26-1
- 1004 0065 0100     		.2byte	0x1
- 1005 0067 50       		.byte	0x50
- 1006 0068 07000000 		.4byte	.LVL26-1
- 1007 006c 24000000 		.4byte	.LFE3
- 1008 0070 0400     		.2byte	0x4
- 1009 0072 F3       		.byte	0xf3
- 1010 0073 01       		.uleb128 0x1
- 1011 0074 50       		.byte	0x50
- 1012 0075 9F       		.byte	0x9f
- 1013 0076 00000000 		.4byte	0
- 1014 007a 00000000 		.4byte	0
- 1015              		.section	.debug_aranges,"",%progbits
- 1016 0000 4C000000 		.4byte	0x4c
- 1017 0004 0200     		.2byte	0x2
- 1018 0006 00000000 		.4byte	.Ldebug_info0
- 1019 000a 04       		.byte	0x4
- 1020 000b 00       		.byte	0
- 1021 000c 0000     		.2byte	0
- 1022 000e 0000     		.2byte	0
- 1023 0010 00000000 		.4byte	.LFB4
- 1024 0014 0A000000 		.4byte	.LFE4-.LFB4
- 1025 0018 00000000 		.4byte	.LFB5
- 1026 001c 14000000 		.4byte	.LFE5-.LFB5
- 1027 0020 00000000 		.4byte	.LFB1
- 1028 0024 1E000000 		.4byte	.LFE1-.LFB1
- 1029 0028 00000000 		.4byte	.LFB2
- 1030 002c 16000000 		.4byte	.LFE2-.LFB2
- 1031 0030 00000000 		.4byte	.LFB6
- 1032 0034 58000000 		.4byte	.LFE6-.LFB6
- 1033 0038 00000000 		.4byte	.LFB7
- 1034 003c 1C000000 		.4byte	.LFE7-.LFB7
- 1035 0040 00000000 		.4byte	.LFB3
- 1036 0044 24000000 		.4byte	.LFE3-.LFB3
- 1037 0048 00000000 		.4byte	0
- 1038 004c 00000000 		.4byte	0
- 1039              		.section	.debug_ranges,"",%progbits
- 1040              	.Ldebug_ranges0:
- 1041 0000 00000000 		.4byte	.LFB4
- 1042 0004 0A000000 		.4byte	.LFE4
- 1043 0008 00000000 		.4byte	.LFB5
- 1044 000c 14000000 		.4byte	.LFE5
- 1045 0010 00000000 		.4byte	.LFB1
- 1046 0014 1E000000 		.4byte	.LFE1
- 1047 0018 00000000 		.4byte	.LFB2
- 1048 001c 16000000 		.4byte	.LFE2
- 1049 0020 00000000 		.4byte	.LFB6
- 1050 0024 58000000 		.4byte	.LFE6
- 1051 0028 00000000 		.4byte	.LFB7
- 1052 002c 1C000000 		.4byte	.LFE7
- 1053 0030 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 22
+ 970 0090 0E       		.uleb128 0xe
+ 971 0091 3A       		.uleb128 0x3a
+ 972 0092 0B       		.uleb128 0xb
+ 973 0093 3B       		.uleb128 0x3b
+ 974 0094 0B       		.uleb128 0xb
+ 975 0095 27       		.uleb128 0x27
+ 976 0096 19       		.uleb128 0x19
+ 977 0097 11       		.uleb128 0x11
+ 978 0098 01       		.uleb128 0x1
+ 979 0099 12       		.uleb128 0x12
+ 980 009a 06       		.uleb128 0x6
+ 981 009b 40       		.uleb128 0x40
+ 982 009c 18       		.uleb128 0x18
+ 983 009d 9642     		.uleb128 0x2116
+ 984 009f 19       		.uleb128 0x19
+ 985 00a0 01       		.uleb128 0x1
+ 986 00a1 13       		.uleb128 0x13
+ 987 00a2 00       		.byte	0
+ 988 00a3 00       		.byte	0
+ 989 00a4 0C       		.uleb128 0xc
+ 990 00a5 05       		.uleb128 0x5
+ 991 00a6 00       		.byte	0
+ 992 00a7 03       		.uleb128 0x3
+ 993 00a8 0E       		.uleb128 0xe
+ 994 00a9 3A       		.uleb128 0x3a
+ 995 00aa 0B       		.uleb128 0xb
+ 996 00ab 3B       		.uleb128 0x3b
+ 997 00ac 0B       		.uleb128 0xb
+ 998 00ad 49       		.uleb128 0x49
+ 999 00ae 13       		.uleb128 0x13
+ 1000 00af 02       		.uleb128 0x2
+ 1001 00b0 17       		.uleb128 0x17
+ 1002 00b1 00       		.byte	0
+ 1003 00b2 00       		.byte	0
+ 1004 00b3 0D       		.uleb128 0xd
+ 1005 00b4 2E       		.uleb128 0x2e
+ 1006 00b5 01       		.byte	0x1
+ 1007 00b6 3F       		.uleb128 0x3f
+ 1008 00b7 19       		.uleb128 0x19
+ 1009 00b8 03       		.uleb128 0x3
+ 1010 00b9 0E       		.uleb128 0xe
+ 1011 00ba 3A       		.uleb128 0x3a
+ 1012 00bb 0B       		.uleb128 0xb
+ 1013 00bc 3B       		.uleb128 0x3b
+ 1014 00bd 0B       		.uleb128 0xb
+ 1015 00be 27       		.uleb128 0x27
+ 1016 00bf 19       		.uleb128 0x19
+ 1017 00c0 49       		.uleb128 0x49
+ 1018 00c1 13       		.uleb128 0x13
+ 1019 00c2 11       		.uleb128 0x11
+ 1020 00c3 01       		.uleb128 0x1
+ 1021 00c4 12       		.uleb128 0x12
+ 1022 00c5 06       		.uleb128 0x6
+ 1023 00c6 40       		.uleb128 0x40
+ 1024 00c7 18       		.uleb128 0x18
+ 1025 00c8 9742     		.uleb128 0x2117
+ 1026 00ca 19       		.uleb128 0x19
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 22
 
 
- 1054 0034 24000000 		.4byte	.LFE3
- 1055 0038 00000000 		.4byte	0
- 1056 003c 00000000 		.4byte	0
- 1057              		.section	.debug_line,"",%progbits
- 1058              	.Ldebug_line0:
- 1059 0000 10020000 		.section	.debug_str,"MS",%progbits,1
- 1059      02008401 
- 1059      00000201 
- 1059      FB0E0D00 
- 1059      01010101 
- 1060              	.LASF30:
- 1061 0000 56444143 		.ascii	"VDAC8_Enabling_SetValue\000"
- 1061      385F456E 
- 1061      61626C69 
- 1061      6E675F53 
- 1061      65745661 
- 1062              	.LASF12:
- 1063 0018 5F5F7569 		.ascii	"__uint8_t\000"
- 1063      6E74385F 
- 1063      7400
- 1064              	.LASF22:
- 1065 0022 73706565 		.ascii	"speed\000"
- 1065      6400
- 1066              	.LASF3:
- 1067 0028 73686F72 		.ascii	"short unsigned int\000"
- 1067      7420756E 
- 1067      7369676E 
- 1067      65642069 
- 1067      6E7400
- 1068              	.LASF41:
- 1069 003b 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
- 1069      73657273 
- 1069      5C6E6963 
- 1069      6F5F5C53 
- 1069      756E6468 
- 1070 0069 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
- 1070      6C6F725C 
- 1070      42616368 
- 1070      656C6F72 
- 1070      50726F6A 
- 1071 0099 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
- 1071      636F6F6C 
- 1071      696E6773 
- 1071      79737465 
- 1071      6D2E6379 
- 1072              	.LASF40:
- 1073 00b1 50756D70 		.ascii	"PumpCtrl.c\000"
- 1073      4374726C 
- 1073      2E6300
- 1074              	.LASF31:
- 1075 00bc 56444143 		.ascii	"VDAC8_SpeedControl_SetRange\000"
- 1075      385F5370 
- 1075      65656443 
- 1075      6F6E7472 
- 1075      6F6C5F53 
- 1076              	.LASF38:
- 1077 00d8 5047415F 		.ascii	"PGA_SpeedControl_Start\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 23
+ 1027 00cb 01       		.uleb128 0x1
+ 1028 00cc 13       		.uleb128 0x13
+ 1029 00cd 00       		.byte	0
+ 1030 00ce 00       		.byte	0
+ 1031 00cf 0E       		.uleb128 0xe
+ 1032 00d0 2E       		.uleb128 0x2e
+ 1033 00d1 01       		.byte	0x1
+ 1034 00d2 3F       		.uleb128 0x3f
+ 1035 00d3 19       		.uleb128 0x19
+ 1036 00d4 03       		.uleb128 0x3
+ 1037 00d5 0E       		.uleb128 0xe
+ 1038 00d6 3A       		.uleb128 0x3a
+ 1039 00d7 0B       		.uleb128 0xb
+ 1040 00d8 3B       		.uleb128 0x3b
+ 1041 00d9 0B       		.uleb128 0xb
+ 1042 00da 27       		.uleb128 0x27
+ 1043 00db 19       		.uleb128 0x19
+ 1044 00dc 11       		.uleb128 0x11
+ 1045 00dd 01       		.uleb128 0x1
+ 1046 00de 12       		.uleb128 0x12
+ 1047 00df 06       		.uleb128 0x6
+ 1048 00e0 40       		.uleb128 0x40
+ 1049 00e1 18       		.uleb128 0x18
+ 1050 00e2 9742     		.uleb128 0x2117
+ 1051 00e4 19       		.uleb128 0x19
+ 1052 00e5 01       		.uleb128 0x1
+ 1053 00e6 13       		.uleb128 0x13
+ 1054 00e7 00       		.byte	0
+ 1055 00e8 00       		.byte	0
+ 1056 00e9 0F       		.uleb128 0xf
+ 1057 00ea 34       		.uleb128 0x34
+ 1058 00eb 00       		.byte	0
+ 1059 00ec 03       		.uleb128 0x3
+ 1060 00ed 0E       		.uleb128 0xe
+ 1061 00ee 3A       		.uleb128 0x3a
+ 1062 00ef 0B       		.uleb128 0xb
+ 1063 00f0 3B       		.uleb128 0x3b
+ 1064 00f1 0B       		.uleb128 0xb
+ 1065 00f2 49       		.uleb128 0x49
+ 1066 00f3 13       		.uleb128 0x13
+ 1067 00f4 3F       		.uleb128 0x3f
+ 1068 00f5 19       		.uleb128 0x19
+ 1069 00f6 02       		.uleb128 0x2
+ 1070 00f7 18       		.uleb128 0x18
+ 1071 00f8 00       		.byte	0
+ 1072 00f9 00       		.byte	0
+ 1073 00fa 10       		.uleb128 0x10
+ 1074 00fb 2E       		.uleb128 0x2e
+ 1075 00fc 00       		.byte	0
+ 1076 00fd 3F       		.uleb128 0x3f
+ 1077 00fe 19       		.uleb128 0x19
+ 1078 00ff 3C       		.uleb128 0x3c
+ 1079 0100 19       		.uleb128 0x19
+ 1080 0101 6E       		.uleb128 0x6e
+ 1081 0102 0E       		.uleb128 0xe
+ 1082 0103 03       		.uleb128 0x3
+ 1083 0104 0E       		.uleb128 0xe
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 23
 
 
- 1077      53706565 
- 1077      64436F6E 
- 1077      74726F6C 
- 1077      5F537461 
- 1078              	.LASF16:
- 1079 00ef 666C6F61 		.ascii	"float\000"
- 1079      7400
- 1080              	.LASF29:
- 1081 00f5 636F6E73 		.ascii	"const_speed\000"
- 1081      745F7370 
- 1081      65656400 
- 1082              	.LASF1:
- 1083 0101 756E7369 		.ascii	"unsigned char\000"
- 1083      676E6564 
- 1083      20636861 
- 1083      7200
- 1084              	.LASF39:
- 1085 010f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1085      43313120 
- 1085      352E342E 
- 1085      31203230 
- 1085      31363036 
- 1086 0142 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1086      20726576 
- 1086      6973696F 
- 1086      6E203233 
- 1086      37373135 
- 1087 0175 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1087      66756E63 
- 1087      74696F6E 
- 1087      2D736563 
- 1087      74696F6E 
- 1088              	.LASF33:
- 1089 019d 56444143 		.ascii	"VDAC8_Enabling_SetRange\000"
- 1089      385F456E 
- 1089      61626C69 
- 1089      6E675F53 
- 1089      65745261 
- 1090              	.LASF35:
- 1091 01b5 56444143 		.ascii	"VDAC8_SpeedControl_Stop\000"
- 1091      385F5370 
- 1091      65656443 
- 1091      6F6E7472 
- 1091      6F6C5F53 
- 1092              	.LASF5:
- 1093 01cd 6C6F6E67 		.ascii	"long unsigned int\000"
- 1093      20756E73 
- 1093      69676E65 
- 1093      6420696E 
- 1093      7400
- 1094              	.LASF21:
- 1095 01df 50756D70 		.ascii	"Pump_Shutdown\000"
- 1095      5F536875 
- 1095      74646F77 
- 1095      6E00
- 1096              	.LASF14:
- 1097 01ed 75696E74 		.ascii	"uint8\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 24
+ 1084 0105 3A       		.uleb128 0x3a
+ 1085 0106 0B       		.uleb128 0xb
+ 1086 0107 3B       		.uleb128 0x3b
+ 1087 0108 0B       		.uleb128 0xb
+ 1088 0109 00       		.byte	0
+ 1089 010a 00       		.byte	0
+ 1090 010b 00       		.byte	0
+ 1091              		.section	.debug_loc,"",%progbits
+ 1092              	.Ldebug_loc0:
+ 1093              	.LLST0:
+ 1094 0000 00000000 		.4byte	.LVL11
+ 1095 0004 07000000 		.4byte	.LVL12-1
+ 1096 0008 0100     		.2byte	0x1
+ 1097 000a 50       		.byte	0x50
+ 1098 000b 07000000 		.4byte	.LVL12-1
+ 1099 000f 3E000000 		.4byte	.LVL19
+ 1100 0013 0400     		.2byte	0x4
+ 1101 0015 F3       		.byte	0xf3
+ 1102 0016 01       		.uleb128 0x1
+ 1103 0017 50       		.byte	0x50
+ 1104 0018 9F       		.byte	0x9f
+ 1105 0019 3E000000 		.4byte	.LVL19
+ 1106 001d 46000000 		.4byte	.LVL21
+ 1107 0021 0300     		.2byte	0x3
+ 1108 0023 09       		.byte	0x9
+ 1109 0024 8C       		.byte	0x8c
+ 1110 0025 9F       		.byte	0x9f
+ 1111 0026 46000000 		.4byte	.LVL21
+ 1112 002a 58000000 		.4byte	.LFE6
+ 1113 002e 0400     		.2byte	0x4
+ 1114 0030 F3       		.byte	0xf3
+ 1115 0031 01       		.uleb128 0x1
+ 1116 0032 50       		.byte	0x50
+ 1117 0033 9F       		.byte	0x9f
+ 1118 0034 00000000 		.4byte	0
+ 1119 0038 00000000 		.4byte	0
+ 1120              	.LLST1:
+ 1121 003c 00000000 		.4byte	.LVL23
+ 1122 0040 02000000 		.4byte	.LVL24
+ 1123 0044 0100     		.2byte	0x1
+ 1124 0046 50       		.byte	0x50
+ 1125 0047 02000000 		.4byte	.LVL24
+ 1126 004b 1C000000 		.4byte	.LFE7
+ 1127 004f 0400     		.2byte	0x4
+ 1128 0051 F3       		.byte	0xf3
+ 1129 0052 01       		.uleb128 0x1
+ 1130 0053 50       		.byte	0x50
+ 1131 0054 9F       		.byte	0x9f
+ 1132 0055 00000000 		.4byte	0
+ 1133 0059 00000000 		.4byte	0
+ 1134              	.LLST2:
+ 1135 005d 00000000 		.4byte	.LVL25
+ 1136 0061 07000000 		.4byte	.LVL26-1
+ 1137 0065 0100     		.2byte	0x1
+ 1138 0067 50       		.byte	0x50
+ 1139 0068 07000000 		.4byte	.LVL26-1
+ 1140 006c 24000000 		.4byte	.LFE3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 24
 
 
- 1097      3800
- 1098              	.LASF27:
- 1099 01f3 766F6C74 		.ascii	"voltage\000"
- 1099      61676500 
- 1100              	.LASF28:
- 1101 01fb 6F757470 		.ascii	"output_voltage\000"
- 1101      75745F76 
- 1101      6F6C7461 
- 1101      676500
- 1102              	.LASF23:
- 1103 020a 73706565 		.ascii	"speed_control_voltage\000"
- 1103      645F636F 
- 1103      6E74726F 
- 1103      6C5F766F 
- 1103      6C746167 
- 1104              	.LASF17:
- 1105 0220 646F7562 		.ascii	"double\000"
- 1105      6C6500
- 1106              	.LASF20:
- 1107 0227 50756D70 		.ascii	"Pump_Setup\000"
- 1107      5F536574 
- 1107      757000
- 1108              	.LASF34:
- 1109 0232 56444143 		.ascii	"VDAC8_Enabling_Start\000"
- 1109      385F456E 
- 1109      61626C69 
- 1109      6E675F53 
- 1109      74617274 
- 1110              	.LASF24:
- 1111 0247 53657453 		.ascii	"SetSpeed\000"
- 1111      70656564 
- 1111      00
- 1112              	.LASF15:
- 1113 0250 75696E74 		.ascii	"uint16\000"
- 1113      313600
- 1114              	.LASF18:
- 1115 0257 50756D70 		.ascii	"Pump_Start\000"
- 1115      5F537461 
- 1115      727400
- 1116              	.LASF25:
- 1117 0262 50756D70 		.ascii	"Pump_Startup\000"
- 1117      5F537461 
- 1117      72747570 
- 1117      00
- 1118              	.LASF8:
- 1119 026f 756E7369 		.ascii	"unsigned int\000"
- 1119      676E6564 
- 1119      20696E74 
- 1119      00
- 1120              	.LASF42:
- 1121 027c 53657443 		.ascii	"SetConstSpeed\000"
- 1121      6F6E7374 
- 1121      53706565 
- 1121      6400
- 1122              	.LASF7:
- 1123 028a 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1123      206C6F6E 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 25
+ 1141 0070 0400     		.2byte	0x4
+ 1142 0072 F3       		.byte	0xf3
+ 1143 0073 01       		.uleb128 0x1
+ 1144 0074 50       		.byte	0x50
+ 1145 0075 9F       		.byte	0x9f
+ 1146 0076 00000000 		.4byte	0
+ 1147 007a 00000000 		.4byte	0
+ 1148              	.LLST3:
+ 1149 007e 00000000 		.4byte	.LVL31
+ 1150 0082 06000000 		.4byte	.LVL32
+ 1151 0086 0100     		.2byte	0x1
+ 1152 0088 50       		.byte	0x50
+ 1153 0089 06000000 		.4byte	.LVL32
+ 1154 008d 1C000000 		.4byte	.LVL36
+ 1155 0091 0400     		.2byte	0x4
+ 1156 0093 F3       		.byte	0xf3
+ 1157 0094 01       		.uleb128 0x1
+ 1158 0095 50       		.byte	0x50
+ 1159 0096 9F       		.byte	0x9f
+ 1160 0097 1C000000 		.4byte	.LVL36
+ 1161 009b 1E000000 		.4byte	.LVL37
+ 1162 009f 0100     		.2byte	0x1
+ 1163 00a1 50       		.byte	0x50
+ 1164 00a2 1E000000 		.4byte	.LVL37
+ 1165 00a6 30000000 		.4byte	.LFE8
+ 1166 00aa 0400     		.2byte	0x4
+ 1167 00ac F3       		.byte	0xf3
+ 1168 00ad 01       		.uleb128 0x1
+ 1169 00ae 50       		.byte	0x50
+ 1170 00af 9F       		.byte	0x9f
+ 1171 00b0 00000000 		.4byte	0
+ 1172 00b4 00000000 		.4byte	0
+ 1173              		.section	.debug_aranges,"",%progbits
+ 1174 0000 54000000 		.4byte	0x54
+ 1175 0004 0200     		.2byte	0x2
+ 1176 0006 00000000 		.4byte	.Ldebug_info0
+ 1177 000a 04       		.byte	0x4
+ 1178 000b 00       		.byte	0
+ 1179 000c 0000     		.2byte	0
+ 1180 000e 0000     		.2byte	0
+ 1181 0010 00000000 		.4byte	.LFB4
+ 1182 0014 0A000000 		.4byte	.LFE4-.LFB4
+ 1183 0018 00000000 		.4byte	.LFB5
+ 1184 001c 14000000 		.4byte	.LFE5-.LFB5
+ 1185 0020 00000000 		.4byte	.LFB1
+ 1186 0024 28000000 		.4byte	.LFE1-.LFB1
+ 1187 0028 00000000 		.4byte	.LFB2
+ 1188 002c 16000000 		.4byte	.LFE2-.LFB2
+ 1189 0030 00000000 		.4byte	.LFB6
+ 1190 0034 58000000 		.4byte	.LFE6-.LFB6
+ 1191 0038 00000000 		.4byte	.LFB7
+ 1192 003c 1C000000 		.4byte	.LFE7-.LFB7
+ 1193 0040 00000000 		.4byte	.LFB3
+ 1194 0044 24000000 		.4byte	.LFE3-.LFB3
+ 1195 0048 00000000 		.4byte	.LFB8
+ 1196 004c 30000000 		.4byte	.LFE8-.LFB8
+ 1197 0050 00000000 		.4byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 25
 
 
- 1123      6720756E 
- 1123      7369676E 
- 1123      65642069 
- 1124              	.LASF13:
- 1125 02a1 75696E74 		.ascii	"uint8_t\000"
- 1125      385F7400 
- 1126              	.LASF19:
- 1127 02a9 50756D70 		.ascii	"Pump_Stop\000"
- 1127      5F53746F 
- 1127      7000
- 1128              	.LASF26:
- 1129 02b3 636F6E73 		.ascii	"constVoltage\000"
- 1129      74566F6C 
- 1129      74616765 
- 1129      00
- 1130              	.LASF37:
- 1131 02c0 56444143 		.ascii	"VDAC8_SpeedControl_Start\000"
- 1131      385F5370 
- 1131      65656443 
- 1131      6F6E7472 
- 1131      6F6C5F53 
- 1132              	.LASF10:
- 1133 02d9 73697A65 		.ascii	"sizetype\000"
- 1133      74797065 
- 1133      00
- 1134              	.LASF6:
- 1135 02e2 6C6F6E67 		.ascii	"long long int\000"
- 1135      206C6F6E 
- 1135      6720696E 
- 1135      7400
- 1136              	.LASF11:
- 1137 02f0 63686172 		.ascii	"char\000"
- 1137      00
- 1138              	.LASF2:
- 1139 02f5 73686F72 		.ascii	"short int\000"
- 1139      7420696E 
- 1139      7400
- 1140              	.LASF32:
- 1141 02ff 56444143 		.ascii	"VDAC8_SpeedControl_SetValue\000"
- 1141      385F5370 
- 1141      65656443 
- 1141      6F6E7472 
- 1141      6F6C5F53 
- 1142              	.LASF4:
- 1143 031b 6C6F6E67 		.ascii	"long int\000"
- 1143      20696E74 
- 1143      00
- 1144              	.LASF9:
- 1145 0324 6C6F6E67 		.ascii	"long double\000"
- 1145      20646F75 
- 1145      626C6500 
- 1146              	.LASF0:
- 1147 0330 7369676E 		.ascii	"signed char\000"
- 1147      65642063 
- 1147      68617200 
- 1148              	.LASF36:
- 1149 033c 5047415F 		.ascii	"PGA_SpeedControl_Stop\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccNY9QQG.s 			page 26
+ 1198 0054 00000000 		.4byte	0
+ 1199              		.section	.debug_ranges,"",%progbits
+ 1200              	.Ldebug_ranges0:
+ 1201 0000 00000000 		.4byte	.LFB4
+ 1202 0004 0A000000 		.4byte	.LFE4
+ 1203 0008 00000000 		.4byte	.LFB5
+ 1204 000c 14000000 		.4byte	.LFE5
+ 1205 0010 00000000 		.4byte	.LFB1
+ 1206 0014 28000000 		.4byte	.LFE1
+ 1207 0018 00000000 		.4byte	.LFB2
+ 1208 001c 16000000 		.4byte	.LFE2
+ 1209 0020 00000000 		.4byte	.LFB6
+ 1210 0024 58000000 		.4byte	.LFE6
+ 1211 0028 00000000 		.4byte	.LFB7
+ 1212 002c 1C000000 		.4byte	.LFE7
+ 1213 0030 00000000 		.4byte	.LFB3
+ 1214 0034 24000000 		.4byte	.LFE3
+ 1215 0038 00000000 		.4byte	.LFB8
+ 1216 003c 30000000 		.4byte	.LFE8
+ 1217 0040 00000000 		.4byte	0
+ 1218 0044 00000000 		.4byte	0
+ 1219              		.section	.debug_line,"",%progbits
+ 1220              	.Ldebug_line0:
+ 1221 0000 49020000 		.section	.debug_str,"MS",%progbits,1
+ 1221      0200A401 
+ 1221      00000201 
+ 1221      FB0E0D00 
+ 1221      01010101 
+ 1222              	.LASF33:
+ 1223 0000 56444143 		.ascii	"VDAC8_Enabling_SetValue\000"
+ 1223      385F456E 
+ 1223      61626C69 
+ 1223      6E675F53 
+ 1223      65745661 
+ 1224              	.LASF12:
+ 1225 0018 5F5F7569 		.ascii	"__uint8_t\000"
+ 1225      6E74385F 
+ 1225      7400
+ 1226              	.LASF22:
+ 1227 0022 73706565 		.ascii	"speed\000"
+ 1227      6400
+ 1228              	.LASF36:
+ 1229 0028 56444143 		.ascii	"VDAC8_Direction_Start\000"
+ 1229      385F4469 
+ 1229      72656374 
+ 1229      696F6E5F 
+ 1229      53746172 
+ 1230              	.LASF32:
+ 1231 003e 6F757470 		.ascii	"output_voltage_direction\000"
+ 1231      75745F76 
+ 1231      6F6C7461 
+ 1231      67655F64 
+ 1231      69726563 
+ 1232              	.LASF3:
+ 1233 0057 73686F72 		.ascii	"short unsigned int\000"
+ 1233      7420756E 
+ 1233      7369676E 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 26
 
 
- 1149      53706565 
- 1149      64436F6E 
- 1149      74726F6C 
- 1149      5F53746F 
- 1150              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1233      65642069 
+ 1233      6E7400
+ 1234              	.LASF46:
+ 1235 006a 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 1235      73657273 
+ 1235      5C6E6963 
+ 1235      6F5F5C53 
+ 1235      756E6468 
+ 1236 0098 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 1236      6C6F725C 
+ 1236      42616368 
+ 1236      656C6F72 
+ 1236      50726F6A 
+ 1237 00c8 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 1237      636F6F6C 
+ 1237      696E6773 
+ 1237      79737465 
+ 1237      6D2E6379 
+ 1238              	.LASF45:
+ 1239 00e0 50756D70 		.ascii	"PumpCtrl.c\000"
+ 1239      4374726C 
+ 1239      2E6300
+ 1240              	.LASF42:
+ 1241 00eb 5047415F 		.ascii	"PGA_SpeedControl_Start\000"
+ 1241      53706565 
+ 1241      64436F6E 
+ 1241      74726F6C 
+ 1241      5F537461 
+ 1242              	.LASF16:
+ 1243 0102 666C6F61 		.ascii	"float\000"
+ 1243      7400
+ 1244              	.LASF37:
+ 1245 0108 56444143 		.ascii	"VDAC8_Direction_SetValue\000"
+ 1245      385F4469 
+ 1245      72656374 
+ 1245      696F6E5F 
+ 1245      53657456 
+ 1246              	.LASF27:
+ 1247 0121 466C6F77 		.ascii	"FlowDirection\000"
+ 1247      44697265 
+ 1247      6374696F 
+ 1247      6E00
+ 1248              	.LASF31:
+ 1249 012f 636F6E73 		.ascii	"const_speed\000"
+ 1249      745F7370 
+ 1249      65656400 
+ 1250              	.LASF1:
+ 1251 013b 756E7369 		.ascii	"unsigned char\000"
+ 1251      676E6564 
+ 1251      20636861 
+ 1251      7200
+ 1252              	.LASF44:
+ 1253 0149 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1253      43313120 
+ 1253      352E342E 
+ 1253      31203230 
+ 1253      31363036 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 27
+
+
+ 1254 017c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1254      20726576 
+ 1254      6973696F 
+ 1254      6E203233 
+ 1254      37373135 
+ 1255 01af 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1255      66756E63 
+ 1255      74696F6E 
+ 1255      2D736563 
+ 1255      74696F6E 
+ 1256              	.LASF35:
+ 1257 01d7 56444143 		.ascii	"VDAC8_Enabling_SetRange\000"
+ 1257      385F456E 
+ 1257      61626C69 
+ 1257      6E675F53 
+ 1257      65745261 
+ 1258              	.LASF39:
+ 1259 01ef 56444143 		.ascii	"VDAC8_SpeedControl_Stop\000"
+ 1259      385F5370 
+ 1259      65656443 
+ 1259      6F6E7472 
+ 1259      6F6C5F53 
+ 1260              	.LASF5:
+ 1261 0207 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1261      20756E73 
+ 1261      69676E65 
+ 1261      6420696E 
+ 1261      7400
+ 1262              	.LASF21:
+ 1263 0219 50756D70 		.ascii	"Pump_Shutdown\000"
+ 1263      5F536875 
+ 1263      74646F77 
+ 1263      6E00
+ 1264              	.LASF14:
+ 1265 0227 75696E74 		.ascii	"uint8\000"
+ 1265      3800
+ 1266              	.LASF29:
+ 1267 022d 766F6C74 		.ascii	"voltage\000"
+ 1267      61676500 
+ 1268              	.LASF30:
+ 1269 0235 6F757470 		.ascii	"output_voltage\000"
+ 1269      75745F76 
+ 1269      6F6C7461 
+ 1269      676500
+ 1270              	.LASF23:
+ 1271 0244 73706565 		.ascii	"speed_control_voltage\000"
+ 1271      645F636F 
+ 1271      6E74726F 
+ 1271      6C5F766F 
+ 1271      6C746167 
+ 1272              	.LASF17:
+ 1273 025a 646F7562 		.ascii	"double\000"
+ 1273      6C6500
+ 1274              	.LASF20:
+ 1275 0261 50756D70 		.ascii	"Pump_Setup\000"
+ 1275      5F536574 
+ 1275      757000
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 28
+
+
+ 1276              	.LASF34:
+ 1277 026c 56444143 		.ascii	"VDAC8_Enabling_Start\000"
+ 1277      385F456E 
+ 1277      61626C69 
+ 1277      6E675F53 
+ 1277      74617274 
+ 1278              	.LASF24:
+ 1279 0281 53657453 		.ascii	"SetSpeed\000"
+ 1279      70656564 
+ 1279      00
+ 1280              	.LASF15:
+ 1281 028a 75696E74 		.ascii	"uint16\000"
+ 1281      313600
+ 1282              	.LASF18:
+ 1283 0291 50756D70 		.ascii	"Pump_Start\000"
+ 1283      5F537461 
+ 1283      727400
+ 1284              	.LASF25:
+ 1285 029c 50756D70 		.ascii	"Pump_Startup\000"
+ 1285      5F537461 
+ 1285      72747570 
+ 1285      00
+ 1286              	.LASF8:
+ 1287 02a9 756E7369 		.ascii	"unsigned int\000"
+ 1287      676E6564 
+ 1287      20696E74 
+ 1287      00
+ 1288              	.LASF47:
+ 1289 02b6 53657443 		.ascii	"SetConstSpeed\000"
+ 1289      6F6E7374 
+ 1289      53706565 
+ 1289      6400
+ 1290              	.LASF7:
+ 1291 02c4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1291      206C6F6E 
+ 1291      6720756E 
+ 1291      7369676E 
+ 1291      65642069 
+ 1292              	.LASF13:
+ 1293 02db 75696E74 		.ascii	"uint8_t\000"
+ 1293      385F7400 
+ 1294              	.LASF19:
+ 1295 02e3 50756D70 		.ascii	"Pump_Stop\000"
+ 1295      5F53746F 
+ 1295      7000
+ 1296              	.LASF26:
+ 1297 02ed 636F6E73 		.ascii	"constVoltage\000"
+ 1297      74566F6C 
+ 1297      74616765 
+ 1297      00
+ 1298              	.LASF41:
+ 1299 02fa 56444143 		.ascii	"VDAC8_SpeedControl_Start\000"
+ 1299      385F5370 
+ 1299      65656443 
+ 1299      6F6E7472 
+ 1299      6F6C5F53 
+ 1300              	.LASF10:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccukKMTc.s 			page 29
+
+
+ 1301 0313 73697A65 		.ascii	"sizetype\000"
+ 1301      74797065 
+ 1301      00
+ 1302              	.LASF6:
+ 1303 031c 6C6F6E67 		.ascii	"long long int\000"
+ 1303      206C6F6E 
+ 1303      6720696E 
+ 1303      7400
+ 1304              	.LASF11:
+ 1305 032a 63686172 		.ascii	"char\000"
+ 1305      00
+ 1306              	.LASF2:
+ 1307 032f 73686F72 		.ascii	"short int\000"
+ 1307      7420696E 
+ 1307      7400
+ 1308              	.LASF28:
+ 1309 0339 72656775 		.ascii	"regulation\000"
+ 1309      6C617469 
+ 1309      6F6E00
+ 1310              	.LASF38:
+ 1311 0344 56444143 		.ascii	"VDAC8_SpeedControl_SetValue\000"
+ 1311      385F5370 
+ 1311      65656443 
+ 1311      6F6E7472 
+ 1311      6F6C5F53 
+ 1312              	.LASF4:
+ 1313 0360 6C6F6E67 		.ascii	"long int\000"
+ 1313      20696E74 
+ 1313      00
+ 1314              	.LASF9:
+ 1315 0369 6C6F6E67 		.ascii	"long double\000"
+ 1315      20646F75 
+ 1315      626C6500 
+ 1316              	.LASF0:
+ 1317 0375 7369676E 		.ascii	"signed char\000"
+ 1317      65642063 
+ 1317      68617200 
+ 1318              	.LASF43:
+ 1319 0381 43794465 		.ascii	"CyDelay\000"
+ 1319      6C617900 
+ 1320              	.LASF40:
+ 1321 0389 5047415F 		.ascii	"PGA_SpeedControl_Stop\000"
+ 1321      53706565 
+ 1321      64436F6E 
+ 1321      74726F6C 
+ 1321      5F53746F 
+ 1322              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

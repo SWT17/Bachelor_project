@@ -14,14 +14,16 @@
 #include "VDAC8_SpeedControl.h"
 #include "PGA_SpeedControl.h"
 #include "VDAC8_Enabling.h"
+#include "VDAC8_Direction.h"
 #include "Enable_pin.h"
+
 
 void Pump_Setup();
 void Pump_Shutdown();
 void Pump_Startup(uint16 constVoltage);
 void Pump_Stop();
 void Pump_Start();
-
+void FlowDirection(uint8 regulation);
 
 
 /* [] END OF FILE */

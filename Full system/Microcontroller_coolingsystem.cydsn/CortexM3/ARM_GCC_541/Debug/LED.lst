@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 1
 
 
    1              		.syntax unified
@@ -19,13 +19,13 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.TurnON,"ax",%progbits
+  19              		.section	.text.Turn_ON,"ax",%progbits
   20              		.align	2
-  21              		.global	TurnON
+  21              		.global	Turn_ON
   22              		.thumb
   23              		.thumb_func
-  24              		.type	TurnON, %function
-  25              	TurnON:
+  24              		.type	Turn_ON, %function
+  25              	Turn_ON:
   26              	.LFB0:
   27              		.file 1 "LED.c"
    1:LED.c         **** /* ========================================
@@ -41,7 +41,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   11:LED.c         **** */
   12:LED.c         **** #include "LED.h"
   13:LED.c         **** 
-  14:LED.c         **** void TurnON()
+  14:LED.c         **** void Turn_ON()
   15:LED.c         **** {
   28              		.loc 1 15 0
   29              		.cfi_startproc
@@ -58,21 +58,21 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   39              	.LVL0:
   40 0008 08BD     		pop	{r3, pc}
   41              		.cfi_endproc
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 2
 
 
   42              	.LFE0:
-  43              		.size	TurnON, .-TurnON
-  44 000a 00BF     		.section	.text.TurnOFF,"ax",%progbits
+  43              		.size	Turn_ON, .-Turn_ON
+  44 000a 00BF     		.section	.text.Turn_OFF,"ax",%progbits
   45              		.align	2
-  46              		.global	TurnOFF
+  46              		.global	Turn_OFF
   47              		.thumb
   48              		.thumb_func
-  49              		.type	TurnOFF, %function
-  50              	TurnOFF:
+  49              		.type	Turn_OFF, %function
+  50              	Turn_OFF:
   51              	.LFB1:
   17:LED.c         **** }
-  18:LED.c         **** void TurnOFF()
+  18:LED.c         **** void Turn_OFF()
   19:LED.c         **** {
   52              		.loc 1 19 0
   53              		.cfi_startproc
@@ -90,7 +90,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   64 0008 08BD     		pop	{r3, pc}
   65              		.cfi_endproc
   66              	.LFE1:
-  67              		.size	TurnOFF, .-TurnOFF
+  67              		.size	Turn_OFF, .-Turn_OFF
   68 000a 00BF     		.text
   69              	.Letext0:
   70              		.file 2 "Generated_Source\\PSoC5/LED_pin.h"
@@ -103,7 +103,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   77 000b 01       		.uleb128 0x1
   78 000c 8A000000 		.4byte	.LASF14
   79 0010 0C       		.byte	0xc
-  80 0011 7E010000 		.4byte	.LASF15
+  80 0011 76010000 		.4byte	.LASF15
   81 0015 00000000 		.4byte	.LASF16
   82 0019 00000000 		.4byte	.Ldebug_ranges0+0
   83 001d 00000000 		.4byte	0
@@ -111,18 +111,18 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
   85 0025 02       		.uleb128 0x2
   86 0026 01       		.byte	0x1
   87 0027 06       		.byte	0x6
-  88 0028 AA010000 		.4byte	.LASF0
+  88 0028 AB010000 		.4byte	.LASF0
   89 002c 02       		.uleb128 0x2
   90 002d 01       		.byte	0x1
   91 002e 08       		.byte	0x8
   92 002f 7C000000 		.4byte	.LASF1
   93 0033 02       		.uleb128 0x2
   94 0034 02       		.byte	0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 3
 
 
   95 0035 05       		.byte	0x5
-  96 0036 97010000 		.4byte	.LASF2
+  96 0036 98010000 		.4byte	.LASF2
   97 003a 02       		.uleb128 0x2
   98 003b 02       		.byte	0x2
   99 003c 07       		.byte	0x7
@@ -130,7 +130,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  101 0041 02       		.uleb128 0x2
  102 0042 04       		.byte	0x4
  103 0043 05       		.byte	0x5
- 104 0044 A1010000 		.4byte	.LASF4
+ 104 0044 A2010000 		.4byte	.LASF4
  105 0048 02       		.uleb128 0x2
  106 0049 04       		.byte	0x4
  107 004a 07       		.byte	0x7
@@ -138,7 +138,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  109 004f 02       		.uleb128 0x2
  110 0050 08       		.byte	0x8
  111 0051 05       		.byte	0x5
- 112 0052 84010000 		.4byte	.LASF6
+ 112 0052 7C010000 		.4byte	.LASF6
  113 0056 02       		.uleb128 0x2
  114 0057 08       		.byte	0x8
  115 0058 07       		.byte	0x7
@@ -162,9 +162,9 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  133 0079 02       		.uleb128 0x2
  134 007a 01       		.byte	0x1
  135 007b 08       		.byte	0x8
- 136 007c 92010000 		.4byte	.LASF11
+ 136 007c 8A010000 		.4byte	.LASF11
  137 0080 04       		.uleb128 0x4
- 138 0081 B6010000 		.4byte	.LASF12
+ 138 0081 B7010000 		.4byte	.LASF12
  139 0085 01       		.byte	0x1
  140 0086 0E       		.byte	0xe
  141 0087 00000000 		.4byte	.LFB0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  149 009e 06       		.uleb128 0x6
  150 009f 01       		.uleb128 0x1
  151 00a0 50       		.byte	0x50
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 4
 
 
  152 00a1 02       		.uleb128 0x2
@@ -187,7 +187,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  155 00a4 00       		.byte	0
  156 00a5 00       		.byte	0
  157 00a6 04       		.uleb128 0x4
- 158 00a7 76010000 		.4byte	.LASF13
+ 158 00a7 8F010000 		.4byte	.LASF13
  159 00ab 01       		.byte	0x1
  160 00ac 12       		.byte	0x12
  161 00ad 00000000 		.4byte	.LFB1
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  206 0016 0B       		.uleb128 0xb
  207 0017 0B       		.uleb128 0xb
  208 0018 3E       		.uleb128 0x3e
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 5
 
 
  209 0019 0B       		.uleb128 0xb
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  263 0055 18       		.uleb128 0x18
  264 0056 00       		.byte	0
  265 0057 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 6
 
 
  266 0058 07       		.uleb128 0x7
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  311      6C6F725C 
  311      42616368 
  311      656C6F72 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 7
 
 
  311      50726F6A 
@@ -418,40 +418,41 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 1
  330      00
  331              	.LASF7:
  332 015f 6C6F6E67 		.ascii	"long long unsigned int\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc5Pg8Re.s 			page 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccZItsQZ.s 			page 8
 
 
  332      206C6F6E 
  332      6720756E 
  332      7369676E 
  332      65642069 
- 333              	.LASF13:
- 334 0176 5475726E 		.ascii	"TurnOFF\000"
- 334      4F464600 
- 335              	.LASF15:
- 336 017e 4C45442E 		.ascii	"LED.c\000"
- 336      6300
- 337              	.LASF6:
- 338 0184 6C6F6E67 		.ascii	"long long int\000"
- 338      206C6F6E 
- 338      6720696E 
- 338      7400
- 339              	.LASF11:
- 340 0192 63686172 		.ascii	"char\000"
+ 333              	.LASF15:
+ 334 0176 4C45442E 		.ascii	"LED.c\000"
+ 334      6300
+ 335              	.LASF6:
+ 336 017c 6C6F6E67 		.ascii	"long long int\000"
+ 336      206C6F6E 
+ 336      6720696E 
+ 336      7400
+ 337              	.LASF11:
+ 338 018a 63686172 		.ascii	"char\000"
+ 338      00
+ 339              	.LASF13:
+ 340 018f 5475726E 		.ascii	"Turn_OFF\000"
+ 340      5F4F4646 
  340      00
  341              	.LASF2:
- 342 0197 73686F72 		.ascii	"short int\000"
+ 342 0198 73686F72 		.ascii	"short int\000"
  342      7420696E 
  342      7400
  343              	.LASF4:
- 344 01a1 6C6F6E67 		.ascii	"long int\000"
+ 344 01a2 6C6F6E67 		.ascii	"long int\000"
  344      20696E74 
  344      00
  345              	.LASF0:
- 346 01aa 7369676E 		.ascii	"signed char\000"
+ 346 01ab 7369676E 		.ascii	"signed char\000"
  346      65642063 
  346      68617200 
  347              	.LASF12:
- 348 01b6 5475726E 		.ascii	"TurnON\000"
- 348      4F4E00
+ 348 01b7 5475726E 		.ascii	"Turn_ON\000"
+ 348      5F4F4E00 
  349              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

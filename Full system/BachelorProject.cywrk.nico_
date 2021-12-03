@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\TopDesign">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController.h">
 <ExpandedNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
@@ -34,6 +34,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\cyapicallbacks.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\LED.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\PumpCtrl.h</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Header Files\Regulation.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\switch.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController_interrupt.h</v>
@@ -42,6 +43,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Amplifier.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\LED.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\PumpCtrl.c</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Source Files\Regulation.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\switch.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\SystemController.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Temperature.c</v>
@@ -68,44 +70,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>BachelorProject</v>
-<v>BachelorProject\Microcontroller_coolingsystem</v>
-<v>BachelorProject\Microcontroller_coolingsystem\TopDesign</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Pins</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Analog</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Clocks</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Interrupts</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\DMA</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\System</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Directives</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\Flash Security</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr\EEPROM</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\Amplifier.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\AmplifierRegisters.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\cyapicallbacks.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\LED.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\PumpCtrl.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\switch.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController_interrupt.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\Temperature.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\Amplifier.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\LED.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\PumpCtrl.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\switch.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\SystemController.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\Temperature.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\ClockCounter_test.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\ClockCounter_test.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\ReceiveBytes.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Test files\Prerequisite Unit test\SPI_test.c</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
@@ -114,12 +79,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\TopDesign</v>
 <v>BachelorProject\Microcontroller_coolingsystem\TopDesign\TopDesign.cysch</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>BachelorProject</v>
-<v>BachelorProject\Microcontroller_coolingsystem</v>
-<v>BachelorProject\Microcontroller_coolingsystem\TopDesign</v>
-<v>BachelorProject\Microcontroller_coolingsystem\TopDesign\TopDesign.cysch</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject">
 <ExpandedNodeIds>
@@ -143,6 +103,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Direction_pin.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Enable_pin.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_clock.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
@@ -154,6 +115,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrl.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrlUnitTest.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Regulation.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\RTD_1.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Speed_pin.lst</v>
@@ -180,6 +142,8 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC_test.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Direction.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Direction_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Enabling.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Enabling_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_SpeedControl.lst</v>
@@ -191,44 +155,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.rpt</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem_timing.html</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>BachelorProject</v>
-<v>BachelorProject\Microcontroller_coolingsystem</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Amplifier.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_TempSampling.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\ClockCounter_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Enable_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_clock.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\LED.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl_PM.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrl.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrlUnitTest.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\RTD_1.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Speed_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1.lst</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
 <TreeKeysV2>
@@ -257,27 +184,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\VDAC8_v1_90</v>
 <v>BachelorProject\Microcontroller_coolingsystem\VDAC8_v1_90\VDAC8_v1_90.pdf</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>BachelorProject</v>
-<v>BachelorProject\Microcontroller_coolingsystem</v>
-<v>BachelorProject\Microcontroller_coolingsystem\PSoC 5LP Architecture TRM</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CY8C58LP Family Datasheet</v>
-<v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides</v>
-<v>BachelorProject\Microcontroller_coolingsystem\System Reference Guides\cy_boot_v6_10</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Counter_v3_0.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_clock_v2_20.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_isr_v1_70.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_isr_v1_71</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_isr_v1_71\cy_isr_v1_71.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20</v>
-<v>BachelorProject\Microcontroller_coolingsystem\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\PGA_v2_0.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\RTDCalc_v1_20.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\SPI_Master_v2_50.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\UART_v2_50.pdf</v>
-<v>BachelorProject\Microcontroller_coolingsystem\VDAC8_v1_90</v>
-<v>BachelorProject\Microcontroller_coolingsystem\VDAC8_v1_90\VDAC8_v1_90.pdf</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
 </CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
@@ -286,10 +193,16 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.h" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Temperature.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\switch.h" />
+<name v=".\Microcontroller_coolingsystem.cydsn\switch.c" />
 <name v=".\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Regulation.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Amplifier.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.h" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5\switch_input_interrupt.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -297,7 +210,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="954, 581" SelectedTabbedMdiWindow="dfc1b163-48c4-40be-a2da-bc67f734ea24"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.h" Guid="63115090-3aca-4727-90fd-deb3d398554d" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Temperature.c" Guid="0bcd5acc-fc65-4316-8a30-40083ac15784" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="dfc1b163-48c4-40be-a2da-bc67f734ea24" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="b9606217-5fda-4337-bae6-c0618f9bc199" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1338, 728" SelectedTabbedMdiWindow="a594bd74-a9cf-4505-934d-c7c94e54e802"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\switch.h" Guid="5a76f362-4542-40f3-97be-1edde93569f9" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\switch.c" Guid="8b2ad053-368a-4dfb-9b17-7f43cdb64a77" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="bd62dfb0-1293-476f-95e6-39078eb696f7" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.c" Guid="1a199aa1-9673-4238-b1c9-d7bd6fab80b6" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="2a71d57e-7877-48ef-8d8f-a5efed141dd0" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Regulation.c" Guid="a594bd74-a9cf-4505-934d-c7c94e54e802" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="02dc0ec7-989e-4ea8-a03f-a73d2aa00edb" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Amplifier.c" Guid="8bb9616e-94eb-4b14-89ad-9ecad3efe721" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.h" Guid="c7d99942-f6a7-4573-b741-7bc9b16b5750" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5\switch_input_interrupt.c" Guid="82517b6d-d1b8-47a8-a67c-cac3db1f9001" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

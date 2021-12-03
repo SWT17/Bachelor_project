@@ -19,6 +19,7 @@
 #include "SystemController.h"
 #include "SystemController_interrupt.h"
 #include "LED.h"
+#include "Regulation.h"
 
 #include <stdio.h>
 

@@ -10,11 +10,13 @@
  * ========================================
 */
 #include "PumpCtrl.h"
+#include "UART_1.h"
 
 float voltage;
 uint8 output_voltage;
 uint8 speed;
 uint8 const_speed;
+uint8 output_voltage_direction;
 
 void SetSpeed(uint8_t speed);
 uint8 SetConstSpeed(uint16 speed_control_voltage);
@@ -23,16 +25,16 @@ uint8 SetConstSpeed(uint16 speed_control_voltage);
 /*Initialize the VDAC component for speed control and enabling pin*/
 void Pump_Setup()
 {
-    //Set the range for the VDAC Speed control to the 0V-4.080V range
-    VDAC8_SpeedControl_SetRange(VDAC8_SpeedControl_RANGE_4V);
-    //Set initial speed to 0;
-    VDAC8_SpeedControl_SetValue(0);
-    
-    //Set range for the VDAC for enabling through the transistor
-    VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V);   
-    
+    output_voltage = 0;
     //Start VDAC_enabling
     VDAC8_Enabling_Start();
+        //Set range for the VDAC for enabling through the transistor
+    VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V); 
+    
+    
+    //Start VDAC for flow direction control
+    VDAC8_Direction_Start();
+    VDAC8_Direction_SetValue(0);
 
     //Stop pump.
     Pump_Stop();
@@ -43,8 +45,8 @@ void Pump_Shutdown()
 {
 
     //Stop VDAC in outputting the speed control voltage. Set output value to 0.
-    VDAC8_SpeedControl_Stop();
     VDAC8_SpeedControl_SetValue(0);
+    VDAC8_SpeedControl_Stop();
     
     PGA_SpeedControl_Stop();
     
@@ -84,11 +86,10 @@ board to ground. This stop the pump.*/
 void Pump_Stop()
 {
     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
-    output_voltage = (uint8)(3200*4080/255);
+    output_voltage = (uint8)(4080 * 255/(4080));
     VDAC8_Enabling_SetValue(output_voltage); 
     
 }
-
 
 
 /*Iteration 3 adjustable speed on pump
@@ -129,11 +130,30 @@ uint8 SetConstSpeed(uint16 speed_control_voltage)
 /*Method for controlling the direction of flow
 when regulating the temperature with on/off regulation*/
 
-void FlowDirection()
+void FlowDirection(uint8 regulation)
 {
     /*How does the bidirectional pin work? Is it high/low input or 
     the same as with the enabling pin.
     Then we need and ADC to control the other MOSFET.*/
+    
+    
+    
+    if(regulation == 0)
+    {
+        output_voltage_direction = (uint8) (4080*255/4080);
+        
+        VDAC8_Direction_SetValue(output_voltage_direction);
+        CyDelay(10500);
+        Pump_Stop();
+        
+    }else
+    {
+        output_voltage_direction = 0;
+        VDAC8_Direction_SetValue(output_voltage_direction);
+        Pump_Start();
+        
+    }
+    
 }
 
 

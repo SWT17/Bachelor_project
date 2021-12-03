@@ -18,8 +18,6 @@ uint8 switch_counter;
 /*Setup interrupt handler*/
 CY_ISR_PROTO(switch_newState);
 
-/* Declared functions for Switch class*/
-CY_ISR(switch_newState);
 
 /* Do inital setup of interrupt and internal state*/
 void Switch_Setup()
@@ -28,7 +26,9 @@ void Switch_Setup()
     Switch_Startup();
     
     //Enable the interrupt on the switch.
+    
     switch_input_interrupt_StartEx(switch_newState);
+//    switch_input_interrupt_Start();
 }
 
 /*Controlled shutdown on switch, shutoff the input power for the switch disabling it*/
@@ -41,12 +41,18 @@ void Switch_Shutdown()
 void Switch_Startup()
 {
     //Set High input to the switch priming it.
+    CyDelay(2000);
     Switch_output_Write(255);
+    
 }
+
+
 
 /*Interrupt handler for the switch interrupt*/
 CY_ISR(switch_newState)
 {
+    
+    CyDelay(50);
     //Reads the state on the input pin on the PSOC recieving signal for the switch
     //If the signal is high, Read() output 1, if low it outputs 0.
     switch_state = Switch_input_Read();

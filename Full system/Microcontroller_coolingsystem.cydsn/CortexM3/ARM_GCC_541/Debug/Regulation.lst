@@ -1,0 +1,634 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Regulation.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Regulation_setup,"ax",%progbits
+  20              		.align	2
+  21              		.global	Regulation_setup
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	Regulation_setup, %function
+  25              	Regulation_setup:
+  26              	.LFB0:
+  27              		.file 1 "Regulation.c"
+   1:Regulation.c  **** /* ========================================
+   2:Regulation.c  ****  *
+   3:Regulation.c  ****  * Copyright YOUR COMPANY, THE YEAR
+   4:Regulation.c  ****  * All Rights Reserved
+   5:Regulation.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:Regulation.c  ****  *
+   7:Regulation.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:Regulation.c  ****  * WHICH IS THE PROPERTY OF your company.
+   9:Regulation.c  ****  *
+  10:Regulation.c  ****  * ========================================
+  11:Regulation.c  **** */
+  12:Regulation.c  **** 
+  13:Regulation.c  **** #include "Regulation.h"
+  14:Regulation.c  **** 
+  15:Regulation.c  **** float lower_limit = -11;
+  16:Regulation.c  **** float upper_limit = -9;
+  17:Regulation.c  **** uint8 res;
+  18:Regulation.c  **** 
+  19:Regulation.c  **** 
+  20:Regulation.c  **** void Regulation_setup()
+  21:Regulation.c  **** {
+  28              		.loc 1 21 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  22:Regulation.c  ****     res = 1;
+  33              		.loc 1 22 0
+  34 0000 0122     		movs	r2, #1
+  35 0002 014B     		ldr	r3, .L2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 2
+
+
+  36 0004 1A70     		strb	r2, [r3]
+  37 0006 7047     		bx	lr
+  38              	.L3:
+  39              		.align	2
+  40              	.L2:
+  41 0008 00000000 		.word	res
+  42              		.cfi_endproc
+  43              	.LFE0:
+  44              		.size	Regulation_setup, .-Regulation_setup
+  45              		.global	__aeabi_fcmplt
+  46              		.section	.text.Regulation,"ax",%progbits
+  47              		.align	2
+  48              		.global	Regulation
+  49              		.thumb
+  50              		.thumb_func
+  51              		.type	Regulation, %function
+  52              	Regulation:
+  53              	.LFB1:
+  23:Regulation.c  **** }
+  24:Regulation.c  **** 
+  25:Regulation.c  **** uint8 Regulation(float temp)
+  26:Regulation.c  **** {
+  54              		.loc 1 26 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              	.LVL0:
+  59 0000 10B5     		push	{r4, lr}
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 4, -8
+  62              		.cfi_offset 14, -4
+  63 0002 0446     		mov	r4, r0
+  27:Regulation.c  ****     if(temp > upper_limit)
+  64              		.loc 1 27 0
+  65 0004 0146     		mov	r1, r0
+  66 0006 0A4B     		ldr	r3, .L13
+  67 0008 1868     		ldr	r0, [r3]	@ float
+  68              	.LVL1:
+  69 000a FFF7FEFF 		bl	__aeabi_fcmplt
+  70              	.LVL2:
+  71 000e 18B1     		cbz	r0, .L11
+  28:Regulation.c  ****     {
+  29:Regulation.c  ****         res = 1;
+  72              		.loc 1 29 0
+  73 0010 0122     		movs	r2, #1
+  74 0012 084B     		ldr	r3, .L13+4
+  75 0014 1A70     		strb	r2, [r3]
+  76 0016 08E0     		b	.L7
+  77              	.L11:
+  30:Regulation.c  ****         
+  31:Regulation.c  ****     }else if( temp < lower_limit)
+  78              		.loc 1 31 0
+  79 0018 054B     		ldr	r3, .L13
+  80 001a 5968     		ldr	r1, [r3, #4]	@ float
+  81 001c 2046     		mov	r0, r4
+  82 001e FFF7FEFF 		bl	__aeabi_fcmplt
+  83              	.LVL3:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 3
+
+
+  84 0022 10B1     		cbz	r0, .L7
+  32:Regulation.c  ****     {
+  33:Regulation.c  ****         res = 0;
+  85              		.loc 1 33 0
+  86 0024 0022     		movs	r2, #0
+  87 0026 034B     		ldr	r3, .L13+4
+  88 0028 1A70     		strb	r2, [r3]
+  89              	.L7:
+  34:Regulation.c  ****     }
+  35:Regulation.c  ****     return res;
+  36:Regulation.c  **** }
+  90              		.loc 1 36 0
+  91 002a 024B     		ldr	r3, .L13+4
+  92 002c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  93 002e 10BD     		pop	{r4, pc}
+  94              	.LVL4:
+  95              	.L14:
+  96              		.align	2
+  97              	.L13:
+  98 0030 00000000 		.word	.LANCHOR0
+  99 0034 00000000 		.word	res
+ 100              		.cfi_endproc
+ 101              	.LFE1:
+ 102              		.size	Regulation, .-Regulation
+ 103              		.comm	res,1,1
+ 104              		.global	upper_limit
+ 105              		.global	lower_limit
+ 106              		.data
+ 107              		.align	2
+ 108              		.set	.LANCHOR0,. + 0
+ 109              		.type	upper_limit, %object
+ 110              		.size	upper_limit, 4
+ 111              	upper_limit:
+ 112 0000 000010C1 		.word	-1055916032
+ 113              		.type	lower_limit, %object
+ 114              		.size	lower_limit, 4
+ 115              	lower_limit:
+ 116 0004 000030C1 		.word	-1053818880
+ 117              		.text
+ 118              	.Letext0:
+ 119              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 120              		.section	.debug_info,"",%progbits
+ 121              	.Ldebug_info0:
+ 122 0000 F6000000 		.4byte	0xf6
+ 123 0004 0400     		.2byte	0x4
+ 124 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 125 000a 04       		.byte	0x4
+ 126 000b 01       		.uleb128 0x1
+ 127 000c 95000000 		.4byte	.LASF14
+ 128 0010 0C       		.byte	0xc
+ 129 0011 84010000 		.4byte	.LASF15
+ 130 0015 00000000 		.4byte	.LASF16
+ 131 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 132 001d 00000000 		.4byte	0
+ 133 0021 00000000 		.4byte	.Ldebug_line0
+ 134 0025 02       		.uleb128 0x2
+ 135 0026 04       		.byte	0x4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 4
+
+
+ 136 0027 04       		.byte	0x4
+ 137 0028 81000000 		.4byte	.LASF0
+ 138 002c 02       		.uleb128 0x2
+ 139 002d 01       		.byte	0x1
+ 140 002e 06       		.byte	0x6
+ 141 002f DA010000 		.4byte	.LASF1
+ 142 0033 02       		.uleb128 0x2
+ 143 0034 01       		.byte	0x1
+ 144 0035 08       		.byte	0x8
+ 145 0036 87000000 		.4byte	.LASF2
+ 146 003a 02       		.uleb128 0x2
+ 147 003b 02       		.byte	0x2
+ 148 003c 05       		.byte	0x5
+ 149 003d C1010000 		.4byte	.LASF3
+ 150 0041 02       		.uleb128 0x2
+ 151 0042 02       		.byte	0x2
+ 152 0043 07       		.byte	0x7
+ 153 0044 3A010000 		.4byte	.LASF4
+ 154 0048 02       		.uleb128 0x2
+ 155 0049 04       		.byte	0x4
+ 156 004a 05       		.byte	0x5
+ 157 004b D1010000 		.4byte	.LASF5
+ 158 004f 02       		.uleb128 0x2
+ 159 0050 04       		.byte	0x4
+ 160 0051 07       		.byte	0x7
+ 161 0052 23010000 		.4byte	.LASF6
+ 162 0056 02       		.uleb128 0x2
+ 163 0057 08       		.byte	0x8
+ 164 0058 05       		.byte	0x5
+ 165 0059 91010000 		.4byte	.LASF7
+ 166 005d 02       		.uleb128 0x2
+ 167 005e 08       		.byte	0x8
+ 168 005f 07       		.byte	0x7
+ 169 0060 6D010000 		.4byte	.LASF8
+ 170 0064 03       		.uleb128 0x3
+ 171 0065 04       		.byte	0x4
+ 172 0066 05       		.byte	0x5
+ 173 0067 696E7400 		.ascii	"int\000"
+ 174 006b 02       		.uleb128 0x2
+ 175 006c 04       		.byte	0x4
+ 176 006d 07       		.byte	0x7
+ 177 006e 60010000 		.4byte	.LASF9
+ 178 0072 04       		.uleb128 0x4
+ 179 0073 CB010000 		.4byte	.LASF17
+ 180 0077 02       		.byte	0x2
+ 181 0078 E901     		.2byte	0x1e9
+ 182 007a 33000000 		.4byte	0x33
+ 183 007e 02       		.uleb128 0x2
+ 184 007f 08       		.byte	0x8
+ 185 0080 04       		.byte	0x4
+ 186 0081 59010000 		.4byte	.LASF10
+ 187 0085 02       		.uleb128 0x2
+ 188 0086 01       		.byte	0x1
+ 189 0087 08       		.byte	0x8
+ 190 0088 9F010000 		.4byte	.LASF11
+ 191 008c 05       		.uleb128 0x5
+ 192 008d B0010000 		.4byte	.LASF18
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 5
+
+
+ 193 0091 01       		.byte	0x1
+ 194 0092 14       		.byte	0x14
+ 195 0093 00000000 		.4byte	.LFB0
+ 196 0097 0C000000 		.4byte	.LFE0-.LFB0
+ 197 009b 01       		.uleb128 0x1
+ 198 009c 9C       		.byte	0x9c
+ 199 009d 06       		.uleb128 0x6
+ 200 009e 76000000 		.4byte	.LASF19
+ 201 00a2 01       		.byte	0x1
+ 202 00a3 19       		.byte	0x19
+ 203 00a4 72000000 		.4byte	0x72
+ 204 00a8 00000000 		.4byte	.LFB1
+ 205 00ac 38000000 		.4byte	.LFE1-.LFB1
+ 206 00b0 01       		.uleb128 0x1
+ 207 00b1 9C       		.byte	0x9c
+ 208 00b2 C6000000 		.4byte	0xc6
+ 209 00b6 07       		.uleb128 0x7
+ 210 00b7 35010000 		.4byte	.LASF20
+ 211 00bb 01       		.byte	0x1
+ 212 00bc 19       		.byte	0x19
+ 213 00bd 25000000 		.4byte	0x25
+ 214 00c1 00000000 		.4byte	.LLST0
+ 215 00c5 00       		.byte	0
+ 216 00c6 08       		.uleb128 0x8
+ 217 00c7 4D010000 		.4byte	.LASF12
+ 218 00cb 01       		.byte	0x1
+ 219 00cc 0F       		.byte	0xf
+ 220 00cd 25000000 		.4byte	0x25
+ 221 00d1 05       		.uleb128 0x5
+ 222 00d2 03       		.byte	0x3
+ 223 00d3 00000000 		.4byte	lower_limit
+ 224 00d7 08       		.uleb128 0x8
+ 225 00d8 A4010000 		.4byte	.LASF13
+ 226 00dc 01       		.byte	0x1
+ 227 00dd 10       		.byte	0x10
+ 228 00de 25000000 		.4byte	0x25
+ 229 00e2 05       		.uleb128 0x5
+ 230 00e3 03       		.byte	0x3
+ 231 00e4 00000000 		.4byte	upper_limit
+ 232 00e8 09       		.uleb128 0x9
+ 233 00e9 72657300 		.ascii	"res\000"
+ 234 00ed 01       		.byte	0x1
+ 235 00ee 11       		.byte	0x11
+ 236 00ef 72000000 		.4byte	0x72
+ 237 00f3 05       		.uleb128 0x5
+ 238 00f4 03       		.byte	0x3
+ 239 00f5 00000000 		.4byte	res
+ 240 00f9 00       		.byte	0
+ 241              		.section	.debug_abbrev,"",%progbits
+ 242              	.Ldebug_abbrev0:
+ 243 0000 01       		.uleb128 0x1
+ 244 0001 11       		.uleb128 0x11
+ 245 0002 01       		.byte	0x1
+ 246 0003 25       		.uleb128 0x25
+ 247 0004 0E       		.uleb128 0xe
+ 248 0005 13       		.uleb128 0x13
+ 249 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 6
+
+
+ 250 0007 03       		.uleb128 0x3
+ 251 0008 0E       		.uleb128 0xe
+ 252 0009 1B       		.uleb128 0x1b
+ 253 000a 0E       		.uleb128 0xe
+ 254 000b 55       		.uleb128 0x55
+ 255 000c 17       		.uleb128 0x17
+ 256 000d 11       		.uleb128 0x11
+ 257 000e 01       		.uleb128 0x1
+ 258 000f 10       		.uleb128 0x10
+ 259 0010 17       		.uleb128 0x17
+ 260 0011 00       		.byte	0
+ 261 0012 00       		.byte	0
+ 262 0013 02       		.uleb128 0x2
+ 263 0014 24       		.uleb128 0x24
+ 264 0015 00       		.byte	0
+ 265 0016 0B       		.uleb128 0xb
+ 266 0017 0B       		.uleb128 0xb
+ 267 0018 3E       		.uleb128 0x3e
+ 268 0019 0B       		.uleb128 0xb
+ 269 001a 03       		.uleb128 0x3
+ 270 001b 0E       		.uleb128 0xe
+ 271 001c 00       		.byte	0
+ 272 001d 00       		.byte	0
+ 273 001e 03       		.uleb128 0x3
+ 274 001f 24       		.uleb128 0x24
+ 275 0020 00       		.byte	0
+ 276 0021 0B       		.uleb128 0xb
+ 277 0022 0B       		.uleb128 0xb
+ 278 0023 3E       		.uleb128 0x3e
+ 279 0024 0B       		.uleb128 0xb
+ 280 0025 03       		.uleb128 0x3
+ 281 0026 08       		.uleb128 0x8
+ 282 0027 00       		.byte	0
+ 283 0028 00       		.byte	0
+ 284 0029 04       		.uleb128 0x4
+ 285 002a 16       		.uleb128 0x16
+ 286 002b 00       		.byte	0
+ 287 002c 03       		.uleb128 0x3
+ 288 002d 0E       		.uleb128 0xe
+ 289 002e 3A       		.uleb128 0x3a
+ 290 002f 0B       		.uleb128 0xb
+ 291 0030 3B       		.uleb128 0x3b
+ 292 0031 05       		.uleb128 0x5
+ 293 0032 49       		.uleb128 0x49
+ 294 0033 13       		.uleb128 0x13
+ 295 0034 00       		.byte	0
+ 296 0035 00       		.byte	0
+ 297 0036 05       		.uleb128 0x5
+ 298 0037 2E       		.uleb128 0x2e
+ 299 0038 00       		.byte	0
+ 300 0039 3F       		.uleb128 0x3f
+ 301 003a 19       		.uleb128 0x19
+ 302 003b 03       		.uleb128 0x3
+ 303 003c 0E       		.uleb128 0xe
+ 304 003d 3A       		.uleb128 0x3a
+ 305 003e 0B       		.uleb128 0xb
+ 306 003f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 7
+
+
+ 307 0040 0B       		.uleb128 0xb
+ 308 0041 11       		.uleb128 0x11
+ 309 0042 01       		.uleb128 0x1
+ 310 0043 12       		.uleb128 0x12
+ 311 0044 06       		.uleb128 0x6
+ 312 0045 40       		.uleb128 0x40
+ 313 0046 18       		.uleb128 0x18
+ 314 0047 9742     		.uleb128 0x2117
+ 315 0049 19       		.uleb128 0x19
+ 316 004a 00       		.byte	0
+ 317 004b 00       		.byte	0
+ 318 004c 06       		.uleb128 0x6
+ 319 004d 2E       		.uleb128 0x2e
+ 320 004e 01       		.byte	0x1
+ 321 004f 3F       		.uleb128 0x3f
+ 322 0050 19       		.uleb128 0x19
+ 323 0051 03       		.uleb128 0x3
+ 324 0052 0E       		.uleb128 0xe
+ 325 0053 3A       		.uleb128 0x3a
+ 326 0054 0B       		.uleb128 0xb
+ 327 0055 3B       		.uleb128 0x3b
+ 328 0056 0B       		.uleb128 0xb
+ 329 0057 27       		.uleb128 0x27
+ 330 0058 19       		.uleb128 0x19
+ 331 0059 49       		.uleb128 0x49
+ 332 005a 13       		.uleb128 0x13
+ 333 005b 11       		.uleb128 0x11
+ 334 005c 01       		.uleb128 0x1
+ 335 005d 12       		.uleb128 0x12
+ 336 005e 06       		.uleb128 0x6
+ 337 005f 40       		.uleb128 0x40
+ 338 0060 18       		.uleb128 0x18
+ 339 0061 9642     		.uleb128 0x2116
+ 340 0063 19       		.uleb128 0x19
+ 341 0064 01       		.uleb128 0x1
+ 342 0065 13       		.uleb128 0x13
+ 343 0066 00       		.byte	0
+ 344 0067 00       		.byte	0
+ 345 0068 07       		.uleb128 0x7
+ 346 0069 05       		.uleb128 0x5
+ 347 006a 00       		.byte	0
+ 348 006b 03       		.uleb128 0x3
+ 349 006c 0E       		.uleb128 0xe
+ 350 006d 3A       		.uleb128 0x3a
+ 351 006e 0B       		.uleb128 0xb
+ 352 006f 3B       		.uleb128 0x3b
+ 353 0070 0B       		.uleb128 0xb
+ 354 0071 49       		.uleb128 0x49
+ 355 0072 13       		.uleb128 0x13
+ 356 0073 02       		.uleb128 0x2
+ 357 0074 17       		.uleb128 0x17
+ 358 0075 00       		.byte	0
+ 359 0076 00       		.byte	0
+ 360 0077 08       		.uleb128 0x8
+ 361 0078 34       		.uleb128 0x34
+ 362 0079 00       		.byte	0
+ 363 007a 03       		.uleb128 0x3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 8
+
+
+ 364 007b 0E       		.uleb128 0xe
+ 365 007c 3A       		.uleb128 0x3a
+ 366 007d 0B       		.uleb128 0xb
+ 367 007e 3B       		.uleb128 0x3b
+ 368 007f 0B       		.uleb128 0xb
+ 369 0080 49       		.uleb128 0x49
+ 370 0081 13       		.uleb128 0x13
+ 371 0082 3F       		.uleb128 0x3f
+ 372 0083 19       		.uleb128 0x19
+ 373 0084 02       		.uleb128 0x2
+ 374 0085 18       		.uleb128 0x18
+ 375 0086 00       		.byte	0
+ 376 0087 00       		.byte	0
+ 377 0088 09       		.uleb128 0x9
+ 378 0089 34       		.uleb128 0x34
+ 379 008a 00       		.byte	0
+ 380 008b 03       		.uleb128 0x3
+ 381 008c 08       		.uleb128 0x8
+ 382 008d 3A       		.uleb128 0x3a
+ 383 008e 0B       		.uleb128 0xb
+ 384 008f 3B       		.uleb128 0x3b
+ 385 0090 0B       		.uleb128 0xb
+ 386 0091 49       		.uleb128 0x49
+ 387 0092 13       		.uleb128 0x13
+ 388 0093 3F       		.uleb128 0x3f
+ 389 0094 19       		.uleb128 0x19
+ 390 0095 02       		.uleb128 0x2
+ 391 0096 18       		.uleb128 0x18
+ 392 0097 00       		.byte	0
+ 393 0098 00       		.byte	0
+ 394 0099 00       		.byte	0
+ 395              		.section	.debug_loc,"",%progbits
+ 396              	.Ldebug_loc0:
+ 397              	.LLST0:
+ 398 0000 00000000 		.4byte	.LVL0
+ 399 0004 0A000000 		.4byte	.LVL1
+ 400 0008 0100     		.2byte	0x1
+ 401 000a 50       		.byte	0x50
+ 402 000b 0A000000 		.4byte	.LVL1
+ 403 000f 0D000000 		.4byte	.LVL2-1
+ 404 0013 0100     		.2byte	0x1
+ 405 0015 51       		.byte	0x51
+ 406 0016 0D000000 		.4byte	.LVL2-1
+ 407 001a 30000000 		.4byte	.LVL4
+ 408 001e 0100     		.2byte	0x1
+ 409 0020 54       		.byte	0x54
+ 410 0021 30000000 		.4byte	.LVL4
+ 411 0025 38000000 		.4byte	.LFE1
+ 412 0029 0600     		.2byte	0x6
+ 413 002b F3       		.byte	0xf3
+ 414 002c 03       		.uleb128 0x3
+ 415 002d F5       		.byte	0xf5
+ 416 002e 00       		.uleb128 0
+ 417 002f 25       		.uleb128 0x25
+ 418 0030 9F       		.byte	0x9f
+ 419 0031 00000000 		.4byte	0
+ 420 0035 00000000 		.4byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 9
+
+
+ 421              		.section	.debug_aranges,"",%progbits
+ 422 0000 24000000 		.4byte	0x24
+ 423 0004 0200     		.2byte	0x2
+ 424 0006 00000000 		.4byte	.Ldebug_info0
+ 425 000a 04       		.byte	0x4
+ 426 000b 00       		.byte	0
+ 427 000c 0000     		.2byte	0
+ 428 000e 0000     		.2byte	0
+ 429 0010 00000000 		.4byte	.LFB0
+ 430 0014 0C000000 		.4byte	.LFE0-.LFB0
+ 431 0018 00000000 		.4byte	.LFB1
+ 432 001c 38000000 		.4byte	.LFE1-.LFB1
+ 433 0020 00000000 		.4byte	0
+ 434 0024 00000000 		.4byte	0
+ 435              		.section	.debug_ranges,"",%progbits
+ 436              	.Ldebug_ranges0:
+ 437 0000 00000000 		.4byte	.LFB0
+ 438 0004 0C000000 		.4byte	.LFE0
+ 439 0008 00000000 		.4byte	.LFB1
+ 440 000c 38000000 		.4byte	.LFE1
+ 441 0010 00000000 		.4byte	0
+ 442 0014 00000000 		.4byte	0
+ 443              		.section	.debug_line,"",%progbits
+ 444              	.Ldebug_line0:
+ 445 0000 71000000 		.section	.debug_str,"MS",%progbits,1
+ 445      02004700 
+ 445      00000201 
+ 445      FB0E0D00 
+ 445      01010101 
+ 446              	.LASF16:
+ 447 0000 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 447      73657273 
+ 447      5C6E6963 
+ 447      6F5F5C53 
+ 447      756E6468 
+ 448 002e 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 448      6C6F725C 
+ 448      42616368 
+ 448      656C6F72 
+ 448      50726F6A 
+ 449 005e 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 449      636F6F6C 
+ 449      696E6773 
+ 449      79737465 
+ 449      6D2E6379 
+ 450              	.LASF19:
+ 451 0076 52656775 		.ascii	"Regulation\000"
+ 451      6C617469 
+ 451      6F6E00
+ 452              	.LASF0:
+ 453 0081 666C6F61 		.ascii	"float\000"
+ 453      7400
+ 454              	.LASF2:
+ 455 0087 756E7369 		.ascii	"unsigned char\000"
+ 455      676E6564 
+ 455      20636861 
+ 455      7200
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 10
+
+
+ 456              	.LASF14:
+ 457 0095 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 457      43313120 
+ 457      352E342E 
+ 457      31203230 
+ 457      31363036 
+ 458 00c8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 458      20726576 
+ 458      6973696F 
+ 458      6E203233 
+ 458      37373135 
+ 459 00fb 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 459      66756E63 
+ 459      74696F6E 
+ 459      2D736563 
+ 459      74696F6E 
+ 460              	.LASF6:
+ 461 0123 6C6F6E67 		.ascii	"long unsigned int\000"
+ 461      20756E73 
+ 461      69676E65 
+ 461      6420696E 
+ 461      7400
+ 462              	.LASF20:
+ 463 0135 74656D70 		.ascii	"temp\000"
+ 463      00
+ 464              	.LASF4:
+ 465 013a 73686F72 		.ascii	"short unsigned int\000"
+ 465      7420756E 
+ 465      7369676E 
+ 465      65642069 
+ 465      6E7400
+ 466              	.LASF12:
+ 467 014d 6C6F7765 		.ascii	"lower_limit\000"
+ 467      725F6C69 
+ 467      6D697400 
+ 468              	.LASF10:
+ 469 0159 646F7562 		.ascii	"double\000"
+ 469      6C6500
+ 470              	.LASF9:
+ 471 0160 756E7369 		.ascii	"unsigned int\000"
+ 471      676E6564 
+ 471      20696E74 
+ 471      00
+ 472              	.LASF8:
+ 473 016d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 473      206C6F6E 
+ 473      6720756E 
+ 473      7369676E 
+ 473      65642069 
+ 474              	.LASF15:
+ 475 0184 52656775 		.ascii	"Regulation.c\000"
+ 475      6C617469 
+ 475      6F6E2E63 
+ 475      00
+ 476              	.LASF7:
+ 477 0191 6C6F6E67 		.ascii	"long long int\000"
+ 477      206C6F6E 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cclSTUFl.s 			page 11
+
+
+ 477      6720696E 
+ 477      7400
+ 478              	.LASF11:
+ 479 019f 63686172 		.ascii	"char\000"
+ 479      00
+ 480              	.LASF13:
+ 481 01a4 75707065 		.ascii	"upper_limit\000"
+ 481      725F6C69 
+ 481      6D697400 
+ 482              	.LASF18:
+ 483 01b0 52656775 		.ascii	"Regulation_setup\000"
+ 483      6C617469 
+ 483      6F6E5F73 
+ 483      65747570 
+ 483      00
+ 484              	.LASF3:
+ 485 01c1 73686F72 		.ascii	"short int\000"
+ 485      7420696E 
+ 485      7400
+ 486              	.LASF17:
+ 487 01cb 75696E74 		.ascii	"uint8\000"
+ 487      3800
+ 488              	.LASF5:
+ 489 01d1 6C6F6E67 		.ascii	"long int\000"
+ 489      20696E74 
+ 489      00
+ 490              	.LASF1:
+ 491 01da 7369676E 		.ascii	"signed char\000"
+ 491      65642063 
+ 491      68617200 
+ 492              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

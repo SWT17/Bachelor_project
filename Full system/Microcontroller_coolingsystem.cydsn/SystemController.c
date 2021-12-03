@@ -23,10 +23,14 @@ CY_ISR_PROTO(ISR_CLOCK_handler);
 uint8 Switch_State;
 uint16 rtd_ratio ;
 uint16 ref_res = 4300; //Reference resistance on the amplifier circuit
+float last_regu;
+float regu;
 
 
 int main(void)
 {   
+
+    
 
     System_Setup();
 
@@ -46,6 +50,7 @@ void System_Setup()
     CyGlobalIntEnable; 
     //System is off, set state to 0.
     Switch_State = 0;
+    last_regu = 0;
        
     /*Start UART*/
     UART_1_Start();
@@ -73,7 +78,7 @@ void System_On()
     Amplifier_Startup();
     
     //Start up the pump
-    Pump_Startup(2000);
+    Pump_Startup(2500);
     
     /*Start counter for sampling the temperature*/
     Temp_sample_counter_Start();
@@ -81,7 +86,7 @@ void System_On()
     isr_clock_StartEx(ISR_CLOCK_handler); 
     
     //Turn on indicator LED
-    TurnON();
+    Turn_ON();
 }
 
 /*Turn system off after being in system on state*/
@@ -101,7 +106,7 @@ void System_Off()
     Amplifier_Shutdown();
     
     //Turn off the indicator LED
-    TurnOFF();
+    Turn_OFF();
     
 }
 
@@ -112,7 +117,7 @@ void System_newState(uint8 switchstate)
 {
     Switch_State = switchstate;
     
-    if(!Switch_State)
+    if(Switch_State)
     {
         //Turn system on. 
         System_On();
@@ -137,13 +142,28 @@ CY_ISR(ISR_CLOCK_handler)
     char temp[50];
             
     float temp_string = GetTemperature();
-    sprintf(temp,"Temperatur: %f\n\r",temp_string);
+    sprintf(temp,"Temperature: %f\n\r",temp_string);
     UART_1_PutString(temp);
 
-       
-    /*Clears counter     interrupt*/
-    Temp_sample_counter_ReadStatusRegister();
     
+    regu = Regulation(temp_string);
+    
+
+    
+
+
+    
+    
+    if(last_regu != regu)
+    {
+        
+        FlowDirection(regu);
+    }
+
+    last_regu = regu;
+    
+     /*Clears counter     interrupt*/
+    Temp_sample_counter_ReadStatusRegister();
 }
 
 

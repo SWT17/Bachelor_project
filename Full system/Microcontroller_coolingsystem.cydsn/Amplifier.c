@@ -23,7 +23,7 @@ void Set_ConverionMode(char conversionmode);
 void Clear_Fault();
 void WriteByteToAdress(char adress, char data);
 char ReadByteFromAdress(char adress);
-
+void Reset_amplifier_ref();
 
 /*Internal variables declartion*/
 uint16_t rtd_ratio;
@@ -32,7 +32,7 @@ uint8 bytes_received ;
 char config;
 
 
-void ReadReg();
+
 
 /*Does initial setup of the amplifier*/
 void Amplifier_Setup()
@@ -45,11 +45,12 @@ void Amplifier_Setup()
 //Setup the microchipon the amplifier circuit
 void MAX31865_Setup()
 {
+    Reset_amplifier_ref();
+    
     Set_WireSetup(TWO_OR_FOUR_WIRECONFIG);
     Set_FilterSetup(FILTER_50HZ);
     Set_VBIAS(VBIAS_ON);
     Clear_Fault();
-    ReadReg();
 }
 
 /*Retrieve RTD ration by reading the RTD msb byte and 
@@ -242,10 +243,9 @@ void WriteByteToAdress(char adress, char data)
        
 }
 
-void ReadReg()
+void Reset_amplifier_ref()
 {
-    config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
-    
+    WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,0x00);    
 }
 
 
