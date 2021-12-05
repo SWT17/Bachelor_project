@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\Microcontroller_coolingsystem.cydwr">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BachelorProject\Microcontroller_coolingsystem\Header Files\PumpCtrl.h">
 <ExpandedNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
@@ -34,7 +34,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\cyapicallbacks.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\LED.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\PumpCtrl.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\Regulation.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\switch.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController_interrupt.h</v>
@@ -43,7 +42,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Amplifier.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\LED.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\PumpCtrl.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\Regulation.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\switch.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\SystemController.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Temperature.c</v>
@@ -90,7 +88,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\cyapicallbacks.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\LED.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\PumpCtrl.h</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Header Files\Regulation.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\switch.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController.h</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Header Files\SystemController_interrupt.h</v>
@@ -99,7 +96,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Amplifier.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\LED.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\PumpCtrl.c</v>
-<v>BachelorProject\Microcontroller_coolingsystem\Source Files\Regulation.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\switch.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\SystemController.c</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Source Files\Temperature.c</v>
@@ -119,6 +115,8 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\PumpCtrlUnitTest</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\SwitchUnitTest</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest\TemperatureUnitTest.c</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest\TemperatureUnitTest.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -157,7 +155,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Direction_pin.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Enable_pin.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_clock.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
@@ -169,7 +166,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrl.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrlUnitTest.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Regulation.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\RTD_1.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Speed_pin.lst</v>
@@ -196,8 +192,6 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Direction.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Direction_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Enabling.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_Enabling_PM.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_SpeedControl.lst</v>
@@ -212,52 +206,6 @@
 <VisibleNodeIds>
 <v>BachelorProject</v>
 <v>BachelorProject\Microcontroller_coolingsystem</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Amplifier.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_TempSampling.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\ClockCounter_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Direction_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Enable_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_clock.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\LED.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_SpeedControl_PM.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrl.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\PumpCtrlUnitTest.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Regulation.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\RTD_1.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_2.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Speed_pin.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_INT.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_IntClock.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_1_PM.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SS.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_input.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\switch_input_interrupt.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_output.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_test.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SwitchUnitTest.lst</v>
-<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SystemController.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

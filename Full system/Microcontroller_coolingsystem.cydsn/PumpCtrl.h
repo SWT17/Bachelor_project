@@ -14,7 +14,6 @@
 #include "VDAC8_SpeedControl.h"
 #include "PGA_SpeedControl.h"
 #include "VDAC8_Enabling.h"
-#include "VDAC8_Direction.h"
 #include "Enable_pin.h"
 
 

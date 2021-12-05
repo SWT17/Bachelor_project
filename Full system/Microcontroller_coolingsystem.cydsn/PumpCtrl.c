@@ -32,9 +32,6 @@ void Pump_Setup()
     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V); 
     
     
-    //Start VDAC for flow direction control
-    VDAC8_Direction_Start();
-    VDAC8_Direction_SetValue(0);
 
     //Stop pump.
     Pump_Stop();
@@ -92,31 +89,7 @@ void Pump_Stop()
 }
 
 
-/*Iteration 3 adjustable speed on pump
-Set speed of the pump via the VDAC component*/
-void SetSpeed(uint8_t speed)
-{
-    
-    voltage = ((float)speed/256)*4096*2; //Calculate the new voltage for the speed control.
-    
-    /*Check if voltage is below zero == speed has become negative*/
-    if(voltage < 0)
-    {
-        VDAC8_SpeedControl_SetValue(0);       
-    }
-    /*Check if voltage is above maximum*/
-    else if(voltage > 4500)
-    {
-        speed = (uint8)((4500 * 255) / (4096 * 2)); //Maximum speed when PGA gain is 2.
-        VDAC8_SpeedControl_SetValue(speed);
-    }
-    else
-    {
-        VDAC8_SpeedControl_SetValue(speed);
-    }
-    
-    
-}
+
 
 
 /*Set a constant hardcoded speed for the speed control.*/
@@ -130,31 +103,6 @@ uint8 SetConstSpeed(uint16 speed_control_voltage)
 /*Method for controlling the direction of flow
 when regulating the temperature with on/off regulation*/
 
-void FlowDirection(uint8 regulation)
-{
-    /*How does the bidirectional pin work? Is it high/low input or 
-    the same as with the enabling pin.
-    Then we need and ADC to control the other MOSFET.*/
-    
-    
-    
-    if(regulation == 0)
-    {
-        output_voltage_direction = (uint8) (4080*255/4080);
-        
-        VDAC8_Direction_SetValue(output_voltage_direction);
-        CyDelay(10500);
-        Pump_Stop();
-        
-    }else
-    {
-        output_voltage_direction = 0;
-        VDAC8_Direction_SetValue(output_voltage_direction);
-        Pump_Start();
-        
-    }
-    
-}
 
 
 /* [] END OF FILE */

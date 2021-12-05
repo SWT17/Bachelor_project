@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
   28:Temperature.c **** /*Setup of the internal reference resistance in the amplifier.
   29:Temperature.c **** The amplifier uses this for calculating the RTD/ref_res ratio stored in the
   30:Temperature.c **** RTD_MSB and RTD_LSB data registers*/
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 2
 
 
   31:Temperature.c **** void Temperature_Setup(uint16_t ref_res)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
   72              	.LFE2:
   73              		.size	GetTemperature, .-GetTemperature
   74              		.global	__aeabi_i2d
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 3
 
 
   75              		.global	__aeabi_dmul
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  104 0010 4FF07C53 		mov	r3, #1056964608
  105 0014 FFF7FEFF 		bl	__aeabi_dmul
  106              	.LVL4:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 4
 
 
  107 0018 FFF7FEFF 		bl	__aeabi_d2f
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  154              	.LVL11:
  155 0012 0449     		ldr	r1, .L13+4
  156 0014 FFF7FEFF 		bl	__aeabi_fdiv
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 5
 
 
  157              	.LVL12:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  209 000b 01       		.uleb128 0x1
  210 000c FB000000 		.4byte	.LASF31
  211 0010 0C       		.byte	0xc
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 6
 
 
  212 0011 21020000 		.4byte	.LASF32
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  266 007d E4010000 		.4byte	.LASF10
  267 0081 02       		.uleb128 0x2
  268 0082 08       		.byte	0x8
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 7
 
 
  269 0083 04       		.byte	0x4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  323 00f8 01       		.byte	0x1
  324 00f9 1F       		.byte	0x1f
  325 00fa 96000000 		.4byte	0x96
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 8
 
 
  326 00fe 01       		.uleb128 0x1
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  380 0176 32       		.byte	0x32
  381 0177 BA000000 		.4byte	0xba
  382 017b 34000000 		.4byte	.LLST2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 9
 
 
  383 017f 0B       		.uleb128 0xb
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  437 01fd 03       		.byte	0x3
  438 01fe 00000000 		.4byte	Ref_resistance
  439 0202 10       		.uleb128 0x10
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 10
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 10
 
 
  440 0203 19000000 		.4byte	.LASF36
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  494 002f 0B       		.uleb128 0xb
  495 0030 3E       		.uleb128 0x3e
  496 0031 0B       		.uleb128 0xb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 11
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 11
 
 
  497 0032 03       		.uleb128 0x3
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  551 0069 18       		.uleb128 0x18
  552 006a 00       		.byte	0
  553 006b 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 12
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 12
 
 
  554 006c 08       		.uleb128 0x8
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  608 00a4 0E       		.uleb128 0xe
  609 00a5 3A       		.uleb128 0x3a
  610 00a6 0B       		.uleb128 0xb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 13
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 13
 
 
  611 00a7 3B       		.uleb128 0x3b
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  665 00dd 06       		.uleb128 0x6
  666 00de 40       		.uleb128 0x40
  667 00df 18       		.uleb128 0x18
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 14
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 14
 
 
  668 00e0 9642     		.uleb128 0x2116
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  722 0004 0A000000 		.4byte	.LVL2
  723 0008 0100     		.2byte	0x1
  724 000a 50       		.byte	0x50
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 15
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 15
 
 
  725 000b 0A000000 		.4byte	.LVL2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  779 0006 00000000 		.4byte	.Ldebug_info0
  780 000a 04       		.byte	0x4
  781 000b 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 16
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 16
 
 
  782 000c 0000     		.2byte	0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  820      6F5F5C53 
  820      756E6468 
  821 005c 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 17
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 17
 
 
  821      6C6F725C 
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  840      2D736563 
  840      74696F6E 
  841              	.LASF7:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 18
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 18
 
 
  842 0189 6C6F6E67 		.ascii	"long unsigned int\000"
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 1
  867              	.LASF32:
  868 0221 54656D70 		.ascii	"Temperature.c\000"
  868      65726174 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\cciGygg9.s 			page 19
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccf28KGs.s 			page 19
 
 
  868      7572652E 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 1
 
 
    1              		.syntax unified
@@ -20,17 +20,15 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.global	__aeabi_f2d
-  20              		.global	__aeabi_ui2f
-  21              		.global	__aeabi_fcmpeq
-  22              		.section	.text.ISR_CLOCK_handler,"ax",%progbits
-  23              		.align	2
-  24              		.global	ISR_CLOCK_handler
-  25              		.thumb
-  26              		.thumb_func
-  27              		.type	ISR_CLOCK_handler, %function
-  28              	ISR_CLOCK_handler:
-  29              	.LFB69:
-  30              		.file 1 "SystemController.c"
+  20              		.section	.text.ISR_CLOCK_handler,"ax",%progbits
+  21              		.align	2
+  22              		.global	ISR_CLOCK_handler
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	ISR_CLOCK_handler, %function
+  26              	ISR_CLOCK_handler:
+  27              	.LFB69:
+  28              		.file 1 "SystemController.c"
    1:SystemController.c **** /* ========================================
    2:SystemController.c ****  *
    3:SystemController.c ****  * Copyright YOUR COMPANY, THE YEAR
@@ -58,11 +56,11 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 1
   25:SystemController.c **** uint16 ref_res = 4300; //Reference resistance on the amplifier circuit
   26:SystemController.c **** float last_regu;
   27:SystemController.c **** float regu;
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 2
-
-
   28:SystemController.c **** 
   29:SystemController.c **** 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 2
+
+
   30:SystemController.c **** int main(void)
   31:SystemController.c **** {   
   32:SystemController.c **** 
@@ -118,11 +116,11 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 1
   82:SystemController.c ****     
   83:SystemController.c ****     /*Start counter for sampling the temperature*/
   84:SystemController.c ****     Temp_sample_counter_Start();
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 3
-
-
   85:SystemController.c ****     Clock_TempSampling_Start();
   86:SystemController.c ****     isr_clock_StartEx(ISR_CLOCK_handler); 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 3
+
+
   87:SystemController.c ****     
   88:SystemController.c ****     //Turn on indicator LED
   89:SystemController.c ****     Turn_ON();
@@ -170,1675 +168,1577 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 1
  131:SystemController.c **** 
  132:SystemController.c **** CY_ISR(ISR_CLOCK_handler)
  133:SystemController.c **** {
-  31              		.loc 1 133 0
-  32              		.cfi_startproc
-  33              		@ args = 0, pretend = 0, frame = 56
-  34              		@ frame_needed = 0, uses_anonymous_args = 0
-  35 0000 10B5     		push	{r4, lr}
-  36              		.cfi_def_cfa_offset 8
-  37              		.cfi_offset 4, -8
-  38              		.cfi_offset 14, -4
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 4
-
-
-  39 0002 8EB0     		sub	sp, sp, #56
-  40              		.cfi_def_cfa_offset 64
+  29              		.loc 1 133 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 56
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 00B5     		push	{lr}
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 14, -4
+  36 0002 8FB0     		sub	sp, sp, #60
+  37              		.cfi_def_cfa_offset 64
  134:SystemController.c **** 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 4
+
+
  135:SystemController.c ****     //Code to fetch temperature here
  136:SystemController.c ****     rtd_ratio = GetRtdRatio();
-  41              		.loc 1 136 0
-  42 0004 FFF7FEFF 		bl	GetRtdRatio
-  43              	.LVL0:
-  44 0008 144B     		ldr	r3, .L6
-  45 000a 1880     		strh	r0, [r3]	@ movhi
+  38              		.loc 1 136 0
+  39 0004 FFF7FEFF 		bl	GetRtdRatio
+  40              	.LVL0:
+  41 0008 0A4B     		ldr	r3, .L3
+  42 000a 1880     		strh	r0, [r3]	@ movhi
  137:SystemController.c ****     
  138:SystemController.c ****     //Set the new temperature measurement.
  139:SystemController.c ****     SetTemperature(rtd_ratio);
-  46              		.loc 1 139 0
-  47 000c FFF7FEFF 		bl	SetTemperature
-  48              	.LVL1:
+  43              		.loc 1 139 0
+  44 000c FFF7FEFF 		bl	SetTemperature
+  45              	.LVL1:
  140:SystemController.c ****     
  141:SystemController.c ****     //Get temperature sample and print to uart
  142:SystemController.c ****     char temp[50];
  143:SystemController.c ****             
  144:SystemController.c ****     float temp_string = GetTemperature();
-  49              		.loc 1 144 0
-  50 0010 FFF7FEFF 		bl	GetTemperature
-  51              	.LVL2:
-  52 0014 0446     		mov	r4, r0
-  53              	.LVL3:
+  46              		.loc 1 144 0
+  47 0010 FFF7FEFF 		bl	GetTemperature
+  48              	.LVL2:
  145:SystemController.c ****     sprintf(temp,"Temperature: %f\n\r",temp_string);
-  54              		.loc 1 145 0
-  55 0016 FFF7FEFF 		bl	__aeabi_f2d
-  56              	.LVL4:
-  57 001a 0246     		mov	r2, r0
-  58 001c 0B46     		mov	r3, r1
-  59 001e 1049     		ldr	r1, .L6+4
-  60 0020 01A8     		add	r0, sp, #4
-  61 0022 FFF7FEFF 		bl	sprintf
-  62              	.LVL5:
+  49              		.loc 1 145 0
+  50 0014 FFF7FEFF 		bl	__aeabi_f2d
+  51              	.LVL3:
+  52 0018 0246     		mov	r2, r0
+  53 001a 0B46     		mov	r3, r1
+  54 001c 0649     		ldr	r1, .L3+4
+  55 001e 01A8     		add	r0, sp, #4
+  56 0020 FFF7FEFF 		bl	sprintf
+  57              	.LVL4:
  146:SystemController.c ****     UART_1_PutString(temp);
-  63              		.loc 1 146 0
-  64 0026 01A8     		add	r0, sp, #4
-  65 0028 FFF7FEFF 		bl	UART_1_PutString
-  66              	.LVL6:
- 147:SystemController.c **** 
- 148:SystemController.c ****     
- 149:SystemController.c ****     regu = Regulation(temp_string);
-  67              		.loc 1 149 0
-  68 002c 2046     		mov	r0, r4
-  69 002e FFF7FEFF 		bl	Regulation
-  70              	.LVL7:
-  71 0032 0446     		mov	r4, r0
-  72              	.LVL8:
-  73 0034 FFF7FEFF 		bl	__aeabi_ui2f
-  74              	.LVL9:
-  75 0038 0A4B     		ldr	r3, .L6+8
-  76 003a 1860     		str	r0, [r3]	@ float
- 150:SystemController.c ****     
- 151:SystemController.c **** 
- 152:SystemController.c ****     
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 5
+  58              		.loc 1 146 0
+  59 0024 01A8     		add	r0, sp, #4
+  60 0026 FFF7FEFF 		bl	UART_1_PutString
+  61              	.LVL5:
+ 147:SystemController.c ****     
+ 148:SystemController.c ****      /*Clears counter     interrupt*/
+ 149:SystemController.c ****     Temp_sample_counter_ReadStatusRegister();
+  62              		.loc 1 149 0
+  63 002a FFF7FEFF 		bl	Temp_sample_counter_ReadStatusRegister
+  64              	.LVL6:
+ 150:SystemController.c **** }
+  65              		.loc 1 150 0
+  66 002e 0FB0     		add	sp, sp, #60
+  67              		.cfi_def_cfa_offset 4
+  68              		@ sp needed
+  69 0030 5DF804FB 		ldr	pc, [sp], #4
+  70              	.L4:
+  71              		.align	2
+  72              	.L3:
+  73 0034 00000000 		.word	rtd_ratio
+  74 0038 00000000 		.word	.LC0
+  75              		.cfi_endproc
+  76              	.LFE69:
+  77              		.size	ISR_CLOCK_handler, .-ISR_CLOCK_handler
+  78              		.section	.text.System_Setup,"ax",%progbits
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 5
 
 
- 153:SystemController.c **** 
- 154:SystemController.c **** 
- 155:SystemController.c ****     
- 156:SystemController.c ****     
- 157:SystemController.c ****     if(last_regu != regu)
-  77              		.loc 1 157 0
-  78 003c 0A4B     		ldr	r3, .L6+12
-  79 003e 1968     		ldr	r1, [r3]	@ float
-  80 0040 FFF7FEFF 		bl	__aeabi_fcmpeq
-  81              	.LVL10:
-  82 0044 10B9     		cbnz	r0, .L2
- 158:SystemController.c ****     {
- 159:SystemController.c ****         
- 160:SystemController.c ****         FlowDirection(regu);
-  83              		.loc 1 160 0
-  84 0046 2046     		mov	r0, r4
-  85 0048 FFF7FEFF 		bl	FlowDirection
-  86              	.LVL11:
-  87              	.L2:
- 161:SystemController.c ****     }
- 162:SystemController.c **** 
- 163:SystemController.c ****     last_regu = regu;
-  88              		.loc 1 163 0
-  89 004c 054B     		ldr	r3, .L6+8
-  90 004e 1A68     		ldr	r2, [r3]	@ float
-  91 0050 054B     		ldr	r3, .L6+12
-  92 0052 1A60     		str	r2, [r3]	@ float
- 164:SystemController.c ****     
- 165:SystemController.c ****      /*Clears counter     interrupt*/
- 166:SystemController.c ****     Temp_sample_counter_ReadStatusRegister();
-  93              		.loc 1 166 0
-  94 0054 FFF7FEFF 		bl	Temp_sample_counter_ReadStatusRegister
-  95              	.LVL12:
- 167:SystemController.c **** }
-  96              		.loc 1 167 0
-  97 0058 0EB0     		add	sp, sp, #56
-  98              		.cfi_def_cfa_offset 8
-  99              		@ sp needed
- 100 005a 10BD     		pop	{r4, pc}
- 101              	.L7:
- 102              		.align	2
- 103              	.L6:
- 104 005c 00000000 		.word	rtd_ratio
- 105 0060 00000000 		.word	.LC0
- 106 0064 00000000 		.word	regu
- 107 0068 00000000 		.word	last_regu
- 108              		.cfi_endproc
- 109              	.LFE69:
- 110              		.size	ISR_CLOCK_handler, .-ISR_CLOCK_handler
- 111              		.section	.text.System_Setup,"ax",%progbits
- 112              		.align	2
- 113              		.global	System_Setup
- 114              		.thumb
- 115              		.thumb_func
- 116              		.type	System_Setup, %function
- 117              	System_Setup:
- 118              	.LFB65:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 6
-
-
+  79              		.align	2
+  80              		.global	System_Setup
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	System_Setup, %function
+  84              	System_Setup:
+  85              	.LFB65:
   48:SystemController.c ****     /* Enable global interrupts. */
- 119              		.loc 1 48 0
- 120              		.cfi_startproc
- 121              		@ args = 0, pretend = 0, frame = 0
- 122              		@ frame_needed = 0, uses_anonymous_args = 0
- 123 0000 08B5     		push	{r3, lr}
- 124              		.cfi_def_cfa_offset 8
- 125              		.cfi_offset 3, -8
- 126              		.cfi_offset 14, -4
+  86              		.loc 1 48 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 08B5     		push	{r3, lr}
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 3, -8
+  93              		.cfi_offset 14, -4
   50:SystemController.c ****     //System is off, set state to 0.
- 127              		.loc 1 50 0
- 128              		.syntax unified
- 129              	@ 50 "SystemController.c" 1
- 130 0002 62B6     		CPSIE   i
- 131              	@ 0 "" 2
+  94              		.loc 1 50 0
+  95              		.syntax unified
+  96              	@ 50 "SystemController.c" 1
+  97 0002 62B6     		CPSIE   i
+  98              	@ 0 "" 2
   52:SystemController.c ****     last_regu = 0;
- 132              		.loc 1 52 0
- 133              		.thumb
- 134              		.syntax unified
- 135 0004 0022     		movs	r2, #0
- 136 0006 094B     		ldr	r3, .L10
- 137 0008 1A70     		strb	r2, [r3]
+  99              		.loc 1 52 0
+ 100              		.thumb
+ 101              		.syntax unified
+ 102 0004 0022     		movs	r2, #0
+ 103 0006 094B     		ldr	r3, .L7
+ 104 0008 1A70     		strb	r2, [r3]
   53:SystemController.c ****        
- 138              		.loc 1 53 0
- 139 000a 0022     		movs	r2, #0
- 140 000c 084B     		ldr	r3, .L10+4
- 141 000e 1A60     		str	r2, [r3]	@ float
+ 105              		.loc 1 53 0
+ 106 000a 0022     		movs	r2, #0
+ 107 000c 084B     		ldr	r3, .L7+4
+ 108 000e 1A60     		str	r2, [r3]	@ float
   56:SystemController.c ****     
- 142              		.loc 1 56 0
- 143 0010 FFF7FEFF 		bl	UART_1_Start
- 144              	.LVL13:
+ 109              		.loc 1 56 0
+ 110 0010 FFF7FEFF 		bl	UART_1_Start
+ 111              	.LVL7:
   59:SystemController.c ****     
- 145              		.loc 1 59 0
- 146 0014 FFF7FEFF 		bl	Switch_Setup
- 147              	.LVL14:
+ 112              		.loc 1 59 0
+ 113 0014 FFF7FEFF 		bl	Switch_Setup
+ 114              	.LVL8:
   62:SystemController.c ****      
- 148              		.loc 1 62 0
- 149 0018 FFF7FEFF 		bl	Pump_Setup
- 150              	.LVL15:
+ 115              		.loc 1 62 0
+ 116 0018 FFF7FEFF 		bl	Pump_Setup
+ 117              	.LVL9:
   65:SystemController.c ****     
- 151              		.loc 1 65 0
- 152 001c FFF7FEFF 		bl	Amplifier_Setup
- 153              	.LVL16:
+ 118              		.loc 1 65 0
+ 119 001c FFF7FEFF 		bl	Amplifier_Setup
+ 120              	.LVL10:
   68:SystemController.c ****             
- 154              		.loc 1 68 0
- 155 0020 044B     		ldr	r3, .L10+8
- 156 0022 1888     		ldrh	r0, [r3]
- 157 0024 FFF7FEFF 		bl	Temperature_Setup
- 158              	.LVL17:
- 159 0028 08BD     		pop	{r3, pc}
- 160              	.L11:
- 161 002a 00BF     		.align	2
- 162              	.L10:
- 163 002c 00000000 		.word	Switch_State
- 164 0030 00000000 		.word	last_regu
- 165 0034 00000000 		.word	.LANCHOR0
- 166              		.cfi_endproc
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 7
+ 121              		.loc 1 68 0
+ 122 0020 044B     		ldr	r3, .L7+8
+ 123 0022 1888     		ldrh	r0, [r3]
+ 124 0024 FFF7FEFF 		bl	Temperature_Setup
+ 125              	.LVL11:
+ 126 0028 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 6
 
 
- 167              	.LFE65:
- 168              		.size	System_Setup, .-System_Setup
- 169              		.section	.text.main,"ax",%progbits
- 170              		.align	2
- 171              		.global	main
- 172              		.thumb
- 173              		.thumb_func
- 174              		.type	main, %function
- 175              	main:
- 176              	.LFB64:
+ 127              	.L8:
+ 128 002a 00BF     		.align	2
+ 129              	.L7:
+ 130 002c 00000000 		.word	Switch_State
+ 131 0030 00000000 		.word	last_regu
+ 132 0034 00000000 		.word	.LANCHOR0
+ 133              		.cfi_endproc
+ 134              	.LFE65:
+ 135              		.size	System_Setup, .-System_Setup
+ 136              		.section	.text.main,"ax",%progbits
+ 137              		.align	2
+ 138              		.global	main
+ 139              		.thumb
+ 140              		.thumb_func
+ 141              		.type	main, %function
+ 142              	main:
+ 143              	.LFB64:
   31:SystemController.c **** 
- 177              		.loc 1 31 0
- 178              		.cfi_startproc
- 179              		@ Volatile: function does not return.
- 180              		@ args = 0, pretend = 0, frame = 0
- 181              		@ frame_needed = 0, uses_anonymous_args = 0
- 182 0000 08B5     		push	{r3, lr}
- 183              		.cfi_def_cfa_offset 8
- 184              		.cfi_offset 3, -8
- 185              		.cfi_offset 14, -4
+ 144              		.loc 1 31 0
+ 145              		.cfi_startproc
+ 146              		@ Volatile: function does not return.
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 08B5     		push	{r3, lr}
+ 150              		.cfi_def_cfa_offset 8
+ 151              		.cfi_offset 3, -8
+ 152              		.cfi_offset 14, -4
   35:SystemController.c **** 
- 186              		.loc 1 35 0
- 187 0002 FFF7FEFF 		bl	System_Setup
- 188              	.LVL18:
- 189              	.L13:
- 190 0006 FEE7     		b	.L13
- 191              		.cfi_endproc
- 192              	.LFE64:
- 193              		.size	main, .-main
- 194              		.section	.text.System_On,"ax",%progbits
- 195              		.align	2
- 196              		.global	System_On
- 197              		.thumb
- 198              		.thumb_func
- 199              		.type	System_On, %function
- 200              	System_On:
- 201              	.LFB66:
+ 153              		.loc 1 35 0
+ 154 0002 FFF7FEFF 		bl	System_Setup
+ 155              	.LVL12:
+ 156              	.L10:
+ 157 0006 FEE7     		b	.L10
+ 158              		.cfi_endproc
+ 159              	.LFE64:
+ 160              		.size	main, .-main
+ 161              		.section	.text.System_On,"ax",%progbits
+ 162              		.align	2
+ 163              		.global	System_On
+ 164              		.thumb
+ 165              		.thumb_func
+ 166              		.type	System_On, %function
+ 167              	System_On:
+ 168              	.LFB66:
   76:SystemController.c ****     //Start up the amplifier to get new temperature conversion
- 202              		.loc 1 76 0
- 203              		.cfi_startproc
- 204              		@ args = 0, pretend = 0, frame = 0
- 205              		@ frame_needed = 0, uses_anonymous_args = 0
- 206 0000 08B5     		push	{r3, lr}
- 207              		.cfi_def_cfa_offset 8
- 208              		.cfi_offset 3, -8
- 209              		.cfi_offset 14, -4
+ 169              		.loc 1 76 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173 0000 08B5     		push	{r3, lr}
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 3, -8
+ 176              		.cfi_offset 14, -4
   78:SystemController.c ****     
- 210              		.loc 1 78 0
- 211 0002 FFF7FEFF 		bl	Amplifier_Startup
- 212              	.LVL19:
+ 177              		.loc 1 78 0
+ 178 0002 FFF7FEFF 		bl	Amplifier_Startup
+ 179              	.LVL13:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 7
+
+
   81:SystemController.c ****     
- 213              		.loc 1 81 0
- 214 0006 40F6C410 		movw	r0, #2500
- 215 000a FFF7FEFF 		bl	Pump_Startup
- 216              	.LVL20:
+ 180              		.loc 1 81 0
+ 181 0006 40F6C410 		movw	r0, #2500
+ 182 000a FFF7FEFF 		bl	Pump_Startup
+ 183              	.LVL14:
   84:SystemController.c ****     Clock_TempSampling_Start();
- 217              		.loc 1 84 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 8
-
-
- 218 000e FFF7FEFF 		bl	Temp_sample_counter_Start
- 219              	.LVL21:
+ 184              		.loc 1 84 0
+ 185 000e FFF7FEFF 		bl	Temp_sample_counter_Start
+ 186              	.LVL15:
   85:SystemController.c ****     isr_clock_StartEx(ISR_CLOCK_handler); 
- 220              		.loc 1 85 0
- 221 0012 FFF7FEFF 		bl	Clock_TempSampling_Start
- 222              	.LVL22:
+ 187              		.loc 1 85 0
+ 188 0012 FFF7FEFF 		bl	Clock_TempSampling_Start
+ 189              	.LVL16:
   86:SystemController.c ****     
- 223              		.loc 1 86 0
- 224 0016 0348     		ldr	r0, .L17
- 225 0018 FFF7FEFF 		bl	isr_clock_StartEx
- 226              	.LVL23:
+ 190              		.loc 1 86 0
+ 191 0016 0348     		ldr	r0, .L14
+ 192 0018 FFF7FEFF 		bl	isr_clock_StartEx
+ 193              	.LVL17:
   89:SystemController.c **** }
- 227              		.loc 1 89 0
- 228 001c FFF7FEFF 		bl	Turn_ON
- 229              	.LVL24:
- 230 0020 08BD     		pop	{r3, pc}
- 231              	.L18:
- 232 0022 00BF     		.align	2
- 233              	.L17:
- 234 0024 00000000 		.word	ISR_CLOCK_handler
- 235              		.cfi_endproc
- 236              	.LFE66:
- 237              		.size	System_On, .-System_On
- 238              		.section	.text.System_Off,"ax",%progbits
- 239              		.align	2
- 240              		.global	System_Off
- 241              		.thumb
- 242              		.thumb_func
- 243              		.type	System_Off, %function
- 244              	System_Off:
- 245              	.LFB67:
+ 194              		.loc 1 89 0
+ 195 001c FFF7FEFF 		bl	Turn_ON
+ 196              	.LVL18:
+ 197 0020 08BD     		pop	{r3, pc}
+ 198              	.L15:
+ 199 0022 00BF     		.align	2
+ 200              	.L14:
+ 201 0024 00000000 		.word	ISR_CLOCK_handler
+ 202              		.cfi_endproc
+ 203              	.LFE66:
+ 204              		.size	System_On, .-System_On
+ 205              		.section	.text.System_Off,"ax",%progbits
+ 206              		.align	2
+ 207              		.global	System_Off
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.type	System_Off, %function
+ 211              	System_Off:
+ 212              	.LFB67:
   94:SystemController.c ****     //Stop the clock interrupt routine
- 246              		.loc 1 94 0
- 247              		.cfi_startproc
- 248              		@ args = 0, pretend = 0, frame = 0
- 249              		@ frame_needed = 0, uses_anonymous_args = 0
- 250 0000 08B5     		push	{r3, lr}
- 251              		.cfi_def_cfa_offset 8
- 252              		.cfi_offset 3, -8
- 253              		.cfi_offset 14, -4
+ 213              		.loc 1 94 0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217 0000 08B5     		push	{r3, lr}
+ 218              		.cfi_def_cfa_offset 8
+ 219              		.cfi_offset 3, -8
+ 220              		.cfi_offset 14, -4
   96:SystemController.c ****     
- 254              		.loc 1 96 0
- 255 0002 FFF7FEFF 		bl	isr_clock_Disable
- 256              	.LVL25:
+ 221              		.loc 1 96 0
+ 222 0002 FFF7FEFF 		bl	isr_clock_Disable
+ 223              	.LVL19:
   99:SystemController.c ****     Clock_TempSampling_Stop();
- 257              		.loc 1 99 0
- 258 0006 FFF7FEFF 		bl	Temp_sample_counter_Stop
- 259              	.LVL26:
+ 224              		.loc 1 99 0
+ 225 0006 FFF7FEFF 		bl	Temp_sample_counter_Stop
+ 226              	.LVL20:
  100:SystemController.c ****     
- 260              		.loc 1 100 0
- 261 000a FFF7FEFF 		bl	Clock_TempSampling_Stop
- 262              	.LVL27:
+ 227              		.loc 1 100 0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 8
+
+
+ 228 000a FFF7FEFF 		bl	Clock_TempSampling_Stop
+ 229              	.LVL21:
  103:SystemController.c ****     
- 263              		.loc 1 103 0
- 264 000e FFF7FEFF 		bl	Pump_Shutdown
- 265              	.LVL28:
+ 230              		.loc 1 103 0
+ 231 000e FFF7FEFF 		bl	Pump_Shutdown
+ 232              	.LVL22:
  106:SystemController.c ****     
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 9
-
-
- 266              		.loc 1 106 0
- 267 0012 FFF7FEFF 		bl	Amplifier_Shutdown
- 268              	.LVL29:
+ 233              		.loc 1 106 0
+ 234 0012 FFF7FEFF 		bl	Amplifier_Shutdown
+ 235              	.LVL23:
  109:SystemController.c ****     
- 269              		.loc 1 109 0
- 270 0016 FFF7FEFF 		bl	Turn_OFF
- 271              	.LVL30:
- 272 001a 08BD     		pop	{r3, pc}
- 273              		.cfi_endproc
- 274              	.LFE67:
- 275              		.size	System_Off, .-System_Off
- 276              		.section	.text.System_newState,"ax",%progbits
- 277              		.align	2
- 278              		.global	System_newState
- 279              		.thumb
- 280              		.thumb_func
- 281              		.type	System_newState, %function
- 282              	System_newState:
- 283              	.LFB68:
+ 236              		.loc 1 109 0
+ 237 0016 FFF7FEFF 		bl	Turn_OFF
+ 238              	.LVL24:
+ 239 001a 08BD     		pop	{r3, pc}
+ 240              		.cfi_endproc
+ 241              	.LFE67:
+ 242              		.size	System_Off, .-System_Off
+ 243              		.section	.text.System_newState,"ax",%progbits
+ 244              		.align	2
+ 245              		.global	System_newState
+ 246              		.thumb
+ 247              		.thumb_func
+ 248              		.type	System_newState, %function
+ 249              	System_newState:
+ 250              	.LFB68:
  117:SystemController.c ****     Switch_State = switchstate;
- 284              		.loc 1 117 0
- 285              		.cfi_startproc
- 286              		@ args = 0, pretend = 0, frame = 0
- 287              		@ frame_needed = 0, uses_anonymous_args = 0
- 288              	.LVL31:
- 289 0000 08B5     		push	{r3, lr}
- 290              		.cfi_def_cfa_offset 8
- 291              		.cfi_offset 3, -8
- 292              		.cfi_offset 14, -4
+ 251              		.loc 1 117 0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255              	.LVL25:
+ 256 0000 08B5     		push	{r3, lr}
+ 257              		.cfi_def_cfa_offset 8
+ 258              		.cfi_offset 3, -8
+ 259              		.cfi_offset 14, -4
  118:SystemController.c ****     
- 293              		.loc 1 118 0
- 294 0002 044B     		ldr	r3, .L25
- 295 0004 1870     		strb	r0, [r3]
+ 260              		.loc 1 118 0
+ 261 0002 044B     		ldr	r3, .L22
+ 262 0004 1870     		strb	r0, [r3]
  120:SystemController.c ****     {
- 296              		.loc 1 120 0
- 297 0006 10B1     		cbz	r0, .L22
+ 263              		.loc 1 120 0
+ 264 0006 10B1     		cbz	r0, .L19
  123:SystemController.c ****         
- 298              		.loc 1 123 0
- 299 0008 FFF7FEFF 		bl	System_On
- 300              	.LVL32:
- 301 000c 08BD     		pop	{r3, pc}
- 302              	.LVL33:
- 303              	.L22:
+ 265              		.loc 1 123 0
+ 266 0008 FFF7FEFF 		bl	System_On
+ 267              	.LVL26:
+ 268 000c 08BD     		pop	{r3, pc}
+ 269              	.LVL27:
+ 270              	.L19:
  128:SystemController.c ****     }
- 304              		.loc 1 128 0
- 305 000e FFF7FEFF 		bl	System_Off
- 306              	.LVL34:
- 307 0012 08BD     		pop	{r3, pc}
- 308              	.L26:
- 309              		.align	2
- 310              	.L25:
- 311 0014 00000000 		.word	Switch_State
- 312              		.cfi_endproc
- 313              	.LFE68:
- 314              		.size	System_newState, .-System_newState
- 315              		.comm	regu,4,4
- 316              		.comm	last_regu,4,4
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 10
+ 271              		.loc 1 128 0
+ 272 000e FFF7FEFF 		bl	System_Off
+ 273              	.LVL28:
+ 274 0012 08BD     		pop	{r3, pc}
+ 275              	.L23:
+ 276              		.align	2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 9
 
 
- 317              		.global	ref_res
- 318              		.comm	rtd_ratio,2,2
- 319              		.comm	Switch_State,1,1
- 320              		.data
- 321              		.align	1
- 322              		.set	.LANCHOR0,. + 0
- 323              		.type	ref_res, %object
- 324              		.size	ref_res, 2
- 325              	ref_res:
- 326 0000 CC10     		.short	4300
- 327              		.section	.rodata.str1.4,"aMS",%progbits,1
- 328              		.align	2
- 329              	.LC0:
- 330 0000 54656D70 		.ascii	"Temperature: %f\012\015\000"
- 330      65726174 
- 330      7572653A 
- 330      2025660A 
- 330      0D00
- 331              		.text
- 332              	.Letext0:
- 333              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 334              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 335              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 336              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
- 337              		.file 6 "Amplifier.h"
- 338              		.file 7 "Temperature.h"
- 339              		.file 8 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 340              		.file 9 "Generated_Source\\PSoC5/UART_1.h"
- 341              		.file 10 "Regulation.h"
- 342              		.file 11 "PumpCtrl.h"
- 343              		.file 12 "Generated_Source\\PSoC5/Temp_sample_counter.h"
- 344              		.file 13 "switch.h"
- 345              		.file 14 "Generated_Source\\PSoC5/Clock_TempSampling.h"
- 346              		.file 15 "Generated_Source\\PSoC5/isr_clock.h"
- 347              		.file 16 "LED.h"
- 348              		.section	.debug_info,"",%progbits
- 349              	.Ldebug_info0:
- 350 0000 42040000 		.4byte	0x442
- 351 0004 0400     		.2byte	0x4
- 352 0006 00000000 		.4byte	.Ldebug_abbrev0
- 353 000a 04       		.byte	0x4
- 354 000b 01       		.uleb128 0x1
- 355 000c 87010000 		.4byte	.LASF56
- 356 0010 0C       		.byte	0xc
- 357 0011 C3030000 		.4byte	.LASF57
- 358 0015 C8000000 		.4byte	.LASF58
- 359 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 360 001d 00000000 		.4byte	0
- 361 0021 00000000 		.4byte	.Ldebug_line0
- 362 0025 02       		.uleb128 0x2
- 363 0026 04       		.byte	0x4
- 364 0027 04       		.byte	0x4
- 365 0028 61010000 		.4byte	.LASF0
- 366 002c 02       		.uleb128 0x2
- 367 002d 01       		.byte	0x1
- 368 002e 06       		.byte	0x6
- 369 002f 24030000 		.4byte	.LASF1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 11
+ 277              	.L22:
+ 278 0014 00000000 		.word	Switch_State
+ 279              		.cfi_endproc
+ 280              	.LFE68:
+ 281              		.size	System_newState, .-System_newState
+ 282              		.comm	regu,4,4
+ 283              		.comm	last_regu,4,4
+ 284              		.global	ref_res
+ 285              		.comm	rtd_ratio,2,2
+ 286              		.comm	Switch_State,1,1
+ 287              		.data
+ 288              		.align	1
+ 289              		.set	.LANCHOR0,. + 0
+ 290              		.type	ref_res, %object
+ 291              		.size	ref_res, 2
+ 292              	ref_res:
+ 293 0000 CC10     		.short	4300
+ 294              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 295              		.align	2
+ 296              	.LC0:
+ 297 0000 54656D70 		.ascii	"Temperature: %f\012\015\000"
+ 297      65726174 
+ 297      7572653A 
+ 297      2025660A 
+ 297      0D00
+ 298              		.text
+ 299              	.Letext0:
+ 300              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 301              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 302              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 303              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 304              		.file 6 "Amplifier.h"
+ 305              		.file 7 "Temperature.h"
+ 306              		.file 8 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 307              		.file 9 "Generated_Source\\PSoC5/UART_1.h"
+ 308              		.file 10 "Generated_Source\\PSoC5/Temp_sample_counter.h"
+ 309              		.file 11 "switch.h"
+ 310              		.file 12 "PumpCtrl.h"
+ 311              		.file 13 "Generated_Source\\PSoC5/Clock_TempSampling.h"
+ 312              		.file 14 "Generated_Source\\PSoC5/isr_clock.h"
+ 313              		.file 15 "LED.h"
+ 314              		.section	.debug_info,"",%progbits
+ 315              	.Ldebug_info0:
+ 316 0000 03040000 		.4byte	0x403
+ 317 0004 0400     		.2byte	0x4
+ 318 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 319 000a 04       		.byte	0x4
+ 320 000b 01       		.uleb128 0x1
+ 321 000c 7C010000 		.4byte	.LASF54
+ 322 0010 0C       		.byte	0xc
+ 323 0011 AA030000 		.4byte	.LASF55
+ 324 0015 C8000000 		.4byte	.LASF56
+ 325 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 326 001d 00000000 		.4byte	0
+ 327 0021 00000000 		.4byte	.Ldebug_line0
+ 328 0025 02       		.uleb128 0x2
+ 329 0026 01       		.byte	0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 10
 
 
- 370 0033 02       		.uleb128 0x2
- 371 0034 01       		.byte	0x1
- 372 0035 08       		.byte	0x8
- 373 0036 79010000 		.4byte	.LASF2
- 374 003a 02       		.uleb128 0x2
- 375 003b 02       		.byte	0x2
- 376 003c 05       		.byte	0x5
- 377 003d 60030000 		.4byte	.LASF3
- 378 0041 02       		.uleb128 0x2
- 379 0042 02       		.byte	0x2
- 380 0043 07       		.byte	0x7
- 381 0044 35020000 		.4byte	.LASF4
- 382 0048 03       		.uleb128 0x3
- 383 0049 7A000000 		.4byte	.LASF10
- 384 004d 02       		.byte	0x2
- 385 004e 3F       		.byte	0x3f
- 386 004f 53000000 		.4byte	0x53
- 387 0053 02       		.uleb128 0x2
- 388 0054 04       		.byte	0x4
- 389 0055 05       		.byte	0x5
- 390 0056 8B030000 		.4byte	.LASF5
- 391 005a 02       		.uleb128 0x2
- 392 005b 04       		.byte	0x4
- 393 005c 07       		.byte	0x7
- 394 005d 15020000 		.4byte	.LASF6
- 395 0061 02       		.uleb128 0x2
- 396 0062 08       		.byte	0x8
- 397 0063 05       		.byte	0x5
- 398 0064 FE020000 		.4byte	.LASF7
- 399 0068 02       		.uleb128 0x2
- 400 0069 08       		.byte	0x8
- 401 006a 07       		.byte	0x7
- 402 006b EF030000 		.4byte	.LASF8
- 403 006f 04       		.uleb128 0x4
- 404 0070 04       		.byte	0x4
- 405 0071 05       		.byte	0x5
- 406 0072 696E7400 		.ascii	"int\000"
- 407 0076 02       		.uleb128 0x2
- 408 0077 04       		.byte	0x4
- 409 0078 07       		.byte	0x7
- 410 0079 94020000 		.4byte	.LASF9
- 411 007d 03       		.uleb128 0x3
- 412 007e 59010000 		.4byte	.LASF11
- 413 0082 03       		.byte	0x3
- 414 0083 2C       		.byte	0x2c
- 415 0084 48000000 		.4byte	0x48
- 416 0088 05       		.uleb128 0x5
- 417 0089 6F030000 		.4byte	.LASF12
- 418 008d 04       		.byte	0x4
- 419 008e E901     		.2byte	0x1e9
- 420 0090 33000000 		.4byte	0x33
- 421 0094 05       		.uleb128 0x5
- 422 0095 80020000 		.4byte	.LASF13
- 423 0099 04       		.byte	0x4
- 424 009a EA01     		.2byte	0x1ea
- 425 009c 41000000 		.4byte	0x41
- 426 00a0 02       		.uleb128 0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 12
+ 330 0027 06       		.byte	0x6
+ 331 0028 19030000 		.4byte	.LASF0
+ 332 002c 02       		.uleb128 0x2
+ 333 002d 01       		.byte	0x1
+ 334 002e 08       		.byte	0x8
+ 335 002f 6E010000 		.4byte	.LASF1
+ 336 0033 02       		.uleb128 0x2
+ 337 0034 02       		.byte	0x2
+ 338 0035 05       		.byte	0x5
+ 339 0036 55030000 		.4byte	.LASF2
+ 340 003a 02       		.uleb128 0x2
+ 341 003b 02       		.byte	0x2
+ 342 003c 07       		.byte	0x7
+ 343 003d 2A020000 		.4byte	.LASF3
+ 344 0041 03       		.uleb128 0x3
+ 345 0042 7A000000 		.4byte	.LASF9
+ 346 0046 02       		.byte	0x2
+ 347 0047 3F       		.byte	0x3f
+ 348 0048 4C000000 		.4byte	0x4c
+ 349 004c 02       		.uleb128 0x2
+ 350 004d 04       		.byte	0x4
+ 351 004e 05       		.byte	0x5
+ 352 004f 72030000 		.4byte	.LASF4
+ 353 0053 02       		.uleb128 0x2
+ 354 0054 04       		.byte	0x4
+ 355 0055 07       		.byte	0x7
+ 356 0056 0A020000 		.4byte	.LASF5
+ 357 005a 02       		.uleb128 0x2
+ 358 005b 08       		.byte	0x8
+ 359 005c 05       		.byte	0x5
+ 360 005d F3020000 		.4byte	.LASF6
+ 361 0061 02       		.uleb128 0x2
+ 362 0062 08       		.byte	0x8
+ 363 0063 07       		.byte	0x7
+ 364 0064 D6030000 		.4byte	.LASF7
+ 365 0068 04       		.uleb128 0x4
+ 366 0069 04       		.byte	0x4
+ 367 006a 05       		.byte	0x5
+ 368 006b 696E7400 		.ascii	"int\000"
+ 369 006f 02       		.uleb128 0x2
+ 370 0070 04       		.byte	0x4
+ 371 0071 07       		.byte	0x7
+ 372 0072 89020000 		.4byte	.LASF8
+ 373 0076 03       		.uleb128 0x3
+ 374 0077 4E010000 		.4byte	.LASF10
+ 375 007b 03       		.byte	0x3
+ 376 007c 2C       		.byte	0x2c
+ 377 007d 41000000 		.4byte	0x41
+ 378 0081 05       		.uleb128 0x5
+ 379 0082 64030000 		.4byte	.LASF11
+ 380 0086 04       		.byte	0x4
+ 381 0087 E901     		.2byte	0x1e9
+ 382 0089 2C000000 		.4byte	0x2c
+ 383 008d 05       		.uleb128 0x5
+ 384 008e 75020000 		.4byte	.LASF12
+ 385 0092 04       		.byte	0x4
+ 386 0093 EA01     		.2byte	0x1ea
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 11
 
 
- 427 00a1 08       		.byte	0x8
- 428 00a2 04       		.byte	0x4
- 429 00a3 5D020000 		.4byte	.LASF14
- 430 00a7 02       		.uleb128 0x2
- 431 00a8 01       		.byte	0x1
- 432 00a9 08       		.byte	0x8
- 433 00aa 0C030000 		.4byte	.LASF15
- 434 00ae 02       		.uleb128 0x2
- 435 00af 08       		.byte	0x8
- 436 00b0 04       		.byte	0x4
- 437 00b1 94030000 		.4byte	.LASF16
- 438 00b5 02       		.uleb128 0x2
- 439 00b6 04       		.byte	0x4
- 440 00b7 07       		.byte	0x7
- 441 00b8 F5020000 		.4byte	.LASF17
- 442 00bc 06       		.uleb128 0x6
- 443 00bd 06040000 		.4byte	.LASF23
- 444 00c1 01       		.byte	0x1
- 445 00c2 84       		.byte	0x84
- 446 00c3 00000000 		.4byte	.LFB69
- 447 00c7 6C000000 		.4byte	.LFE69-.LFB69
- 448 00cb 01       		.uleb128 0x1
- 449 00cc 9C       		.byte	0x9c
- 450 00cd 6D010000 		.4byte	0x16d
- 451 00d1 07       		.uleb128 0x7
- 452 00d2 A1020000 		.4byte	.LASF18
- 453 00d6 01       		.byte	0x1
- 454 00d7 8E       		.byte	0x8e
- 455 00d8 6D010000 		.4byte	0x16d
- 456 00dc 02       		.uleb128 0x2
- 457 00dd 91       		.byte	0x91
- 458 00de 44       		.sleb128 -60
- 459 00df 08       		.uleb128 0x8
- 460 00e0 6F020000 		.4byte	.LASF19
- 461 00e4 01       		.byte	0x1
- 462 00e5 90       		.byte	0x90
- 463 00e6 25000000 		.4byte	0x25
- 464 00ea 00000000 		.4byte	.LLST0
- 465 00ee 09       		.uleb128 0x9
- 466 00ef 08000000 		.4byte	.LVL0
- 467 00f3 32030000 		.4byte	0x332
- 468 00f7 09       		.uleb128 0x9
- 469 00f8 10000000 		.4byte	.LVL1
- 470 00fc 3D030000 		.4byte	0x33d
- 471 0100 09       		.uleb128 0x9
- 472 0101 14000000 		.4byte	.LVL2
- 473 0105 48030000 		.4byte	0x348
- 474 0109 0A       		.uleb128 0xa
- 475 010a 26000000 		.4byte	.LVL5
- 476 010e 53030000 		.4byte	0x353
- 477 0112 26010000 		.4byte	0x126
- 478 0116 0B       		.uleb128 0xb
- 479 0117 01       		.uleb128 0x1
- 480 0118 50       		.byte	0x50
- 481 0119 02       		.uleb128 0x2
- 482 011a 91       		.byte	0x91
- 483 011b 44       		.sleb128 -60
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 13
+ 387 0095 3A000000 		.4byte	0x3a
+ 388 0099 02       		.uleb128 0x2
+ 389 009a 04       		.byte	0x4
+ 390 009b 04       		.byte	0x4
+ 391 009c 56010000 		.4byte	.LASF13
+ 392 00a0 02       		.uleb128 0x2
+ 393 00a1 08       		.byte	0x8
+ 394 00a2 04       		.byte	0x4
+ 395 00a3 52020000 		.4byte	.LASF14
+ 396 00a7 02       		.uleb128 0x2
+ 397 00a8 01       		.byte	0x1
+ 398 00a9 08       		.byte	0x8
+ 399 00aa 01030000 		.4byte	.LASF15
+ 400 00ae 02       		.uleb128 0x2
+ 401 00af 08       		.byte	0x8
+ 402 00b0 04       		.byte	0x4
+ 403 00b1 7B030000 		.4byte	.LASF16
+ 404 00b5 02       		.uleb128 0x2
+ 405 00b6 04       		.byte	0x4
+ 406 00b7 07       		.byte	0x7
+ 407 00b8 EA020000 		.4byte	.LASF17
+ 408 00bc 06       		.uleb128 0x6
+ 409 00bd ED030000 		.4byte	.LASF23
+ 410 00c1 01       		.byte	0x1
+ 411 00c2 84       		.byte	0x84
+ 412 00c3 00000000 		.4byte	.LFB69
+ 413 00c7 3C000000 		.4byte	.LFE69-.LFB69
+ 414 00cb 01       		.uleb128 0x1
+ 415 00cc 9C       		.byte	0x9c
+ 416 00cd 44010000 		.4byte	0x144
+ 417 00d1 07       		.uleb128 0x7
+ 418 00d2 96020000 		.4byte	.LASF18
+ 419 00d6 01       		.byte	0x1
+ 420 00d7 8E       		.byte	0x8e
+ 421 00d8 44010000 		.4byte	0x144
+ 422 00dc 02       		.uleb128 0x2
+ 423 00dd 91       		.byte	0x91
+ 424 00de 44       		.sleb128 -60
+ 425 00df 08       		.uleb128 0x8
+ 426 00e0 64020000 		.4byte	.LASF19
+ 427 00e4 01       		.byte	0x1
+ 428 00e5 90       		.byte	0x90
+ 429 00e6 99000000 		.4byte	0x99
+ 430 00ea 00000000 		.4byte	.LLST0
+ 431 00ee 09       		.uleb128 0x9
+ 432 00ef 08000000 		.4byte	.LVL0
+ 433 00f3 09030000 		.4byte	0x309
+ 434 00f7 09       		.uleb128 0x9
+ 435 00f8 10000000 		.4byte	.LVL1
+ 436 00fc 14030000 		.4byte	0x314
+ 437 0100 09       		.uleb128 0x9
+ 438 0101 14000000 		.4byte	.LVL2
+ 439 0105 1F030000 		.4byte	0x31f
+ 440 0109 0A       		.uleb128 0xa
+ 441 010a 24000000 		.4byte	.LVL4
+ 442 010e 2A030000 		.4byte	0x32a
+ 443 0112 26010000 		.4byte	0x126
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 12
 
 
- 484 011c 0B       		.uleb128 0xb
- 485 011d 01       		.uleb128 0x1
- 486 011e 51       		.byte	0x51
- 487 011f 05       		.uleb128 0x5
- 488 0120 03       		.byte	0x3
- 489 0121 00000000 		.4byte	.LC0
- 490 0125 00       		.byte	0
- 491 0126 0A       		.uleb128 0xa
- 492 0127 2C000000 		.4byte	.LVL6
- 493 012b 5E030000 		.4byte	0x35e
- 494 012f 3A010000 		.4byte	0x13a
- 495 0133 0B       		.uleb128 0xb
- 496 0134 01       		.uleb128 0x1
- 497 0135 50       		.byte	0x50
- 498 0136 02       		.uleb128 0x2
- 499 0137 91       		.byte	0x91
- 500 0138 44       		.sleb128 -60
- 501 0139 00       		.byte	0
- 502 013a 0A       		.uleb128 0xa
- 503 013b 32000000 		.4byte	.LVL7
- 504 013f 69030000 		.4byte	0x369
- 505 0143 4F010000 		.4byte	0x14f
- 506 0147 0B       		.uleb128 0xb
- 507 0148 01       		.uleb128 0x1
- 508 0149 50       		.byte	0x50
- 509 014a 03       		.uleb128 0x3
- 510 014b F5       		.byte	0xf5
- 511 014c 04       		.uleb128 0x4
- 512 014d 25       		.uleb128 0x25
- 513 014e 00       		.byte	0
- 514 014f 0A       		.uleb128 0xa
- 515 0150 4C000000 		.4byte	.LVL11
- 516 0154 74030000 		.4byte	0x374
- 517 0158 63010000 		.4byte	0x163
- 518 015c 0B       		.uleb128 0xb
- 519 015d 01       		.uleb128 0x1
- 520 015e 50       		.byte	0x50
- 521 015f 02       		.uleb128 0x2
- 522 0160 74       		.byte	0x74
- 523 0161 00       		.sleb128 0
- 524 0162 00       		.byte	0
- 525 0163 09       		.uleb128 0x9
- 526 0164 58000000 		.4byte	.LVL12
- 527 0168 7F030000 		.4byte	0x37f
- 528 016c 00       		.byte	0
- 529 016d 0C       		.uleb128 0xc
- 530 016e A7000000 		.4byte	0xa7
- 531 0172 7D010000 		.4byte	0x17d
- 532 0176 0D       		.uleb128 0xd
- 533 0177 B5000000 		.4byte	0xb5
- 534 017b 31       		.byte	0x31
- 535 017c 00       		.byte	0
- 536 017d 0E       		.uleb128 0xe
- 537 017e 39030000 		.4byte	.LASF20
- 538 0182 01       		.byte	0x1
- 539 0183 2F       		.byte	0x2f
- 540 0184 00000000 		.4byte	.LFB65
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 14
+ 444 0116 0B       		.uleb128 0xb
+ 445 0117 01       		.uleb128 0x1
+ 446 0118 50       		.byte	0x50
+ 447 0119 02       		.uleb128 0x2
+ 448 011a 91       		.byte	0x91
+ 449 011b 44       		.sleb128 -60
+ 450 011c 0B       		.uleb128 0xb
+ 451 011d 01       		.uleb128 0x1
+ 452 011e 51       		.byte	0x51
+ 453 011f 05       		.uleb128 0x5
+ 454 0120 03       		.byte	0x3
+ 455 0121 00000000 		.4byte	.LC0
+ 456 0125 00       		.byte	0
+ 457 0126 0A       		.uleb128 0xa
+ 458 0127 2A000000 		.4byte	.LVL5
+ 459 012b 35030000 		.4byte	0x335
+ 460 012f 3A010000 		.4byte	0x13a
+ 461 0133 0B       		.uleb128 0xb
+ 462 0134 01       		.uleb128 0x1
+ 463 0135 50       		.byte	0x50
+ 464 0136 02       		.uleb128 0x2
+ 465 0137 91       		.byte	0x91
+ 466 0138 44       		.sleb128 -60
+ 467 0139 00       		.byte	0
+ 468 013a 09       		.uleb128 0x9
+ 469 013b 2E000000 		.4byte	.LVL6
+ 470 013f 40030000 		.4byte	0x340
+ 471 0143 00       		.byte	0
+ 472 0144 0C       		.uleb128 0xc
+ 473 0145 A7000000 		.4byte	0xa7
+ 474 0149 54010000 		.4byte	0x154
+ 475 014d 0D       		.uleb128 0xd
+ 476 014e B5000000 		.4byte	0xb5
+ 477 0152 31       		.byte	0x31
+ 478 0153 00       		.byte	0
+ 479 0154 0E       		.uleb128 0xe
+ 480 0155 2E030000 		.4byte	.LASF20
+ 481 0159 01       		.byte	0x1
+ 482 015a 2F       		.byte	0x2f
+ 483 015b 00000000 		.4byte	.LFB65
+ 484 015f 38000000 		.4byte	.LFE65-.LFB65
+ 485 0163 01       		.uleb128 0x1
+ 486 0164 9C       		.byte	0x9c
+ 487 0165 97010000 		.4byte	0x197
+ 488 0169 09       		.uleb128 0x9
+ 489 016a 14000000 		.4byte	.LVL7
+ 490 016e 4B030000 		.4byte	0x34b
+ 491 0172 09       		.uleb128 0x9
+ 492 0173 18000000 		.4byte	.LVL8
+ 493 0177 56030000 		.4byte	0x356
+ 494 017b 09       		.uleb128 0x9
+ 495 017c 1C000000 		.4byte	.LVL9
+ 496 0180 61030000 		.4byte	0x361
+ 497 0184 09       		.uleb128 0x9
+ 498 0185 20000000 		.4byte	.LVL10
+ 499 0189 6C030000 		.4byte	0x36c
+ 500 018d 09       		.uleb128 0x9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 13
 
 
- 541 0188 38000000 		.4byte	.LFE65-.LFB65
- 542 018c 01       		.uleb128 0x1
- 543 018d 9C       		.byte	0x9c
- 544 018e C0010000 		.4byte	0x1c0
- 545 0192 09       		.uleb128 0x9
- 546 0193 14000000 		.4byte	.LVL13
- 547 0197 8A030000 		.4byte	0x38a
- 548 019b 09       		.uleb128 0x9
- 549 019c 18000000 		.4byte	.LVL14
- 550 01a0 95030000 		.4byte	0x395
- 551 01a4 09       		.uleb128 0x9
- 552 01a5 1C000000 		.4byte	.LVL15
- 553 01a9 A0030000 		.4byte	0x3a0
- 554 01ad 09       		.uleb128 0x9
- 555 01ae 20000000 		.4byte	.LVL16
- 556 01b2 AB030000 		.4byte	0x3ab
- 557 01b6 09       		.uleb128 0x9
- 558 01b7 28000000 		.4byte	.LVL17
- 559 01bb B6030000 		.4byte	0x3b6
- 560 01bf 00       		.byte	0
- 561 01c0 0F       		.uleb128 0xf
- 562 01c1 7B020000 		.4byte	.LASF59
- 563 01c5 01       		.byte	0x1
- 564 01c6 1E       		.byte	0x1e
- 565 01c7 6F000000 		.4byte	0x6f
- 566 01cb 00000000 		.4byte	.LFB64
- 567 01cf 08000000 		.4byte	.LFE64-.LFB64
- 568 01d3 01       		.uleb128 0x1
- 569 01d4 9C       		.byte	0x9c
- 570 01d5 E3010000 		.4byte	0x1e3
- 571 01d9 09       		.uleb128 0x9
- 572 01da 06000000 		.4byte	.LVL18
- 573 01de 7D010000 		.4byte	0x17d
- 574 01e2 00       		.byte	0
- 575 01e3 0E       		.uleb128 0xe
- 576 01e4 5E000000 		.4byte	.LASF21
- 577 01e8 01       		.byte	0x1
- 578 01e9 4B       		.byte	0x4b
- 579 01ea 00000000 		.4byte	.LFB66
- 580 01ee 28000000 		.4byte	.LFE66-.LFB66
- 581 01f2 01       		.uleb128 0x1
- 582 01f3 9C       		.byte	0x9c
- 583 01f4 49020000 		.4byte	0x249
- 584 01f8 09       		.uleb128 0x9
- 585 01f9 06000000 		.4byte	.LVL19
- 586 01fd C1030000 		.4byte	0x3c1
- 587 0201 0A       		.uleb128 0xa
- 588 0202 0E000000 		.4byte	.LVL20
- 589 0206 CC030000 		.4byte	0x3cc
- 590 020a 16020000 		.4byte	0x216
- 591 020e 0B       		.uleb128 0xb
- 592 020f 01       		.uleb128 0x1
- 593 0210 50       		.byte	0x50
- 594 0211 03       		.uleb128 0x3
- 595 0212 0A       		.byte	0xa
- 596 0213 C409     		.2byte	0x9c4
- 597 0215 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 15
+ 501 018e 28000000 		.4byte	.LVL11
+ 502 0192 77030000 		.4byte	0x377
+ 503 0196 00       		.byte	0
+ 504 0197 0F       		.uleb128 0xf
+ 505 0198 70020000 		.4byte	.LASF57
+ 506 019c 01       		.byte	0x1
+ 507 019d 1E       		.byte	0x1e
+ 508 019e 68000000 		.4byte	0x68
+ 509 01a2 00000000 		.4byte	.LFB64
+ 510 01a6 08000000 		.4byte	.LFE64-.LFB64
+ 511 01aa 01       		.uleb128 0x1
+ 512 01ab 9C       		.byte	0x9c
+ 513 01ac BA010000 		.4byte	0x1ba
+ 514 01b0 09       		.uleb128 0x9
+ 515 01b1 06000000 		.4byte	.LVL12
+ 516 01b5 54010000 		.4byte	0x154
+ 517 01b9 00       		.byte	0
+ 518 01ba 0E       		.uleb128 0xe
+ 519 01bb 5E000000 		.4byte	.LASF21
+ 520 01bf 01       		.byte	0x1
+ 521 01c0 4B       		.byte	0x4b
+ 522 01c1 00000000 		.4byte	.LFB66
+ 523 01c5 28000000 		.4byte	.LFE66-.LFB66
+ 524 01c9 01       		.uleb128 0x1
+ 525 01ca 9C       		.byte	0x9c
+ 526 01cb 20020000 		.4byte	0x220
+ 527 01cf 09       		.uleb128 0x9
+ 528 01d0 06000000 		.4byte	.LVL13
+ 529 01d4 82030000 		.4byte	0x382
+ 530 01d8 0A       		.uleb128 0xa
+ 531 01d9 0E000000 		.4byte	.LVL14
+ 532 01dd 8D030000 		.4byte	0x38d
+ 533 01e1 ED010000 		.4byte	0x1ed
+ 534 01e5 0B       		.uleb128 0xb
+ 535 01e6 01       		.uleb128 0x1
+ 536 01e7 50       		.byte	0x50
+ 537 01e8 03       		.uleb128 0x3
+ 538 01e9 0A       		.byte	0xa
+ 539 01ea C409     		.2byte	0x9c4
+ 540 01ec 00       		.byte	0
+ 541 01ed 09       		.uleb128 0x9
+ 542 01ee 12000000 		.4byte	.LVL15
+ 543 01f2 98030000 		.4byte	0x398
+ 544 01f6 09       		.uleb128 0x9
+ 545 01f7 16000000 		.4byte	.LVL16
+ 546 01fb A3030000 		.4byte	0x3a3
+ 547 01ff 0A       		.uleb128 0xa
+ 548 0200 1C000000 		.4byte	.LVL17
+ 549 0204 AE030000 		.4byte	0x3ae
+ 550 0208 16020000 		.4byte	0x216
+ 551 020c 0B       		.uleb128 0xb
+ 552 020d 01       		.uleb128 0x1
+ 553 020e 50       		.byte	0x50
+ 554 020f 05       		.uleb128 0x5
+ 555 0210 03       		.byte	0x3
+ 556 0211 00000000 		.4byte	ISR_CLOCK_handler
+ 557 0215 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 14
 
 
- 598 0216 09       		.uleb128 0x9
- 599 0217 12000000 		.4byte	.LVL21
- 600 021b D7030000 		.4byte	0x3d7
- 601 021f 09       		.uleb128 0x9
- 602 0220 16000000 		.4byte	.LVL22
- 603 0224 E2030000 		.4byte	0x3e2
- 604 0228 0A       		.uleb128 0xa
- 605 0229 1C000000 		.4byte	.LVL23
- 606 022d ED030000 		.4byte	0x3ed
- 607 0231 3F020000 		.4byte	0x23f
- 608 0235 0B       		.uleb128 0xb
- 609 0236 01       		.uleb128 0x1
- 610 0237 50       		.byte	0x50
- 611 0238 05       		.uleb128 0x5
- 612 0239 03       		.byte	0x3
- 613 023a 00000000 		.4byte	ISR_CLOCK_handler
- 614 023e 00       		.byte	0
- 615 023f 09       		.uleb128 0x9
- 616 0240 20000000 		.4byte	.LVL24
- 617 0244 F8030000 		.4byte	0x3f8
- 618 0248 00       		.byte	0
- 619 0249 0E       		.uleb128 0xe
- 620 024a A0030000 		.4byte	.LASF22
- 621 024e 01       		.byte	0x1
- 622 024f 5D       		.byte	0x5d
- 623 0250 00000000 		.4byte	.LFB67
- 624 0254 1C000000 		.4byte	.LFE67-.LFB67
- 625 0258 01       		.uleb128 0x1
- 626 0259 9C       		.byte	0x9c
- 627 025a 95020000 		.4byte	0x295
- 628 025e 09       		.uleb128 0x9
- 629 025f 06000000 		.4byte	.LVL25
- 630 0263 03040000 		.4byte	0x403
- 631 0267 09       		.uleb128 0x9
- 632 0268 0A000000 		.4byte	.LVL26
- 633 026c 0E040000 		.4byte	0x40e
- 634 0270 09       		.uleb128 0x9
- 635 0271 0E000000 		.4byte	.LVL27
- 636 0275 19040000 		.4byte	0x419
- 637 0279 09       		.uleb128 0x9
- 638 027a 12000000 		.4byte	.LVL28
- 639 027e 24040000 		.4byte	0x424
- 640 0282 09       		.uleb128 0x9
- 641 0283 16000000 		.4byte	.LVL29
- 642 0287 2F040000 		.4byte	0x42f
- 643 028b 09       		.uleb128 0x9
- 644 028c 1A000000 		.4byte	.LVL30
- 645 0290 3A040000 		.4byte	0x43a
- 646 0294 00       		.byte	0
- 647 0295 10       		.uleb128 0x10
- 648 0296 3E010000 		.4byte	.LASF24
- 649 029a 01       		.byte	0x1
- 650 029b 74       		.byte	0x74
- 651 029c 00000000 		.4byte	.LFB68
- 652 02a0 18000000 		.4byte	.LFE68-.LFB68
- 653 02a4 01       		.uleb128 0x1
- 654 02a5 9C       		.byte	0x9c
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 16
+ 558 0216 09       		.uleb128 0x9
+ 559 0217 20000000 		.4byte	.LVL18
+ 560 021b B9030000 		.4byte	0x3b9
+ 561 021f 00       		.byte	0
+ 562 0220 0E       		.uleb128 0xe
+ 563 0221 87030000 		.4byte	.LASF22
+ 564 0225 01       		.byte	0x1
+ 565 0226 5D       		.byte	0x5d
+ 566 0227 00000000 		.4byte	.LFB67
+ 567 022b 1C000000 		.4byte	.LFE67-.LFB67
+ 568 022f 01       		.uleb128 0x1
+ 569 0230 9C       		.byte	0x9c
+ 570 0231 6C020000 		.4byte	0x26c
+ 571 0235 09       		.uleb128 0x9
+ 572 0236 06000000 		.4byte	.LVL19
+ 573 023a C4030000 		.4byte	0x3c4
+ 574 023e 09       		.uleb128 0x9
+ 575 023f 0A000000 		.4byte	.LVL20
+ 576 0243 CF030000 		.4byte	0x3cf
+ 577 0247 09       		.uleb128 0x9
+ 578 0248 0E000000 		.4byte	.LVL21
+ 579 024c DA030000 		.4byte	0x3da
+ 580 0250 09       		.uleb128 0x9
+ 581 0251 12000000 		.4byte	.LVL22
+ 582 0255 E5030000 		.4byte	0x3e5
+ 583 0259 09       		.uleb128 0x9
+ 584 025a 16000000 		.4byte	.LVL23
+ 585 025e F0030000 		.4byte	0x3f0
+ 586 0262 09       		.uleb128 0x9
+ 587 0263 1A000000 		.4byte	.LVL24
+ 588 0267 FB030000 		.4byte	0x3fb
+ 589 026b 00       		.byte	0
+ 590 026c 10       		.uleb128 0x10
+ 591 026d 3E010000 		.4byte	.LASF24
+ 592 0271 01       		.byte	0x1
+ 593 0272 74       		.byte	0x74
+ 594 0273 00000000 		.4byte	.LFB68
+ 595 0277 18000000 		.4byte	.LFE68-.LFB68
+ 596 027b 01       		.uleb128 0x1
+ 597 027c 9C       		.byte	0x9c
+ 598 027d A3020000 		.4byte	0x2a3
+ 599 0281 11       		.uleb128 0x11
+ 600 0282 2B000000 		.4byte	.LASF58
+ 601 0286 01       		.byte	0x1
+ 602 0287 74       		.byte	0x74
+ 603 0288 81000000 		.4byte	0x81
+ 604 028c 13000000 		.4byte	.LLST1
+ 605 0290 09       		.uleb128 0x9
+ 606 0291 0C000000 		.4byte	.LVL26
+ 607 0295 BA010000 		.4byte	0x1ba
+ 608 0299 09       		.uleb128 0x9
+ 609 029a 12000000 		.4byte	.LVL28
+ 610 029e 20020000 		.4byte	0x220
+ 611 02a2 00       		.byte	0
+ 612 02a3 12       		.uleb128 0x12
+ 613 02a4 45020000 		.4byte	.LASF25
+ 614 02a8 05       		.byte	0x5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 15
 
 
- 655 02a6 CC020000 		.4byte	0x2cc
- 656 02aa 11       		.uleb128 0x11
- 657 02ab 2B000000 		.4byte	.LASF60
- 658 02af 01       		.byte	0x1
- 659 02b0 74       		.byte	0x74
- 660 02b1 88000000 		.4byte	0x88
- 661 02b5 1E000000 		.4byte	.LLST1
- 662 02b9 09       		.uleb128 0x9
- 663 02ba 0C000000 		.4byte	.LVL32
- 664 02be E3010000 		.4byte	0x1e3
- 665 02c2 09       		.uleb128 0x9
- 666 02c3 12000000 		.4byte	.LVL34
- 667 02c7 49020000 		.4byte	0x249
- 668 02cb 00       		.byte	0
- 669 02cc 12       		.uleb128 0x12
- 670 02cd 50020000 		.4byte	.LASF25
- 671 02d1 05       		.byte	0x5
- 672 02d2 1207     		.2byte	0x712
- 673 02d4 D8020000 		.4byte	0x2d8
- 674 02d8 13       		.uleb128 0x13
- 675 02d9 7D000000 		.4byte	0x7d
- 676 02dd 14       		.uleb128 0x14
- 677 02de DB020000 		.4byte	.LASF26
- 678 02e2 01       		.byte	0x1
- 679 02e3 17       		.byte	0x17
- 680 02e4 88000000 		.4byte	0x88
- 681 02e8 05       		.uleb128 0x5
- 682 02e9 03       		.byte	0x3
- 683 02ea 00000000 		.4byte	Switch_State
- 684 02ee 14       		.uleb128 0x14
- 685 02ef 9D000000 		.4byte	.LASF27
- 686 02f3 01       		.byte	0x1
- 687 02f4 18       		.byte	0x18
- 688 02f5 94000000 		.4byte	0x94
- 689 02f9 05       		.uleb128 0x5
- 690 02fa 03       		.byte	0x3
- 691 02fb 00000000 		.4byte	rtd_ratio
- 692 02ff 14       		.uleb128 0x14
- 693 0300 83030000 		.4byte	.LASF28
- 694 0304 01       		.byte	0x1
- 695 0305 19       		.byte	0x19
- 696 0306 94000000 		.4byte	0x94
- 697 030a 05       		.uleb128 0x5
- 698 030b 03       		.byte	0x3
- 699 030c 00000000 		.4byte	ref_res
- 700 0310 14       		.uleb128 0x14
- 701 0311 B2020000 		.4byte	.LASF29
- 702 0315 01       		.byte	0x1
- 703 0316 1A       		.byte	0x1a
- 704 0317 25000000 		.4byte	0x25
- 705 031b 05       		.uleb128 0x5
- 706 031c 03       		.byte	0x3
- 707 031d 00000000 		.4byte	last_regu
- 708 0321 14       		.uleb128 0x14
- 709 0322 6A030000 		.4byte	.LASF30
- 710 0326 01       		.byte	0x1
- 711 0327 1B       		.byte	0x1b
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 17
+ 615 02a9 1207     		.2byte	0x712
+ 616 02ab AF020000 		.4byte	0x2af
+ 617 02af 13       		.uleb128 0x13
+ 618 02b0 76000000 		.4byte	0x76
+ 619 02b4 14       		.uleb128 0x14
+ 620 02b5 D0020000 		.4byte	.LASF26
+ 621 02b9 01       		.byte	0x1
+ 622 02ba 17       		.byte	0x17
+ 623 02bb 81000000 		.4byte	0x81
+ 624 02bf 05       		.uleb128 0x5
+ 625 02c0 03       		.byte	0x3
+ 626 02c1 00000000 		.4byte	Switch_State
+ 627 02c5 14       		.uleb128 0x14
+ 628 02c6 9D000000 		.4byte	.LASF27
+ 629 02ca 01       		.byte	0x1
+ 630 02cb 18       		.byte	0x18
+ 631 02cc 8D000000 		.4byte	0x8d
+ 632 02d0 05       		.uleb128 0x5
+ 633 02d1 03       		.byte	0x3
+ 634 02d2 00000000 		.4byte	rtd_ratio
+ 635 02d6 14       		.uleb128 0x14
+ 636 02d7 6A030000 		.4byte	.LASF28
+ 637 02db 01       		.byte	0x1
+ 638 02dc 19       		.byte	0x19
+ 639 02dd 8D000000 		.4byte	0x8d
+ 640 02e1 05       		.uleb128 0x5
+ 641 02e2 03       		.byte	0x3
+ 642 02e3 00000000 		.4byte	ref_res
+ 643 02e7 14       		.uleb128 0x14
+ 644 02e8 A7020000 		.4byte	.LASF29
+ 645 02ec 01       		.byte	0x1
+ 646 02ed 1A       		.byte	0x1a
+ 647 02ee 99000000 		.4byte	0x99
+ 648 02f2 05       		.uleb128 0x5
+ 649 02f3 03       		.byte	0x3
+ 650 02f4 00000000 		.4byte	last_regu
+ 651 02f8 14       		.uleb128 0x14
+ 652 02f9 5F030000 		.4byte	.LASF30
+ 653 02fd 01       		.byte	0x1
+ 654 02fe 1B       		.byte	0x1b
+ 655 02ff 99000000 		.4byte	0x99
+ 656 0303 05       		.uleb128 0x5
+ 657 0304 03       		.byte	0x3
+ 658 0305 00000000 		.4byte	regu
+ 659 0309 15       		.uleb128 0x15
+ 660 030a 9B020000 		.4byte	.LASF31
+ 661 030e 9B020000 		.4byte	.LASF31
+ 662 0312 06       		.byte	0x6
+ 663 0313 16       		.byte	0x16
+ 664 0314 15       		.uleb128 0x15
+ 665 0315 B9000000 		.4byte	.LASF32
+ 666 0319 B9000000 		.4byte	.LASF32
+ 667 031d 07       		.byte	0x7
+ 668 031e 13       		.byte	0x13
+ 669 031f 15       		.uleb128 0x15
+ 670 0320 B1020000 		.4byte	.LASF33
+ 671 0324 B1020000 		.4byte	.LASF33
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 16
 
 
- 712 0328 25000000 		.4byte	0x25
- 713 032c 05       		.uleb128 0x5
- 714 032d 03       		.byte	0x3
- 715 032e 00000000 		.4byte	regu
- 716 0332 15       		.uleb128 0x15
- 717 0333 A6020000 		.4byte	.LASF31
- 718 0337 A6020000 		.4byte	.LASF31
- 719 033b 06       		.byte	0x6
- 720 033c 16       		.byte	0x16
- 721 033d 15       		.uleb128 0x15
- 722 033e B9000000 		.4byte	.LASF32
- 723 0342 B9000000 		.4byte	.LASF32
- 724 0346 07       		.byte	0x7
- 725 0347 13       		.byte	0x13
- 726 0348 15       		.uleb128 0x15
- 727 0349 BC020000 		.4byte	.LASF33
- 728 034d BC020000 		.4byte	.LASF33
- 729 0351 07       		.byte	0x7
- 730 0352 12       		.byte	0x12
- 731 0353 15       		.uleb128 0x15
- 732 0354 E7030000 		.4byte	.LASF34
- 733 0358 E7030000 		.4byte	.LASF34
- 734 035c 08       		.byte	0x8
- 735 035d E7       		.byte	0xe7
- 736 035e 15       		.uleb128 0x15
- 737 035f D6030000 		.4byte	.LASF35
- 738 0363 D6030000 		.4byte	.LASF35
- 739 0367 09       		.byte	0x9
- 740 0368 8B       		.byte	0x8b
- 741 0369 15       		.uleb128 0x15
- 742 036a 4E010000 		.4byte	.LASF36
- 743 036e 4E010000 		.4byte	.LASF36
- 744 0372 0A       		.byte	0xa
- 745 0373 0F       		.byte	0xf
- 746 0374 15       		.uleb128 0x15
- 747 0375 75030000 		.4byte	.LASF37
- 748 0379 75030000 		.4byte	.LASF37
- 749 037d 0B       		.byte	0xb
- 750 037e 1A       		.byte	0x1a
- 751 037f 15       		.uleb128 0x15
- 752 0380 37000000 		.4byte	.LASF38
- 753 0384 37000000 		.4byte	.LASF38
- 754 0388 0C       		.byte	0xc
- 755 0389 52       		.byte	0x52
- 756 038a 15       		.uleb128 0x15
- 757 038b 18040000 		.4byte	.LASF39
- 758 038f 18040000 		.4byte	.LASF39
- 759 0393 09       		.byte	0x9
- 760 0394 54       		.byte	0x54
- 761 0395 15       		.uleb128 0x15
- 762 0396 E8020000 		.4byte	.LASF40
- 763 039a E8020000 		.4byte	.LASF40
- 764 039e 0D       		.byte	0xd
- 765 039f 13       		.byte	0x13
- 766 03a0 15       		.uleb128 0x15
- 767 03a1 64020000 		.4byte	.LASF41
- 768 03a5 64020000 		.4byte	.LASF41
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 18
+ 672 0328 07       		.byte	0x7
+ 673 0329 12       		.byte	0x12
+ 674 032a 15       		.uleb128 0x15
+ 675 032b CE030000 		.4byte	.LASF34
+ 676 032f CE030000 		.4byte	.LASF34
+ 677 0333 08       		.byte	0x8
+ 678 0334 E7       		.byte	0xe7
+ 679 0335 15       		.uleb128 0x15
+ 680 0336 BD030000 		.4byte	.LASF35
+ 681 033a BD030000 		.4byte	.LASF35
+ 682 033e 09       		.byte	0x9
+ 683 033f 8B       		.byte	0x8b
+ 684 0340 15       		.uleb128 0x15
+ 685 0341 37000000 		.4byte	.LASF36
+ 686 0345 37000000 		.4byte	.LASF36
+ 687 0349 0A       		.byte	0xa
+ 688 034a 52       		.byte	0x52
+ 689 034b 15       		.uleb128 0x15
+ 690 034c FF030000 		.4byte	.LASF37
+ 691 0350 FF030000 		.4byte	.LASF37
+ 692 0354 09       		.byte	0x9
+ 693 0355 54       		.byte	0x54
+ 694 0356 15       		.uleb128 0x15
+ 695 0357 DD020000 		.4byte	.LASF38
+ 696 035b DD020000 		.4byte	.LASF38
+ 697 035f 0B       		.byte	0xb
+ 698 0360 13       		.byte	0x13
+ 699 0361 15       		.uleb128 0x15
+ 700 0362 59020000 		.4byte	.LASF39
+ 701 0366 59020000 		.4byte	.LASF39
+ 702 036a 0C       		.byte	0xc
+ 703 036b 14       		.byte	0x14
+ 704 036c 15       		.uleb128 0x15
+ 705 036d C0020000 		.4byte	.LASF40
+ 706 0371 C0020000 		.4byte	.LASF40
+ 707 0375 06       		.byte	0x6
+ 708 0376 13       		.byte	0x13
+ 709 0377 15       		.uleb128 0x15
+ 710 0378 5C010000 		.4byte	.LASF41
+ 711 037c 5C010000 		.4byte	.LASF41
+ 712 0380 07       		.byte	0x7
+ 713 0381 14       		.byte	0x14
+ 714 0382 15       		.uleb128 0x15
+ 715 0383 68000000 		.4byte	.LASF42
+ 716 0387 68000000 		.4byte	.LASF42
+ 717 038b 06       		.byte	0x6
+ 718 038c 15       		.byte	0x15
+ 719 038d 15       		.uleb128 0x15
+ 720 038e 7C020000 		.4byte	.LASF43
+ 721 0392 7C020000 		.4byte	.LASF43
+ 722 0396 0C       		.byte	0xc
+ 723 0397 16       		.byte	0x16
+ 724 0398 15       		.uleb128 0x15
+ 725 0399 3B030000 		.4byte	.LASF44
+ 726 039d 3B030000 		.4byte	.LASF44
+ 727 03a1 0A       		.byte	0xa
+ 728 03a2 4F       		.byte	0x4f
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 17
 
 
- 769 03a9 0B       		.byte	0xb
- 770 03aa 15       		.byte	0x15
- 771 03ab 15       		.uleb128 0x15
- 772 03ac CB020000 		.4byte	.LASF42
- 773 03b0 CB020000 		.4byte	.LASF42
- 774 03b4 06       		.byte	0x6
- 775 03b5 13       		.byte	0x13
- 776 03b6 15       		.uleb128 0x15
- 777 03b7 67010000 		.4byte	.LASF43
- 778 03bb 67010000 		.4byte	.LASF43
- 779 03bf 07       		.byte	0x7
- 780 03c0 14       		.byte	0x14
- 781 03c1 15       		.uleb128 0x15
- 782 03c2 68000000 		.4byte	.LASF44
- 783 03c6 68000000 		.4byte	.LASF44
- 784 03ca 06       		.byte	0x6
- 785 03cb 15       		.byte	0x15
- 786 03cc 15       		.uleb128 0x15
- 787 03cd 87020000 		.4byte	.LASF45
- 788 03d1 87020000 		.4byte	.LASF45
- 789 03d5 0B       		.byte	0xb
- 790 03d6 17       		.byte	0x17
- 791 03d7 15       		.uleb128 0x15
- 792 03d8 46030000 		.4byte	.LASF46
- 793 03dc 46030000 		.4byte	.LASF46
- 794 03e0 0C       		.byte	0xc
- 795 03e1 4F       		.byte	0x4f
- 796 03e2 15       		.uleb128 0x15
- 797 03e3 12000000 		.4byte	.LASF47
- 798 03e7 12000000 		.4byte	.LASF47
- 799 03eb 0E       		.byte	0xe
- 800 03ec 27       		.byte	0x27
- 801 03ed 15       		.uleb128 0x15
- 802 03ee 00000000 		.4byte	.LASF48
- 803 03f2 00000000 		.4byte	.LASF48
- 804 03f6 0F       		.byte	0xf
- 805 03f7 18       		.byte	0x18
- 806 03f8 15       		.uleb128 0x15
- 807 03f9 48020000 		.4byte	.LASF49
- 808 03fd 48020000 		.4byte	.LASF49
- 809 0401 10       		.byte	0x10
- 810 0402 0F       		.byte	0xf
- 811 0403 15       		.uleb128 0x15
- 812 0404 A7000000 		.4byte	.LASF50
- 813 0408 A7000000 		.4byte	.LASF50
- 814 040c 0F       		.byte	0xf
- 815 040d 25       		.byte	0x25
- 816 040e 15       		.uleb128 0x15
- 817 040f 84000000 		.4byte	.LASF51
- 818 0413 84000000 		.4byte	.LASF51
- 819 0417 0C       		.byte	0xc
- 820 0418 50       		.byte	0x50
- 821 0419 15       		.uleb128 0x15
- 822 041a AB030000 		.4byte	.LASF52
- 823 041e AB030000 		.4byte	.LASF52
- 824 0422 0E       		.byte	0xe
- 825 0423 28       		.byte	0x28
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 19
+ 729 03a3 15       		.uleb128 0x15
+ 730 03a4 12000000 		.4byte	.LASF45
+ 731 03a8 12000000 		.4byte	.LASF45
+ 732 03ac 0D       		.byte	0xd
+ 733 03ad 27       		.byte	0x27
+ 734 03ae 15       		.uleb128 0x15
+ 735 03af 00000000 		.4byte	.LASF46
+ 736 03b3 00000000 		.4byte	.LASF46
+ 737 03b7 0E       		.byte	0xe
+ 738 03b8 18       		.byte	0x18
+ 739 03b9 15       		.uleb128 0x15
+ 740 03ba 3D020000 		.4byte	.LASF47
+ 741 03be 3D020000 		.4byte	.LASF47
+ 742 03c2 0F       		.byte	0xf
+ 743 03c3 0F       		.byte	0xf
+ 744 03c4 15       		.uleb128 0x15
+ 745 03c5 A7000000 		.4byte	.LASF48
+ 746 03c9 A7000000 		.4byte	.LASF48
+ 747 03cd 0E       		.byte	0xe
+ 748 03ce 25       		.byte	0x25
+ 749 03cf 15       		.uleb128 0x15
+ 750 03d0 84000000 		.4byte	.LASF49
+ 751 03d4 84000000 		.4byte	.LASF49
+ 752 03d8 0A       		.byte	0xa
+ 753 03d9 50       		.byte	0x50
+ 754 03da 15       		.uleb128 0x15
+ 755 03db 92030000 		.4byte	.LASF50
+ 756 03df 92030000 		.4byte	.LASF50
+ 757 03e3 0D       		.byte	0xd
+ 758 03e4 28       		.byte	0x28
+ 759 03e5 15       		.uleb128 0x15
+ 760 03e6 1C020000 		.4byte	.LASF51
+ 761 03ea 1C020000 		.4byte	.LASF51
+ 762 03ee 0C       		.byte	0xc
+ 763 03ef 15       		.byte	0x15
+ 764 03f0 15       		.uleb128 0x15
+ 765 03f1 06030000 		.4byte	.LASF52
+ 766 03f5 06030000 		.4byte	.LASF52
+ 767 03f9 06       		.byte	0x6
+ 768 03fa 14       		.byte	0x14
+ 769 03fb 15       		.uleb128 0x15
+ 770 03fc 25030000 		.4byte	.LASF53
+ 771 0400 25030000 		.4byte	.LASF53
+ 772 0404 0F       		.byte	0xf
+ 773 0405 10       		.byte	0x10
+ 774 0406 00       		.byte	0
+ 775              		.section	.debug_abbrev,"",%progbits
+ 776              	.Ldebug_abbrev0:
+ 777 0000 01       		.uleb128 0x1
+ 778 0001 11       		.uleb128 0x11
+ 779 0002 01       		.byte	0x1
+ 780 0003 25       		.uleb128 0x25
+ 781 0004 0E       		.uleb128 0xe
+ 782 0005 13       		.uleb128 0x13
+ 783 0006 0B       		.uleb128 0xb
+ 784 0007 03       		.uleb128 0x3
+ 785 0008 0E       		.uleb128 0xe
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 18
 
 
- 826 0424 15       		.uleb128 0x15
- 827 0425 27020000 		.4byte	.LASF53
- 828 0429 27020000 		.4byte	.LASF53
- 829 042d 0B       		.byte	0xb
- 830 042e 16       		.byte	0x16
- 831 042f 15       		.uleb128 0x15
- 832 0430 11030000 		.4byte	.LASF54
- 833 0434 11030000 		.4byte	.LASF54
- 834 0438 06       		.byte	0x6
- 835 0439 14       		.byte	0x14
- 836 043a 15       		.uleb128 0x15
- 837 043b 30030000 		.4byte	.LASF55
- 838 043f 30030000 		.4byte	.LASF55
- 839 0443 10       		.byte	0x10
- 840 0444 10       		.byte	0x10
- 841 0445 00       		.byte	0
- 842              		.section	.debug_abbrev,"",%progbits
- 843              	.Ldebug_abbrev0:
- 844 0000 01       		.uleb128 0x1
- 845 0001 11       		.uleb128 0x11
- 846 0002 01       		.byte	0x1
- 847 0003 25       		.uleb128 0x25
- 848 0004 0E       		.uleb128 0xe
- 849 0005 13       		.uleb128 0x13
- 850 0006 0B       		.uleb128 0xb
- 851 0007 03       		.uleb128 0x3
- 852 0008 0E       		.uleb128 0xe
- 853 0009 1B       		.uleb128 0x1b
- 854 000a 0E       		.uleb128 0xe
- 855 000b 55       		.uleb128 0x55
- 856 000c 17       		.uleb128 0x17
- 857 000d 11       		.uleb128 0x11
- 858 000e 01       		.uleb128 0x1
- 859 000f 10       		.uleb128 0x10
- 860 0010 17       		.uleb128 0x17
- 861 0011 00       		.byte	0
- 862 0012 00       		.byte	0
- 863 0013 02       		.uleb128 0x2
- 864 0014 24       		.uleb128 0x24
- 865 0015 00       		.byte	0
- 866 0016 0B       		.uleb128 0xb
- 867 0017 0B       		.uleb128 0xb
- 868 0018 3E       		.uleb128 0x3e
- 869 0019 0B       		.uleb128 0xb
- 870 001a 03       		.uleb128 0x3
- 871 001b 0E       		.uleb128 0xe
- 872 001c 00       		.byte	0
- 873 001d 00       		.byte	0
- 874 001e 03       		.uleb128 0x3
- 875 001f 16       		.uleb128 0x16
- 876 0020 00       		.byte	0
- 877 0021 03       		.uleb128 0x3
- 878 0022 0E       		.uleb128 0xe
- 879 0023 3A       		.uleb128 0x3a
- 880 0024 0B       		.uleb128 0xb
- 881 0025 3B       		.uleb128 0x3b
- 882 0026 0B       		.uleb128 0xb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 20
+ 786 0009 1B       		.uleb128 0x1b
+ 787 000a 0E       		.uleb128 0xe
+ 788 000b 55       		.uleb128 0x55
+ 789 000c 17       		.uleb128 0x17
+ 790 000d 11       		.uleb128 0x11
+ 791 000e 01       		.uleb128 0x1
+ 792 000f 10       		.uleb128 0x10
+ 793 0010 17       		.uleb128 0x17
+ 794 0011 00       		.byte	0
+ 795 0012 00       		.byte	0
+ 796 0013 02       		.uleb128 0x2
+ 797 0014 24       		.uleb128 0x24
+ 798 0015 00       		.byte	0
+ 799 0016 0B       		.uleb128 0xb
+ 800 0017 0B       		.uleb128 0xb
+ 801 0018 3E       		.uleb128 0x3e
+ 802 0019 0B       		.uleb128 0xb
+ 803 001a 03       		.uleb128 0x3
+ 804 001b 0E       		.uleb128 0xe
+ 805 001c 00       		.byte	0
+ 806 001d 00       		.byte	0
+ 807 001e 03       		.uleb128 0x3
+ 808 001f 16       		.uleb128 0x16
+ 809 0020 00       		.byte	0
+ 810 0021 03       		.uleb128 0x3
+ 811 0022 0E       		.uleb128 0xe
+ 812 0023 3A       		.uleb128 0x3a
+ 813 0024 0B       		.uleb128 0xb
+ 814 0025 3B       		.uleb128 0x3b
+ 815 0026 0B       		.uleb128 0xb
+ 816 0027 49       		.uleb128 0x49
+ 817 0028 13       		.uleb128 0x13
+ 818 0029 00       		.byte	0
+ 819 002a 00       		.byte	0
+ 820 002b 04       		.uleb128 0x4
+ 821 002c 24       		.uleb128 0x24
+ 822 002d 00       		.byte	0
+ 823 002e 0B       		.uleb128 0xb
+ 824 002f 0B       		.uleb128 0xb
+ 825 0030 3E       		.uleb128 0x3e
+ 826 0031 0B       		.uleb128 0xb
+ 827 0032 03       		.uleb128 0x3
+ 828 0033 08       		.uleb128 0x8
+ 829 0034 00       		.byte	0
+ 830 0035 00       		.byte	0
+ 831 0036 05       		.uleb128 0x5
+ 832 0037 16       		.uleb128 0x16
+ 833 0038 00       		.byte	0
+ 834 0039 03       		.uleb128 0x3
+ 835 003a 0E       		.uleb128 0xe
+ 836 003b 3A       		.uleb128 0x3a
+ 837 003c 0B       		.uleb128 0xb
+ 838 003d 3B       		.uleb128 0x3b
+ 839 003e 05       		.uleb128 0x5
+ 840 003f 49       		.uleb128 0x49
+ 841 0040 13       		.uleb128 0x13
+ 842 0041 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 19
 
 
- 883 0027 49       		.uleb128 0x49
- 884 0028 13       		.uleb128 0x13
- 885 0029 00       		.byte	0
- 886 002a 00       		.byte	0
- 887 002b 04       		.uleb128 0x4
- 888 002c 24       		.uleb128 0x24
- 889 002d 00       		.byte	0
- 890 002e 0B       		.uleb128 0xb
- 891 002f 0B       		.uleb128 0xb
- 892 0030 3E       		.uleb128 0x3e
- 893 0031 0B       		.uleb128 0xb
- 894 0032 03       		.uleb128 0x3
- 895 0033 08       		.uleb128 0x8
- 896 0034 00       		.byte	0
- 897 0035 00       		.byte	0
- 898 0036 05       		.uleb128 0x5
- 899 0037 16       		.uleb128 0x16
- 900 0038 00       		.byte	0
- 901 0039 03       		.uleb128 0x3
- 902 003a 0E       		.uleb128 0xe
- 903 003b 3A       		.uleb128 0x3a
- 904 003c 0B       		.uleb128 0xb
- 905 003d 3B       		.uleb128 0x3b
- 906 003e 05       		.uleb128 0x5
- 907 003f 49       		.uleb128 0x49
- 908 0040 13       		.uleb128 0x13
- 909 0041 00       		.byte	0
- 910 0042 00       		.byte	0
- 911 0043 06       		.uleb128 0x6
- 912 0044 2E       		.uleb128 0x2e
- 913 0045 01       		.byte	0x1
- 914 0046 3F       		.uleb128 0x3f
- 915 0047 19       		.uleb128 0x19
- 916 0048 03       		.uleb128 0x3
- 917 0049 0E       		.uleb128 0xe
- 918 004a 3A       		.uleb128 0x3a
- 919 004b 0B       		.uleb128 0xb
- 920 004c 3B       		.uleb128 0x3b
- 921 004d 0B       		.uleb128 0xb
- 922 004e 27       		.uleb128 0x27
- 923 004f 19       		.uleb128 0x19
- 924 0050 11       		.uleb128 0x11
- 925 0051 01       		.uleb128 0x1
- 926 0052 12       		.uleb128 0x12
- 927 0053 06       		.uleb128 0x6
- 928 0054 40       		.uleb128 0x40
- 929 0055 18       		.uleb128 0x18
- 930 0056 9642     		.uleb128 0x2116
- 931 0058 19       		.uleb128 0x19
- 932 0059 01       		.uleb128 0x1
- 933 005a 13       		.uleb128 0x13
- 934 005b 00       		.byte	0
- 935 005c 00       		.byte	0
- 936 005d 07       		.uleb128 0x7
- 937 005e 34       		.uleb128 0x34
- 938 005f 00       		.byte	0
- 939 0060 03       		.uleb128 0x3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 21
+ 843 0042 00       		.byte	0
+ 844 0043 06       		.uleb128 0x6
+ 845 0044 2E       		.uleb128 0x2e
+ 846 0045 01       		.byte	0x1
+ 847 0046 3F       		.uleb128 0x3f
+ 848 0047 19       		.uleb128 0x19
+ 849 0048 03       		.uleb128 0x3
+ 850 0049 0E       		.uleb128 0xe
+ 851 004a 3A       		.uleb128 0x3a
+ 852 004b 0B       		.uleb128 0xb
+ 853 004c 3B       		.uleb128 0x3b
+ 854 004d 0B       		.uleb128 0xb
+ 855 004e 27       		.uleb128 0x27
+ 856 004f 19       		.uleb128 0x19
+ 857 0050 11       		.uleb128 0x11
+ 858 0051 01       		.uleb128 0x1
+ 859 0052 12       		.uleb128 0x12
+ 860 0053 06       		.uleb128 0x6
+ 861 0054 40       		.uleb128 0x40
+ 862 0055 18       		.uleb128 0x18
+ 863 0056 9642     		.uleb128 0x2116
+ 864 0058 19       		.uleb128 0x19
+ 865 0059 01       		.uleb128 0x1
+ 866 005a 13       		.uleb128 0x13
+ 867 005b 00       		.byte	0
+ 868 005c 00       		.byte	0
+ 869 005d 07       		.uleb128 0x7
+ 870 005e 34       		.uleb128 0x34
+ 871 005f 00       		.byte	0
+ 872 0060 03       		.uleb128 0x3
+ 873 0061 0E       		.uleb128 0xe
+ 874 0062 3A       		.uleb128 0x3a
+ 875 0063 0B       		.uleb128 0xb
+ 876 0064 3B       		.uleb128 0x3b
+ 877 0065 0B       		.uleb128 0xb
+ 878 0066 49       		.uleb128 0x49
+ 879 0067 13       		.uleb128 0x13
+ 880 0068 02       		.uleb128 0x2
+ 881 0069 18       		.uleb128 0x18
+ 882 006a 00       		.byte	0
+ 883 006b 00       		.byte	0
+ 884 006c 08       		.uleb128 0x8
+ 885 006d 34       		.uleb128 0x34
+ 886 006e 00       		.byte	0
+ 887 006f 03       		.uleb128 0x3
+ 888 0070 0E       		.uleb128 0xe
+ 889 0071 3A       		.uleb128 0x3a
+ 890 0072 0B       		.uleb128 0xb
+ 891 0073 3B       		.uleb128 0x3b
+ 892 0074 0B       		.uleb128 0xb
+ 893 0075 49       		.uleb128 0x49
+ 894 0076 13       		.uleb128 0x13
+ 895 0077 02       		.uleb128 0x2
+ 896 0078 17       		.uleb128 0x17
+ 897 0079 00       		.byte	0
+ 898 007a 00       		.byte	0
+ 899 007b 09       		.uleb128 0x9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 20
 
 
- 940 0061 0E       		.uleb128 0xe
- 941 0062 3A       		.uleb128 0x3a
- 942 0063 0B       		.uleb128 0xb
- 943 0064 3B       		.uleb128 0x3b
- 944 0065 0B       		.uleb128 0xb
- 945 0066 49       		.uleb128 0x49
- 946 0067 13       		.uleb128 0x13
- 947 0068 02       		.uleb128 0x2
- 948 0069 18       		.uleb128 0x18
- 949 006a 00       		.byte	0
- 950 006b 00       		.byte	0
- 951 006c 08       		.uleb128 0x8
- 952 006d 34       		.uleb128 0x34
- 953 006e 00       		.byte	0
- 954 006f 03       		.uleb128 0x3
- 955 0070 0E       		.uleb128 0xe
- 956 0071 3A       		.uleb128 0x3a
- 957 0072 0B       		.uleb128 0xb
- 958 0073 3B       		.uleb128 0x3b
- 959 0074 0B       		.uleb128 0xb
- 960 0075 49       		.uleb128 0x49
- 961 0076 13       		.uleb128 0x13
- 962 0077 02       		.uleb128 0x2
- 963 0078 17       		.uleb128 0x17
- 964 0079 00       		.byte	0
- 965 007a 00       		.byte	0
- 966 007b 09       		.uleb128 0x9
- 967 007c 898201   		.uleb128 0x4109
- 968 007f 00       		.byte	0
- 969 0080 11       		.uleb128 0x11
- 970 0081 01       		.uleb128 0x1
- 971 0082 31       		.uleb128 0x31
- 972 0083 13       		.uleb128 0x13
- 973 0084 00       		.byte	0
- 974 0085 00       		.byte	0
- 975 0086 0A       		.uleb128 0xa
- 976 0087 898201   		.uleb128 0x4109
- 977 008a 01       		.byte	0x1
- 978 008b 11       		.uleb128 0x11
- 979 008c 01       		.uleb128 0x1
- 980 008d 31       		.uleb128 0x31
- 981 008e 13       		.uleb128 0x13
- 982 008f 01       		.uleb128 0x1
- 983 0090 13       		.uleb128 0x13
- 984 0091 00       		.byte	0
- 985 0092 00       		.byte	0
- 986 0093 0B       		.uleb128 0xb
- 987 0094 8A8201   		.uleb128 0x410a
- 988 0097 00       		.byte	0
- 989 0098 02       		.uleb128 0x2
- 990 0099 18       		.uleb128 0x18
- 991 009a 9142     		.uleb128 0x2111
- 992 009c 18       		.uleb128 0x18
- 993 009d 00       		.byte	0
- 994 009e 00       		.byte	0
- 995 009f 0C       		.uleb128 0xc
- 996 00a0 01       		.uleb128 0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 22
+ 900 007c 898201   		.uleb128 0x4109
+ 901 007f 00       		.byte	0
+ 902 0080 11       		.uleb128 0x11
+ 903 0081 01       		.uleb128 0x1
+ 904 0082 31       		.uleb128 0x31
+ 905 0083 13       		.uleb128 0x13
+ 906 0084 00       		.byte	0
+ 907 0085 00       		.byte	0
+ 908 0086 0A       		.uleb128 0xa
+ 909 0087 898201   		.uleb128 0x4109
+ 910 008a 01       		.byte	0x1
+ 911 008b 11       		.uleb128 0x11
+ 912 008c 01       		.uleb128 0x1
+ 913 008d 31       		.uleb128 0x31
+ 914 008e 13       		.uleb128 0x13
+ 915 008f 01       		.uleb128 0x1
+ 916 0090 13       		.uleb128 0x13
+ 917 0091 00       		.byte	0
+ 918 0092 00       		.byte	0
+ 919 0093 0B       		.uleb128 0xb
+ 920 0094 8A8201   		.uleb128 0x410a
+ 921 0097 00       		.byte	0
+ 922 0098 02       		.uleb128 0x2
+ 923 0099 18       		.uleb128 0x18
+ 924 009a 9142     		.uleb128 0x2111
+ 925 009c 18       		.uleb128 0x18
+ 926 009d 00       		.byte	0
+ 927 009e 00       		.byte	0
+ 928 009f 0C       		.uleb128 0xc
+ 929 00a0 01       		.uleb128 0x1
+ 930 00a1 01       		.byte	0x1
+ 931 00a2 49       		.uleb128 0x49
+ 932 00a3 13       		.uleb128 0x13
+ 933 00a4 01       		.uleb128 0x1
+ 934 00a5 13       		.uleb128 0x13
+ 935 00a6 00       		.byte	0
+ 936 00a7 00       		.byte	0
+ 937 00a8 0D       		.uleb128 0xd
+ 938 00a9 21       		.uleb128 0x21
+ 939 00aa 00       		.byte	0
+ 940 00ab 49       		.uleb128 0x49
+ 941 00ac 13       		.uleb128 0x13
+ 942 00ad 2F       		.uleb128 0x2f
+ 943 00ae 0B       		.uleb128 0xb
+ 944 00af 00       		.byte	0
+ 945 00b0 00       		.byte	0
+ 946 00b1 0E       		.uleb128 0xe
+ 947 00b2 2E       		.uleb128 0x2e
+ 948 00b3 01       		.byte	0x1
+ 949 00b4 3F       		.uleb128 0x3f
+ 950 00b5 19       		.uleb128 0x19
+ 951 00b6 03       		.uleb128 0x3
+ 952 00b7 0E       		.uleb128 0xe
+ 953 00b8 3A       		.uleb128 0x3a
+ 954 00b9 0B       		.uleb128 0xb
+ 955 00ba 3B       		.uleb128 0x3b
+ 956 00bb 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 21
 
 
- 997 00a1 01       		.byte	0x1
- 998 00a2 49       		.uleb128 0x49
- 999 00a3 13       		.uleb128 0x13
- 1000 00a4 01       		.uleb128 0x1
- 1001 00a5 13       		.uleb128 0x13
- 1002 00a6 00       		.byte	0
- 1003 00a7 00       		.byte	0
- 1004 00a8 0D       		.uleb128 0xd
- 1005 00a9 21       		.uleb128 0x21
- 1006 00aa 00       		.byte	0
- 1007 00ab 49       		.uleb128 0x49
- 1008 00ac 13       		.uleb128 0x13
- 1009 00ad 2F       		.uleb128 0x2f
- 1010 00ae 0B       		.uleb128 0xb
- 1011 00af 00       		.byte	0
- 1012 00b0 00       		.byte	0
- 1013 00b1 0E       		.uleb128 0xe
- 1014 00b2 2E       		.uleb128 0x2e
- 1015 00b3 01       		.byte	0x1
- 1016 00b4 3F       		.uleb128 0x3f
- 1017 00b5 19       		.uleb128 0x19
- 1018 00b6 03       		.uleb128 0x3
- 1019 00b7 0E       		.uleb128 0xe
- 1020 00b8 3A       		.uleb128 0x3a
- 1021 00b9 0B       		.uleb128 0xb
- 1022 00ba 3B       		.uleb128 0x3b
- 1023 00bb 0B       		.uleb128 0xb
- 1024 00bc 11       		.uleb128 0x11
- 1025 00bd 01       		.uleb128 0x1
- 1026 00be 12       		.uleb128 0x12
- 1027 00bf 06       		.uleb128 0x6
- 1028 00c0 40       		.uleb128 0x40
- 1029 00c1 18       		.uleb128 0x18
- 1030 00c2 9742     		.uleb128 0x2117
- 1031 00c4 19       		.uleb128 0x19
- 1032 00c5 01       		.uleb128 0x1
- 1033 00c6 13       		.uleb128 0x13
- 1034 00c7 00       		.byte	0
- 1035 00c8 00       		.byte	0
- 1036 00c9 0F       		.uleb128 0xf
- 1037 00ca 2E       		.uleb128 0x2e
- 1038 00cb 01       		.byte	0x1
- 1039 00cc 3F       		.uleb128 0x3f
- 1040 00cd 19       		.uleb128 0x19
- 1041 00ce 03       		.uleb128 0x3
- 1042 00cf 0E       		.uleb128 0xe
- 1043 00d0 3A       		.uleb128 0x3a
- 1044 00d1 0B       		.uleb128 0xb
- 1045 00d2 3B       		.uleb128 0x3b
- 1046 00d3 0B       		.uleb128 0xb
- 1047 00d4 27       		.uleb128 0x27
- 1048 00d5 19       		.uleb128 0x19
- 1049 00d6 49       		.uleb128 0x49
- 1050 00d7 13       		.uleb128 0x13
- 1051 00d8 8701     		.uleb128 0x87
- 1052 00da 19       		.uleb128 0x19
- 1053 00db 11       		.uleb128 0x11
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 23
+ 957 00bc 11       		.uleb128 0x11
+ 958 00bd 01       		.uleb128 0x1
+ 959 00be 12       		.uleb128 0x12
+ 960 00bf 06       		.uleb128 0x6
+ 961 00c0 40       		.uleb128 0x40
+ 962 00c1 18       		.uleb128 0x18
+ 963 00c2 9742     		.uleb128 0x2117
+ 964 00c4 19       		.uleb128 0x19
+ 965 00c5 01       		.uleb128 0x1
+ 966 00c6 13       		.uleb128 0x13
+ 967 00c7 00       		.byte	0
+ 968 00c8 00       		.byte	0
+ 969 00c9 0F       		.uleb128 0xf
+ 970 00ca 2E       		.uleb128 0x2e
+ 971 00cb 01       		.byte	0x1
+ 972 00cc 3F       		.uleb128 0x3f
+ 973 00cd 19       		.uleb128 0x19
+ 974 00ce 03       		.uleb128 0x3
+ 975 00cf 0E       		.uleb128 0xe
+ 976 00d0 3A       		.uleb128 0x3a
+ 977 00d1 0B       		.uleb128 0xb
+ 978 00d2 3B       		.uleb128 0x3b
+ 979 00d3 0B       		.uleb128 0xb
+ 980 00d4 27       		.uleb128 0x27
+ 981 00d5 19       		.uleb128 0x19
+ 982 00d6 49       		.uleb128 0x49
+ 983 00d7 13       		.uleb128 0x13
+ 984 00d8 8701     		.uleb128 0x87
+ 985 00da 19       		.uleb128 0x19
+ 986 00db 11       		.uleb128 0x11
+ 987 00dc 01       		.uleb128 0x1
+ 988 00dd 12       		.uleb128 0x12
+ 989 00de 06       		.uleb128 0x6
+ 990 00df 40       		.uleb128 0x40
+ 991 00e0 18       		.uleb128 0x18
+ 992 00e1 9742     		.uleb128 0x2117
+ 993 00e3 19       		.uleb128 0x19
+ 994 00e4 01       		.uleb128 0x1
+ 995 00e5 13       		.uleb128 0x13
+ 996 00e6 00       		.byte	0
+ 997 00e7 00       		.byte	0
+ 998 00e8 10       		.uleb128 0x10
+ 999 00e9 2E       		.uleb128 0x2e
+ 1000 00ea 01       		.byte	0x1
+ 1001 00eb 3F       		.uleb128 0x3f
+ 1002 00ec 19       		.uleb128 0x19
+ 1003 00ed 03       		.uleb128 0x3
+ 1004 00ee 0E       		.uleb128 0xe
+ 1005 00ef 3A       		.uleb128 0x3a
+ 1006 00f0 0B       		.uleb128 0xb
+ 1007 00f1 3B       		.uleb128 0x3b
+ 1008 00f2 0B       		.uleb128 0xb
+ 1009 00f3 27       		.uleb128 0x27
+ 1010 00f4 19       		.uleb128 0x19
+ 1011 00f5 11       		.uleb128 0x11
+ 1012 00f6 01       		.uleb128 0x1
+ 1013 00f7 12       		.uleb128 0x12
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 22
 
 
- 1054 00dc 01       		.uleb128 0x1
- 1055 00dd 12       		.uleb128 0x12
- 1056 00de 06       		.uleb128 0x6
- 1057 00df 40       		.uleb128 0x40
- 1058 00e0 18       		.uleb128 0x18
- 1059 00e1 9742     		.uleb128 0x2117
- 1060 00e3 19       		.uleb128 0x19
- 1061 00e4 01       		.uleb128 0x1
- 1062 00e5 13       		.uleb128 0x13
- 1063 00e6 00       		.byte	0
- 1064 00e7 00       		.byte	0
- 1065 00e8 10       		.uleb128 0x10
- 1066 00e9 2E       		.uleb128 0x2e
- 1067 00ea 01       		.byte	0x1
- 1068 00eb 3F       		.uleb128 0x3f
- 1069 00ec 19       		.uleb128 0x19
- 1070 00ed 03       		.uleb128 0x3
- 1071 00ee 0E       		.uleb128 0xe
- 1072 00ef 3A       		.uleb128 0x3a
- 1073 00f0 0B       		.uleb128 0xb
- 1074 00f1 3B       		.uleb128 0x3b
- 1075 00f2 0B       		.uleb128 0xb
- 1076 00f3 27       		.uleb128 0x27
- 1077 00f4 19       		.uleb128 0x19
- 1078 00f5 11       		.uleb128 0x11
- 1079 00f6 01       		.uleb128 0x1
- 1080 00f7 12       		.uleb128 0x12
- 1081 00f8 06       		.uleb128 0x6
- 1082 00f9 40       		.uleb128 0x40
- 1083 00fa 18       		.uleb128 0x18
- 1084 00fb 9742     		.uleb128 0x2117
- 1085 00fd 19       		.uleb128 0x19
- 1086 00fe 01       		.uleb128 0x1
- 1087 00ff 13       		.uleb128 0x13
- 1088 0100 00       		.byte	0
- 1089 0101 00       		.byte	0
- 1090 0102 11       		.uleb128 0x11
- 1091 0103 05       		.uleb128 0x5
- 1092 0104 00       		.byte	0
- 1093 0105 03       		.uleb128 0x3
- 1094 0106 0E       		.uleb128 0xe
- 1095 0107 3A       		.uleb128 0x3a
- 1096 0108 0B       		.uleb128 0xb
- 1097 0109 3B       		.uleb128 0x3b
- 1098 010a 0B       		.uleb128 0xb
- 1099 010b 49       		.uleb128 0x49
- 1100 010c 13       		.uleb128 0x13
- 1101 010d 02       		.uleb128 0x2
- 1102 010e 17       		.uleb128 0x17
- 1103 010f 00       		.byte	0
- 1104 0110 00       		.byte	0
- 1105 0111 12       		.uleb128 0x12
- 1106 0112 34       		.uleb128 0x34
- 1107 0113 00       		.byte	0
- 1108 0114 03       		.uleb128 0x3
- 1109 0115 0E       		.uleb128 0xe
- 1110 0116 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 24
+ 1014 00f8 06       		.uleb128 0x6
+ 1015 00f9 40       		.uleb128 0x40
+ 1016 00fa 18       		.uleb128 0x18
+ 1017 00fb 9742     		.uleb128 0x2117
+ 1018 00fd 19       		.uleb128 0x19
+ 1019 00fe 01       		.uleb128 0x1
+ 1020 00ff 13       		.uleb128 0x13
+ 1021 0100 00       		.byte	0
+ 1022 0101 00       		.byte	0
+ 1023 0102 11       		.uleb128 0x11
+ 1024 0103 05       		.uleb128 0x5
+ 1025 0104 00       		.byte	0
+ 1026 0105 03       		.uleb128 0x3
+ 1027 0106 0E       		.uleb128 0xe
+ 1028 0107 3A       		.uleb128 0x3a
+ 1029 0108 0B       		.uleb128 0xb
+ 1030 0109 3B       		.uleb128 0x3b
+ 1031 010a 0B       		.uleb128 0xb
+ 1032 010b 49       		.uleb128 0x49
+ 1033 010c 13       		.uleb128 0x13
+ 1034 010d 02       		.uleb128 0x2
+ 1035 010e 17       		.uleb128 0x17
+ 1036 010f 00       		.byte	0
+ 1037 0110 00       		.byte	0
+ 1038 0111 12       		.uleb128 0x12
+ 1039 0112 34       		.uleb128 0x34
+ 1040 0113 00       		.byte	0
+ 1041 0114 03       		.uleb128 0x3
+ 1042 0115 0E       		.uleb128 0xe
+ 1043 0116 3A       		.uleb128 0x3a
+ 1044 0117 0B       		.uleb128 0xb
+ 1045 0118 3B       		.uleb128 0x3b
+ 1046 0119 05       		.uleb128 0x5
+ 1047 011a 49       		.uleb128 0x49
+ 1048 011b 13       		.uleb128 0x13
+ 1049 011c 3F       		.uleb128 0x3f
+ 1050 011d 19       		.uleb128 0x19
+ 1051 011e 3C       		.uleb128 0x3c
+ 1052 011f 19       		.uleb128 0x19
+ 1053 0120 00       		.byte	0
+ 1054 0121 00       		.byte	0
+ 1055 0122 13       		.uleb128 0x13
+ 1056 0123 35       		.uleb128 0x35
+ 1057 0124 00       		.byte	0
+ 1058 0125 49       		.uleb128 0x49
+ 1059 0126 13       		.uleb128 0x13
+ 1060 0127 00       		.byte	0
+ 1061 0128 00       		.byte	0
+ 1062 0129 14       		.uleb128 0x14
+ 1063 012a 34       		.uleb128 0x34
+ 1064 012b 00       		.byte	0
+ 1065 012c 03       		.uleb128 0x3
+ 1066 012d 0E       		.uleb128 0xe
+ 1067 012e 3A       		.uleb128 0x3a
+ 1068 012f 0B       		.uleb128 0xb
+ 1069 0130 3B       		.uleb128 0x3b
+ 1070 0131 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 23
 
 
- 1111 0117 0B       		.uleb128 0xb
- 1112 0118 3B       		.uleb128 0x3b
- 1113 0119 05       		.uleb128 0x5
- 1114 011a 49       		.uleb128 0x49
- 1115 011b 13       		.uleb128 0x13
- 1116 011c 3F       		.uleb128 0x3f
- 1117 011d 19       		.uleb128 0x19
- 1118 011e 3C       		.uleb128 0x3c
- 1119 011f 19       		.uleb128 0x19
- 1120 0120 00       		.byte	0
- 1121 0121 00       		.byte	0
- 1122 0122 13       		.uleb128 0x13
- 1123 0123 35       		.uleb128 0x35
- 1124 0124 00       		.byte	0
- 1125 0125 49       		.uleb128 0x49
- 1126 0126 13       		.uleb128 0x13
- 1127 0127 00       		.byte	0
- 1128 0128 00       		.byte	0
- 1129 0129 14       		.uleb128 0x14
- 1130 012a 34       		.uleb128 0x34
- 1131 012b 00       		.byte	0
- 1132 012c 03       		.uleb128 0x3
- 1133 012d 0E       		.uleb128 0xe
- 1134 012e 3A       		.uleb128 0x3a
- 1135 012f 0B       		.uleb128 0xb
- 1136 0130 3B       		.uleb128 0x3b
- 1137 0131 0B       		.uleb128 0xb
- 1138 0132 49       		.uleb128 0x49
- 1139 0133 13       		.uleb128 0x13
- 1140 0134 3F       		.uleb128 0x3f
- 1141 0135 19       		.uleb128 0x19
- 1142 0136 02       		.uleb128 0x2
- 1143 0137 18       		.uleb128 0x18
- 1144 0138 00       		.byte	0
- 1145 0139 00       		.byte	0
- 1146 013a 15       		.uleb128 0x15
- 1147 013b 2E       		.uleb128 0x2e
- 1148 013c 00       		.byte	0
- 1149 013d 3F       		.uleb128 0x3f
- 1150 013e 19       		.uleb128 0x19
- 1151 013f 3C       		.uleb128 0x3c
- 1152 0140 19       		.uleb128 0x19
- 1153 0141 6E       		.uleb128 0x6e
- 1154 0142 0E       		.uleb128 0xe
- 1155 0143 03       		.uleb128 0x3
- 1156 0144 0E       		.uleb128 0xe
- 1157 0145 3A       		.uleb128 0x3a
- 1158 0146 0B       		.uleb128 0xb
- 1159 0147 3B       		.uleb128 0x3b
- 1160 0148 0B       		.uleb128 0xb
- 1161 0149 00       		.byte	0
- 1162 014a 00       		.byte	0
- 1163 014b 00       		.byte	0
- 1164              		.section	.debug_loc,"",%progbits
- 1165              	.Ldebug_loc0:
- 1166              	.LLST0:
- 1167 0000 16000000 		.4byte	.LVL3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 25
+ 1071 0132 49       		.uleb128 0x49
+ 1072 0133 13       		.uleb128 0x13
+ 1073 0134 3F       		.uleb128 0x3f
+ 1074 0135 19       		.uleb128 0x19
+ 1075 0136 02       		.uleb128 0x2
+ 1076 0137 18       		.uleb128 0x18
+ 1077 0138 00       		.byte	0
+ 1078 0139 00       		.byte	0
+ 1079 013a 15       		.uleb128 0x15
+ 1080 013b 2E       		.uleb128 0x2e
+ 1081 013c 00       		.byte	0
+ 1082 013d 3F       		.uleb128 0x3f
+ 1083 013e 19       		.uleb128 0x19
+ 1084 013f 3C       		.uleb128 0x3c
+ 1085 0140 19       		.uleb128 0x19
+ 1086 0141 6E       		.uleb128 0x6e
+ 1087 0142 0E       		.uleb128 0xe
+ 1088 0143 03       		.uleb128 0x3
+ 1089 0144 0E       		.uleb128 0xe
+ 1090 0145 3A       		.uleb128 0x3a
+ 1091 0146 0B       		.uleb128 0xb
+ 1092 0147 3B       		.uleb128 0x3b
+ 1093 0148 0B       		.uleb128 0xb
+ 1094 0149 00       		.byte	0
+ 1095 014a 00       		.byte	0
+ 1096 014b 00       		.byte	0
+ 1097              		.section	.debug_loc,"",%progbits
+ 1098              	.Ldebug_loc0:
+ 1099              	.LLST0:
+ 1100 0000 14000000 		.4byte	.LVL2
+ 1101 0004 17000000 		.4byte	.LVL3-1
+ 1102 0008 0100     		.2byte	0x1
+ 1103 000a 50       		.byte	0x50
+ 1104 000b 00000000 		.4byte	0
+ 1105 000f 00000000 		.4byte	0
+ 1106              	.LLST1:
+ 1107 0013 00000000 		.4byte	.LVL25
+ 1108 0017 0B000000 		.4byte	.LVL26-1
+ 1109 001b 0100     		.2byte	0x1
+ 1110 001d 50       		.byte	0x50
+ 1111 001e 0B000000 		.4byte	.LVL26-1
+ 1112 0022 0E000000 		.4byte	.LVL27
+ 1113 0026 0400     		.2byte	0x4
+ 1114 0028 F3       		.byte	0xf3
+ 1115 0029 01       		.uleb128 0x1
+ 1116 002a 50       		.byte	0x50
+ 1117 002b 9F       		.byte	0x9f
+ 1118 002c 0E000000 		.4byte	.LVL27
+ 1119 0030 11000000 		.4byte	.LVL28-1
+ 1120 0034 0100     		.2byte	0x1
+ 1121 0036 50       		.byte	0x50
+ 1122 0037 11000000 		.4byte	.LVL28-1
+ 1123 003b 18000000 		.4byte	.LFE68
+ 1124 003f 0400     		.2byte	0x4
+ 1125 0041 F3       		.byte	0xf3
+ 1126 0042 01       		.uleb128 0x1
+ 1127 0043 50       		.byte	0x50
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 24
 
 
- 1168 0004 19000000 		.4byte	.LVL4-1
- 1169 0008 0100     		.2byte	0x1
- 1170 000a 50       		.byte	0x50
- 1171 000b 19000000 		.4byte	.LVL4-1
- 1172 000f 34000000 		.4byte	.LVL8
- 1173 0013 0100     		.2byte	0x1
- 1174 0015 54       		.byte	0x54
- 1175 0016 00000000 		.4byte	0
- 1176 001a 00000000 		.4byte	0
- 1177              	.LLST1:
- 1178 001e 00000000 		.4byte	.LVL31
- 1179 0022 0B000000 		.4byte	.LVL32-1
- 1180 0026 0100     		.2byte	0x1
- 1181 0028 50       		.byte	0x50
- 1182 0029 0B000000 		.4byte	.LVL32-1
- 1183 002d 0E000000 		.4byte	.LVL33
- 1184 0031 0400     		.2byte	0x4
- 1185 0033 F3       		.byte	0xf3
- 1186 0034 01       		.uleb128 0x1
- 1187 0035 50       		.byte	0x50
- 1188 0036 9F       		.byte	0x9f
- 1189 0037 0E000000 		.4byte	.LVL33
- 1190 003b 11000000 		.4byte	.LVL34-1
- 1191 003f 0100     		.2byte	0x1
- 1192 0041 50       		.byte	0x50
- 1193 0042 11000000 		.4byte	.LVL34-1
- 1194 0046 18000000 		.4byte	.LFE68
- 1195 004a 0400     		.2byte	0x4
- 1196 004c F3       		.byte	0xf3
- 1197 004d 01       		.uleb128 0x1
- 1198 004e 50       		.byte	0x50
- 1199 004f 9F       		.byte	0x9f
- 1200 0050 00000000 		.4byte	0
- 1201 0054 00000000 		.4byte	0
- 1202              		.section	.debug_aranges,"",%progbits
- 1203 0000 44000000 		.4byte	0x44
- 1204 0004 0200     		.2byte	0x2
- 1205 0006 00000000 		.4byte	.Ldebug_info0
- 1206 000a 04       		.byte	0x4
- 1207 000b 00       		.byte	0
- 1208 000c 0000     		.2byte	0
- 1209 000e 0000     		.2byte	0
- 1210 0010 00000000 		.4byte	.LFB69
- 1211 0014 6C000000 		.4byte	.LFE69-.LFB69
- 1212 0018 00000000 		.4byte	.LFB65
- 1213 001c 38000000 		.4byte	.LFE65-.LFB65
- 1214 0020 00000000 		.4byte	.LFB64
- 1215 0024 08000000 		.4byte	.LFE64-.LFB64
- 1216 0028 00000000 		.4byte	.LFB66
- 1217 002c 28000000 		.4byte	.LFE66-.LFB66
- 1218 0030 00000000 		.4byte	.LFB67
- 1219 0034 1C000000 		.4byte	.LFE67-.LFB67
- 1220 0038 00000000 		.4byte	.LFB68
- 1221 003c 18000000 		.4byte	.LFE68-.LFB68
- 1222 0040 00000000 		.4byte	0
- 1223 0044 00000000 		.4byte	0
- 1224              		.section	.debug_ranges,"",%progbits
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 26
+ 1128 0044 9F       		.byte	0x9f
+ 1129 0045 00000000 		.4byte	0
+ 1130 0049 00000000 		.4byte	0
+ 1131              		.section	.debug_aranges,"",%progbits
+ 1132 0000 44000000 		.4byte	0x44
+ 1133 0004 0200     		.2byte	0x2
+ 1134 0006 00000000 		.4byte	.Ldebug_info0
+ 1135 000a 04       		.byte	0x4
+ 1136 000b 00       		.byte	0
+ 1137 000c 0000     		.2byte	0
+ 1138 000e 0000     		.2byte	0
+ 1139 0010 00000000 		.4byte	.LFB69
+ 1140 0014 3C000000 		.4byte	.LFE69-.LFB69
+ 1141 0018 00000000 		.4byte	.LFB65
+ 1142 001c 38000000 		.4byte	.LFE65-.LFB65
+ 1143 0020 00000000 		.4byte	.LFB64
+ 1144 0024 08000000 		.4byte	.LFE64-.LFB64
+ 1145 0028 00000000 		.4byte	.LFB66
+ 1146 002c 28000000 		.4byte	.LFE66-.LFB66
+ 1147 0030 00000000 		.4byte	.LFB67
+ 1148 0034 1C000000 		.4byte	.LFE67-.LFB67
+ 1149 0038 00000000 		.4byte	.LFB68
+ 1150 003c 18000000 		.4byte	.LFE68-.LFB68
+ 1151 0040 00000000 		.4byte	0
+ 1152 0044 00000000 		.4byte	0
+ 1153              		.section	.debug_ranges,"",%progbits
+ 1154              	.Ldebug_ranges0:
+ 1155 0000 00000000 		.4byte	.LFB69
+ 1156 0004 3C000000 		.4byte	.LFE69
+ 1157 0008 00000000 		.4byte	.LFB65
+ 1158 000c 38000000 		.4byte	.LFE65
+ 1159 0010 00000000 		.4byte	.LFB64
+ 1160 0014 08000000 		.4byte	.LFE64
+ 1161 0018 00000000 		.4byte	.LFB66
+ 1162 001c 28000000 		.4byte	.LFE66
+ 1163 0020 00000000 		.4byte	.LFB67
+ 1164 0024 1C000000 		.4byte	.LFE67
+ 1165 0028 00000000 		.4byte	.LFB68
+ 1166 002c 18000000 		.4byte	.LFE68
+ 1167 0030 00000000 		.4byte	0
+ 1168 0034 00000000 		.4byte	0
+ 1169              		.section	.debug_line,"",%progbits
+ 1170              	.Ldebug_line0:
+ 1171 0000 DE020000 		.section	.debug_str,"MS",%progbits,1
+ 1171      02005A02 
+ 1171      00000201 
+ 1171      FB0E0D00 
+ 1171      01010101 
+ 1172              	.LASF46:
+ 1173 0000 6973725F 		.ascii	"isr_clock_StartEx\000"
+ 1173      636C6F63 
+ 1173      6B5F5374 
+ 1173      61727445 
+ 1173      7800
+ 1174              	.LASF45:
+ 1175 0012 436C6F63 		.ascii	"Clock_TempSampling_Start\000"
+ 1175      6B5F5465 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 25
 
 
- 1225              	.Ldebug_ranges0:
- 1226 0000 00000000 		.4byte	.LFB69
- 1227 0004 6C000000 		.4byte	.LFE69
- 1228 0008 00000000 		.4byte	.LFB65
- 1229 000c 38000000 		.4byte	.LFE65
- 1230 0010 00000000 		.4byte	.LFB64
- 1231 0014 08000000 		.4byte	.LFE64
- 1232 0018 00000000 		.4byte	.LFB66
- 1233 001c 28000000 		.4byte	.LFE66
- 1234 0020 00000000 		.4byte	.LFB67
- 1235 0024 1C000000 		.4byte	.LFE67
- 1236 0028 00000000 		.4byte	.LFB68
- 1237 002c 18000000 		.4byte	.LFE68
- 1238 0030 00000000 		.4byte	0
- 1239 0034 00000000 		.4byte	0
- 1240              		.section	.debug_line,"",%progbits
- 1241              	.Ldebug_line0:
- 1242 0000 F2020000 		.section	.debug_str,"MS",%progbits,1
- 1242      02006A02 
- 1242      00000201 
- 1242      FB0E0D00 
- 1242      01010101 
- 1243              	.LASF48:
- 1244 0000 6973725F 		.ascii	"isr_clock_StartEx\000"
- 1244      636C6F63 
- 1244      6B5F5374 
- 1244      61727445 
- 1244      7800
- 1245              	.LASF47:
- 1246 0012 436C6F63 		.ascii	"Clock_TempSampling_Start\000"
- 1246      6B5F5465 
- 1246      6D705361 
- 1246      6D706C69 
- 1246      6E675F53 
- 1247              	.LASF60:
- 1248 002b 73776974 		.ascii	"switchstate\000"
- 1248      63687374 
- 1248      61746500 
- 1249              	.LASF38:
- 1250 0037 54656D70 		.ascii	"Temp_sample_counter_ReadStatusRegister\000"
- 1250      5F73616D 
- 1250      706C655F 
- 1250      636F756E 
- 1250      7465725F 
- 1251              	.LASF21:
- 1252 005e 53797374 		.ascii	"System_On\000"
- 1252      656D5F4F 
- 1252      6E00
- 1253              	.LASF44:
- 1254 0068 416D706C 		.ascii	"Amplifier_Startup\000"
- 1254      69666965 
- 1254      725F5374 
- 1254      61727475 
- 1254      7000
- 1255              	.LASF10:
- 1256 007a 5F5F696E 		.ascii	"__int32_t\000"
- 1256      7433325F 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 27
+ 1175      6D705361 
+ 1175      6D706C69 
+ 1175      6E675F53 
+ 1176              	.LASF58:
+ 1177 002b 73776974 		.ascii	"switchstate\000"
+ 1177      63687374 
+ 1177      61746500 
+ 1178              	.LASF36:
+ 1179 0037 54656D70 		.ascii	"Temp_sample_counter_ReadStatusRegister\000"
+ 1179      5F73616D 
+ 1179      706C655F 
+ 1179      636F756E 
+ 1179      7465725F 
+ 1180              	.LASF21:
+ 1181 005e 53797374 		.ascii	"System_On\000"
+ 1181      656D5F4F 
+ 1181      6E00
+ 1182              	.LASF42:
+ 1183 0068 416D706C 		.ascii	"Amplifier_Startup\000"
+ 1183      69666965 
+ 1183      725F5374 
+ 1183      61727475 
+ 1183      7000
+ 1184              	.LASF9:
+ 1185 007a 5F5F696E 		.ascii	"__int32_t\000"
+ 1185      7433325F 
+ 1185      7400
+ 1186              	.LASF49:
+ 1187 0084 54656D70 		.ascii	"Temp_sample_counter_Stop\000"
+ 1187      5F73616D 
+ 1187      706C655F 
+ 1187      636F756E 
+ 1187      7465725F 
+ 1188              	.LASF27:
+ 1189 009d 7274645F 		.ascii	"rtd_ratio\000"
+ 1189      72617469 
+ 1189      6F00
+ 1190              	.LASF48:
+ 1191 00a7 6973725F 		.ascii	"isr_clock_Disable\000"
+ 1191      636C6F63 
+ 1191      6B5F4469 
+ 1191      7361626C 
+ 1191      6500
+ 1192              	.LASF32:
+ 1193 00b9 53657454 		.ascii	"SetTemperature\000"
+ 1193      656D7065 
+ 1193      72617475 
+ 1193      726500
+ 1194              	.LASF56:
+ 1195 00c8 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 1195      73657273 
+ 1195      5C6E6963 
+ 1195      6F5F5C53 
+ 1195      756E6468 
+ 1196 00f6 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 1196      6C6F725C 
+ 1196      42616368 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 26
 
 
- 1256      7400
- 1257              	.LASF51:
- 1258 0084 54656D70 		.ascii	"Temp_sample_counter_Stop\000"
- 1258      5F73616D 
- 1258      706C655F 
- 1258      636F756E 
- 1258      7465725F 
- 1259              	.LASF27:
- 1260 009d 7274645F 		.ascii	"rtd_ratio\000"
- 1260      72617469 
- 1260      6F00
- 1261              	.LASF50:
- 1262 00a7 6973725F 		.ascii	"isr_clock_Disable\000"
- 1262      636C6F63 
- 1262      6B5F4469 
- 1262      7361626C 
- 1262      6500
- 1263              	.LASF32:
- 1264 00b9 53657454 		.ascii	"SetTemperature\000"
- 1264      656D7065 
- 1264      72617475 
- 1264      726500
- 1265              	.LASF58:
- 1266 00c8 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
- 1266      73657273 
- 1266      5C6E6963 
- 1266      6F5F5C53 
- 1266      756E6468 
- 1267 00f6 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
- 1267      6C6F725C 
- 1267      42616368 
- 1267      656C6F72 
- 1267      50726F6A 
- 1268 0126 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
- 1268      636F6F6C 
- 1268      696E6773 
- 1268      79737465 
- 1268      6D2E6379 
- 1269              	.LASF24:
- 1270 013e 53797374 		.ascii	"System_newState\000"
- 1270      656D5F6E 
- 1270      65775374 
- 1270      61746500 
- 1271              	.LASF36:
- 1272 014e 52656775 		.ascii	"Regulation\000"
- 1272      6C617469 
- 1272      6F6E00
- 1273              	.LASF11:
- 1274 0159 696E7433 		.ascii	"int32_t\000"
- 1274      325F7400 
- 1275              	.LASF0:
- 1276 0161 666C6F61 		.ascii	"float\000"
- 1276      7400
- 1277              	.LASF43:
- 1278 0167 54656D70 		.ascii	"Temperature_Setup\000"
- 1278      65726174 
- 1278      7572655F 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 28
+ 1196      656C6F72 
+ 1196      50726F6A 
+ 1197 0126 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 1197      636F6F6C 
+ 1197      696E6773 
+ 1197      79737465 
+ 1197      6D2E6379 
+ 1198              	.LASF24:
+ 1199 013e 53797374 		.ascii	"System_newState\000"
+ 1199      656D5F6E 
+ 1199      65775374 
+ 1199      61746500 
+ 1200              	.LASF10:
+ 1201 014e 696E7433 		.ascii	"int32_t\000"
+ 1201      325F7400 
+ 1202              	.LASF13:
+ 1203 0156 666C6F61 		.ascii	"float\000"
+ 1203      7400
+ 1204              	.LASF41:
+ 1205 015c 54656D70 		.ascii	"Temperature_Setup\000"
+ 1205      65726174 
+ 1205      7572655F 
+ 1205      53657475 
+ 1205      7000
+ 1206              	.LASF1:
+ 1207 016e 756E7369 		.ascii	"unsigned char\000"
+ 1207      676E6564 
+ 1207      20636861 
+ 1207      7200
+ 1208              	.LASF54:
+ 1209 017c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1209      43313120 
+ 1209      352E342E 
+ 1209      31203230 
+ 1209      31363036 
+ 1210 01af 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1210      20726576 
+ 1210      6973696F 
+ 1210      6E203233 
+ 1210      37373135 
+ 1211 01e2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1211      66756E63 
+ 1211      74696F6E 
+ 1211      2D736563 
+ 1211      74696F6E 
+ 1212              	.LASF5:
+ 1213 020a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1213      20756E73 
+ 1213      69676E65 
+ 1213      6420696E 
+ 1213      7400
+ 1214              	.LASF51:
+ 1215 021c 50756D70 		.ascii	"Pump_Shutdown\000"
+ 1215      5F536875 
+ 1215      74646F77 
+ 1215      6E00
+ 1216              	.LASF3:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 27
 
 
- 1278      53657475 
- 1278      7000
- 1279              	.LASF2:
- 1280 0179 756E7369 		.ascii	"unsigned char\000"
- 1280      676E6564 
- 1280      20636861 
- 1280      7200
- 1281              	.LASF56:
- 1282 0187 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1282      43313120 
- 1282      352E342E 
- 1282      31203230 
- 1282      31363036 
- 1283 01ba 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1283      20726576 
- 1283      6973696F 
- 1283      6E203233 
- 1283      37373135 
- 1284 01ed 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1284      66756E63 
- 1284      74696F6E 
- 1284      2D736563 
- 1284      74696F6E 
- 1285              	.LASF6:
- 1286 0215 6C6F6E67 		.ascii	"long unsigned int\000"
- 1286      20756E73 
- 1286      69676E65 
- 1286      6420696E 
- 1286      7400
- 1287              	.LASF53:
- 1288 0227 50756D70 		.ascii	"Pump_Shutdown\000"
- 1288      5F536875 
- 1288      74646F77 
- 1288      6E00
- 1289              	.LASF4:
- 1290 0235 73686F72 		.ascii	"short unsigned int\000"
- 1290      7420756E 
- 1290      7369676E 
- 1290      65642069 
- 1290      6E7400
- 1291              	.LASF49:
- 1292 0248 5475726E 		.ascii	"Turn_ON\000"
- 1292      5F4F4E00 
- 1293              	.LASF25:
- 1294 0250 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1294      52784275 
- 1294      66666572 
- 1294      00
- 1295              	.LASF14:
- 1296 025d 646F7562 		.ascii	"double\000"
- 1296      6C6500
- 1297              	.LASF41:
- 1298 0264 50756D70 		.ascii	"Pump_Setup\000"
- 1298      5F536574 
- 1298      757000
- 1299              	.LASF19:
- 1300 026f 74656D70 		.ascii	"temp_string\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 29
+ 1217 022a 73686F72 		.ascii	"short unsigned int\000"
+ 1217      7420756E 
+ 1217      7369676E 
+ 1217      65642069 
+ 1217      6E7400
+ 1218              	.LASF47:
+ 1219 023d 5475726E 		.ascii	"Turn_ON\000"
+ 1219      5F4F4E00 
+ 1220              	.LASF25:
+ 1221 0245 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1221      52784275 
+ 1221      66666572 
+ 1221      00
+ 1222              	.LASF14:
+ 1223 0252 646F7562 		.ascii	"double\000"
+ 1223      6C6500
+ 1224              	.LASF39:
+ 1225 0259 50756D70 		.ascii	"Pump_Setup\000"
+ 1225      5F536574 
+ 1225      757000
+ 1226              	.LASF19:
+ 1227 0264 74656D70 		.ascii	"temp_string\000"
+ 1227      5F737472 
+ 1227      696E6700 
+ 1228              	.LASF57:
+ 1229 0270 6D61696E 		.ascii	"main\000"
+ 1229      00
+ 1230              	.LASF12:
+ 1231 0275 75696E74 		.ascii	"uint16\000"
+ 1231      313600
+ 1232              	.LASF43:
+ 1233 027c 50756D70 		.ascii	"Pump_Startup\000"
+ 1233      5F537461 
+ 1233      72747570 
+ 1233      00
+ 1234              	.LASF8:
+ 1235 0289 756E7369 		.ascii	"unsigned int\000"
+ 1235      676E6564 
+ 1235      20696E74 
+ 1235      00
+ 1236              	.LASF18:
+ 1237 0296 74656D70 		.ascii	"temp\000"
+ 1237      00
+ 1238              	.LASF31:
+ 1239 029b 47657452 		.ascii	"GetRtdRatio\000"
+ 1239      74645261 
+ 1239      74696F00 
+ 1240              	.LASF29:
+ 1241 02a7 6C617374 		.ascii	"last_regu\000"
+ 1241      5F726567 
+ 1241      7500
+ 1242              	.LASF33:
+ 1243 02b1 47657454 		.ascii	"GetTemperature\000"
+ 1243      656D7065 
+ 1243      72617475 
+ 1243      726500
+ 1244              	.LASF40:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 28
 
 
- 1300      5F737472 
- 1300      696E6700 
- 1301              	.LASF59:
- 1302 027b 6D61696E 		.ascii	"main\000"
- 1302      00
- 1303              	.LASF13:
- 1304 0280 75696E74 		.ascii	"uint16\000"
- 1304      313600
- 1305              	.LASF45:
- 1306 0287 50756D70 		.ascii	"Pump_Startup\000"
- 1306      5F537461 
- 1306      72747570 
- 1306      00
- 1307              	.LASF9:
- 1308 0294 756E7369 		.ascii	"unsigned int\000"
- 1308      676E6564 
- 1308      20696E74 
- 1308      00
- 1309              	.LASF18:
- 1310 02a1 74656D70 		.ascii	"temp\000"
- 1310      00
- 1311              	.LASF31:
- 1312 02a6 47657452 		.ascii	"GetRtdRatio\000"
- 1312      74645261 
- 1312      74696F00 
- 1313              	.LASF29:
- 1314 02b2 6C617374 		.ascii	"last_regu\000"
- 1314      5F726567 
- 1314      7500
- 1315              	.LASF33:
- 1316 02bc 47657454 		.ascii	"GetTemperature\000"
- 1316      656D7065 
- 1316      72617475 
- 1316      726500
- 1317              	.LASF42:
- 1318 02cb 416D706C 		.ascii	"Amplifier_Setup\000"
- 1318      69666965 
- 1318      725F5365 
- 1318      74757000 
- 1319              	.LASF26:
- 1320 02db 53776974 		.ascii	"Switch_State\000"
- 1320      63685F53 
- 1320      74617465 
- 1320      00
- 1321              	.LASF40:
- 1322 02e8 53776974 		.ascii	"Switch_Setup\000"
- 1322      63685F53 
- 1322      65747570 
- 1322      00
- 1323              	.LASF17:
- 1324 02f5 73697A65 		.ascii	"sizetype\000"
- 1324      74797065 
- 1324      00
- 1325              	.LASF7:
- 1326 02fe 6C6F6E67 		.ascii	"long long int\000"
- 1326      206C6F6E 
- 1326      6720696E 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 30
+ 1245 02c0 416D706C 		.ascii	"Amplifier_Setup\000"
+ 1245      69666965 
+ 1245      725F5365 
+ 1245      74757000 
+ 1246              	.LASF26:
+ 1247 02d0 53776974 		.ascii	"Switch_State\000"
+ 1247      63685F53 
+ 1247      74617465 
+ 1247      00
+ 1248              	.LASF38:
+ 1249 02dd 53776974 		.ascii	"Switch_Setup\000"
+ 1249      63685F53 
+ 1249      65747570 
+ 1249      00
+ 1250              	.LASF17:
+ 1251 02ea 73697A65 		.ascii	"sizetype\000"
+ 1251      74797065 
+ 1251      00
+ 1252              	.LASF6:
+ 1253 02f3 6C6F6E67 		.ascii	"long long int\000"
+ 1253      206C6F6E 
+ 1253      6720696E 
+ 1253      7400
+ 1254              	.LASF15:
+ 1255 0301 63686172 		.ascii	"char\000"
+ 1255      00
+ 1256              	.LASF52:
+ 1257 0306 416D706C 		.ascii	"Amplifier_Shutdown\000"
+ 1257      69666965 
+ 1257      725F5368 
+ 1257      7574646F 
+ 1257      776E00
+ 1258              	.LASF0:
+ 1259 0319 7369676E 		.ascii	"signed char\000"
+ 1259      65642063 
+ 1259      68617200 
+ 1260              	.LASF53:
+ 1261 0325 5475726E 		.ascii	"Turn_OFF\000"
+ 1261      5F4F4646 
+ 1261      00
+ 1262              	.LASF20:
+ 1263 032e 53797374 		.ascii	"System_Setup\000"
+ 1263      656D5F53 
+ 1263      65747570 
+ 1263      00
+ 1264              	.LASF44:
+ 1265 033b 54656D70 		.ascii	"Temp_sample_counter_Start\000"
+ 1265      5F73616D 
+ 1265      706C655F 
+ 1265      636F756E 
+ 1265      7465725F 
+ 1266              	.LASF2:
+ 1267 0355 73686F72 		.ascii	"short int\000"
+ 1267      7420696E 
+ 1267      7400
+ 1268              	.LASF30:
+ 1269 035f 72656775 		.ascii	"regu\000"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 29
 
 
- 1326      7400
- 1327              	.LASF15:
- 1328 030c 63686172 		.ascii	"char\000"
- 1328      00
- 1329              	.LASF54:
- 1330 0311 416D706C 		.ascii	"Amplifier_Shutdown\000"
- 1330      69666965 
- 1330      725F5368 
- 1330      7574646F 
- 1330      776E00
- 1331              	.LASF1:
- 1332 0324 7369676E 		.ascii	"signed char\000"
- 1332      65642063 
- 1332      68617200 
- 1333              	.LASF55:
- 1334 0330 5475726E 		.ascii	"Turn_OFF\000"
- 1334      5F4F4646 
- 1334      00
- 1335              	.LASF20:
- 1336 0339 53797374 		.ascii	"System_Setup\000"
- 1336      656D5F53 
- 1336      65747570 
- 1336      00
- 1337              	.LASF46:
- 1338 0346 54656D70 		.ascii	"Temp_sample_counter_Start\000"
- 1338      5F73616D 
- 1338      706C655F 
- 1338      636F756E 
- 1338      7465725F 
- 1339              	.LASF3:
- 1340 0360 73686F72 		.ascii	"short int\000"
- 1340      7420696E 
- 1340      7400
- 1341              	.LASF30:
- 1342 036a 72656775 		.ascii	"regu\000"
- 1342      00
- 1343              	.LASF12:
- 1344 036f 75696E74 		.ascii	"uint8\000"
- 1344      3800
- 1345              	.LASF37:
- 1346 0375 466C6F77 		.ascii	"FlowDirection\000"
- 1346      44697265 
- 1346      6374696F 
- 1346      6E00
- 1347              	.LASF28:
- 1348 0383 7265665F 		.ascii	"ref_res\000"
- 1348      72657300 
- 1349              	.LASF5:
- 1350 038b 6C6F6E67 		.ascii	"long int\000"
- 1350      20696E74 
- 1350      00
- 1351              	.LASF16:
- 1352 0394 6C6F6E67 		.ascii	"long double\000"
- 1352      20646F75 
- 1352      626C6500 
- 1353              	.LASF22:
- 1354 03a0 53797374 		.ascii	"System_Off\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccQdcvZr.s 			page 31
+ 1269      00
+ 1270              	.LASF11:
+ 1271 0364 75696E74 		.ascii	"uint8\000"
+ 1271      3800
+ 1272              	.LASF28:
+ 1273 036a 7265665F 		.ascii	"ref_res\000"
+ 1273      72657300 
+ 1274              	.LASF4:
+ 1275 0372 6C6F6E67 		.ascii	"long int\000"
+ 1275      20696E74 
+ 1275      00
+ 1276              	.LASF16:
+ 1277 037b 6C6F6E67 		.ascii	"long double\000"
+ 1277      20646F75 
+ 1277      626C6500 
+ 1278              	.LASF22:
+ 1279 0387 53797374 		.ascii	"System_Off\000"
+ 1279      656D5F4F 
+ 1279      666600
+ 1280              	.LASF50:
+ 1281 0392 436C6F63 		.ascii	"Clock_TempSampling_Stop\000"
+ 1281      6B5F5465 
+ 1281      6D705361 
+ 1281      6D706C69 
+ 1281      6E675F53 
+ 1282              	.LASF55:
+ 1283 03aa 53797374 		.ascii	"SystemController.c\000"
+ 1283      656D436F 
+ 1283      6E74726F 
+ 1283      6C6C6572 
+ 1283      2E6300
+ 1284              	.LASF35:
+ 1285 03bd 55415254 		.ascii	"UART_1_PutString\000"
+ 1285      5F315F50 
+ 1285      75745374 
+ 1285      72696E67 
+ 1285      00
+ 1286              	.LASF34:
+ 1287 03ce 73707269 		.ascii	"sprintf\000"
+ 1287      6E746600 
+ 1288              	.LASF7:
+ 1289 03d6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1289      206C6F6E 
+ 1289      6720756E 
+ 1289      7369676E 
+ 1289      65642069 
+ 1290              	.LASF23:
+ 1291 03ed 4953525F 		.ascii	"ISR_CLOCK_handler\000"
+ 1291      434C4F43 
+ 1291      4B5F6861 
+ 1291      6E646C65 
+ 1291      7200
+ 1292              	.LASF37:
+ 1293 03ff 55415254 		.ascii	"UART_1_Start\000"
+ 1293      5F315F53 
+ 1293      74617274 
+ 1293      00
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEjTifJ.s 			page 30
 
 
- 1354      656D5F4F 
- 1354      666600
- 1355              	.LASF52:
- 1356 03ab 436C6F63 		.ascii	"Clock_TempSampling_Stop\000"
- 1356      6B5F5465 
- 1356      6D705361 
- 1356      6D706C69 
- 1356      6E675F53 
- 1357              	.LASF57:
- 1358 03c3 53797374 		.ascii	"SystemController.c\000"
- 1358      656D436F 
- 1358      6E74726F 
- 1358      6C6C6572 
- 1358      2E6300
- 1359              	.LASF35:
- 1360 03d6 55415254 		.ascii	"UART_1_PutString\000"
- 1360      5F315F50 
- 1360      75745374 
- 1360      72696E67 
- 1360      00
- 1361              	.LASF34:
- 1362 03e7 73707269 		.ascii	"sprintf\000"
- 1362      6E746600 
- 1363              	.LASF8:
- 1364 03ef 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1364      206C6F6E 
- 1364      6720756E 
- 1364      7369676E 
- 1364      65642069 
- 1365              	.LASF23:
- 1366 0406 4953525F 		.ascii	"ISR_CLOCK_handler\000"
- 1366      434C4F43 
- 1366      4B5F6861 
- 1366      6E646C65 
- 1366      7200
- 1367              	.LASF39:
- 1368 0418 55415254 		.ascii	"UART_1_Start\000"
- 1368      5F315F53 
- 1368      74617274 
- 1368      00
- 1369              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1294              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

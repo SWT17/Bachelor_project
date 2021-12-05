@@ -144,23 +144,6 @@ CY_ISR(ISR_CLOCK_handler)
     float temp_string = GetTemperature();
     sprintf(temp,"Temperature: %f\n\r",temp_string);
     UART_1_PutString(temp);
-
-    
-    regu = Regulation(temp_string);
-    
-
-    
-
-
-    
-    
-    if(last_regu != regu)
-    {
-        
-        FlowDirection(regu);
-    }
-
-    last_regu = regu;
     
      /*Clears counter     interrupt*/
     Temp_sample_counter_ReadStatusRegister();
