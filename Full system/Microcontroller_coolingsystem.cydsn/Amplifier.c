@@ -225,8 +225,7 @@ char ReadByteFromAdress(char adress)
 
 void WriteByteToAdress(char adress, char data)
 {
-    
-    
+       
     //Pull Slave select low, start transmission.
     SS_Write(0);
     SPIM_1_WriteTxData(adress);
