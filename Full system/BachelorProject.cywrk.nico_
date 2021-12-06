@@ -119,6 +119,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\PumpCtrlUnitTest</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\SwitchUnitTest</v>
 <v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest</v>
+<v>BachelorProject\Microcontroller_coolingsystem\Test files\TemperatureUnitTest\TemperatureUnitTest.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -258,6 +259,7 @@
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Switch_test.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SwitchUnitTest.lst</v>
 <v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\SystemController.lst</v>
+<v>BachelorProject\Microcontroller_coolingsystem\CortexM3\ARM_GCC_541\Debug\Listing Files\Temp_sample_counter.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -316,16 +318,7 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Microcontroller_coolingsystem.cydsn\switch.h" />
-<name v=".\Microcontroller_coolingsystem.cydsn\switch.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Regulation.c" />
 <name v=".\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Amplifier.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.h" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5\switch_input_interrupt.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -333,7 +326,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1338, 728" SelectedTabbedMdiWindow="a594bd74-a9cf-4505-934d-c7c94e54e802"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\switch.h" Guid="5a76f362-4542-40f3-97be-1edde93569f9" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\switch.c" Guid="8b2ad053-368a-4dfb-9b17-7f43cdb64a77" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\TopDesign\TopDesign.cysch" Guid="bd62dfb0-1293-476f-95e6-39078eb696f7" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.c" Guid="1a199aa1-9673-4238-b1c9-d7bd6fab80b6" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="2a71d57e-7877-48ef-8d8f-a5efed141dd0" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Regulation.c" Guid="a594bd74-a9cf-4505-934d-c7c94e54e802" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="02dc0ec7-989e-4ea8-a03f-a73d2aa00edb" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Amplifier.c" Guid="8bb9616e-94eb-4b14-89ad-9ecad3efe721" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.h" Guid="c7d99942-f6a7-4573-b741-7bc9b16b5750" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5\switch_input_interrupt.c" Guid="82517b6d-d1b8-47a8-a67c-cac3db1f9001" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1424, 645" SelectedTabbedMdiWindow="05745e8e-bb09-469f-a78b-08377b1f36fe"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Microcontroller_coolingsystem.cydwr" Guid="05745e8e-bb09-469f-a78b-08377b1f36fe" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
