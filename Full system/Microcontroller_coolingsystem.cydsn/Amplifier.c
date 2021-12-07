@@ -242,6 +242,7 @@ void WriteByteToAdress(char adress, char data)
        
 }
 
+/*Resets the configuration register on the max31865*/
 void Reset_amplifier_ref()
 {
     WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,0x00);    

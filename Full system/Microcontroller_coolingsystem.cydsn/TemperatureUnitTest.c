@@ -15,15 +15,43 @@
 calculated based of the ratio given to the method.*/
 void calc_RTD_value_RatiosSent_RTDresistancereceived()
 {
-    SetTemperature(1000);
-    SetTemperature(2500);
-    SetTemperature(7542);
+
+    //Setup the temperature class with af reference resistance
+    Temperature_Setup(4300);
+    
+    //Run the test
+    SetTemperature(7239);
+    SetTemperature(7620);
+    SetTemperature(8611);
 }
 
 /*Test the resulting temperature if it corresponds with the
 Standard 60751 when feeding it with known RTD resistance values*/
 void calc_Calctemp_RatiosSent_RTDresistancereceived()
 {
+    //Setup the temperature class with af reference resistance
+    Temperature_Setup(4300);
+    
+    UART_1_Start();
+    //Run the test
+    SetTemperature(7232);
+    char temp[50];
+            
+    float temp_string = GetTemperature();
+    sprintf(temp,"RTD resistance value = 7232 Temperature: %f\n\r",temp_string);
+    UART_1_PutString(temp);
+    SetTemperature(7620);
+
+            
+    temp_string = GetTemperature();
+    sprintf(temp,"RTD resistance value = 7620 Temperature: %f\n\r",temp_string);
+    UART_1_PutString(temp);
+    SetTemperature(8598);
+    
+            
+     temp_string = GetTemperature();
+    sprintf(temp,"RTD resistance value = 8598 Temperature: %f\n\r",temp_string);
+    UART_1_PutString(temp);
 
 }
 

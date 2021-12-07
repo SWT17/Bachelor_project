@@ -9,10 +9,19 @@
  *
  * ========================================
 */
-#include "Temperature.h"
-#include "UART_1.h"
+#include "MaxanalogOutput.h"
 
-void calc_RTD_value_RatiosSent_RTDresistancereceived();
-void calc_Calctemp_RatiosSent_RTDresistancereceived();
-
+uint8 speed;
+uint16 voltage;
+void maxAnalogOutputTest()
+{
+    PGA_SpeedControl_Start();
+    VDAC8_SpeedControl_Start();
+    
+    voltage = 4000;
+    speed = (voltage*256)/(4080*2);
+    
+    VDAC8_SpeedControl_SetValue(speed);
+      
+}
 /* [] END OF FILE */

@@ -9,10 +9,10 @@
  *
  * ========================================
 */
-#include "Temperature.h"
-#include "UART_1.h"
 
-void calc_RTD_value_RatiosSent_RTDresistancereceived();
-void calc_Calctemp_RatiosSent_RTDresistancereceived();
+#include "VDAC8_SpeedControl.h"
+#include "PGA_SpeedControl.h"
+
+void maxAnalogOutputTest();
 
 /* [] END OF FILE */

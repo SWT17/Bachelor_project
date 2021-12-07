@@ -30,8 +30,7 @@ float regu;
 int main(void)
 {   
 
-    
-
+  
     System_Setup();
 
     

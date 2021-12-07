@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
   28:Amplifier.c   **** /*Internal variables declartion*/
   29:Amplifier.c   **** uint16_t rtd_ratio;
   30:Amplifier.c   **** uint8 dummy_bytes;
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 2
 
 
   31:Amplifier.c   **** uint8 bytes_received ;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
   85:Amplifier.c   **** /*Controlled startup after being shutdown. Setting up temperature conversion
   86:Amplifier.c   **** starting SPI communication again*/
   87:Amplifier.c   **** void Amplifier_Startup()
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 3
 
 
   88:Amplifier.c   **** {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
   60              		@ args = 0, pretend = 0, frame = 0
   61              		@ frame_needed = 0, uses_anonymous_args = 0
   62 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 4
 
 
   63              		.cfi_def_cfa_offset 8
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  146:Amplifier.c   ****     if(filterconfig == FILTER_50HZ)
  147:Amplifier.c   ****     {
  148:Amplifier.c   ****        config |= FILTER_50HZ;
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 5
 
 
  149:Amplifier.c   ****        WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,config); 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  203:Amplifier.c   **** 
  204:Amplifier.c   **** char ReadByteFromAdress(char adress)
  205:Amplifier.c   **** {
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 6
 
 
   81              		.loc 1 205 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  219:Amplifier.c   ****     
  220:Amplifier.c   ****     //Clear TX and RX FIFO for the SPI to make it ready for the next transmission.
  221:Amplifier.c   ****     
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 7
 
 
  222:Amplifier.c   ****     return bytes_received;
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  168              		.size	GetRtdRatio, .-GetRtdRatio
  169 001a 00BF     		.section	.text.WriteByteToAdress,"ax",%progbits
  170              		.align	2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 8
 
 
  171              		.global	WriteByteToAdress
@@ -443,48 +443,47 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  187              		.cfi_offset 14, -4
  188 0002 0546     		mov	r5, r0
  189 0004 0C46     		mov	r4, r1
- 228:Amplifier.c   ****     
- 229:Amplifier.c   ****     
- 230:Amplifier.c   ****     //Pull Slave select low, start transmission.
- 231:Amplifier.c   ****     SS_Write(0);
- 190              		.loc 1 231 0
+ 228:Amplifier.c   ****        
+ 229:Amplifier.c   ****     //Pull Slave select low, start transmission.
+ 230:Amplifier.c   ****     SS_Write(0);
+ 190              		.loc 1 230 0
  191 0006 0020     		movs	r0, #0
  192              	.LVL19:
  193 0008 FFF7FEFF 		bl	SS_Write
  194              	.LVL20:
- 232:Amplifier.c   ****     SPIM_1_WriteTxData(adress);
- 195              		.loc 1 232 0
+ 231:Amplifier.c   ****     SPIM_1_WriteTxData(adress);
+ 195              		.loc 1 231 0
  196 000c 2846     		mov	r0, r5
  197 000e FFF7FEFF 		bl	SPIM_1_WriteTxData
  198              	.LVL21:
- 233:Amplifier.c   ****     SPIM_1_WriteTxData(data);
- 199              		.loc 1 233 0
+ 232:Amplifier.c   ****     SPIM_1_WriteTxData(data);
+ 199              		.loc 1 232 0
  200 0012 2046     		mov	r0, r4
  201 0014 FFF7FEFF 		bl	SPIM_1_WriteTxData
  202              	.LVL22:
- 234:Amplifier.c   ****     //Pull slave select up, end transmission.
- 235:Amplifier.c   ****     CyDelay(20);
- 203              		.loc 1 235 0
+ 233:Amplifier.c   ****     //Pull slave select up, end transmission.
+ 234:Amplifier.c   ****     CyDelay(20);
+ 203              		.loc 1 234 0
  204 0018 1420     		movs	r0, #20
  205 001a FFF7FEFF 		bl	CyDelay
  206              	.LVL23:
- 236:Amplifier.c   ****     SS_Write(255);
- 207              		.loc 1 236 0
+ 235:Amplifier.c   ****     SS_Write(255);
+ 207              		.loc 1 235 0
  208 001e FF20     		movs	r0, #255
  209 0020 FFF7FEFF 		bl	SS_Write
  210              	.LVL24:
- 237:Amplifier.c   ****     
- 238:Amplifier.c   ****     dummy_bytes = SPIM_1_ReadRxData();
- 211              		.loc 1 238 0
+ 236:Amplifier.c   ****     
+ 237:Amplifier.c   ****     dummy_bytes = SPIM_1_ReadRxData();
+ 211              		.loc 1 237 0
  212 0024 FFF7FEFF 		bl	SPIM_1_ReadRxData
  213              	.LVL25:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 9
-
-
  214 0028 024C     		ldr	r4, .L14
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 9
+
+
  215 002a 2070     		strb	r0, [r4]
- 239:Amplifier.c   ****     dummy_bytes = SPIM_1_ReadRxData();
- 216              		.loc 1 239 0
+ 238:Amplifier.c   ****     dummy_bytes = SPIM_1_ReadRxData();
+ 216              		.loc 1 238 0
  217 002c FFF7FEFF 		bl	SPIM_1_ReadRxData
  218              	.LVL26:
  219 0030 2070     		strb	r0, [r4]
@@ -538,10 +537,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  262              	.L17:
  129:Amplifier.c   ****     {
  263              		.loc 1 129 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 10
-
-
  264 001c 102C     		cmp	r4, #16
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 10
+
+
  265 001e 07D1     		bne	.L16
  132:Amplifier.c   ****         //Write new config setup to amplifier.
  266              		.loc 1 132 0
@@ -598,10 +597,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  312              		.loc 1 148 0
  313 0012 40F00101 		orr	r1, r0, #1
  314 0016 1970     		strb	r1, [r3]
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 11
-
-
  149:Amplifier.c   ****     }
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 11
+
+
  315              		.loc 1 149 0
  316 0018 8020     		movs	r0, #128
  317 001a FFF7FEFF 		bl	WriteByteToAdress
@@ -658,10 +657,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  363 000a 0A4B     		ldr	r3, .L32
  364 000c 1870     		strb	r0, [r3]
  165:Amplifier.c   ****     {
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 12
-
-
  365              		.loc 1 165 0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 12
+
+
  366 000e 402C     		cmp	r4, #64
  367 0010 05D1     		bne	.L29
  167:Amplifier.c   ****         WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,config);
@@ -718,10 +717,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  413 0002 0446     		mov	r4, r0
  181:Amplifier.c   ****     if(vbias_mode == VBIAS_ON)
  414              		.loc 1 181 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 13
-
-
  415 0004 0020     		movs	r0, #0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 13
+
+
  416              	.LVL43:
  417 0006 FFF7FEFF 		bl	ReadByteFromAdress
  418              	.LVL44:
@@ -778,10 +777,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  462              		@ args = 0, pretend = 0, frame = 0
  463              		@ frame_needed = 0, uses_anonymous_args = 0
  464 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 14
-
-
  465              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 14
+
+
  466              		.cfi_offset 3, -8
  467              		.cfi_offset 14, -4
   77:Amplifier.c   ****     Set_VBIAS(VBIAS_OFF);
@@ -838,10 +837,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  512 0018 08BD     		pop	{r3, pc}
  513              	.L45:
  514 001a 00BF     		.align	2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 15
-
-
  515              	.L44:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 15
+
+
  516 001c 00000000 		.word	config
  517              		.cfi_endproc
  518              	.LFE12:
@@ -893,18 +892,18 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  559              		.type	Reset_amplifier_ref, %function
  560              	Reset_amplifier_ref:
  561              	.LFB15:
- 240:Amplifier.c   ****     
- 241:Amplifier.c   ****     //This is done to empty the data received for every WRITE in the RX buffer and TX
- 242:Amplifier.c   **** 
- 243:Amplifier.c   ****        
- 244:Amplifier.c   **** }
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 16
+ 239:Amplifier.c   ****     
+ 240:Amplifier.c   ****     //This is done to empty the data received for every WRITE in the RX buffer and TX
+ 241:Amplifier.c   **** 
+ 242:Amplifier.c   ****        
+ 243:Amplifier.c   **** }
+ 244:Amplifier.c   **** 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 16
 
 
- 245:Amplifier.c   **** 
- 246:Amplifier.c   **** void Reset_amplifier_ref()
- 247:Amplifier.c   **** {
- 562              		.loc 1 247 0
+ 245:Amplifier.c   **** void Reset_amplifier_ref()
+ 246:Amplifier.c   **** {
+ 562              		.loc 1 246 0
  563              		.cfi_startproc
  564              		@ args = 0, pretend = 0, frame = 0
  565              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -912,8 +911,8 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  567              		.cfi_def_cfa_offset 8
  568              		.cfi_offset 3, -8
  569              		.cfi_offset 14, -4
- 248:Amplifier.c   ****     WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,0x00);    
- 570              		.loc 1 248 0
+ 247:Amplifier.c   ****     WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,0x00);    
+ 570              		.loc 1 247 0
  571 0002 0021     		movs	r1, #0
  572 0004 8020     		movs	r0, #128
  573 0006 FFF7FEFF 		bl	WriteByteToAdress
@@ -958,10 +957,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  607 0012 8020     		movs	r0, #128
  608 0014 FFF7FEFF 		bl	Set_VBIAS
  609              	.LVL60:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 17
-
-
   53:Amplifier.c   **** }
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 17
+
+
  610              		.loc 1 53 0
  611 0018 FFF7FEFF 		bl	Clear_Fault
  612              	.LVL61:
@@ -1018,10 +1017,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  660 000a 04       		.byte	0x4
  661 000b 01       		.uleb128 0x1
  662 000c 63010000 		.4byte	.LASF53
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 18
-
-
  663 0010 0C       		.byte	0xc
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 18
+
+
  664 0011 F9000000 		.4byte	.LASF54
  665 0015 83000000 		.4byte	.LASF55
  666 0019 00000000 		.4byte	.Ldebug_ranges0+0
@@ -1078,10 +1077,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  717 007c 07       		.byte	0x7
  718 007d 5B020000 		.4byte	.LASF10
  719 0081 02       		.uleb128 0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 19
-
-
  720 0082 08       		.byte	0x8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 19
+
+
  721 0083 04       		.byte	0x4
  722 0084 5E030000 		.4byte	.LASF11
  723 0088 02       		.uleb128 0x2
@@ -1138,10 +1137,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  774 00f6 00000000 		.4byte	.LLST0
  775 00fa 07       		.uleb128 0x7
  776 00fb 4C534200 		.ascii	"LSB\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 20
-
-
  777 00ff 01       		.byte	0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 20
+
+
  778 0100 63       		.byte	0x63
  779 0101 96000000 		.4byte	0x96
  780 0105 21000000 		.4byte	.LLST1
@@ -1198,10 +1197,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  831 0177 00       		.byte	0
  832 0178 0B       		.uleb128 0xb
  833 0179 16000000 		.4byte	.LVL8
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 21
-
-
  834 017d 34060000 		.4byte	0x634
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 21
+
+
  835 0181 8C010000 		.4byte	0x18c
  836 0185 0C       		.uleb128 0xc
  837 0186 01       		.uleb128 0x1
@@ -1258,10 +1257,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  888 01ec 0E       		.uleb128 0xe
  889 01ed 1F000000 		.4byte	.LASF24
  890 01f1 01       		.byte	0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 22
-
-
  891 01f2 3F       		.byte	0x3f
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 22
+
+
  892 01f3 8F000000 		.4byte	0x8f
  893 01f7 01       		.uleb128 0x1
  894 01f8 54       		.byte	0x54
@@ -1318,10 +1317,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  945 025b 8F000000 		.4byte	0x8f
  946 025f 76000000 		.4byte	.LLST4
  947 0263 0A       		.uleb128 0xa
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 23
-
-
  948 0264 34010000 		.4byte	.LASF28
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 23
+
+
  949 0268 01       		.byte	0x1
  950 0269 E2       		.byte	0xe2
  951 026a 8F000000 		.4byte	0x8f
@@ -1378,10 +1377,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1002 02d0 02       		.uleb128 0x2
  1003 02d1 09       		.byte	0x9
  1004 02d2 FF       		.byte	0xff
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 24
-
-
  1005 02d3 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 24
+
+
  1006 02d4 09       		.uleb128 0x9
  1007 02d5 28000000 		.4byte	.LVL25
  1008 02d9 4A060000 		.4byte	0x64a
@@ -1438,10 +1437,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1059 0342 00       		.byte	0
  1060 0343 11       		.uleb128 0x11
  1061 0344 44030000 		.4byte	.LASF31
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 25
-
-
  1062 0348 01       		.byte	0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 25
+
+
  1063 0349 8F       		.byte	0x8f
  1064 034a 00000000 		.4byte	.LFB9
  1065 034e 38000000 		.4byte	.LFE9-.LFB9
@@ -1498,10 +1497,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1116 03b4 0A       		.uleb128 0xa
  1117 03b5 23020000 		.4byte	.LASF34
  1118 03b9 01       		.byte	0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 26
-
-
  1119 03ba A1       		.byte	0xa1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 26
+
+
  1120 03bb 8F000000 		.4byte	0x8f
  1121 03bf FA000000 		.4byte	.LLST8
  1122 03c3 0B       		.uleb128 0xb
@@ -1558,10 +1557,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1173 042c 0C       		.uleb128 0xc
  1174 042d 01       		.uleb128 0x1
  1175 042e 50       		.byte	0x50
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 27
-
-
  1176 042f 01       		.uleb128 0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 27
+
+
  1177 0430 30       		.byte	0x30
  1178 0431 00       		.byte	0
  1179 0432 0B       		.uleb128 0xb
@@ -1618,10 +1617,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1230 0492 09       		.uleb128 0x9
  1231 0493 12000000 		.4byte	.LVL49
  1232 0497 55060000 		.4byte	0x655
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 28
-
-
  1233 049b 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 28
+
+
  1234 049c 08       		.uleb128 0x8
  1235 049d 89030000 		.4byte	.LASF39
  1236 04a1 01       		.byte	0x1
@@ -1678,10 +1677,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1287 0507 0B       		.uleb128 0xb
  1288 0508 12000000 		.4byte	.LVL54
  1289 050c 9F030000 		.4byte	0x39f
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 29
-
-
  1290 0510 1B050000 		.4byte	0x51b
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 29
+
+
  1291 0514 0C       		.uleb128 0xc
  1292 0515 01       		.uleb128 0x1
  1293 0516 50       		.byte	0x50
@@ -1696,7 +1695,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1302 0525 08       		.uleb128 0x8
  1303 0526 34000000 		.4byte	.LASF41
  1304 052a 01       		.byte	0x1
- 1305 052b F6       		.byte	0xf6
+ 1305 052b F5       		.byte	0xf5
  1306 052c 00000000 		.4byte	.LFB15
  1307 0530 0C000000 		.4byte	.LFE15-.LFB15
  1308 0534 01       		.uleb128 0x1
@@ -1738,10 +1737,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1344 057c 01       		.uleb128 0x1
  1345 057d 50       		.byte	0x50
  1346 057e 01       		.uleb128 0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 30
-
-
  1347 057f 30       		.byte	0x30
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 30
+
+
  1348 0580 00       		.byte	0
  1349 0581 0B       		.uleb128 0xb
  1350 0582 12000000 		.4byte	.LVL59
@@ -1798,10 +1797,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1401 05f1 1E       		.byte	0x1e
  1402 05f2 AC000000 		.4byte	0xac
  1403 05f6 05       		.uleb128 0x5
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 31
-
-
  1404 05f7 03       		.byte	0x3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 31
+
+
  1405 05f8 00000000 		.4byte	dummy_bytes
  1406 05fc 12       		.uleb128 0x12
  1407 05fd 0C010000 		.4byte	.LASF45
@@ -1858,10 +1857,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1458 0003 25       		.uleb128 0x25
  1459 0004 0E       		.uleb128 0xe
  1460 0005 13       		.uleb128 0x13
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 32
-
-
  1461 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 32
+
+
  1462 0007 03       		.uleb128 0x3
  1463 0008 0E       		.uleb128 0xe
  1464 0009 1B       		.uleb128 0x1b
@@ -1918,10 +1917,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1515 003c 0B       		.uleb128 0xb
  1516 003d 3B       		.uleb128 0x3b
  1517 003e 05       		.uleb128 0x5
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 33
-
-
  1518 003f 49       		.uleb128 0x49
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 33
+
+
  1519 0040 13       		.uleb128 0x13
  1520 0041 00       		.byte	0
  1521 0042 00       		.byte	0
@@ -1978,10 +1977,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1572 0076 0B       		.uleb128 0xb
  1573 0077 3B       		.uleb128 0x3b
  1574 0078 0B       		.uleb128 0xb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 34
-
-
  1575 0079 11       		.uleb128 0x11
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 34
+
+
  1576 007a 01       		.uleb128 0x1
  1577 007b 12       		.uleb128 0x12
  1578 007c 06       		.uleb128 0x6
@@ -2038,10 +2037,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1629 00b7 00       		.byte	0
  1630 00b8 00       		.byte	0
  1631 00b9 0D       		.uleb128 0xd
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 35
-
-
  1632 00ba 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 35
+
+
  1633 00bb 01       		.byte	0x1
  1634 00bc 3F       		.uleb128 0x3f
  1635 00bd 19       		.uleb128 0x19
@@ -2098,10 +2097,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1686 00f1 10       		.uleb128 0x10
  1687 00f2 898201   		.uleb128 0x4109
  1688 00f5 01       		.byte	0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 36
-
-
  1689 00f6 11       		.uleb128 0x11
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 36
+
+
  1690 00f7 01       		.uleb128 0x1
  1691 00f8 31       		.uleb128 0x31
  1692 00f9 13       		.uleb128 0x13
@@ -2158,10 +2157,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1743 012d 19       		.uleb128 0x19
  1744 012e 6E       		.uleb128 0x6e
  1745 012f 0E       		.uleb128 0xe
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 37
-
-
  1746 0130 03       		.uleb128 0x3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 37
+
+
  1747 0131 0E       		.uleb128 0xe
  1748 0132 3A       		.uleb128 0x3a
  1749 0133 0B       		.uleb128 0xb
@@ -2218,10 +2217,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1800 0063 10000000 		.4byte	.LVL15
  1801 0067 14000000 		.4byte	.LVL16
  1802 006b 0100     		.2byte	0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 38
-
-
  1803 006d 50       		.byte	0x50
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 38
+
+
  1804 006e 00000000 		.4byte	0
  1805 0072 00000000 		.4byte	0
  1806              	.LLST4:
@@ -2278,10 +2277,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1857 00ef 01       		.uleb128 0x1
  1858 00f0 50       		.byte	0x50
  1859 00f1 9F       		.byte	0x9f
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 39
-
-
  1860 00f2 00000000 		.4byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 39
+
+
  1861 00f6 00000000 		.4byte	0
  1862              	.LLST8:
  1863 00fa 00000000 		.4byte	.LVL37
@@ -2338,10 +2337,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1914 0050 00000000 		.4byte	.LFB11
  1915 0054 38000000 		.4byte	.LFE11-.LFB11
  1916 0058 00000000 		.4byte	.LFB4
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 40
-
-
  1917 005c 14000000 		.4byte	.LFE4-.LFB4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 40
+
+
  1918 0060 00000000 		.4byte	.LFB12
  1919 0064 20000000 		.4byte	.LFE12-.LFB12
  1920 0068 00000000 		.4byte	.LFB5
@@ -2398,10 +2397,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1967              	.LASF29:
  1968 0000 5365745F 		.ascii	"Set_WireSetup\000"
  1968      57697265 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 41
-
-
  1968      53657475 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 41
+
+
  1968      7000
  1969              	.LASF3:
  1970 000e 5F5F7569 		.ascii	"__uint8_t\000"
@@ -2458,10 +2457,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  1989      50726F6A 
  1990 00e1 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
  1990      636F6F6C 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 42
-
-
  1990      696E6773 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 42
+
+
  1990      79737465 
  1990      6D2E6379 
  1991              	.LASF54:
@@ -2518,10 +2517,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  2012      66756E63 
  2012      74696F6E 
  2012      2D736563 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 43
-
-
  2012      74696F6E 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 43
+
+
  2013              	.LASF7:
  2014 01f1 6C6F6E67 		.ascii	"long unsigned int\000"
  2014      20756E73 
@@ -2578,10 +2577,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  2036      65642069 
  2037              	.LASF14:
  2038 028c 75696E74 		.ascii	"uint8_t\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 44
-
-
  2038      385F7400 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 44
+
+
  2039              	.LASF33:
  2040 0294 5365745F 		.ascii	"Set_ConverionMode\000"
  2040      436F6E76 
@@ -2638,10 +2637,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 1
  2063              	.LASF2:
  2064 0328 73686F72 		.ascii	"short int\000"
  2064      7420696E 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccu8t9W5.s 			page 45
-
-
  2064      7400
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc2QUXTf.s 			page 45
+
+
  2065              	.LASF15:
  2066 0332 75696E74 		.ascii	"uint16_t\000"
  2066      31365F74 

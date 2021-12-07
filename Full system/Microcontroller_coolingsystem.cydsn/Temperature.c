@@ -64,6 +64,7 @@ uint32_t calc_RTD_value(uint16 rtd_ratio)
     
     float rtd_res = (rtd_ratio*Ref_resistance)/pow(2,15); //Calculates the RTD resistance in mili Ohm from equation p. 19 in MAX31865 datasheet
     uint32 rtd_res_mOhm = rtd_res * 1000;
+
     return rtd_res_mOhm;
 }
 
