@@ -136,14 +136,13 @@ void FlowDirection(uint8 regulation)
     the same as with the enabling pin.
     Then we need and ADC to control the other MOSFET.*/
     
-    
-    
     if(regulation == 0)
     {
         output_voltage_direction = (uint8) (4080*255/4080);
         
         VDAC8_Direction_SetValue(output_voltage_direction);
-        CyDelay(10500);
+        //Delay is based on the time to empty the tubes at 2.5V pump speed
+        CyDelay(13000);
         Pump_Stop();
         
     }else

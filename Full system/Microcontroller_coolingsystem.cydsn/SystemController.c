@@ -66,6 +66,8 @@ void System_Setup()
     
     /*Setup the Temperature domain class with reference resistance value*/
     Temperature_Setup(ref_res);
+    
+    Regulation_setup();
             
 }
 
@@ -147,11 +149,6 @@ CY_ISR(ISR_CLOCK_handler)
 
     
     regu = Regulation(temp_string);
-    
-
-    
-
-
     
     
     if(last_regu != regu)

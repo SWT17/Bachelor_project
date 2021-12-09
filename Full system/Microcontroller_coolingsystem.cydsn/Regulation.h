@@ -13,4 +13,5 @@
 #include "cytypes.h"
 
 uint8 Regulation(float temp);
+void Regulation_setup();
 /* [] END OF FILE */
