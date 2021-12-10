@@ -316,11 +316,12 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
-<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.h" />
-<name v=".\Microcontroller_coolingsystem.cydsn\Regulation.h" />
 <name v=".\Microcontroller_coolingsystem.cydsn\Regulation.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\Amplifier.c" />
+<name v=".\Microcontroller_coolingsystem.cydsn\SystemController.h" />
+<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.h" />
+<name v=".\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -328,7 +329,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1303, 711" SelectedTabbedMdiWindow="ff166013-5fca-4f97-9c28-8c3a3838b1a7"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.c" Guid="ff166013-5fca-4f97-9c28-8c3a3838b1a7" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="56163aec-0318-423a-848a-0eaba52504e6" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.h" Guid="4092451f-21dd-4a58-b2c4-8771aa73a15d" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Regulation.h" Guid="c397ddc1-ca2a-41db-ae34-a21bb9046a6e" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Regulation.c" Guid="967ea1ac-bbdb-47a5-9ffb-a8ec62914110" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1303, 711" SelectedTabbedMdiWindow="f03a8728-0383-458b-af9c-035d38e4585a"><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Regulation.c" Guid="0176b623-8127-425c-906a-ff17c0835f95" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.c" Guid="015baef2-e4c0-443f-95e2-d96f113699d0" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Amplifier.c" Guid="cc5b62da-987e-4d9b-a57f-a733214befe0" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\SystemController.h" Guid="5c8c0758-405c-4d42-8a84-8f7a378fd37a" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.h" Guid="852ab920-e44a-4d96-8766-6bbded827492" /><DocumentWindow Key="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\PumpCtrl.c" Guid="f03a8728-0383-458b-af9c-035d38e4585a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
