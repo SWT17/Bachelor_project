@@ -14,4 +14,9 @@
 #include "UART_1.h"
 
 void Run_Tests();
+void Pump_StartPump_CallMethod_PumpStarted();
+void Pump_PumpStartUp_CallMethod_CorrectMethodsCalled();
+void Pump_SetConstSpeed_CallMethodWith63_OutputIs2V();
+void Pump_SetConstSpeed_CallMethodWith94_OutputIs3V();
+void Pump_PumpStop_CallMethod_OutputIs4_6VOnPin02();
 /* [] END OF FILE */

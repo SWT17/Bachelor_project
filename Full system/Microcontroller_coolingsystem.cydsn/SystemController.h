@@ -24,11 +24,13 @@
 
 
 //Test includes
-//#include "PumpCtrlUnitTest.h"
+#include "PumpCtrlUnitTest.h"
 //#include "SwitchUnitTest.h"
 //#include "TemperatureUnitTest.h"
 //#include "MaxanalogOutput.h"
-
+//#include "LEDUnitTest.h"
+//#include "AmplifierUnitTest.h"
+//#include "SystemControllerUnitTest.h"
 
 
 

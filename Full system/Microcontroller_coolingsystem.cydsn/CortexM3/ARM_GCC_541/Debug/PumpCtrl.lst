@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 1
 
 
    1              		.syntax unified
@@ -42,70 +42,71 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   12:PumpCtrl.c    **** #include "PumpCtrl.h"
   13:PumpCtrl.c    **** #include "UART_1.h"
   14:PumpCtrl.c    **** 
-  15:PumpCtrl.c    **** float voltage;
-  16:PumpCtrl.c    **** uint8 output_voltage;
-  17:PumpCtrl.c    **** uint8 speed;
-  18:PumpCtrl.c    **** uint8 const_speed;
-  19:PumpCtrl.c    **** uint8 output_voltage_direction;
-  20:PumpCtrl.c    **** 
-  21:PumpCtrl.c    **** void SetSpeed(uint8_t speed);
-  22:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage);
-  23:PumpCtrl.c    **** 
+  15:PumpCtrl.c    **** //Delcared variables
+  16:PumpCtrl.c    **** float voltage;
+  17:PumpCtrl.c    **** uint8 output_voltage;
+  18:PumpCtrl.c    **** uint8 speed;
+  19:PumpCtrl.c    **** uint8 const_speed;
+  20:PumpCtrl.c    **** uint8 output_voltage_direction;
+  21:PumpCtrl.c    **** 
+  22:PumpCtrl.c    **** //declared functions
+  23:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage);
   24:PumpCtrl.c    **** 
-  25:PumpCtrl.c    **** /*Initialize the VDAC component for speed control and enabling pin*/
-  26:PumpCtrl.c    **** void Pump_Setup()
-  27:PumpCtrl.c    **** {
-  28:PumpCtrl.c    ****     output_voltage = 0;
-  29:PumpCtrl.c    ****     //Start VDAC_enabling
-  30:PumpCtrl.c    ****     VDAC8_Enabling_Start();
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 2
+  25:PumpCtrl.c    **** 
+  26:PumpCtrl.c    **** /*Initialize the VDAC component for speed control and enabling pin*/
+  27:PumpCtrl.c    **** void Pump_Setup()
+  28:PumpCtrl.c    **** {
+  29:PumpCtrl.c    ****     output_voltage = 0;
+  30:PumpCtrl.c    ****     //Start VDAC_enabling
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 2
 
 
-  31:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
-  32:PumpCtrl.c    ****     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V); 
-  33:PumpCtrl.c    ****     
+  31:PumpCtrl.c    ****     VDAC8_Enabling_Start();
+  32:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
+  33:PumpCtrl.c    ****     VDAC8_Enabling_SetRange(VDAC8_Enabling_RANGE_4V); 
   34:PumpCtrl.c    ****     
-  35:PumpCtrl.c    **** 
-  36:PumpCtrl.c    ****     //Stop pump.
-  37:PumpCtrl.c    ****     Pump_Stop();
-  38:PumpCtrl.c    **** }
-  39:PumpCtrl.c    **** 
-  40:PumpCtrl.c    **** /*Controlled shutdown of pump and it's software components*/
-  41:PumpCtrl.c    **** void Pump_Shutdown()
-  42:PumpCtrl.c    **** {
-  43:PumpCtrl.c    **** 
-  44:PumpCtrl.c    ****     //Stop VDAC in outputting the speed control voltage. Set output value to 0.
-  45:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
-  46:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
-  47:PumpCtrl.c    ****     
-  48:PumpCtrl.c    ****     PGA_SpeedControl_Stop();
-  49:PumpCtrl.c    ****     
-  50:PumpCtrl.c    ****     //Stop the pump
-  51:PumpCtrl.c    ****     Pump_Stop();
-  52:PumpCtrl.c    **** }
-  53:PumpCtrl.c    **** 
-  54:PumpCtrl.c    **** /*Controlled startup of pump*/
-  55:PumpCtrl.c    **** void Pump_Startup(uint16 constVoltage)
-  56:PumpCtrl.c    **** {
-  57:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
-  58:PumpCtrl.c    ****     VDAC8_SpeedControl_Start();
-  59:PumpCtrl.c    ****     //Start PGA for speed control
-  60:PumpCtrl.c    ****     PGA_SpeedControl_Start();
-  61:PumpCtrl.c    ****     
-  62:PumpCtrl.c    **** 
-  63:PumpCtrl.c    ****     //Set speed control voltage to 2.5V
-  64:PumpCtrl.c    ****     speed = SetConstSpeed(constVoltage);
-  65:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
-  66:PumpCtrl.c    ****      
-  67:PumpCtrl.c    ****     //Call Pump start
-  68:PumpCtrl.c    ****     Pump_Start();
-  69:PumpCtrl.c    **** }
-  70:PumpCtrl.c    **** 
+  35:PumpCtrl.c    ****     
+  36:PumpCtrl.c    **** 
+  37:PumpCtrl.c    ****     //Stop pump.
+  38:PumpCtrl.c    ****     Pump_Stop();
+  39:PumpCtrl.c    **** }
+  40:PumpCtrl.c    **** 
+  41:PumpCtrl.c    **** /*Controlled shutdown of pump and it's software components*/
+  42:PumpCtrl.c    **** void Pump_Shutdown()
+  43:PumpCtrl.c    **** {
+  44:PumpCtrl.c    **** 
+  45:PumpCtrl.c    ****     //Stop VDAC in outputting the speed control voltage. Set output value to 0.
+  46:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(0);
+  47:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
+  48:PumpCtrl.c    ****     
+  49:PumpCtrl.c    ****     PGA_SpeedControl_Stop();
+  50:PumpCtrl.c    ****     
+  51:PumpCtrl.c    ****     //Stop the pump
+  52:PumpCtrl.c    ****     Pump_Stop();
+  53:PumpCtrl.c    **** }
+  54:PumpCtrl.c    **** 
+  55:PumpCtrl.c    **** /*Controlled startup of pump*/
+  56:PumpCtrl.c    **** void Pump_Startup(uint16 constVoltage)
+  57:PumpCtrl.c    **** {
+  58:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
+  59:PumpCtrl.c    ****     VDAC8_SpeedControl_Start();
+  60:PumpCtrl.c    ****     //Start PGA for speed control
+  61:PumpCtrl.c    ****     PGA_SpeedControl_Start();
+  62:PumpCtrl.c    ****     
+  63:PumpCtrl.c    **** 
+  64:PumpCtrl.c    ****     //Set speed control voltage to 2.5V
+  65:PumpCtrl.c    ****     speed = SetConstSpeed(constVoltage);
+  66:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
+  67:PumpCtrl.c    ****      
+  68:PumpCtrl.c    ****     //Call Pump start
+  69:PumpCtrl.c    ****     Pump_Start();
+  70:PumpCtrl.c    **** }
   71:PumpCtrl.c    **** 
-  72:PumpCtrl.c    **** /*Start the pump by enabling it, and setting the speed control variable*/
-  73:PumpCtrl.c    **** void Pump_Start()
-  74:PumpCtrl.c    **** {
-  28              		.loc 1 74 0
+  72:PumpCtrl.c    **** 
+  73:PumpCtrl.c    **** /*Start the pump by enabling it, and setting the speed control variable*/
+  74:PumpCtrl.c    **** void Pump_Start()
+  75:PumpCtrl.c    **** {
+  28              		.loc 1 75 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -113,14 +114,14 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  75:PumpCtrl.c    ****     //Enable pump through closing transistor.
-  76:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(0);
-  36              		.loc 1 76 0
+  76:PumpCtrl.c    ****     //Enable pump through closing transistor.
+  77:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(0);
+  36              		.loc 1 77 0
   37 0002 0020     		movs	r0, #0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 3
+
+
   38 0004 FFF7FEFF 		bl	VDAC8_Enabling_SetValue
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 3
-
-
   39              	.LVL0:
   40 0008 08BD     		pop	{r3, pc}
   41              		.cfi_endproc
@@ -134,15 +135,15 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   49              		.type	Pump_Stop, %function
   50              	Pump_Stop:
   51              	.LFB5:
-  77:PumpCtrl.c    ****     
-  78:PumpCtrl.c    **** }
-  79:PumpCtrl.c    **** 
+  78:PumpCtrl.c    ****     
+  79:PumpCtrl.c    **** }
   80:PumpCtrl.c    **** 
-  81:PumpCtrl.c    **** /*Opens up the transistor, connecting the enable pin on pump controller
-  82:PumpCtrl.c    **** board to ground. This stop the pump.*/
-  83:PumpCtrl.c    **** void Pump_Stop()
-  84:PumpCtrl.c    **** {
-  52              		.loc 1 84 0
+  81:PumpCtrl.c    **** 
+  82:PumpCtrl.c    **** /*Opens up the transistor, connecting the enable pin on pump controller
+  83:PumpCtrl.c    **** board to ground. This stop the pump.*/
+  84:PumpCtrl.c    **** void Pump_Stop()
+  85:PumpCtrl.c    **** {
+  52              		.loc 1 85 0
   53              		.cfi_startproc
   54              		@ args = 0, pretend = 0, frame = 0
   55              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -150,14 +151,14 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   57              		.cfi_def_cfa_offset 8
   58              		.cfi_offset 3, -8
   59              		.cfi_offset 14, -4
-  85:PumpCtrl.c    ****     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
-  86:PumpCtrl.c    ****     output_voltage = (uint8)(4080 * 255/(4080));
-  60              		.loc 1 86 0
+  86:PumpCtrl.c    ****     //Set the initial enabling VDAC value to 3.2V from a maximum of 4.080 from the VDAC
+  87:PumpCtrl.c    ****     output_voltage = (uint8)(4080 * 255/(4080));
+  60              		.loc 1 87 0
   61 0002 FF20     		movs	r0, #255
   62 0004 024B     		ldr	r3, .L5
   63 0006 1870     		strb	r0, [r3]
-  87:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(output_voltage); 
-  64              		.loc 1 87 0
+  88:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(output_voltage); 
+  64              		.loc 1 88 0
   65 0008 FFF7FEFF 		bl	VDAC8_Enabling_SetValue
   66              	.LVL1:
   67 000c 08BD     		pop	{r3, pc}
@@ -176,11 +177,11 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   80              		.type	Pump_Setup, %function
   81              	Pump_Setup:
   82              	.LFB1:
-  27:PumpCtrl.c    ****     output_voltage = 0;
-  83              		.loc 1 27 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 4
+  28:PumpCtrl.c    ****     output_voltage = 0;
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 4
 
 
+  83              		.loc 1 28 0
   84              		.cfi_startproc
   85              		@ args = 0, pretend = 0, frame = 0
   86              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -188,22 +189,22 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
   88              		.cfi_def_cfa_offset 8
   89              		.cfi_offset 3, -8
   90              		.cfi_offset 14, -4
-  28:PumpCtrl.c    ****     //Start VDAC_enabling
-  91              		.loc 1 28 0
+  29:PumpCtrl.c    ****     //Start VDAC_enabling
+  91              		.loc 1 29 0
   92 0002 0022     		movs	r2, #0
   93 0004 044B     		ldr	r3, .L9
   94 0006 1A70     		strb	r2, [r3]
-  30:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
-  95              		.loc 1 30 0
+  31:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
+  95              		.loc 1 31 0
   96 0008 FFF7FEFF 		bl	VDAC8_Enabling_Start
   97              	.LVL2:
-  32:PumpCtrl.c    ****     
-  98              		.loc 1 32 0
+  33:PumpCtrl.c    ****     
+  98              		.loc 1 33 0
   99 000c 0420     		movs	r0, #4
  100 000e FFF7FEFF 		bl	VDAC8_Enabling_SetRange
  101              	.LVL3:
-  37:PumpCtrl.c    **** }
- 102              		.loc 1 37 0
+  38:PumpCtrl.c    **** }
+ 102              		.loc 1 38 0
  103 0012 FFF7FEFF 		bl	Pump_Stop
  104              	.LVL4:
  105 0016 08BD     		pop	{r3, pc}
@@ -222,8 +223,8 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  118              		.type	Pump_Shutdown, %function
  119              	Pump_Shutdown:
  120              	.LFB2:
-  42:PumpCtrl.c    **** 
- 121              		.loc 1 42 0
+  43:PumpCtrl.c    **** 
+ 121              		.loc 1 43 0
  122              		.cfi_startproc
  123              		@ args = 0, pretend = 0, frame = 0
  124              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -231,24 +232,24 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  126              		.cfi_def_cfa_offset 8
  127              		.cfi_offset 3, -8
  128              		.cfi_offset 14, -4
-  45:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
- 129              		.loc 1 45 0
+  46:PumpCtrl.c    ****     VDAC8_SpeedControl_Stop();
+ 129              		.loc 1 46 0
  130 0002 0020     		movs	r0, #0
  131 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
  132              	.LVL5:
-  46:PumpCtrl.c    ****     
- 133              		.loc 1 46 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 5
+  47:PumpCtrl.c    ****     
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 5
 
 
+ 133              		.loc 1 47 0
  134 0008 FFF7FEFF 		bl	VDAC8_SpeedControl_Stop
  135              	.LVL6:
-  48:PumpCtrl.c    ****     
- 136              		.loc 1 48 0
+  49:PumpCtrl.c    ****     
+ 136              		.loc 1 49 0
  137 000c FFF7FEFF 		bl	PGA_SpeedControl_Stop
  138              	.LVL7:
-  51:PumpCtrl.c    **** }
- 139              		.loc 1 51 0
+  52:PumpCtrl.c    **** }
+ 139              		.loc 1 52 0
  140 0010 FFF7FEFF 		bl	Pump_Stop
  141              	.LVL8:
  142 0014 08BD     		pop	{r3, pc}
@@ -263,23 +264,22 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  151              		.type	SetConstSpeed, %function
  152              	SetConstSpeed:
  153              	.LFB6:
-  88:PumpCtrl.c    ****     
-  89:PumpCtrl.c    **** }
-  90:PumpCtrl.c    **** 
+  89:PumpCtrl.c    ****     
+  90:PumpCtrl.c    **** }
   91:PumpCtrl.c    **** 
   92:PumpCtrl.c    **** 
   93:PumpCtrl.c    **** 
   94:PumpCtrl.c    **** 
-  95:PumpCtrl.c    **** /*Set a constant hardcoded speed for the speed control.*/
-  96:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage)
-  97:PumpCtrl.c    **** {
- 154              		.loc 1 97 0
+  95:PumpCtrl.c    **** 
+  96:PumpCtrl.c    **** /*Set a constant hardcoded speed for the speed control.*/
+  97:PumpCtrl.c    **** uint8 SetConstSpeed(uint16 speed_control_voltage)
+  98:PumpCtrl.c    **** {
+ 154              		.loc 1 98 0
  155              		.cfi_startproc
  156              		@ args = 0, pretend = 0, frame = 0
  157              		@ frame_needed = 0, uses_anonymous_args = 0
  158              		@ link register save eliminated.
  159              	.LVL9:
-  98:PumpCtrl.c    **** 
   99:PumpCtrl.c    ****     const_speed = (speed_control_voltage*256)/(4080*2); //Calculate the speed corresponding to 2.5V
  160              		.loc 1 99 0
  161 0000 0002     		lsls	r0, r0, #8
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  172              		.align	2
  173              	.L14:
  174 0014 81808080 		.word	-2139062143
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 6
 
 
  175 0018 00000000 		.word	const_speed
@@ -313,8 +313,8 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  184              		.type	Pump_Startup, %function
  185              	Pump_Startup:
  186              	.LFB3:
-  56:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
- 187              		.loc 1 56 0
+  57:PumpCtrl.c    ****     //Start VDAC to output the speed control voltage
+ 187              		.loc 1 57 0
  188              		.cfi_startproc
  189              		@ args = 0, pretend = 0, frame = 0
  190              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -324,27 +324,27 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  194              		.cfi_offset 4, -8
  195              		.cfi_offset 14, -4
  196 0002 0446     		mov	r4, r0
-  58:PumpCtrl.c    ****     //Start PGA for speed control
- 197              		.loc 1 58 0
+  59:PumpCtrl.c    ****     //Start PGA for speed control
+ 197              		.loc 1 59 0
  198 0004 FFF7FEFF 		bl	VDAC8_SpeedControl_Start
  199              	.LVL12:
-  60:PumpCtrl.c    ****     
- 200              		.loc 1 60 0
+  61:PumpCtrl.c    ****     
+ 200              		.loc 1 61 0
  201 0008 FFF7FEFF 		bl	PGA_SpeedControl_Start
  202              	.LVL13:
-  64:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
- 203              		.loc 1 64 0
+  65:PumpCtrl.c    ****     VDAC8_SpeedControl_SetValue(speed);
+ 203              		.loc 1 65 0
  204 000c 2046     		mov	r0, r4
  205 000e FFF7FEFF 		bl	SetConstSpeed
  206              	.LVL14:
  207 0012 034B     		ldr	r3, .L18
  208 0014 1870     		strb	r0, [r3]
-  65:PumpCtrl.c    ****      
- 209              		.loc 1 65 0
+  66:PumpCtrl.c    ****      
+ 209              		.loc 1 66 0
  210 0016 FFF7FEFF 		bl	VDAC8_SpeedControl_SetValue
  211              	.LVL15:
-  68:PumpCtrl.c    **** }
- 212              		.loc 1 68 0
+  69:PumpCtrl.c    **** }
+ 212              		.loc 1 69 0
  213 001a FFF7FEFF 		bl	Pump_Start
  214              	.LVL16:
  215 001e 10BD     		pop	{r4, pc}
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  223              		.comm	output_voltage_direction,1,1
  224              		.comm	const_speed,1,1
  225              		.comm	speed,1,1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 7
 
 
  226              		.comm	output_voltage,1,1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  280 005d 03       		.uleb128 0x3
  281 005e 04       		.byte	0x4
  282 005f 05       		.byte	0x5
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 8
 
 
  283 0060 696E7400 		.ascii	"int\000"
@@ -459,7 +459,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  318 00a6 05       		.uleb128 0x5
  319 00a7 41020000 		.4byte	.LASF16
  320 00ab 01       		.byte	0x1
- 321 00ac 49       		.byte	0x49
+ 321 00ac 4A       		.byte	0x4a
  322 00ad 00000000 		.4byte	.LFB4
  323 00b1 0A000000 		.4byte	.LFE4-.LFB4
  324 00b5 01       		.uleb128 0x1
@@ -478,10 +478,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  337 00cb 05       		.uleb128 0x5
  338 00cc 8B020000 		.4byte	.LASF17
  339 00d0 01       		.byte	0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 9
 
 
- 340 00d1 53       		.byte	0x53
+ 340 00d1 54       		.byte	0x54
  341 00d2 00000000 		.4byte	.LFB5
  342 00d6 14000000 		.4byte	.LFE5-.LFB5
  343 00da 01       		.uleb128 0x1
@@ -501,7 +501,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  357 00f1 05       		.uleb128 0x5
  358 00f2 1A020000 		.4byte	.LASF18
  359 00f6 01       		.byte	0x1
- 360 00f7 1A       		.byte	0x1a
+ 360 00f7 1B       		.byte	0x1b
  361 00f8 00000000 		.4byte	.LFB1
  362 00fc 1C000000 		.4byte	.LFE1-.LFB1
  363 0100 01       		.uleb128 0x1
@@ -527,7 +527,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  383 012c 05       		.uleb128 0x5
  384 012d D2010000 		.4byte	.LASF19
  385 0131 01       		.byte	0x1
- 386 0132 29       		.byte	0x29
+ 386 0132 2A       		.byte	0x2a
  387 0133 00000000 		.4byte	.LFB2
  388 0137 16000000 		.4byte	.LFE2-.LFB2
  389 013b 01       		.uleb128 0x1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  394 0146 6C020000 		.4byte	0x26c
  395 014a 54010000 		.4byte	0x154
  396 014e 07       		.uleb128 0x7
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 10
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 10
 
 
  397 014f 01       		.uleb128 0x1
@@ -559,7 +559,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  412 0170 0A       		.uleb128 0xa
  413 0171 66020000 		.4byte	.LASF38
  414 0175 01       		.byte	0x1
- 415 0176 60       		.byte	0x60
+ 415 0176 61       		.byte	0x61
  416 0177 80000000 		.4byte	0x80
  417 017b 00000000 		.4byte	.LFB6
  418 017f 1C000000 		.4byte	.LFE6-.LFB6
@@ -569,14 +569,14 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  422 0189 0B       		.uleb128 0xb
  423 018a FD010000 		.4byte	.LASF20
  424 018e 01       		.byte	0x1
- 425 018f 60       		.byte	0x60
+ 425 018f 61       		.byte	0x61
  426 0190 8C000000 		.4byte	0x8c
  427 0194 00000000 		.4byte	.LLST0
  428 0198 00       		.byte	0
  429 0199 0C       		.uleb128 0xc
  430 019a 4C020000 		.4byte	.LASF39
  431 019e 01       		.byte	0x1
- 432 019f 37       		.byte	0x37
+ 432 019f 38       		.byte	0x38
  433 01a0 00000000 		.4byte	.LFB3
  434 01a4 24000000 		.4byte	.LFE3-.LFB3
  435 01a8 01       		.uleb128 0x1
@@ -585,7 +585,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  438 01ae 0B       		.uleb128 0xb
  439 01af 95020000 		.4byte	.LASF21
  440 01b3 01       		.byte	0x1
- 441 01b4 37       		.byte	0x37
+ 441 01b4 38       		.byte	0x38
  442 01b5 8C000000 		.4byte	0x8c
  443 01b9 21000000 		.4byte	.LLST1
  444 01bd 08       		.uleb128 0x8
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  451 01d0 12000000 		.4byte	.LVL14
  452 01d4 70010000 		.4byte	0x170
  453 01d8 E3010000 		.4byte	0x1e3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 11
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 11
 
 
  454 01dc 07       		.uleb128 0x7
@@ -618,7 +618,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  468 01f6 0D       		.uleb128 0xd
  469 01f7 E6010000 		.4byte	.LASF22
  470 01fb 01       		.byte	0x1
- 471 01fc 0F       		.byte	0xf
+ 471 01fc 10       		.byte	0x10
  472 01fd 98000000 		.4byte	0x98
  473 0201 05       		.uleb128 0x5
  474 0202 03       		.byte	0x3
@@ -626,7 +626,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  476 0207 0D       		.uleb128 0xd
  477 0208 EE010000 		.4byte	.LASF23
  478 020c 01       		.byte	0x1
- 479 020d 10       		.byte	0x10
+ 479 020d 11       		.byte	0x11
  480 020e 80000000 		.4byte	0x80
  481 0212 05       		.uleb128 0x5
  482 0213 03       		.byte	0x3
@@ -634,7 +634,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  484 0218 0D       		.uleb128 0xd
  485 0219 18000000 		.4byte	.LASF24
  486 021d 01       		.byte	0x1
- 487 021e 11       		.byte	0x11
+ 487 021e 12       		.byte	0x12
  488 021f 80000000 		.4byte	0x80
  489 0223 05       		.uleb128 0x5
  490 0224 03       		.byte	0x3
@@ -642,7 +642,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  492 0229 0D       		.uleb128 0xd
  493 022a E8000000 		.4byte	.LASF25
  494 022e 01       		.byte	0x1
- 495 022f 12       		.byte	0x12
+ 495 022f 13       		.byte	0x13
  496 0230 80000000 		.4byte	0x80
  497 0234 05       		.uleb128 0x5
  498 0235 03       		.byte	0x3
@@ -650,7 +650,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  500 023a 0D       		.uleb128 0xd
  501 023b 1E000000 		.4byte	.LASF26
  502 023f 01       		.byte	0x1
- 503 0240 13       		.byte	0x13
+ 503 0240 14       		.byte	0x14
  504 0241 80000000 		.4byte	0x80
  505 0245 05       		.uleb128 0x5
  506 0246 03       		.byte	0x3
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  508 024b 0E       		.uleb128 0xe
  509 024c 00000000 		.4byte	.LASF27
  510 0250 00000000 		.4byte	.LASF27
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 12
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 12
 
 
  511 0254 03       		.byte	0x3
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  565 000e 01       		.uleb128 0x1
  566 000f 10       		.uleb128 0x10
  567 0010 17       		.uleb128 0x17
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 13
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 13
 
 
  568 0011 00       		.byte	0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  622 0047 9742     		.uleb128 0x2117
  623 0049 19       		.uleb128 0x19
  624 004a 01       		.uleb128 0x1
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 14
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 14
 
 
  625 004b 13       		.uleb128 0x13
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  679 008a 49       		.uleb128 0x49
  680 008b 13       		.uleb128 0x13
  681 008c 11       		.uleb128 0x11
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 15
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 15
 
 
  682 008d 01       		.uleb128 0x1
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  736 00c5 03       		.uleb128 0x3
  737 00c6 0E       		.uleb128 0xe
  738 00c7 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 16
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 16
 
 
  739 00c8 0B       		.uleb128 0xb
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  793 0037 01       		.uleb128 0x1
  794 0038 50       		.byte	0x50
  795 0039 9F       		.byte	0x9f
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 17
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 17
 
 
  796 003a 00000000 		.4byte	0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  842 0018 73706565 		.ascii	"speed\000"
  842      6400
  843              	.LASF26:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 18
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 18
 
 
  844 001e 6F757470 		.ascii	"output_voltage_direction\000"
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  862      31363036 
  863 0135 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
  863      20726576 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 19
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 19
 
 
  863      6973696F 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  884      757000
  885              	.LASF28:
  886 0225 56444143 		.ascii	"VDAC8_Enabling_Start\000"
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 20
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 20
 
 
  886      385F456E 
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 1
  908      6720696E 
  908      7400
  909              	.LASF11:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccEfw8EI.s 			page 21
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccq21uVf.s 			page 21
 
 
  910 02d2 63686172 		.ascii	"char\000"

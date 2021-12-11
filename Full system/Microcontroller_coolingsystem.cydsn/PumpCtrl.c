@@ -96,7 +96,6 @@ void Pump_Stop()
 /*Set a constant hardcoded speed for the speed control.*/
 uint8 SetConstSpeed(uint16 speed_control_voltage)
 {
-
     const_speed = (speed_control_voltage*256)/(4080*2); //Calculate the speed corresponding to 2.5V output
     return const_speed;
 }

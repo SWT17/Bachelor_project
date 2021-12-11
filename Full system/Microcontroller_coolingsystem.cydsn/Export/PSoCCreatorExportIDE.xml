@@ -70,6 +70,12 @@
           <File BuildType="BUILD" Toolchain="">TemperatureUnitTest.c</File>
           <File BuildType="BUILD" Toolchain="">MaxanalogOutput.h</File>
           <File BuildType="BUILD" Toolchain="">MaxanalogOutput.c</File>
+          <File BuildType="BUILD" Toolchain="">LEDUnitTest.c</File>
+          <File BuildType="BUILD" Toolchain="">LEDUnitTest.h</File>
+          <File BuildType="BUILD" Toolchain="">AmplifierUnitTest.c</File>
+          <File BuildType="BUILD" Toolchain="">AmplifierUnitTest.h</File>
+          <File BuildType="BUILD" Toolchain="">SystemControllerUnitTest.c</File>
+          <File BuildType="BUILD" Toolchain="">SystemControllerUnitTest.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\nico_\Sundhedsteknologi\7. Semester\Bachelor\BachelorProject\Full system\Microcontroller_coolingsystem.cydsn\Generated_Source\PSoC5">

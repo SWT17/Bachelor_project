@@ -1,0 +1,665 @@
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"SystemControllerUnitTest.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SystemController_Switchnewstate1_methodcalled_SystemOnIscalled,"ax",%progbits
+  20              		.align	2
+  21              		.global	SystemController_Switchnewstate1_methodcalled_SystemOnIscalled
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	SystemController_Switchnewstate1_methodcalled_SystemOnIscalled, %function
+  25              	SystemController_Switchnewstate1_methodcalled_SystemOnIscalled:
+  26              	.LFB64:
+  27              		.file 1 "SystemControllerUnitTest.c"
+   1:SystemControllerUnitTest.c **** /* ========================================
+   2:SystemControllerUnitTest.c ****  *
+   3:SystemControllerUnitTest.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:SystemControllerUnitTest.c ****  * All Rights Reserved
+   5:SystemControllerUnitTest.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:SystemControllerUnitTest.c ****  *
+   7:SystemControllerUnitTest.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:SystemControllerUnitTest.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:SystemControllerUnitTest.c ****  *
+  10:SystemControllerUnitTest.c ****  * ========================================
+  11:SystemControllerUnitTest.c **** */
+  12:SystemControllerUnitTest.c **** #include "SystemControllerUnitTest.h"
+  13:SystemControllerUnitTest.c **** 
+  14:SystemControllerUnitTest.c **** void SystemController_Switchnewstate1_methodcalled_SystemOnIscalled()
+  15:SystemControllerUnitTest.c **** {
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  16:SystemControllerUnitTest.c ****     UART_1_Start();
+  36              		.loc 1 16 0
+  37 0002 FFF7FEFF 		bl	UART_1_Start
+  38              	.LVL0:
+  17:SystemControllerUnitTest.c ****     System_newState(1);
+  39              		.loc 1 17 0
+  40 0006 0120     		movs	r0, #1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 2
+
+
+  41 0008 FFF7FEFF 		bl	System_newState
+  42              	.LVL1:
+  43 000c 08BD     		pop	{r3, pc}
+  44              		.cfi_endproc
+  45              	.LFE64:
+  46              		.size	SystemController_Switchnewstate1_methodcalled_SystemOnIscalled, .-SystemController_Switchnew
+  47 000e 00BF     		.section	.text.SystemController_Switchnewstate0_methodcalled_SystemOffIscalled,"ax",%progbits
+  48              		.align	2
+  49              		.global	SystemController_Switchnewstate0_methodcalled_SystemOffIscalled
+  50              		.thumb
+  51              		.thumb_func
+  52              		.type	SystemController_Switchnewstate0_methodcalled_SystemOffIscalled, %function
+  53              	SystemController_Switchnewstate0_methodcalled_SystemOffIscalled:
+  54              	.LFB65:
+  18:SystemControllerUnitTest.c **** }
+  19:SystemControllerUnitTest.c **** 
+  20:SystemControllerUnitTest.c **** void SystemController_Switchnewstate0_methodcalled_SystemOffIscalled()
+  21:SystemControllerUnitTest.c **** {
+  55              		.loc 1 21 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 08B5     		push	{r3, lr}
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 3, -8
+  62              		.cfi_offset 14, -4
+  22:SystemControllerUnitTest.c ****     UART_1_Start();
+  63              		.loc 1 22 0
+  64 0002 FFF7FEFF 		bl	UART_1_Start
+  65              	.LVL2:
+  23:SystemControllerUnitTest.c ****     System_newState(0);
+  66              		.loc 1 23 0
+  67 0006 0020     		movs	r0, #0
+  68 0008 FFF7FEFF 		bl	System_newState
+  69              	.LVL3:
+  70 000c 08BD     		pop	{r3, pc}
+  71              		.cfi_endproc
+  72              	.LFE65:
+  73              		.size	SystemController_Switchnewstate0_methodcalled_SystemOffIscalled, .-SystemController_Switchne
+  74 000e 00BF     		.section	.text.SystemController_ClockHandle_methodcalled_SystemOffIscalled,"ax",%progbits
+  75              		.align	2
+  76              		.global	SystemController_ClockHandle_methodcalled_SystemOffIscalled
+  77              		.thumb
+  78              		.thumb_func
+  79              		.type	SystemController_ClockHandle_methodcalled_SystemOffIscalled, %function
+  80              	SystemController_ClockHandle_methodcalled_SystemOffIscalled:
+  81              	.LFB66:
+  24:SystemControllerUnitTest.c **** }
+  25:SystemControllerUnitTest.c **** 
+  26:SystemControllerUnitTest.c **** void SystemController_ClockHandle_methodcalled_SystemOffIscalled()
+  27:SystemControllerUnitTest.c **** {
+  82              		.loc 1 27 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 08B5     		push	{r3, lr}
+  87              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 3
+
+
+  88              		.cfi_offset 3, -8
+  89              		.cfi_offset 14, -4
+  28:SystemControllerUnitTest.c ****    System_newState(1);
+  90              		.loc 1 28 0
+  91 0002 0120     		movs	r0, #1
+  92 0004 FFF7FEFF 		bl	System_newState
+  93              	.LVL4:
+  94 0008 08BD     		pop	{r3, pc}
+  95              		.cfi_endproc
+  96              	.LFE66:
+  97              		.size	SystemController_ClockHandle_methodcalled_SystemOffIscalled, .-SystemController_ClockHandle_
+  98 000a 00BF     		.text
+  99              	.Letext0:
+ 100              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 101              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 102              		.file 4 "Generated_Source\\PSoC5/UART_1.h"
+ 103              		.file 5 "SystemController_interrupt.h"
+ 104              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 105              		.section	.debug_info,"",%progbits
+ 106              	.Ldebug_info0:
+ 107 0000 49010000 		.4byte	0x149
+ 108 0004 0400     		.2byte	0x4
+ 109 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 110 000a 04       		.byte	0x4
+ 111 000b 01       		.uleb128 0x1
+ 112 000c 2E000000 		.4byte	.LASF21
+ 113 0010 0C       		.byte	0xc
+ 114 0011 A1010000 		.4byte	.LASF22
+ 115 0015 EB000000 		.4byte	.LASF23
+ 116 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 117 001d 00000000 		.4byte	0
+ 118 0021 00000000 		.4byte	.Ldebug_line0
+ 119 0025 02       		.uleb128 0x2
+ 120 0026 01       		.byte	0x1
+ 121 0027 06       		.byte	0x6
+ 122 0028 05020000 		.4byte	.LASF0
+ 123 002c 02       		.uleb128 0x2
+ 124 002d 01       		.byte	0x1
+ 125 002e 08       		.byte	0x8
+ 126 002f 61010000 		.4byte	.LASF1
+ 127 0033 02       		.uleb128 0x2
+ 128 0034 02       		.byte	0x2
+ 129 0035 05       		.byte	0x5
+ 130 0036 A6020000 		.4byte	.LASF2
+ 131 003a 02       		.uleb128 0x2
+ 132 003b 02       		.byte	0x2
+ 133 003c 07       		.byte	0x7
+ 134 003d 0E000000 		.4byte	.LASF3
+ 135 0041 03       		.uleb128 0x3
+ 136 0042 5D020000 		.4byte	.LASF9
+ 137 0046 02       		.byte	0x2
+ 138 0047 3F       		.byte	0x3f
+ 139 0048 4C000000 		.4byte	0x4c
+ 140 004c 02       		.uleb128 0x2
+ 141 004d 04       		.byte	0x4
+ 142 004e 05       		.byte	0x5
+ 143 004f 84010000 		.4byte	.LASF4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 4
+
+
+ 144 0053 02       		.uleb128 0x2
+ 145 0054 04       		.byte	0x4
+ 146 0055 07       		.byte	0x7
+ 147 0056 BC000000 		.4byte	.LASF5
+ 148 005a 02       		.uleb128 0x2
+ 149 005b 08       		.byte	0x8
+ 150 005c 05       		.byte	0x5
+ 151 005d 00000000 		.4byte	.LASF6
+ 152 0061 02       		.uleb128 0x2
+ 153 0062 08       		.byte	0x8
+ 154 0063 07       		.byte	0x7
+ 155 0064 CE000000 		.4byte	.LASF7
+ 156 0068 04       		.uleb128 0x4
+ 157 0069 04       		.byte	0x4
+ 158 006a 05       		.byte	0x5
+ 159 006b 696E7400 		.ascii	"int\000"
+ 160 006f 02       		.uleb128 0x2
+ 161 0070 04       		.byte	0x4
+ 162 0071 07       		.byte	0x7
+ 163 0072 21000000 		.4byte	.LASF8
+ 164 0076 03       		.uleb128 0x3
+ 165 0077 B0020000 		.4byte	.LASF10
+ 166 007b 03       		.byte	0x3
+ 167 007c 2C       		.byte	0x2c
+ 168 007d 41000000 		.4byte	0x41
+ 169 0081 02       		.uleb128 0x2
+ 170 0082 04       		.byte	0x4
+ 171 0083 04       		.byte	0x4
+ 172 0084 E5000000 		.4byte	.LASF11
+ 173 0088 02       		.uleb128 0x2
+ 174 0089 08       		.byte	0x8
+ 175 008a 04       		.byte	0x4
+ 176 008b 8D010000 		.4byte	.LASF12
+ 177 008f 02       		.uleb128 0x2
+ 178 0090 01       		.byte	0x1
+ 179 0091 08       		.byte	0x8
+ 180 0092 7F010000 		.4byte	.LASF13
+ 181 0096 02       		.uleb128 0x2
+ 182 0097 08       		.byte	0x8
+ 183 0098 04       		.byte	0x4
+ 184 0099 11020000 		.4byte	.LASF14
+ 185 009d 02       		.uleb128 0x2
+ 186 009e 04       		.byte	0x4
+ 187 009f 07       		.byte	0x7
+ 188 00a0 B8020000 		.4byte	.LASF15
+ 189 00a4 05       		.uleb128 0x5
+ 190 00a5 67020000 		.4byte	.LASF16
+ 191 00a9 01       		.byte	0x1
+ 192 00aa 0E       		.byte	0xe
+ 193 00ab 00000000 		.4byte	.LFB64
+ 194 00af 0E000000 		.4byte	.LFE64-.LFB64
+ 195 00b3 01       		.uleb128 0x1
+ 196 00b4 9C       		.byte	0x9c
+ 197 00b5 D2000000 		.4byte	0xd2
+ 198 00b9 06       		.uleb128 0x6
+ 199 00ba 06000000 		.4byte	.LVL0
+ 200 00be 36010000 		.4byte	0x136
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 5
+
+
+ 201 00c2 07       		.uleb128 0x7
+ 202 00c3 0C000000 		.4byte	.LVL1
+ 203 00c7 41010000 		.4byte	0x141
+ 204 00cb 08       		.uleb128 0x8
+ 205 00cc 01       		.uleb128 0x1
+ 206 00cd 50       		.byte	0x50
+ 207 00ce 01       		.uleb128 0x1
+ 208 00cf 31       		.byte	0x31
+ 209 00d0 00       		.byte	0
+ 210 00d1 00       		.byte	0
+ 211 00d2 05       		.uleb128 0x5
+ 212 00d3 1D020000 		.4byte	.LASF17
+ 213 00d7 01       		.byte	0x1
+ 214 00d8 14       		.byte	0x14
+ 215 00d9 00000000 		.4byte	.LFB65
+ 216 00dd 0E000000 		.4byte	.LFE65-.LFB65
+ 217 00e1 01       		.uleb128 0x1
+ 218 00e2 9C       		.byte	0x9c
+ 219 00e3 00010000 		.4byte	0x100
+ 220 00e7 06       		.uleb128 0x6
+ 221 00e8 06000000 		.4byte	.LVL2
+ 222 00ec 36010000 		.4byte	0x136
+ 223 00f0 07       		.uleb128 0x7
+ 224 00f1 0C000000 		.4byte	.LVL3
+ 225 00f5 41010000 		.4byte	0x141
+ 226 00f9 08       		.uleb128 0x8
+ 227 00fa 01       		.uleb128 0x1
+ 228 00fb 50       		.byte	0x50
+ 229 00fc 01       		.uleb128 0x1
+ 230 00fd 30       		.byte	0x30
+ 231 00fe 00       		.byte	0
+ 232 00ff 00       		.byte	0
+ 233 0100 05       		.uleb128 0x5
+ 234 0101 BC010000 		.4byte	.LASF18
+ 235 0105 01       		.byte	0x1
+ 236 0106 1A       		.byte	0x1a
+ 237 0107 00000000 		.4byte	.LFB66
+ 238 010b 0A000000 		.4byte	.LFE66-.LFB66
+ 239 010f 01       		.uleb128 0x1
+ 240 0110 9C       		.byte	0x9c
+ 241 0111 25010000 		.4byte	0x125
+ 242 0115 07       		.uleb128 0x7
+ 243 0116 08000000 		.4byte	.LVL4
+ 244 011a 41010000 		.4byte	0x141
+ 245 011e 08       		.uleb128 0x8
+ 246 011f 01       		.uleb128 0x1
+ 247 0120 50       		.byte	0x50
+ 248 0121 01       		.uleb128 0x1
+ 249 0122 31       		.byte	0x31
+ 250 0123 00       		.byte	0
+ 251 0124 00       		.byte	0
+ 252 0125 09       		.uleb128 0x9
+ 253 0126 F8010000 		.4byte	.LASF24
+ 254 012a 06       		.byte	0x6
+ 255 012b 1207     		.2byte	0x712
+ 256 012d 31010000 		.4byte	0x131
+ 257 0131 0A       		.uleb128 0xa
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 6
+
+
+ 258 0132 76000000 		.4byte	0x76
+ 259 0136 0B       		.uleb128 0xb
+ 260 0137 94010000 		.4byte	.LASF19
+ 261 013b 94010000 		.4byte	.LASF19
+ 262 013f 04       		.byte	0x4
+ 263 0140 54       		.byte	0x54
+ 264 0141 0B       		.uleb128 0xb
+ 265 0142 6F010000 		.4byte	.LASF20
+ 266 0146 6F010000 		.4byte	.LASF20
+ 267 014a 05       		.byte	0x5
+ 268 014b 0E       		.byte	0xe
+ 269 014c 00       		.byte	0
+ 270              		.section	.debug_abbrev,"",%progbits
+ 271              	.Ldebug_abbrev0:
+ 272 0000 01       		.uleb128 0x1
+ 273 0001 11       		.uleb128 0x11
+ 274 0002 01       		.byte	0x1
+ 275 0003 25       		.uleb128 0x25
+ 276 0004 0E       		.uleb128 0xe
+ 277 0005 13       		.uleb128 0x13
+ 278 0006 0B       		.uleb128 0xb
+ 279 0007 03       		.uleb128 0x3
+ 280 0008 0E       		.uleb128 0xe
+ 281 0009 1B       		.uleb128 0x1b
+ 282 000a 0E       		.uleb128 0xe
+ 283 000b 55       		.uleb128 0x55
+ 284 000c 17       		.uleb128 0x17
+ 285 000d 11       		.uleb128 0x11
+ 286 000e 01       		.uleb128 0x1
+ 287 000f 10       		.uleb128 0x10
+ 288 0010 17       		.uleb128 0x17
+ 289 0011 00       		.byte	0
+ 290 0012 00       		.byte	0
+ 291 0013 02       		.uleb128 0x2
+ 292 0014 24       		.uleb128 0x24
+ 293 0015 00       		.byte	0
+ 294 0016 0B       		.uleb128 0xb
+ 295 0017 0B       		.uleb128 0xb
+ 296 0018 3E       		.uleb128 0x3e
+ 297 0019 0B       		.uleb128 0xb
+ 298 001a 03       		.uleb128 0x3
+ 299 001b 0E       		.uleb128 0xe
+ 300 001c 00       		.byte	0
+ 301 001d 00       		.byte	0
+ 302 001e 03       		.uleb128 0x3
+ 303 001f 16       		.uleb128 0x16
+ 304 0020 00       		.byte	0
+ 305 0021 03       		.uleb128 0x3
+ 306 0022 0E       		.uleb128 0xe
+ 307 0023 3A       		.uleb128 0x3a
+ 308 0024 0B       		.uleb128 0xb
+ 309 0025 3B       		.uleb128 0x3b
+ 310 0026 0B       		.uleb128 0xb
+ 311 0027 49       		.uleb128 0x49
+ 312 0028 13       		.uleb128 0x13
+ 313 0029 00       		.byte	0
+ 314 002a 00       		.byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 7
+
+
+ 315 002b 04       		.uleb128 0x4
+ 316 002c 24       		.uleb128 0x24
+ 317 002d 00       		.byte	0
+ 318 002e 0B       		.uleb128 0xb
+ 319 002f 0B       		.uleb128 0xb
+ 320 0030 3E       		.uleb128 0x3e
+ 321 0031 0B       		.uleb128 0xb
+ 322 0032 03       		.uleb128 0x3
+ 323 0033 08       		.uleb128 0x8
+ 324 0034 00       		.byte	0
+ 325 0035 00       		.byte	0
+ 326 0036 05       		.uleb128 0x5
+ 327 0037 2E       		.uleb128 0x2e
+ 328 0038 01       		.byte	0x1
+ 329 0039 3F       		.uleb128 0x3f
+ 330 003a 19       		.uleb128 0x19
+ 331 003b 03       		.uleb128 0x3
+ 332 003c 0E       		.uleb128 0xe
+ 333 003d 3A       		.uleb128 0x3a
+ 334 003e 0B       		.uleb128 0xb
+ 335 003f 3B       		.uleb128 0x3b
+ 336 0040 0B       		.uleb128 0xb
+ 337 0041 11       		.uleb128 0x11
+ 338 0042 01       		.uleb128 0x1
+ 339 0043 12       		.uleb128 0x12
+ 340 0044 06       		.uleb128 0x6
+ 341 0045 40       		.uleb128 0x40
+ 342 0046 18       		.uleb128 0x18
+ 343 0047 9742     		.uleb128 0x2117
+ 344 0049 19       		.uleb128 0x19
+ 345 004a 01       		.uleb128 0x1
+ 346 004b 13       		.uleb128 0x13
+ 347 004c 00       		.byte	0
+ 348 004d 00       		.byte	0
+ 349 004e 06       		.uleb128 0x6
+ 350 004f 898201   		.uleb128 0x4109
+ 351 0052 00       		.byte	0
+ 352 0053 11       		.uleb128 0x11
+ 353 0054 01       		.uleb128 0x1
+ 354 0055 31       		.uleb128 0x31
+ 355 0056 13       		.uleb128 0x13
+ 356 0057 00       		.byte	0
+ 357 0058 00       		.byte	0
+ 358 0059 07       		.uleb128 0x7
+ 359 005a 898201   		.uleb128 0x4109
+ 360 005d 01       		.byte	0x1
+ 361 005e 11       		.uleb128 0x11
+ 362 005f 01       		.uleb128 0x1
+ 363 0060 31       		.uleb128 0x31
+ 364 0061 13       		.uleb128 0x13
+ 365 0062 00       		.byte	0
+ 366 0063 00       		.byte	0
+ 367 0064 08       		.uleb128 0x8
+ 368 0065 8A8201   		.uleb128 0x410a
+ 369 0068 00       		.byte	0
+ 370 0069 02       		.uleb128 0x2
+ 371 006a 18       		.uleb128 0x18
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 8
+
+
+ 372 006b 9142     		.uleb128 0x2111
+ 373 006d 18       		.uleb128 0x18
+ 374 006e 00       		.byte	0
+ 375 006f 00       		.byte	0
+ 376 0070 09       		.uleb128 0x9
+ 377 0071 34       		.uleb128 0x34
+ 378 0072 00       		.byte	0
+ 379 0073 03       		.uleb128 0x3
+ 380 0074 0E       		.uleb128 0xe
+ 381 0075 3A       		.uleb128 0x3a
+ 382 0076 0B       		.uleb128 0xb
+ 383 0077 3B       		.uleb128 0x3b
+ 384 0078 05       		.uleb128 0x5
+ 385 0079 49       		.uleb128 0x49
+ 386 007a 13       		.uleb128 0x13
+ 387 007b 3F       		.uleb128 0x3f
+ 388 007c 19       		.uleb128 0x19
+ 389 007d 3C       		.uleb128 0x3c
+ 390 007e 19       		.uleb128 0x19
+ 391 007f 00       		.byte	0
+ 392 0080 00       		.byte	0
+ 393 0081 0A       		.uleb128 0xa
+ 394 0082 35       		.uleb128 0x35
+ 395 0083 00       		.byte	0
+ 396 0084 49       		.uleb128 0x49
+ 397 0085 13       		.uleb128 0x13
+ 398 0086 00       		.byte	0
+ 399 0087 00       		.byte	0
+ 400 0088 0B       		.uleb128 0xb
+ 401 0089 2E       		.uleb128 0x2e
+ 402 008a 00       		.byte	0
+ 403 008b 3F       		.uleb128 0x3f
+ 404 008c 19       		.uleb128 0x19
+ 405 008d 3C       		.uleb128 0x3c
+ 406 008e 19       		.uleb128 0x19
+ 407 008f 6E       		.uleb128 0x6e
+ 408 0090 0E       		.uleb128 0xe
+ 409 0091 03       		.uleb128 0x3
+ 410 0092 0E       		.uleb128 0xe
+ 411 0093 3A       		.uleb128 0x3a
+ 412 0094 0B       		.uleb128 0xb
+ 413 0095 3B       		.uleb128 0x3b
+ 414 0096 0B       		.uleb128 0xb
+ 415 0097 00       		.byte	0
+ 416 0098 00       		.byte	0
+ 417 0099 00       		.byte	0
+ 418              		.section	.debug_aranges,"",%progbits
+ 419 0000 2C000000 		.4byte	0x2c
+ 420 0004 0200     		.2byte	0x2
+ 421 0006 00000000 		.4byte	.Ldebug_info0
+ 422 000a 04       		.byte	0x4
+ 423 000b 00       		.byte	0
+ 424 000c 0000     		.2byte	0
+ 425 000e 0000     		.2byte	0
+ 426 0010 00000000 		.4byte	.LFB64
+ 427 0014 0E000000 		.4byte	.LFE64-.LFB64
+ 428 0018 00000000 		.4byte	.LFB65
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 9
+
+
+ 429 001c 0E000000 		.4byte	.LFE65-.LFB65
+ 430 0020 00000000 		.4byte	.LFB66
+ 431 0024 0A000000 		.4byte	.LFE66-.LFB66
+ 432 0028 00000000 		.4byte	0
+ 433 002c 00000000 		.4byte	0
+ 434              		.section	.debug_ranges,"",%progbits
+ 435              	.Ldebug_ranges0:
+ 436 0000 00000000 		.4byte	.LFB64
+ 437 0004 0E000000 		.4byte	.LFE64
+ 438 0008 00000000 		.4byte	.LFB65
+ 439 000c 0E000000 		.4byte	.LFE65
+ 440 0010 00000000 		.4byte	.LFB66
+ 441 0014 0A000000 		.4byte	.LFE66
+ 442 0018 00000000 		.4byte	0
+ 443 001c 00000000 		.4byte	0
+ 444              		.section	.debug_line,"",%progbits
+ 445              	.Ldebug_line0:
+ 446 0000 B7010000 		.section	.debug_str,"MS",%progbits,1
+ 446      02007F01 
+ 446      00000201 
+ 446      FB0E0D00 
+ 446      01010101 
+ 447              	.LASF6:
+ 448 0000 6C6F6E67 		.ascii	"long long int\000"
+ 448      206C6F6E 
+ 448      6720696E 
+ 448      7400
+ 449              	.LASF3:
+ 450 000e 73686F72 		.ascii	"short unsigned int\000"
+ 450      7420756E 
+ 450      7369676E 
+ 450      65642069 
+ 450      6E7400
+ 451              	.LASF8:
+ 452 0021 756E7369 		.ascii	"unsigned int\000"
+ 452      676E6564 
+ 452      20696E74 
+ 452      00
+ 453              	.LASF21:
+ 454 002e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 454      43313120 
+ 454      352E342E 
+ 454      31203230 
+ 454      31363036 
+ 455 0061 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 455      20726576 
+ 455      6973696F 
+ 455      6E203233 
+ 455      37373135 
+ 456 0094 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 456      66756E63 
+ 456      74696F6E 
+ 456      2D736563 
+ 456      74696F6E 
+ 457              	.LASF5:
+ 458 00bc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 458      20756E73 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 10
+
+
+ 458      69676E65 
+ 458      6420696E 
+ 458      7400
+ 459              	.LASF7:
+ 460 00ce 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 460      206C6F6E 
+ 460      6720756E 
+ 460      7369676E 
+ 460      65642069 
+ 461              	.LASF11:
+ 462 00e5 666C6F61 		.ascii	"float\000"
+ 462      7400
+ 463              	.LASF23:
+ 464 00eb 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
+ 464      73657273 
+ 464      5C6E6963 
+ 464      6F5F5C53 
+ 464      756E6468 
+ 465 0119 61636865 		.ascii	"achelor\\BachelorProject\\Full system\\Microcontrol"
+ 465      6C6F725C 
+ 465      42616368 
+ 465      656C6F72 
+ 465      50726F6A 
+ 466 0149 6C65725F 		.ascii	"ler_coolingsystem.cydsn\000"
+ 466      636F6F6C 
+ 466      696E6773 
+ 466      79737465 
+ 466      6D2E6379 
+ 467              	.LASF1:
+ 468 0161 756E7369 		.ascii	"unsigned char\000"
+ 468      676E6564 
+ 468      20636861 
+ 468      7200
+ 469              	.LASF20:
+ 470 016f 53797374 		.ascii	"System_newState\000"
+ 470      656D5F6E 
+ 470      65775374 
+ 470      61746500 
+ 471              	.LASF13:
+ 472 017f 63686172 		.ascii	"char\000"
+ 472      00
+ 473              	.LASF4:
+ 474 0184 6C6F6E67 		.ascii	"long int\000"
+ 474      20696E74 
+ 474      00
+ 475              	.LASF12:
+ 476 018d 646F7562 		.ascii	"double\000"
+ 476      6C6500
+ 477              	.LASF19:
+ 478 0194 55415254 		.ascii	"UART_1_Start\000"
+ 478      5F315F53 
+ 478      74617274 
+ 478      00
+ 479              	.LASF22:
+ 480 01a1 53797374 		.ascii	"SystemControllerUnitTest.c\000"
+ 480      656D436F 
+ 480      6E74726F 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 11
+
+
+ 480      6C6C6572 
+ 480      556E6974 
+ 481              	.LASF18:
+ 482 01bc 53797374 		.ascii	"SystemController_ClockHandle_methodcalled_SystemOff"
+ 482      656D436F 
+ 482      6E74726F 
+ 482      6C6C6572 
+ 482      5F436C6F 
+ 483 01ef 49736361 		.ascii	"Iscalled\000"
+ 483      6C6C6564 
+ 483      00
+ 484              	.LASF24:
+ 485 01f8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 485      52784275 
+ 485      66666572 
+ 485      00
+ 486              	.LASF0:
+ 487 0205 7369676E 		.ascii	"signed char\000"
+ 487      65642063 
+ 487      68617200 
+ 488              	.LASF14:
+ 489 0211 6C6F6E67 		.ascii	"long double\000"
+ 489      20646F75 
+ 489      626C6500 
+ 490              	.LASF17:
+ 491 021d 53797374 		.ascii	"SystemController_Switchnewstate0_methodcalled_Syste"
+ 491      656D436F 
+ 491      6E74726F 
+ 491      6C6C6572 
+ 491      5F537769 
+ 492 0250 6D4F6666 		.ascii	"mOffIscalled\000"
+ 492      49736361 
+ 492      6C6C6564 
+ 492      00
+ 493              	.LASF9:
+ 494 025d 5F5F696E 		.ascii	"__int32_t\000"
+ 494      7433325F 
+ 494      7400
+ 495              	.LASF16:
+ 496 0267 53797374 		.ascii	"SystemController_Switchnewstate1_methodcalled_Syste"
+ 496      656D436F 
+ 496      6E74726F 
+ 496      6C6C6572 
+ 496      5F537769 
+ 497 029a 6D4F6E49 		.ascii	"mOnIscalled\000"
+ 497      7363616C 
+ 497      6C656400 
+ 498              	.LASF2:
+ 499 02a6 73686F72 		.ascii	"short int\000"
+ 499      7420696E 
+ 499      7400
+ 500              	.LASF10:
+ 501 02b0 696E7433 		.ascii	"int32_t\000"
+ 501      325F7400 
+ 502              	.LASF15:
+ 503 02b8 73697A65 		.ascii	"sizetype\000"
+ 503      74797065 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccTbimlo.s 			page 12
+
+
+ 503      00
+ 504              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

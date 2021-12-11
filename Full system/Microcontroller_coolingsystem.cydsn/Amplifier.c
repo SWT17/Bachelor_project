@@ -11,6 +11,7 @@
 */
 #include "Amplifier.h"
 #include "AmplifierRegisters.h"
+#include "UART_1.h"
 
 /*Internal function declarations*/
 uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB);
@@ -45,6 +46,7 @@ void Amplifier_Setup()
 //Setup the microchipon the amplifier circuit
 void MAX31865_Setup()
 {
+    
     Reset_amplifier_ref();
     
     Set_WireSetup(TWO_OR_FOUR_WIRECONFIG);
@@ -61,9 +63,10 @@ uint16 GetRtdRatio()
     uint16_t rtd_ratio;
     //Read MSB byte from amplifier
     char RTD_msb = ReadByteFromAdress(READ_RTD_MSB_REG_ADRESS);
-    
+
     //Read LSB byte from amplifier
     char RTD_lsb = ReadByteFromAdress(READ_RTD_LSB_REG_ADRESS);
+
     
     rtd_ratio = Conc_RTDdata(RTD_msb, RTD_lsb);
     
@@ -98,6 +101,7 @@ void Amplifier_Startup()
 
 uint16_t Conc_RTDdata(uint8_t MSB, uint8_t LSB)
 {
+    
     //Concatenate MSB and LSB to form the 15 Bit RTD ration according to datasheet MAX31865 page 15 Table. 4
     rtd_ratio = ((uint16_t)MSB << 7) | LSB>>1;
     return rtd_ratio;
@@ -160,8 +164,9 @@ void Set_FilterSetup(char filterconfig)
 //Sets the conversion mode to auto
 void Set_ConverionMode(char conversionmode)
 {
-    
+      
     config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
+    
     if(conversionmode == CONVERSIONMODE_AUTO)
     {
         config |= CONVERSIONMODE_AUTO;
@@ -178,6 +183,7 @@ void Set_ConverionMode(char conversionmode)
 
 void Set_VBIAS(char vbias_mode)
 {    
+    
     config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     if(vbias_mode == VBIAS_ON)
     {
@@ -196,6 +202,7 @@ void Set_VBIAS(char vbias_mode)
 //Clears the fault register upon setup
 void Clear_Fault()
 {
+    
     config = ReadByteFromAdress(READ_CONFIG_REG_ADRESS);
     config |= CLEAR_FAULTBIT;
     WriteByteToAdress(WRITE_CONFIG_REG_ADRESS,config);
@@ -203,8 +210,8 @@ void Clear_Fault()
 
 char ReadByteFromAdress(char adress)
 {
-
     
+  
     SS_Write(0);
     //According to the datasheet for the max31865 the amplifier first needs the read adress
     //Then it needs a default signal, to return what is on the adress requested in the first SPI write msg.
@@ -225,7 +232,7 @@ char ReadByteFromAdress(char adress)
 
 void WriteByteToAdress(char adress, char data)
 {
-       
+        
     //Pull Slave select low, start transmission.
     SS_Write(0);
     SPIM_1_WriteTxData(adress);

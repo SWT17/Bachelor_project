@@ -30,9 +30,9 @@ float regu;
 int main(void)
 {   
 
-  
-    System_Setup();
-
+    Pump_PumpStop_CallMethod_OutputIs4_6VOnPin02();    
+//    System_Setup();
+    
     
     /*Wait for interrupts*/
     for(;;)
@@ -73,6 +73,7 @@ void System_Setup()
 /*Turn system On after being in system off state*/
 void System_On()
 {
+    UART_1_PutString("SystemOn called \r\n");
     //Start up the amplifier to get new temperature conversion
     Amplifier_Startup();
     
@@ -91,6 +92,7 @@ void System_On()
 /*Turn system off after being in system on state*/
 void System_Off()
 {
+    UART_1_PutString("SystemOff called \r\n");
     //Stop the clock interrupt routine
     isr_clock_Disable();
     
@@ -108,6 +110,7 @@ void System_Off()
     Turn_OFF();
     
 }
+
 
 
 

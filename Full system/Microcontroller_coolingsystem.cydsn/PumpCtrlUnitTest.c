@@ -49,4 +49,39 @@ void Pump_Setup_CallMethod_CallsMethodInBody()
     
 }
 
+
+void Pump_PumpStart_CallMethod_PumpStarted()
+{
+    Pump_Setup();
+    CyDelay(1000);
+    Pump_Start();
+    
+}
+
+void Pump_PumpStartUp_CallMethod_CorrectMethodsCalled()
+{
+    UART_1_Start();   
+    Pump_Startup(1000);
+    
+}
+
+void Pump_SetConstSpeed_CallMethodWith63_OutputIs2V()
+{
+    Pump_Setup();
+    Pump_Startup(2000);
+    
+}
+
+void Pump_SetConstSpeed_CallMethodWith94_OutputIs3V()
+{
+    Pump_Setup();
+    Pump_Startup(3000);
+}
+
+void Pump_PumpStop_CallMethod_OutputIs4_6VOnPin02()
+{
+    Pump_Setup();
+    
+}
+
 /* [] END OF FILE */
