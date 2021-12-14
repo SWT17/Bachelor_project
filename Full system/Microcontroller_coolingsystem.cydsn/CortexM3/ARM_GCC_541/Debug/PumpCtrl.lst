@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
   28:PumpCtrl.c    ****     output_voltage = 0;
   29:PumpCtrl.c    ****     //Start VDAC_enabling
   30:PumpCtrl.c    ****     VDAC8_Enabling_Start();
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 2
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 2
 
 
   31:PumpCtrl.c    ****         //Set range for the VDAC for enabling through the transistor
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
   35              		.cfi_offset 14, -4
   78:PumpCtrl.c    ****     //Enable pump through closing transistor.
   79:PumpCtrl.c    ****     VDAC8_Enabling_SetValue(0);
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 3
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 3
 
 
   36              		.loc 1 79 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
   79              		.thumb_func
   80              		.type	Pump_Setup, %function
   81              	Pump_Setup:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 4
 
 
   82              	.LFB1:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  128              		.loc 1 45 0
  129              		.cfi_startproc
  130              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 5
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 5
 
 
  131              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  173              		.cfi_offset 3, -16
  174              		.cfi_offset 4, -12
  175              		.cfi_offset 5, -8
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 6
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 6
 
 
  176              		.cfi_offset 14, -4
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  217              	.L22:
  112:PumpCtrl.c    ****     }
  113:PumpCtrl.c    ****     else
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 7
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 7
 
 
  114:PumpCtrl.c    ****     {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  258              	.L27:
  259 0014 81808080 		.word	-2139062143
  260 0018 00000000 		.word	const_speed
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 8
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 8
 
 
  261              		.cfi_endproc
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  309              		.align	2
  310              		.global	FlowDirection
  311              		.thumb
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 9
 
 
  312              		.thumb_func
@@ -505,53 +505,52 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  136:PumpCtrl.c    ****     the same as with the enabling pin.
  137:PumpCtrl.c    ****     Then we need and ADC to control the other MOSFET.*/
  138:PumpCtrl.c    ****     
- 139:PumpCtrl.c    ****     
- 140:PumpCtrl.c    ****     
- 141:PumpCtrl.c    ****     if(regulation == 0)
- 325              		.loc 1 141 0
+ 139:PumpCtrl.c    ****     if(regulation == 0)
+ 325              		.loc 1 139 0
  326 0002 58B9     		cbnz	r0, .L34
- 142:PumpCtrl.c    ****     {
- 143:PumpCtrl.c    ****         output_voltage_direction = (uint8) (4080*255/4080);
- 327              		.loc 1 143 0
+ 140:PumpCtrl.c    ****     {
+ 141:PumpCtrl.c    ****         output_voltage_direction = (uint8) (4080*255/4080);
+ 327              		.loc 1 141 0
  328 0004 FF20     		movs	r0, #255
  329              	.LVL32:
  330 0006 094B     		ldr	r3, .L37
  331 0008 1870     		strb	r0, [r3]
- 144:PumpCtrl.c    ****         
- 145:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
- 332              		.loc 1 145 0
+ 142:PumpCtrl.c    ****         
+ 143:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
+ 332              		.loc 1 143 0
  333 000a FFF7FEFF 		bl	VDAC8_Direction_SetValue
  334              	.LVL33:
- 146:PumpCtrl.c    ****         CyDelay(10500);
- 335              		.loc 1 146 0
- 336 000e 42F60410 		movw	r0, #10500
+ 144:PumpCtrl.c    ****         //Delay is based on the time to empty the tubes at 2.5V pump speed
+ 145:PumpCtrl.c    ****         CyDelay(13000);
+ 335              		.loc 1 145 0
+ 336 000e 43F2C820 		movw	r0, #13000
  337 0012 FFF7FEFF 		bl	CyDelay
  338              	.LVL34:
- 147:PumpCtrl.c    ****         Pump_Stop();
- 339              		.loc 1 147 0
+ 146:PumpCtrl.c    ****         Pump_Stop();
+ 339              		.loc 1 146 0
  340 0016 FFF7FEFF 		bl	Pump_Stop
  341              	.LVL35:
  342 001a 08BD     		pop	{r3, pc}
  343              	.LVL36:
  344              	.L34:
- 148:PumpCtrl.c    ****         
- 149:PumpCtrl.c    ****     }else
- 150:PumpCtrl.c    ****     {
- 151:PumpCtrl.c    ****         output_voltage_direction = 0;
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 10
+ 147:PumpCtrl.c    ****         
+ 148:PumpCtrl.c    ****     }else
+ 149:PumpCtrl.c    ****     {
+ 150:PumpCtrl.c    ****         output_voltage_direction = 0;
+ 345              		.loc 1 150 0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 10
 
 
- 345              		.loc 1 151 0
  346 001c 0020     		movs	r0, #0
  347              	.LVL37:
  348 001e 034B     		ldr	r3, .L37
  349 0020 1870     		strb	r0, [r3]
- 152:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
- 350              		.loc 1 152 0
+ 151:PumpCtrl.c    ****         VDAC8_Direction_SetValue(output_voltage_direction);
+ 350              		.loc 1 151 0
  351 0022 FFF7FEFF 		bl	VDAC8_Direction_SetValue
  352              	.LVL38:
- 153:PumpCtrl.c    ****         Pump_Start();
- 353              		.loc 1 153 0
+ 152:PumpCtrl.c    ****         Pump_Start();
+ 353              		.loc 1 152 0
  354 0026 FFF7FEFF 		bl	Pump_Start
  355              	.LVL39:
  356 002a 08BD     		pop	{r3, pc}
@@ -598,10 +597,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  397 002c 03       		.uleb128 0x3
  398 002d 18000000 		.4byte	.LASF12
  399 0031 02       		.byte	0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 11
-
-
  400 0032 1D       		.byte	0x1d
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 11
+
+
  401 0033 37000000 		.4byte	0x37
  402 0037 02       		.uleb128 0x2
  403 0038 01       		.byte	0x1
@@ -658,10 +657,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  454 0092 2C000000 		.4byte	0x2c
  455 0096 05       		.uleb128 0x5
  456 0097 27020000 		.4byte	.LASF14
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 12
-
-
  457 009b 04       		.byte	0x4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 12
+
+
  458 009c E901     		.2byte	0x1e9
  459 009e 37000000 		.4byte	0x37
  460 00a2 05       		.uleb128 0x5
@@ -718,10 +717,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  511 0106 00       		.byte	0
  512 0107 06       		.uleb128 0x6
  513 0108 61020000 		.4byte	.LASF20
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 13
-
-
  514 010c 01       		.byte	0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 13
+
+
  515 010d 1A       		.byte	0x1a
  516 010e 00000000 		.4byte	.LFB1
  517 0112 28000000 		.4byte	.LFE1-.LFB1
@@ -778,10 +777,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  568 0184 01       		.uleb128 0x1
  569 0185 30       		.byte	0x30
  570 0186 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 14
-
-
  571 0187 09       		.uleb128 0x9
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 14
+
+
  572 0188 0C000000 		.4byte	.LVL8
  573 018c 8F030000 		.4byte	0x38f
  574 0190 09       		.uleb128 0x9
@@ -838,10 +837,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  625 01fc 00       		.sleb128 0
  626 01fd 00       		.byte	0
  627 01fe 00       		.byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 15
-
-
  628 01ff 0D       		.uleb128 0xd
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 15
+
+
  629 0200 B6020000 		.4byte	.LASF47
  630 0204 01       		.byte	0x1
  631 0205 7B       		.byte	0x7b
@@ -898,10 +897,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  682 0280 BC000000 		.4byte	0xbc
  683 0284 00       		.byte	0
  684 0285 0E       		.uleb128 0xe
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 16
-
-
  685 0286 21010000 		.4byte	.LASF27
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 16
+
+
  686 028a 01       		.byte	0x1
  687 028b 85       		.byte	0x85
  688 028c 00000000 		.4byte	.LFB8
@@ -935,7 +934,7 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  716 02cc 50       		.byte	0x50
  717 02cd 03       		.uleb128 0x3
  718 02ce 0A       		.byte	0xa
- 719 02cf 0429     		.2byte	0x2904
+ 719 02cf C832     		.2byte	0x32c8
  720 02d1 00       		.byte	0
  721 02d2 09       		.uleb128 0x9
  722 02d3 1A000000 		.4byte	.LVL35
@@ -958,10 +957,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  739 02f9 2D020000 		.4byte	.LASF29
  740 02fd 01       		.byte	0x1
  741 02fe 0F       		.byte	0xf
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 17
-
-
  742 02ff AE000000 		.4byte	0xae
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 17
+
+
  743 0303 05       		.uleb128 0x5
  744 0304 03       		.byte	0x3
  745 0305 00000000 		.4byte	voltage
@@ -1018,10 +1017,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  796 0377 06       		.byte	0x6
  797 0378 33       		.byte	0x33
  798 0379 10       		.uleb128 0x10
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 18
-
-
  799 037a 08010000 		.4byte	.LASF37
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 18
+
+
  800 037e 08010000 		.4byte	.LASF37
  801 0382 06       		.byte	0x6
  802 0383 37       		.byte	0x37
@@ -1078,10 +1077,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  853 0011 00       		.byte	0
  854 0012 00       		.byte	0
  855 0013 02       		.uleb128 0x2
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 19
-
-
  856 0014 24       		.uleb128 0x24
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 19
+
+
  857 0015 00       		.byte	0
  858 0016 0B       		.uleb128 0xb
  859 0017 0B       		.uleb128 0xb
@@ -1138,10 +1137,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  910 004a 3A       		.uleb128 0x3a
  911 004b 0B       		.uleb128 0xb
  912 004c 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 20
-
-
  913 004d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 20
+
+
  914 004e 11       		.uleb128 0x11
  915 004f 01       		.uleb128 0x1
  916 0050 12       		.uleb128 0x12
@@ -1198,10 +1197,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  967 008d 3F       		.uleb128 0x3f
  968 008e 19       		.uleb128 0x19
  969 008f 03       		.uleb128 0x3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 21
-
-
  970 0090 0E       		.uleb128 0xe
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 21
+
+
  971 0091 3A       		.uleb128 0x3a
  972 0092 0B       		.uleb128 0xb
  973 0093 3B       		.uleb128 0x3b
@@ -1258,10 +1257,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1024 00c7 18       		.uleb128 0x18
  1025 00c8 9742     		.uleb128 0x2117
  1026 00ca 19       		.uleb128 0x19
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 22
-
-
  1027 00cb 01       		.uleb128 0x1
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 22
+
+
  1028 00cc 13       		.uleb128 0x13
  1029 00cd 00       		.byte	0
  1030 00ce 00       		.byte	0
@@ -1318,10 +1317,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1081 0102 0E       		.uleb128 0xe
  1082 0103 03       		.uleb128 0x3
  1083 0104 0E       		.uleb128 0xe
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 23
-
-
  1084 0105 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 23
+
+
  1085 0106 0B       		.uleb128 0xb
  1086 0107 3B       		.uleb128 0x3b
  1087 0108 0B       		.uleb128 0xb
@@ -1378,10 +1377,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1138 0067 50       		.byte	0x50
  1139 0068 07000000 		.4byte	.LVL26-1
  1140 006c 24000000 		.4byte	.LFE3
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 24
-
-
  1141 0070 0400     		.2byte	0x4
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 24
+
+
  1142 0072 F3       		.byte	0xf3
  1143 0073 01       		.uleb128 0x1
  1144 0074 50       		.byte	0x50
@@ -1438,10 +1437,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1195 0048 00000000 		.4byte	.LFB8
  1196 004c 30000000 		.4byte	.LFE8-.LFB8
  1197 0050 00000000 		.4byte	0
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 25
-
-
  1198 0054 00000000 		.4byte	0
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 25
+
+
  1199              		.section	.debug_ranges,"",%progbits
  1200              	.Ldebug_ranges0:
  1201 0000 00000000 		.4byte	.LFB4
@@ -1498,10 +1497,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1233 0057 73686F72 		.ascii	"short unsigned int\000"
  1233      7420756E 
  1233      7369676E 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 26
-
-
  1233      65642069 
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 26
+
+
  1233      6E7400
  1234              	.LASF46:
  1235 006a 433A5C55 		.ascii	"C:\\Users\\nico_\\Sundhedsteknologi\\7. Semester\\B"
@@ -1558,10 +1557,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1253      352E342E 
  1253      31203230 
  1253      31363036 
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 27
-
-
  1254 017c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 27
+
+
  1254      20726576 
  1254      6973696F 
  1254      6E203233 
@@ -1618,10 +1617,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1275 0261 50756D70 		.ascii	"Pump_Setup\000"
  1275      5F536574 
  1275      757000
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 28
-
-
  1276              	.LASF34:
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 28
+
+
  1277 026c 56444143 		.ascii	"VDAC8_Enabling_Start\000"
  1277      385F456E 
  1277      61626C69 
@@ -1678,10 +1677,10 @@ ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 1
  1299      6F6E7472 
  1299      6F6C5F53 
  1300              	.LASF10:
-ARM GAS  C:\Users\nico_\AppData\Local\Temp\ccGUUuwZ.s 			page 29
-
-
  1301 0313 73697A65 		.ascii	"sizetype\000"
+ARM GAS  C:\Users\nico_\AppData\Local\Temp\cc1I2BJo.s 			page 29
+
+
  1301      74797065 
  1301      00
  1302              	.LASF6:

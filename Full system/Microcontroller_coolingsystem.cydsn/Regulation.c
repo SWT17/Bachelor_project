@@ -12,24 +12,26 @@
 
 #include "Regulation.h"
 
-float regulation_temp;
+float upper_limit;
+float lower_limit;
 uint8 res;
 
 
 
 void Regulation_setup()
 {
-    regulation_temp = -10;
+    upper_limit = -9;
+    lower_limit = -11;
     res = 1;
 }
 
 uint8 Regulation(float temp)
 {
-    if(temp > regulation_temp)
+    if(temp > upper_limit)
     {
         res = 1;
         
-    }else if( temp < regulation_temp)
+    }else if( temp < lower_limit)
     {
         res = 0;
     }
